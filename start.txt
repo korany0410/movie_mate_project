@@ -9,3 +9,7 @@ main -> 지역저장소의 main브랜치
 origin main -> 원격저장소의 main브랜치 원격저장소에서 마지막으로 가져온 버
 pull : 
 request
+
+나도한입~
+
+나도두입~
