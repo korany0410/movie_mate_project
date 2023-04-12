@@ -10,4 +10,4 @@ origin main -> 원격저장소의 main브랜치 원격저장소에서 마지막�
 pull : 
 request
 
-나도한입~
+나도한입~dasdsa
