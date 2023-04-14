@@ -205,7 +205,7 @@ public class MovieController {
 							moviemate_castvo.setName((String) obj10.get("actorNm"));
 							moviemate_castvo.setType("actor");
 						}
-						// System.out.println("---------------------------");
+						System.out.println("---------------------------");
 					}
 				}
 			}
