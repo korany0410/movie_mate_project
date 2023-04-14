@@ -206,6 +206,7 @@ public class MovieController {
 							moviemate_castvo.setType("actor");
 						}
 						// System.out.println("---------------------------");
+						System.out.println("---------------------------");
 					}
 				}
 			}
