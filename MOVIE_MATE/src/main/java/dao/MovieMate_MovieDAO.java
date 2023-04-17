@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MovieMate_MovieVO;
@@ -22,4 +24,6 @@ public class MovieMate_MovieDAO {
 
 		return count;
 	}
+	
+	
 }
