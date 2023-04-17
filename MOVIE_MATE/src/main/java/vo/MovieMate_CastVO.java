@@ -2,10 +2,18 @@ package vo;
 
 public class MovieMate_CastVO {
 	private int cast_idx;
-	private String name, type;
+	private String name, type, profile_img;
 
 	public int getCast_idx() {
 		return cast_idx;
+	}
+
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
 	}
 
 	public void setCast_idx(int cast_idx) {

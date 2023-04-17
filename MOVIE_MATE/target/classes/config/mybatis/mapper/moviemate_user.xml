@@ -3,7 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mmuser">
-	
+	<insert id="signUp" parameterType="vo.MovieMate_UserVO">
+		INSERT INTO moviemate_user VALUES(seq_user_idx.nextVal, #{username}, #{email}, #{pwd},
+		#{profile_img}, #{type}, sysdate)
+	</insert>
+
+	<select id="double_check" resultType="int" parameterType="vo.MovieMate_UserVO">
+		SELECT COUNT(*) FROM moviemate_user WHERE username = #{username}
+	</select>
 </mapper>
 
 
