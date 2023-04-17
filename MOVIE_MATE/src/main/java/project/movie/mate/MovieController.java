@@ -205,7 +205,6 @@ public class MovieController {
 							moviemate_castvo.setName((String) obj10.get("actorNm"));
 							moviemate_castvo.setType("actor");
 						}
-						// System.out.println("---------------------------");
 						System.out.println("---------------------------");
 					}
 				}
@@ -217,7 +216,9 @@ public class MovieController {
 
 	@RequestMapping("/")
 	public String movie_mate_main_screen() {
-
+		
+		// 테스트 중입니다. 
+		
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
 }
