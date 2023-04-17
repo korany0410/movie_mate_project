@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+
+	<typeAliases>
+		<!-- <typeAlias type="vo.VisitVO" alias="visit" /> -->
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="config/mybatis/mapper/movie_cast.xml" />
+		<mapper resource="config/mybatis/mapper/movie_tag.xml" />
+		<mapper resource="config/mybatis/mapper/movie_user.xml" />
+		<mapper resource="config/mybatis/mapper/moviemate_cast.xml" />
+		<mapper resource="config/mybatis/mapper/moviemate_comment.xml" />
+		<mapper resource="config/mybatis/mapper/moviemate_genrerec.xml" />
+		<mapper resource="config/mybatis/mapper/moviemate_movie.xml" />
+		<mapper resource="config/mybatis/mapper/moviemate_tag.xml" />
+		<mapper resource="config/mybatis/mapper/moviemate_user.xml" />
+		<mapper resource="config/mybatis/mapper/user_cast.xml" />
+	</mappers>
+</configuration>

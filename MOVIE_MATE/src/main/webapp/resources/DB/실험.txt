@@ -1,0 +1,9 @@
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=19800101&releaseDte=19801231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=19810101&releaseDte=19811231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=19840101&releaseDte=19841231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=19970101&releaseDte=19971231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=19980101&releaseDte=19981231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=20000101&releaseDte=20001231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=20020101&releaseDte=20021231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=20050101&releaseDte=20051231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=실험&releaseDts=20060101&releaseDte=20061231

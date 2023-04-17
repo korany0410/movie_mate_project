@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mmcast">
+	<select id="openApi_count" resultType="int" parameterType="dao.MovieMate_CastDAO">
+		SELECT COUNT(*) FROM moviemate_cast WHERE name = #{name}
+	</select>
+	<insert id="openApi_insert" parameterType="vo.MovieMate_CastVO">
+		INSERT INTO moviemate_cast values (seq_cast_idx.nextVal, #{name}, #{type}, #{profile_img})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

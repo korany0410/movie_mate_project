@@ -1,0 +1,6 @@
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=군사&releaseDts=19850101&releaseDte=19851231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=군사&releaseDts=19900101&releaseDte=19901231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=군사&releaseDts=20030101&releaseDte=20031231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=군사&releaseDts=20080101&releaseDte=20081231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=군사&releaseDts=20090101&releaseDte=20091231
+https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=K5MR45GEF4R64G7ZU9IL&genre=군사&releaseDts=20100101&releaseDte=20101231
