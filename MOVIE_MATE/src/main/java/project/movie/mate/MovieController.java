@@ -67,7 +67,7 @@ public class MovieController {
 				"전쟁", "종교", "첩보", "청춘영화", "코미디", "판타지", "하이틴(고교)", "합작(번안물)", "활극" };
 
 		for (String c : category) {
-			String file_path = "C:\\Embedded_Spring\\work\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\" + c + ".txt";
+			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\" + c + ".txt";
 			DB db_text = new DB();
 			String[] file_path_arr = db_text.run(file_path);
 			for (String link : file_path_arr) {
@@ -118,9 +118,13 @@ public class MovieController {
 					for (Object arr2 : result) {
 						JSONObject obj2 = (JSONObject) arr2;
 						// System.out.print("title : " + obj2.get("title") + "/");
-						moviemate_movievo.setTitle((String) obj2.get("title"));
+						String title = (String) obj2.get("title");
+						title = title.trim();
+						moviemate_movievo.setTitle(title);
 						// System.out.print("nation : " + obj2.get("nation") + "/");
-						moviemate_movievo.setNation((String) obj2.get("nation"));
+						String nation = (String) obj2.get("nation");
+						nation = nation.trim();
+						moviemate_movievo.setNation(nation);
 						// System.out.print("img : " + obj2.get("posters") + "/");
 						String img = (String) obj2.get("posters");
 						String[] imgs = img.split("[|]");
@@ -135,9 +139,13 @@ public class MovieController {
 							moviemate_movievo.setBackground_img(imgs[1]);
 						}
 						// System.out.println("genre : " + obj2.get("genre"));
-						moviemate_movievo.setGenre((String) obj2.get("genre"));
+						String genre = (String) obj2.get("genre");
+						genre = genre.trim();
+						moviemate_movievo.setGenre(genre);
 						// System.out.println("company : " + obj2.get("company"));
-						moviemate_movievo.setCompany((String) obj2.get("company"));
+						String company = (String) obj2.get("company");
+						company = company.trim();
+						moviemate_movievo.setCompany(company);
 						JSONObject obj3 = (JSONObject) obj2.get("plots");
 						JSONArray plot = (JSONArray) obj3.get("plot");
 						for (Object arr3 : plot) {
