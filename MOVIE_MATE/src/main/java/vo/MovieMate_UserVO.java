@@ -45,6 +45,9 @@ public class MovieMate_UserVO {
 	}
 
 	public String getProfile_img() {
+		if(this.profile_img == null) {
+			return "no_data.jpg";
+		}
 		return profile_img;
 	}
 
@@ -53,6 +56,9 @@ public class MovieMate_UserVO {
 	}
 
 	public String getType() {
+		if(this.type == null) {
+			return "common";
+		}
 		return type;
 	}
 

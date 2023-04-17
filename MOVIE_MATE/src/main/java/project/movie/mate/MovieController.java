@@ -236,7 +236,7 @@ public class MovieController {
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
 
-	@RequestMapping("/")
+	@RequestMapping(value= {"/","/movie_mate_main_screen.do"})
 	public String movie_mate_main_screen() {
 
 		// 테스트 중입니다.
