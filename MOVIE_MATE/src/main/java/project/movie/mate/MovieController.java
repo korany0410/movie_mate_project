@@ -36,6 +36,7 @@ import vo.Movie_UserVO;
 @Controller
 public class MovieController {
 
+	private static final String VIEW_PATH = null;
 	Movie_CastDAO movie_castdao;
 	Movie_TagDAO movie_tagdao;
 	Movie_UserDAO movie_userdao;
@@ -239,11 +240,25 @@ public class MovieController {
 	}
 
 	@RequestMapping(value= {"/","/movie_mate_main_screen.do"})
-	public String movie_mate_main_screen() {
+	public String movie_mate_main_screen(Model model) {
 
-		// 테스트 중입니다.
-
+	List<MovieMate_MovieVO> boxoffi_list = moviemate_moviedao.boxoffi_list();
+    System.out.println(boxoffi_list.size());
+    model.addAttribute("boxoffi_list", boxoffi_list);
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,6 +24,11 @@ public class MovieMate_MovieDAO {
 
 		return count;
 	}
+	//전체조회
+	public List<MovieMate_MovieVO> boxoffi_list(){
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffi_list");
+		return list;
+	}
 	
 	
 }
