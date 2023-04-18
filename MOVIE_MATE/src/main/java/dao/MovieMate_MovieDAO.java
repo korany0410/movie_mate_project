@@ -24,16 +24,25 @@ public class MovieMate_MovieDAO {
 
 		return count;
 	}
-	//전체조회
-	public List<MovieMate_MovieVO> boxoffi_list(){
+
+	// 전체조회
+	public List<MovieMate_MovieVO> boxoffi_list() {
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffi_list");
 		return list;
 	}
-	
+
 	/*
 	 * //명작조회 public List<MovieMate_MovieVO> masterpiece_list(){
 	 * List<MovieMate_MovieVO> list =
 	 * sqlSession.selectList("mmovie.masterpiece_list"); return list; }
 	 * 
 	 */
+
+	public List<MovieMate_MovieVO> top10_list() {
+
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
+
+		return list;
+	}
+
 }
