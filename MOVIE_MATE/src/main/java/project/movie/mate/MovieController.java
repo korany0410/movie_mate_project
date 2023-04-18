@@ -8,10 +8,14 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +47,9 @@ public class MovieController {
 	MovieMate_MovieDAO moviemate_moviedao;
 	MovieMate_TagDAO moviemate_tagdao;
 	User_CastDAO user_castdao;
+
+	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	HttpServletRequest request;
 
 	public MovieController(Movie_CastDAO movie_castdao, Movie_TagDAO movie_tagdao, Movie_UserDAO movie_userdao,
 			MovieMate_CastDAO moviemate_castdao, MovieMate_CommentDAO moviemate_commentdao,
@@ -151,7 +158,7 @@ public class MovieController {
 						JSONArray plot = (JSONArray) obj3.get("plot");
 						for (Object arr3 : plot) {
 							JSONObject obj4 = (JSONObject) arr3;
-							System.out.println(obj4.get("plotText"));
+							//System.out.println(obj4.get("plotText"));
 							String content = (String) obj4.get("plotText");
 							if (obj4.get("plotLang").equals("한국어")) {
 								if (content.length() == 0) {
@@ -168,10 +175,10 @@ public class MovieController {
 						JSONArray rating = (JSONArray) obj5.get("rating");
 						for (Object arr4 : rating) {
 							JSONObject obj6 = (JSONObject) arr4;
-							System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
+							//System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
 							String grade = (String) obj6.get("ratingGrade");
 							moviemate_movievo.setFilm_rating(grade.split("[|]")[0]);
-							System.out.println("release date : " + obj6.get("releaseDate") + " ");
+							//System.out.println("release date : " + obj6.get("releaseDate") + " ");
 							String date = (String) obj6.get("releaseDate");
 							if (date.length() < 8) {
 								moviemate_movievo.setRelease_date("19800101");
@@ -240,7 +247,10 @@ public class MovieController {
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen() {
 
-		// 테스트 중입니다.
+		HttpSession session = request.getSession();
+		if (session.getAttribute("isLogin") == null) {
+			session.setAttribute("isLogin", "no");
+		}
 
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
