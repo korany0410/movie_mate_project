@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: ITSC
-=======
-Built-By: bymys
->>>>>>> 5e38e9417d4d0ef3633fd78abe1c1c69fe82ab95
 Build-Jdk: 11.0.18
 Created-By: Maven Integration for Eclipse
 

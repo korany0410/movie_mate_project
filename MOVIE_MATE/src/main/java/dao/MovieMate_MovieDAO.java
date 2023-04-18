@@ -30,5 +30,10 @@ public class MovieMate_MovieDAO {
 		return list;
 	}
 	
-	
+	/*
+	 * //명작조회 public List<MovieMate_MovieVO> masterpiece_list(){
+	 * List<MovieMate_MovieVO> list =
+	 * sqlSession.selectList("mmovie.masterpiece_list"); return list; }
+	 * 
+	 */
 }

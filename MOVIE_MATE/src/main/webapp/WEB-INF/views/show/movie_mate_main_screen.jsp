@@ -7,7 +7,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-   
+.img1 {
+   display: block;
+   height: 300px;
+}
+
+.carousel-inner {
+   width: 70% !important;
+   margin: 0 auto;
+}
+
+.carousel-item {
+   width: 100% !important;
+}
+
+.movie1 {
+   width: 20%;
+   float: left;
+}
+
+.movie1>* {
+   width: 90%;
+   margin: 0 auto;
+}
+
+h1{padding:0 80px 0 300px;}
 </style>
 <link
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
@@ -28,40 +52,39 @@
    crossorigin="anonymous"></script>
 </head>
 <body>
-   <h1>Movie Mate Top 10 영화</h1>
+   <h1>박스오피스 순위</h1>
 
-   <div id="carouselExample" class="carousel slide" >
-      <div class="carousel-inner" >
-         <div class="carousel-item active" >
+   <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+         <div class="carousel-item active">
             <c:forEach var="i" begin="0" end="4">
-               <div style="float:left;">
-                  <img alt="" src="${boxoffi_list[i].profile_img }" >
+               <div class="movie1">
+                  <img class="img1" alt="" src="${boxoffi_list[i].profile_img}">
                   <div>${boxoffi_list[i].title }</div>
                   <div>${boxoffi_list[i].nation }</div>
                   <div>${boxoffi_list[i].genre }</div>
-               
                </div>
             </c:forEach>
             <div class="carousel-caption d-none d-md-block"></div>
          </div>
          <div class="carousel-item">
             <c:forEach var="i" begin="5" end="9">
-               <div style="float:left;">
-                  <img alt="" src="${boxoffi_list[i].profile_img }">
-               <div>${boxoffi_list[i].title }</div>
-               <div>${boxoffi_list[i].nation }</div>
-               <div>${boxoffi_list[i].genre }</div>
+               <div class="movie1">
+                  <img class="img1" alt="" src="${boxoffi_list[i].profile_img }">
+                  <div>${boxoffi_list[i].title }</div>
+                  <div>${boxoffi_list[i].nation }</div>
+                  <div>${boxoffi_list[i].genre }</div>
                </div>
             </c:forEach>
             <div class="carousel-caption d-none d-md-block"></div>
          </div>
          <div class="carousel-item">
             <c:forEach var="i" begin="10" end="14">
-               <div style="float:left;">
-                  <img alt="" src="${boxoffi_list[i].profile_img }">
-               <div>${boxoffi_list[i].title }</div>
-               <div>${boxoffi_list[i].nation }</div>
-               <div>${boxoffi_list[i].genre }</div>
+               <div class="movie1">
+                  <img class="img1" alt="" src="${boxoffi_list[i].profile_img }">
+                  <div>${boxoffi_list[i].title }</div>
+                  <div>${boxoffi_list[i].nation }</div>
+                  <div>${boxoffi_list[i].genre }</div>
                </div>
             </c:forEach>
             <div class="carousel-caption d-none d-md-block"></div>
@@ -80,8 +103,6 @@
    </div>
 </body>
 </html>
-
-
 
 
 

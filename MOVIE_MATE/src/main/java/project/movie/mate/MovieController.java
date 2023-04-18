@@ -70,7 +70,8 @@ public class MovieController {
 				"전쟁", "종교", "첩보", "청춘영화", "코미디", "판타지", "하이틴(고교)", "합작(번안물)", "활극" };
 
 		for (String c : category) {
-			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\" + c + ".txt";
+			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\"
+					+ c + ".txt";
 			DB db_text = new DB();
 			String[] file_path_arr = db_text.run(file_path);
 			for (String link : file_path_arr) {
@@ -238,27 +239,24 @@ public class MovieController {
 
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
-
-	@RequestMapping(value= {"/","/movie_mate_main_screen.do"})
+    
+	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
-	List<MovieMate_MovieVO> boxoffi_list = moviemate_moviedao.boxoffi_list();
-    System.out.println(boxoffi_list.size());
-    model.addAttribute("boxoffi_list", boxoffi_list);
+		List<MovieMate_MovieVO> boxoffi_list = moviemate_moviedao.boxoffi_list();
+		System.out.println(boxoffi_list.size());
+		model.addAttribute("boxoffi_list", boxoffi_list);
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
 
+	/*
+	 * // 명작 영화
+	 * 
+	 * @RequestMapping(value = {"/","/movie_mate_main_screen.do"} ) public String
+	 * movie_mate_main_screen2(Model model) {
+	 * 
+	 * List<MovieMate_MovieVO> masterpiece_list =
+	 * moviemate_moviedao.masterpiece_list(); model.addAttribute("masterpiece_list",
+	 * masterpiece_list); return "/WEB-INF/views/show/movie_mate_main_screen.jsp"; }
+	 */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
