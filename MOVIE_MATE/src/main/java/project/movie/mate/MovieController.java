@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.MovieMate_CastDAO;
@@ -67,7 +69,8 @@ public class MovieController {
 				"전쟁", "종교", "첩보", "청춘영화", "코미디", "판타지", "하이틴(고교)", "합작(번안물)", "활극" };
 
 		for (String c : category) {
-			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\" + c + ".txt";
+			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\"
+					+ c + ".txt";
 			DB db_text = new DB();
 			String[] file_path_arr = db_text.run(file_path);
 			for (String link : file_path_arr) {
@@ -236,11 +239,13 @@ public class MovieController {
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
 
-	@RequestMapping(value= {"/","/movie_mate_main_screen.do"})
-	public String movie_mate_main_screen() {
+	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
+	public String movie_mate_main_screen(Model model) {
 
 		// 테스트 중입니다.
-
+		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
+		/* System.out.println(top10_list.size()); */
+		model.addAttribute("top10_list", top10_list);
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
 }

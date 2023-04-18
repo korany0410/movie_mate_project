@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MovieMate_MovieVO;
@@ -22,4 +24,11 @@ public class MovieMate_MovieDAO {
 
 		return count;
 	}
+	public List<MovieMate_MovieVO> top10_list(){
+		
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
+		
+		return list;
+	}
+	
 }
