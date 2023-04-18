@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.navbar{
+	width: 1320px;
+	margin: 0 auto;
+	z-index: 1;
+}
