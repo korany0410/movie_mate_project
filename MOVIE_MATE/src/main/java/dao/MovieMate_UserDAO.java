@@ -28,4 +28,12 @@ public class MovieMate_UserDAO {
 		return count;
 	}
 	
+	//(로그인 확인)
+	public int login(MovieMate_UserVO moviemate_uservo) {
+		
+		int count = sqlSession.selectOne("mmuser.login", moviemate_uservo);
+		
+		return count;
+	}
+	
 }

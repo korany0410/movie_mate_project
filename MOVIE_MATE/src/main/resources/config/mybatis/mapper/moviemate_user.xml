@@ -11,6 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="double_check" resultType="int" parameterType="vo.MovieMate_UserVO">
 		SELECT COUNT(*) FROM moviemate_user WHERE username = #{username}
 	</select>
+	
+	<select id="login" resultType="int" parameterType="vo.MovieMate_UserVO">
+		SELECT COUNT(*) FROM moviemate_user WHERE email = #{email} AND pwd = #{pwd}
+	</select>
 </mapper>
 
 
