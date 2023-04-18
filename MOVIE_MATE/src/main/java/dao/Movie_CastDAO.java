@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MovieMate_CastVO;
@@ -33,5 +35,12 @@ public class Movie_CastDAO {
 		}
 
 		return count;
+	}
+
+	public List<Movie_CastVO> selectList(MovieMate_MovieVO movievo) {
+
+		List<Movie_CastVO> cast_list = sqlSession.selectList("mcast.selectList", movievo);
+
+		return cast_list;
 	}
 }

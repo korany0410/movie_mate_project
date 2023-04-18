@@ -6,14 +6,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.MovieMate_CastDAO;
@@ -27,9 +27,9 @@ import dao.Movie_UserDAO;
 import dao.User_CastDAO;
 import db.DB;
 import vo.MovieMate_CastVO;
+import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.Movie_CastVO;
-import vo.Movie_UserVO;
 
 @Controller
 public class MovieController {
@@ -67,7 +67,8 @@ public class MovieController {
 				"전쟁", "종교", "첩보", "청춘영화", "코미디", "판타지", "하이틴(고교)", "합작(번안물)", "활극" };
 
 		for (String c : category) {
-			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\" + c + ".txt";
+			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\"
+					+ c + ".txt";
 			DB db_text = new DB();
 			String[] file_path_arr = db_text.run(file_path);
 			for (String link : file_path_arr) {
@@ -236,11 +237,26 @@ public class MovieController {
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
 
-	@RequestMapping(value= {"/","/movie_mate_main_screen.do"})
+	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen() {
 
 		// 테스트 중입니다.
 
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
+	}
+
+	@RequestMapping("/movie_mate_choice_screen.do")
+	public String movie_mate_choice_screen(Model model, MovieMate_MovieVO moviemate_movievo) {
+
+		List<Movie_CastVO> cast_list = movie_castdao.selectList(moviemate_movievo);
+		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
+
+		System.out.println(cast_list.size());
+		System.out.println(comment_list.size());
+		model.addAttribute("movie_info", moviemate_movievo);
+		model.addAttribute("cast_list", cast_list);
+		model.addAttribute("comment_list", comment_list);
+
+		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
 }
