@@ -150,7 +150,7 @@ public class MovieController {
 						JSONArray plot = (JSONArray) obj3.get("plot");
 						for (Object arr3 : plot) {
 							JSONObject obj4 = (JSONObject) arr3;
-							System.out.println(obj4.get("plotText"));
+							//System.out.println(obj4.get("plotText"));
 							String content = (String) obj4.get("plotText");
 							if (obj4.get("plotLang").equals("한국어")) {
 								if (content.length() == 0) {
@@ -167,22 +167,22 @@ public class MovieController {
 						JSONArray rating = (JSONArray) obj5.get("rating");
 						for (Object arr4 : rating) {
 							JSONObject obj6 = (JSONObject) arr4;
-							System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
+							//System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
 							String grade = (String) obj6.get("ratingGrade");
 							moviemate_movievo.setFilm_rating(grade.split("[|]")[0]);
-							System.out.println("release date : " + obj6.get("releaseDate") + " ");
+							//System.out.println("release date : " + obj6.get("releaseDate") + " ");
 							String date = (String) obj6.get("releaseDate");
 							if (date.length() < 8) {
 								moviemate_movievo.setRelease_date("19800101");
 							} else {
 								String[] date_arr = date.split("[|]");
 								for (String d : date_arr) {
-									System.out.println(d);
 									if (d.length() == 8) {
 										int err = Integer.parseInt(d.substring(6, 8));
 										if (err == 0 || err >= 32) {
 											d = d.substring(0, 6) + "01";
 										}
+										System.out.println("release_date : " + d);
 										moviemate_movievo.setRelease_date(d);
 										break;
 									}

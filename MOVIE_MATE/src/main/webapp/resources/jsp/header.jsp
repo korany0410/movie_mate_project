@@ -27,64 +27,48 @@
 <script type="text/javascript" src="/mate/resources/js/header.js"></script>
 
 <script>
-function search() {
-	  var query = document.querySelector('input[type="search"]').value;
-	  var xhr = new XMLHttpRequest();
-	  xhr.open('POST', 'movie_mate_search.do', true);
-	  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	  xhr.onreadystatechange = function() {
-	    if (xhr.readyState === 4 && xhr.status === 200) {
-	      // 서버에서 반환한 응답을 처리하는 코드 작성
-	    }
-	  };
-	  xhr.send('query=' + encodeURIComponent(query));
-	}
+	function search() {
+		// 검색어 가져오기
+		var searchKeyword = document.querySelector('.form-control').value;
 
+		// movie_mate_search_screen.do로 이동하기
+		window.location.href = "movie_mate_search_screen.do?searchKeyword="
+				+ encodeURIComponent(searchKeyword);
+	}
 </script>
 
 </head>
-
 <body>
+	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">
+				<img src="/mate/resources/images/logo_main.png" alt="" height="30">
+			</a>
+			<div class="collapse navbar-collapse d-flex justify-content-end"
+				id="navbarSupportedContent">
+				<form class="me-2" role="search"
+					onsubmit="event.preventDefault(); search();">
+					<input class="form-control" type="search"
+						placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요." aria-label="Search"
+						onkeydown="if(event.keyCode==13) { event.preventDefault(); search(); }">
+				</form>
 
-	<nav class="navbar navbar-expand fixed-top">
-  <div class="container-fluid">
-
-    <a class="navbar-brand" aria-current="page" href="#">
-      <img src="/mate/resources/images/logo_main.png" alt="" height="30">
-    </a>
-
-
-    <button class="navbar-toggler" type="button"
-      data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
-
-      <form class="d-flex  ms-auto flex-shrink-0" role="search">
-        <input class="form-control me-2" type="search"
-          
-          placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요." aria-label="Search"
-          onkeydown="if(event.keyCode==13) { event.preventDefault(); search(); }">       
-      </form>
-
-      <ul class="navbar-nav  ms-2 mb-2 mb-lg-0 flex-shrink-0">
-        <li class="nav-item">
-          <a class="nav-link" href="movie_mate_login_screen.do">로그인</a>
-        </li>
-
-      </ul>
-      <ul class="navbar-nav mb-2 mb-lg-0 flex-shrink-0 ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="movie_mate_signUp_screen.do">
-            <button class="btn btn-outline-success">회원가입</button>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-	
+				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+					<li class="nav-item">
+						<a class="nav-link" href="movie_mate_login_screen.do">로그인</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+					<li class="nav-item">
+						<a class="nav-link" href="movie_mate_signUp_screen.do">
+							<button class="btn btn-outline-success">회원가입</button>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </body>
+
+
 </html>
