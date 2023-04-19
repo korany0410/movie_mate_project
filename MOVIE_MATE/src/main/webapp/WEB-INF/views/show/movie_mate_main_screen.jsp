@@ -30,7 +30,7 @@
 	width: 90%;
 	margin: 0 auto;
 }
-h1{padding:0 80px 0 300px;}
+h3{padding:40PX 80px 0 300px;}
 
 
 </style>
@@ -53,7 +53,7 @@ h1{padding:0 80px 0 300px;}
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>Movie Mate Top 10 영화</h1>
+	<h3>Movie Mate Top 10 영화</h3>
 	
 	<div id="carouselExample" class="carousel slide">
 		<div class="carousel-inner">
@@ -100,8 +100,63 @@ h1{padding:0 80px 0 300px;}
 		<button class="carousel-control-next" type="button"
 			data-bs-target="#carouselExample" data-bs-slide="next">
 			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>
+				class="visually-hidden">Next</span>	
 		</button>
 	</div>
+	
+	<h3>화제의 감독 미야자키 하야오의 작품</h3>
+	
+	<div id="carouselExample" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<c:forEach var="i" begin="0" end="4">
+					<div class="movie1">
+						<img class="img1" alt="" src="${director_list[i].profile_img}">
+						<div class="fw-bold">${director_list[i].title }</div>
+						<div>${director_list[i].nation }</div>
+						<div>${director_list[i].genre }</div>
+						
+					</div>
+				</c:forEach>
+				<div class="carousel-caption d-none d-md-block"></div>
+			</div>
+			<div class="carousel-item">
+				<c:forEach var="i" begin="5" end="9">
+					<div class="movie1">
+						<img class="img1" alt="" src="${director_list[i].profile_img }">
+						<div  class="fw-bold">${director_list[i].title }</div>
+						<div>${director_list[i].nation }</div>
+						<div>${director_list[i].genre }</div>
+					</div>
+				</c:forEach>
+				<div class="carousel-caption d-none d-md-block"></div>
+			</div>
+			<div class="carousel-item">
+				<c:forEach var="i" begin="10" end="14">
+					<div class="movie1">
+						<img class="img1" alt="" src="${director_list[i].profile_img }">
+						<div class="fw-bold">${director_list[i].title }</div>
+						<div>${director_list[i].nation }</div>
+						<div>${director_list[i].genre }</div>
+					</div>
+				</c:forEach>
+				<div class="carousel-caption d-none d-md-block"></div>
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#carouselExample" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#carouselExample" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>	
+		</button>
+	</div>
+	
 </body>
+
+
+
 </html>

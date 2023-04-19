@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) sub
 		WHERE no BETWEEN 1 AND 15
 	</select>
+	
+	<select id="director_list" resultType="vo.MovieMate_MovieVO" parameterType="vo.MovieMate_MovieVO">
+		SELECT *
+		FROM MOVIEMATE_MOVIE WHERE 
+	</select>
+	
 </mapper>
 
 

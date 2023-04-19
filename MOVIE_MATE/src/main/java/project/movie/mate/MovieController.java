@@ -238,14 +238,22 @@ public class MovieController {
 
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
-
+	//Movie Mate Top 10 영화
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
-		// 테스트 중입니다.
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
-		/* System.out.println(top10_list.size()); */
 		model.addAttribute("top10_list", top10_list);
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
+	
+	//화제의 감독 작품
+	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
+	public String movie_mate_main_screen2(Model model) {
+
+		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
+		model.addAttribute("director_list", director_list);
+		return "/WEB-INF/views/show/movie_mate_main_screen2.jsp";
+	}
+	
 }

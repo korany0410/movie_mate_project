@@ -24,11 +24,22 @@ public class MovieMate_MovieDAO {
 
 		return count;
 	}
+	//Movie Mate Top 10 영화
 	public List<MovieMate_MovieVO> top10_list(){
 		
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
 		
 		return list;
 	}
+	//화제의 감독 작품
+	public List<MovieMate_MovieVO> director_list(){
+		
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.director_list");
+		
+		return list;
+	}
+	
+	
+	
 	
 }
