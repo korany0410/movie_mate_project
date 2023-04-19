@@ -246,22 +246,22 @@ public class MovieController {
 		List<MovieMate_MovieVO> boxoffi_list = moviemate_moviedao.boxoffi_list();
 		System.out.println(boxoffi_list.size());
 		model.addAttribute("boxoffi_list", boxoffi_list);
-		// 테스트 중입니다.
+		
+		// Movie Mate Top 10 영화
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
 		/* System.out.println(top10_list.size()); */
 		model.addAttribute("top10_list", top10_list);
-
+        
+		//  Movie Mate 명작 영화
+		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list(); 
+		model.addAttribute("masterpiece_list", masterpiece_list);  
+	
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
 
-	/*
-	 * // 명작 영화
-	 * 
-	 * @RequestMapping(value = {"/","/movie_mate_main_screen.do"} ) public String
-	 * movie_mate_main_screen2(Model model) {
-	 * 
-	 * List<MovieMate_MovieVO> masterpiece_list =
-	 * moviemate_moviedao.masterpiece_list(); model.addAttribute("masterpiece_list",
-	 * masterpiece_list); return "/WEB-INF/views/show/movie_mate_main_screen.jsp"; }
-	 */
+	
+	  // 명작 영화
+	  
+	  
+	  
 }

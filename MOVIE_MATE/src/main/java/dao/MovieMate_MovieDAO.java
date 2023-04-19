@@ -25,24 +25,25 @@ public class MovieMate_MovieDAO {
 		return count;
 	}
 
-	// 전체조회
+	// 박스오피스 순위
 	public List<MovieMate_MovieVO> boxoffi_list() {
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffi_list");
 		return list;
 	}
-
-	/*
-	 * //명작조회 public List<MovieMate_MovieVO> masterpiece_list(){
-	 * List<MovieMate_MovieVO> list =
-	 * sqlSession.selectList("mmovie.masterpiece_list"); return list; }
-	 * 
-	 */
-
+	
+	// Movie Mate Top 10 영화
 	public List<MovieMate_MovieVO> top10_list() {
-
+		
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
-
+		
 		return list;
 	}
+
+	// Movie Mate 명작 영화
+	  public List<MovieMate_MovieVO> masterpiece_list(){
+	  List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.masterpiece_list"); 
+	  return list; 
+	  
+	  }
 
 }

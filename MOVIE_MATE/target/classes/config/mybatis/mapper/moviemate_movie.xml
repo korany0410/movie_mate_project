@@ -18,18 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{movie_info},
 		#{film_rating}, 0, 0)
 	</insert>
-<<<<<<< HEAD
+
 	
 	<select id="boxoffi_list" resultType="vo.MovieMate_MovieVO"  parameterType="vo.MovieMate_MovieVO">
 	   SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date DESC) no, m.*
        FROM moviemate_movie m)sub WHERE no BETWEEN 1 AND 15
 	</select>
-	
-	<select id=" masterpiece_list" resultType="vo.MovieMate_MovieVO" parameterType="vo.MovieMate_MovieVO">
-	
-	</select>
-	
-=======
 
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO" parameterType="vo.MovieMate_MovieVO">
 		SELECT *
@@ -39,7 +33,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) sub
 		WHERE no BETWEEN 1 AND 15
 	</select>
->>>>>>> 192946359223232978a525e29901f27329b484e7
+	
+	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO" parameterType="vo.MovieMate_MovieVO">
+		select * from moviemate_movie
+		where release_date between'19800101'and '20000101'
+	</select>
+
+      <!-- select * from moviemate_movie
+             -->
 </mapper>
 
 
