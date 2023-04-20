@@ -1,10 +1,13 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
+import vo.Movie_CastVO;
 
 public class MovieMate_MovieDAO {
 
@@ -26,24 +29,43 @@ public class MovieMate_MovieDAO {
 	}
 
 	// 박스오피스 순위
-	public List<MovieMate_MovieVO> boxoffi_list() {
-		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffi_list");
+	public List<MovieMate_MovieVO> boxOffice_list() {
+
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffice_list");
+
 		return list;
 	}
-	
+
 	// Movie Mate Top 10 영화
+
 	public List<MovieMate_MovieVO> top10_list() {
-		
+
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
-		
+
 		return list;
 	}
 
 	// Movie Mate 명작 영화
-	  public List<MovieMate_MovieVO> masterpiece_list(){
-	  List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.masterpiece_list"); 
-	  return list; 
-	  
-	  }
+	public List<MovieMate_MovieVO> masterpiece_list() {
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.masterpiece_list");
+		return list;
+
+	}
+
+	// Movie Mate가 추천하는 이 주의 배우
+
+	public List<MovieMate_MovieVO> recommend_list() {
+		MovieMate_CastVO vo = new MovieMate_CastVO();
+		vo.setName("이병헌");
+		int cast_idx = sqlSession.selectOne("mmcast.selectOne", vo);
+		Movie_CastVO vo_2 = new Movie_CastVO();
+		vo_2.setCast_idx(cast_idx);
+		List<Movie_CastVO> list = sqlSession.selectList("mcast.selectCastList", vo_2);
+		List<MovieMate_MovieVO> movie_list = new ArrayList<MovieMate_MovieVO>();
+		for(Movie_CastVO movie : list) {
+			movie_list.add(sqlSession.selectOne("mmmovie.selectMovieIdx", movie));
+		}
+		return movie_list;
+	}
 
 }

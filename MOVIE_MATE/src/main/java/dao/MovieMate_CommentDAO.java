@@ -1,6 +1,11 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+
+import vo.MovieMate_CommentVO;
+import vo.MovieMate_MovieVO;
 
 public class MovieMate_CommentDAO {
 
@@ -8,5 +13,12 @@ public class MovieMate_CommentDAO {
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
+	}
+
+	public List<MovieMate_CommentVO> selectList(MovieMate_MovieVO movievo) {
+
+		List<MovieMate_CommentVO> comment_list = sqlSession.selectList("mmcomment.selectList", movievo);
+
+		return comment_list;
 	}
 }
