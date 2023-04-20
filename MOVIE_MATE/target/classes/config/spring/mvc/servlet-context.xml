@@ -37,6 +37,7 @@
 		<beans:constructor-arg ref="moviemateMovie_dao"></beans:constructor-arg>
 		<beans:constructor-arg ref="moviemateTag_dao"></beans:constructor-arg>
 		<beans:constructor-arg ref="userCast_dao"></beans:constructor-arg>
+		<beans:constructor-arg ref="moviemateUser_dao"></beans:constructor-arg>
 	</beans:bean>
 
 	<beans:bean class="project.movie.mate.UserController">

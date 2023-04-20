@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.profile_img {
+	display: block;
+	height: 300px;
+	border-radius: 10px;
+}
+
+.wall {
+	height: 100px;
+}
+.carousel-inner {
+	width: 75% !important;
+	height: 460px !important;
+	margin: 0 auto;
+}
+
+.carousel-item {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.movieInfo_box {
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+.movieInfo_box>* {
+	width: 90%;
+	margin: 0 auto;
+}
+
+h1 {
+	padding: 0 80px 0 300px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+	height: 40px;
+	width: 40px !important;
+	top: 185px !important;
+	color: #000 !important;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.carousel-control-prev {
+	left: 11% !important;
+}
+
+.carousel-control-next {
+	right: 11% !important;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 25px;
+	margin: 10px 0;
+	height: 40px;
+}

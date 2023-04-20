@@ -1,8 +1,26 @@
 @charset "UTF-8";
 
 .navbar{
+	background-color: white !important;
+}
+.navbar {
 	width: 1320px;
-	margin: 0 auto;
 	z-index: 1;
 	background-color: white;
+	margin: 0 auto;
+}
+
+.btn {
+	border: 1px solid #bcbcbc !important;
+	color: black !important;
+}
+
+.btn:hover {
+	background-color: #7900FF !important;
+	color: white !important;
+	border: 1px solid #7900FF !important;
+}
+.form-control{
+	width: 350px;
+	background-color: #f3f6f4 !important;
 }

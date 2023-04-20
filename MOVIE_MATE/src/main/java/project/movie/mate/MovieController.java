@@ -6,14 +6,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.MovieMate_CastDAO;
@@ -21,18 +28,22 @@ import dao.MovieMate_CommentDAO;
 import dao.MovieMate_Genre_RecDAO;
 import dao.MovieMate_MovieDAO;
 import dao.MovieMate_TagDAO;
+import dao.MovieMate_UserDAO;
 import dao.Movie_CastDAO;
 import dao.Movie_TagDAO;
 import dao.Movie_UserDAO;
 import dao.User_CastDAO;
 import db.DB;
 import vo.MovieMate_CastVO;
+import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
+import vo.MovieMate_UserVO;
 import vo.Movie_CastVO;
-import vo.Movie_UserVO;
 
 @Controller
 public class MovieController {
+
+	private static final String VIEW_PATH = null;
 
 	Movie_CastDAO movie_castdao;
 	Movie_TagDAO movie_tagdao;
@@ -42,12 +53,18 @@ public class MovieController {
 	MovieMate_Genre_RecDAO moviemate_genre_recdao;
 	MovieMate_MovieDAO moviemate_moviedao;
 	MovieMate_TagDAO moviemate_tagdao;
+	MovieMate_UserDAO moviemate_userdao;
 	User_CastDAO user_castdao;
+
+	Random random = new Random();
+
+	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	HttpServletRequest request;
 
 	public MovieController(Movie_CastDAO movie_castdao, Movie_TagDAO movie_tagdao, Movie_UserDAO movie_userdao,
 			MovieMate_CastDAO moviemate_castdao, MovieMate_CommentDAO moviemate_commentdao,
 			MovieMate_Genre_RecDAO moviemate_genre_recdao, MovieMate_MovieDAO moviemate_moviedao,
-			MovieMate_TagDAO moviemate_tagdao, User_CastDAO user_castdao) {
+			MovieMate_TagDAO moviemate_tagdao, User_CastDAO user_castdao, MovieMate_UserDAO moviemate_userdao) {
 		this.movie_castdao = movie_castdao;
 		this.movie_tagdao = movie_tagdao;
 		this.movie_userdao = movie_userdao;
@@ -57,6 +74,7 @@ public class MovieController {
 		this.moviemate_moviedao = moviemate_moviedao;
 		this.movie_tagdao = movie_tagdao;
 		this.user_castdao = user_castdao;
+		this.moviemate_userdao = moviemate_userdao;
 	}
 
 	@RequestMapping("/data_insert.do")
@@ -67,7 +85,12 @@ public class MovieController {
 				"전쟁", "종교", "첩보", "청춘영화", "코미디", "판타지", "하이틴(고교)", "합작(번안물)", "활극" };
 
 		for (String c : category) {
-			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\" + c + ".txt";
+			String file_path = "C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB\\"
+					+ c + ".txt";
+			// 김볼탱 DB 절대 경로 :
+			// C:\Embedded_Spring\work\project_3\MOVIE_MATE\src\main\webapp\resources\DB
+			// 민지 DB 절대 경로 :
+			// C:\\embedded_kmz_spring\\work\\Project_movie_mate\\MOVIE_MATE\\src\\main\\webapp\\resources\\DB
 			DB db_text = new DB();
 			String[] file_path_arr = db_text.run(file_path);
 			for (String link : file_path_arr) {
@@ -150,7 +173,7 @@ public class MovieController {
 						JSONArray plot = (JSONArray) obj3.get("plot");
 						for (Object arr3 : plot) {
 							JSONObject obj4 = (JSONObject) arr3;
-							//System.out.println(obj4.get("plotText"));
+							// System.out.println(obj4.get("plotText"));
 							String content = (String) obj4.get("plotText");
 							if (obj4.get("plotLang").equals("한국어")) {
 								if (content.length() == 0) {
@@ -167,10 +190,20 @@ public class MovieController {
 						JSONArray rating = (JSONArray) obj5.get("rating");
 						for (Object arr4 : rating) {
 							JSONObject obj6 = (JSONObject) arr4;
-							//System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
+							// System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
 							String grade = (String) obj6.get("ratingGrade");
 							moviemate_movievo.setFilm_rating(grade.split("[|]")[0]);
-							//System.out.println("release date : " + obj6.get("releaseDate") + " ");
+							// System.out.println("release date : " + obj6.get("releaseDate") + " ");
+							grade = grade.split("[|]")[0];
+							if (grade.contains("중학생")) {
+								grade = "15세미만관람불가";
+							} else if (grade.contains("연소자")) {
+								grade = "청소년관람불가";
+							} else if (grade.contains("고등학생")) {
+								grade = "18 세미만관람불가";
+							}
+							moviemate_movievo.setFilm_rating(grade);
+							System.out.print("rating grade : " + grade);
 							String date = (String) obj6.get("releaseDate");
 							if (date.length() < 8) {
 								moviemate_movievo.setRelease_date("19800101");
@@ -182,18 +215,23 @@ public class MovieController {
 										if (err == 0 || err >= 32) {
 											d = d.substring(0, 6) + "01";
 										}
-										System.out.println("release_date : " + d);
+										System.out.print(" | release date : " + d);
 										moviemate_movievo.setRelease_date(d);
 										break;
 									}
 								}
 							}
-							System.out.println("runtime : " + obj6.get("runtime"));
 							String runtime = (String) obj6.get("runtime");
 							moviemate_movievo.setRunning_time(runtime.split("[|]")[0]);
+							System.out.println(" | runtime : " + runtime.split("[|]")[0]);
 							break;
 						}
-
+						int attandance = random.nextInt(990) + 10;
+						double star_score = (double) random.nextInt(5) + random.nextDouble();
+						star_score = Math.round(star_score * 10.0) / 10.0;
+						moviemate_movievo.setAttandance(attandance);
+						moviemate_movievo.setStar_score(star_score);
+						System.out.println("attandance : " + attandance + " | start_score : " + star_score);
 						moviemate_moviedao.openApi_insert(moviemate_movievo);
 						JSONObject obj7 = (JSONObject) obj2.get("directors");
 						JSONArray director = (JSONArray) obj7.get("director");
@@ -236,11 +274,78 @@ public class MovieController {
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
 
-	@RequestMapping(value= {"/","/movie_mate_main_screen.do"})
-	public String movie_mate_main_screen() {
+	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
+	public String movie_mate_main_screen(Model model) {
 
+		HttpSession session = request.getSession();
+		if (session.getAttribute("isLogin") == null) {
+			session.setAttribute("isLogin", "no");
+		}
+		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
+		System.out.println(boxOffice_list.size());
+		model.addAttribute("boxoffi_list", boxOffice_list);
 		// 테스트 중입니다.
+		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
+		/* System.out.println(top10_list.size()); */
+		model.addAttribute("top10_list", top10_list);
+
+		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
+		HashMap<String, String> total_chart_name = new HashMap<String, String>();
+		total_chart.put("boxOffice", boxOffice_list);
+		total_chart_name.put("boxOffice", "박스오피스 순위");
+		total_chart.put("top10", top10_list);
+		total_chart_name.put("top10", "왓챠 top10 영화");
+
+		model.addAttribute("total_chart", total_chart);
+		model.addAttribute("total_chart_name", total_chart_name);
 
 		return "/WEB-INF/views/show/movie_mate_main_screen.jsp";
 	}
+
+	@RequestMapping("/movie_mate_choice_screen.do")
+	public String movie_mate_choice_screen(Model model, MovieMate_MovieVO moviemate_movievo) {
+
+		List<Movie_CastVO> cast_list = movie_castdao.selectList(moviemate_movievo);
+		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
+
+		System.out.println(cast_list.size());
+		System.out.println(comment_list.size());
+		model.addAttribute("movie_info", moviemate_movievo);
+		model.addAttribute("cast_list", cast_list);
+		model.addAttribute("comment_list", comment_list);
+
+		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
+	}
+
+	/*
+	 * // 명작 영화
+	 * 
+	 * @RequestMapping(value = {"/","/movie_mate_main_screen.do"} ) public String
+	 * movie_mate_main_screen2(Model model) {
+	 * 
+	 * List<MovieMate_MovieVO> masterpiece_list =
+	 * moviemate_moviedao.masterpiece_list(); model.addAttribute("masterpiece_list",
+	 * masterpiece_list); return "/WEB-INF/views/show/movie_mate_main_screen.jsp"; }
+	 */
+
+	@RequestMapping("/movie_mate_search_screen.do")
+	public String movie_mate_search_screen(Model model, String keyword) {
+
+		System.out.println("search_screen.do parameter keyword : " + keyword);
+		// 검색 결과를 받아와서 model에 추가
+		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
+		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
+		List<MovieMate_UserVO> search_user_result = moviemate_userdao.search_user(keyword);
+		
+		System.out.println("영화 검색결과 수" + search_movie_result.size());
+		System.out.println("배우 검색결과 수" + search_cast_result.size());
+		System.out.println("유저 검색결과 수" + search_user_result.size());
+
+		model.addAttribute("search_movie", search_movie_result);
+		model.addAttribute("search_cast", search_cast_result);
+		model.addAttribute("search_user", search_user_result);
+
+		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
+	}
+
 }

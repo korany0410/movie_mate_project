@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MovieMate_MovieVO;
@@ -22,4 +24,30 @@ public class MovieMate_MovieDAO {
 
 		return count;
 	}
+
+	// 전체조회
+	public List<MovieMate_MovieVO> boxOffice_list() {
+		
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffice_list");
+		
+		return list;
+	}
+
+	public List<MovieMate_MovieVO> top10_list() {
+
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
+
+		return list;
+	}
+	
+	//영화명 검색 조회
+	public List<MovieMate_MovieVO> search_movie(String searchKeyword) {
+	 
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.search_movie", searchKeyword);
+		return list;
+	}
+	
+	
+
+
 }

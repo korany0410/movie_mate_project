@@ -11,6 +11,8 @@
 	<header>
 		<%@ include file="/resources/jsp/header.jsp"%>
 	</header>
-	<h1>검색 결과 화면</h1>
+	<div class="search_result">
+	${searchKeyword }의 검색결과
+	</div>
 </body>
 </html>
