@@ -298,11 +298,14 @@ public class MovieController {
 	@RequestMapping("/movie_mate_choice_screen.do")
 	public String movie_mate_choice_screen(Model model, MovieMate_MovieVO moviemate_movievo) {
 
+		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<Movie_CastVO> cast_list = movie_castdao.selectList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
 
-		System.out.println(cast_list.size());
-		System.out.println(comment_list.size());
+		System.out.println("캐스팅된 사람 수 : " + cast_list.size());
+		System.out.println("댓글 개수 : " + comment_list.size());
+		int cast_page = cast_list.size() / 6;
+		model.addAttribute("maxCast_page", cast_page);
 		model.addAttribute("movie_info", moviemate_movievo);
 		model.addAttribute("cast_list", cast_list);
 		model.addAttribute("comment_list", comment_list);

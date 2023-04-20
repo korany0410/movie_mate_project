@@ -2,19 +2,22 @@
 
 .profile_img {
 	display: block;
-	height: 300px;
+	height: 100%;
 	border-radius: 10px;
 }
 
 .carousel-inner {
-	width: 75% !important;
-	height: 400px !important;
+	width: 85% !important;
 	margin: 0 auto;
 }
 
 .carousel-item {
 	width: 100% !important;
 	height: 100% !important;
+}
+
+.carousel-item:hover {
+	cursor: pointer;
 }
 
 .movieInfo_box {
@@ -35,18 +38,18 @@ h1 {
 .carousel-control-prev, .carousel-control-next {
 	height: 40px;
 	width: 40px !important;
-	top: 185px !important;
+	top: 40% !important;
 	color: #000 !important;
 	font-weight: bold;
 	font-size: 25px;
 }
 
 .carousel-control-prev {
-	left: 11% !important;
+	left: 5% !important;
 }
 
 .carousel-control-next {
-	right: 11% !important;
+	right: 5% !important;
 }
 
 .title {
