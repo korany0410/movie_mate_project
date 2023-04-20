@@ -41,7 +41,7 @@
 						</div>
 					</c:forEach>
 				</div>
-				<c:forEach var="index" begin="1" end="2">
+				<c:forEach var="index" begin="1" end="5">
 					<div class="carousel-item">
 						<c:forEach var="i" begin="${index * 5}" end="${index * 5 + 4}">
 							<div class="movieInfo_box">

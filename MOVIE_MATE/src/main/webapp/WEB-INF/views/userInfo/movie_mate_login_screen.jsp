@@ -13,6 +13,7 @@
 	function send(f) {
 		var email = f.email.value;
 		var pwd = f.pwd.value;
+		var keyCode = window.event.keyCode;
 
 		url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd;
@@ -21,12 +22,12 @@
 	}
 
 	function resFn() {
-		if (xhr.readyState == 4 && xhr.status == 200){
+		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;
-			
-			if(result == 'success'){
+
+			if (result == 'success') {
 				alert("로그인 성공했습니다.");
-				location.href= "movie_mate_main_screen.do";
+				location.href = "movie_mate_main_screen.do";
 			} else {
 				alert("아이디 또는 비밀번호가 일치하지 않습니다.");
 				return;
@@ -55,10 +56,7 @@
 			<input type="button" name="button" value="로그인"
 				onclick="send(this.form);">
 		</div>
-		<div>
-			<span> <a href="#">비밀번호를 잊어버리셨나요?</a>
-			</span>
-		</div>
+
 
 		<div>
 			계정이 없으신가요?<input type="button" name="button" value="회원가입"

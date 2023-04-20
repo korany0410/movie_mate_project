@@ -271,30 +271,42 @@ public class MovieController {
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
+		// Movie Mate 명작 영화
+		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
+		model.addAttribute("masterpiece_list", masterpiece_list);
+
 		HttpSession session = request.getSession();
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
 		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
-		System.out.println(boxOffice_list.size());
 		model.addAttribute("boxoffi_list", boxOffice_list);
-		// 테스트 중입니다.
+
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
 		model.addAttribute("top10_list", top10_list);
 		//화제감독의추천작
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 	      model.addAttribute("director_list", director_list);
 
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list();
+		model.addAttribute("recommend_list", recommend_list);
+
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
 		HashMap<String, String> total_chart_name = new HashMap<String, String>();
 		total_chart.put("boxOffice", boxOffice_list);
 		total_chart_name.put("boxOffice", "박스오피스 순위");
-		
+
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
 		
 		 total_chart.put("director", director_list);
 	      total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
+
+		total_chart.put("masterpiece", masterpiece_list);
+		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
+
+		total_chart.put("recommend", recommend_list);
+		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
 
 		model.addAttribute("total_chart", total_chart);
 		model.addAttribute("total_chart_name", total_chart_name);
