@@ -21,18 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 
-
-	<!-- <select id="boxoffi_list" resultType="vo.MovieMate_MovieVO" parameterType="vo.MovieMate_MovieVO"> 
-		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date DESC) no, m.* FROM 
-		moviemate_movie m)sub WHERE no BETWEEN 1 AND 15 </select> -->
-
-
 	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.MovieMate_MovieVO">
+		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date DESC) no, m.*
+		FROM moviemate_movie m)sub WHERE no BETWEEN 1 AND 15
+	</select>
+
+
+<!-- 	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date
 		DESC) no, m.*
 		FROM moviemate_movie m)sub WHERE no BETWEEN 1 AND 15
 	</select>
+ -->
+
 
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
@@ -44,6 +47,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) sub
 		WHERE no BETWEEN 1 AND 15
 	</select>
+ 
+	<!-- <select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
+      parameterType="vo.Movie_CastVO">
+        SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
+    </select>  -->
+	
 
 	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
@@ -57,12 +66,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
     </select>
 		
+
+
+
+
+      
 		
 
 	
 	
 	
 	
+
 
 </mapper>
 
