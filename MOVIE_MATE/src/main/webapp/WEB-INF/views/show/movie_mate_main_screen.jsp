@@ -24,6 +24,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
 	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
 	crossorigin="anonymous"></script>
+	
+	
+	
 </head>
 <body>
 	<c:forEach var="map" items="${ total_chart }" varStatus="status">
@@ -41,10 +44,10 @@
 						</div>
 					</c:forEach>
 				</div>
-				<c:forEach var="index" begin="1" end="5">
+				<c:forEach var="index" begin="1" end="2">
 					<div class="carousel-item">
 						<c:forEach var="i" begin="${index * 5}" end="${index * 5 + 4}">
-							<div class="movieInfo_box">
+							<div class="movieInfo_box" >
 								<img class="profile_img" alt=""
 									src="${map.value[i].profile_img }">
 								<div class="fw-bold">${map.value[i].title }</div>
