@@ -32,6 +32,11 @@
     }
 </script>
 <body>
+	<!--<h1>메인 스크린 화면</h1>  -->
+	<header>
+		<%@ include file="/resources/jsp/header.jsp"%>
+	</header>
+	<div class="wall"></div>
 	<c:forEach var="map" items="${ total_chart }" varStatus="status">
 		<div id="${map.key}" class="carousel slide">
 			<div class="carousel-inner">

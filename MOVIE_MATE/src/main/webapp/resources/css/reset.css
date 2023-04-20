@@ -5,6 +5,15 @@
 	padding: 0px;
 }
 
-h3{
+h3 {
 	padding-top: 20px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	margin: 0px;
+	padding: 0px;
 }

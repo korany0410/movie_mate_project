@@ -50,6 +50,10 @@
 </script>
 </head>
 <body>
+	<header>
+		<%@ include file="/resources/jsp/header.jsp"%>
+	</header>
+	<div class="wall"></div>
 	<div class="main_box">
 		<div class="first_box">
 			<div class="thumbnailImg_box row">
@@ -97,8 +101,8 @@
 			</div>
 		</div>
 		<div class="second_box row">
-			<div class="dummy col-1"></div>
-			<div class="left_box col-6">
+			<div class="dummy col-2"></div>
+			<div class="left_box col-5">
 				<div class="myComment_box" id="comment_1">내가 코멘트 남긴 내용</div>
 				<div class="myComment_input_box"></div>
 				<div class="info_box">

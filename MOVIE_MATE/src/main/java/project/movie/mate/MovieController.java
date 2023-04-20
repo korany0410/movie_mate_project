@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.MovieMate_CastDAO;
 import dao.MovieMate_CommentDAO;
 import dao.MovieMate_Genre_RecDAO;
 import dao.MovieMate_MovieDAO;
 import dao.MovieMate_TagDAO;
+import dao.MovieMate_UserDAO;
 import dao.Movie_CastDAO;
 import dao.Movie_TagDAO;
 import dao.Movie_UserDAO;
@@ -36,6 +39,7 @@ import db.DB;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
+import vo.MovieMate_UserVO;
 import vo.Movie_CastVO;
 
 @Controller
@@ -51,6 +55,7 @@ public class MovieController {
 	MovieMate_Genre_RecDAO moviemate_genre_recdao;
 	MovieMate_MovieDAO moviemate_moviedao;
 	MovieMate_TagDAO moviemate_tagdao;
+	MovieMate_UserDAO moviemate_userdao;
 	User_CastDAO user_castdao;
 
 	Random random = new Random();
@@ -61,7 +66,7 @@ public class MovieController {
 	public MovieController(Movie_CastDAO movie_castdao, Movie_TagDAO movie_tagdao, Movie_UserDAO movie_userdao,
 			MovieMate_CastDAO moviemate_castdao, MovieMate_CommentDAO moviemate_commentdao,
 			MovieMate_Genre_RecDAO moviemate_genre_recdao, MovieMate_MovieDAO moviemate_moviedao,
-			MovieMate_TagDAO moviemate_tagdao, User_CastDAO user_castdao) {
+			MovieMate_TagDAO moviemate_tagdao, User_CastDAO user_castdao, MovieMate_UserDAO moviemate_userdao) {
 		this.movie_castdao = movie_castdao;
 		this.movie_tagdao = movie_tagdao;
 		this.movie_userdao = movie_userdao;
@@ -71,6 +76,7 @@ public class MovieController {
 		this.moviemate_moviedao = moviemate_moviedao;
 		this.movie_tagdao = movie_tagdao;
 		this.user_castdao = user_castdao;
+		this.moviemate_userdao = moviemate_userdao;
 	}
 
 	@RequestMapping("/data_insert.do")
@@ -186,7 +192,10 @@ public class MovieController {
 						JSONArray rating = (JSONArray) obj5.get("rating");
 						for (Object arr4 : rating) {
 							JSONObject obj6 = (JSONObject) arr4;
+							// System.out.print("rating grade : " + obj6.get("ratingGrade") + " ");
 							String grade = (String) obj6.get("ratingGrade");
+							moviemate_movievo.setFilm_rating(grade.split("[|]")[0]);
+							// System.out.println("release date : " + obj6.get("releaseDate") + " ");
 							grade = grade.split("[|]")[0];
 							if (grade.contains("중학생")) {
 								grade = "15세미만관람불가";
@@ -270,14 +279,15 @@ public class MovieController {
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
-		// Movie Mate 명작 영화
-		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
-		model.addAttribute("masterpiece_list", masterpiece_list);
-
 		HttpSession session = request.getSession();
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
+		
+		// Movie Mate 명작 영화
+		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
+		model.addAttribute("masterpiece_list", masterpiece_list);
+
 		// 박스오피스 순위
 		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
 		model.addAttribute("boxoffi_list", boxOffice_list);
@@ -286,12 +296,13 @@ public class MovieController {
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
 		model.addAttribute("top10_list", top10_list);
 
+		// 이주의 배우
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+
 		// 화제감독의추천작
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 		model.addAttribute("director_list", director_list);
 
-		// 이 주의 배우
-		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list();
 		model.addAttribute("recommend_list", recommend_list);
 
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
@@ -341,6 +352,40 @@ public class MovieController {
 		model.addAttribute("comment_list", comment_list);
 
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
+	}
+
+	@RequestMapping("/movie_mate_search_screen.do")
+	public String movie_mate_search_screen(Model model, String keyword) {
+
+		System.out.println("search_screen.do parameter keyword : " + keyword);
+		// 검색 결과를 받아와서 model에 추가
+		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
+		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
+		List<MovieMate_UserVO> search_user_result = moviemate_userdao.search_user(keyword);
+
+		System.out.println("영화 검색결과 수" + search_movie_result.size());
+		System.out.println("배우 검색결과 수" + search_cast_result.size());
+		System.out.println("유저 검색결과 수" + search_user_result.size());
+
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("search_movie", search_movie_result);
+		model.addAttribute("search_cast", search_cast_result);
+		model.addAttribute("search_user", search_user_result);
+
+		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
+	}
+
+	@RequestMapping("/movie_mate_search_content.do")
+	@ResponseBody
+	public Map<String, Object> movie_mate_search_content(String keyword) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
+		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
+
+		resultMap.put("search_movie_result", search_movie_result);
+		resultMap.put("search_cast_result", search_cast_result);
+
+		return resultMap;
 	}
 
 }

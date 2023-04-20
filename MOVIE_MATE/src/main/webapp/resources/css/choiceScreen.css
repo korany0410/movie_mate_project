@@ -4,6 +4,10 @@ body {
 	overflow-x: hidden;
 }
 
+.wall {
+	height: 60px;
+}
+
 .main_box {
 	width: 100%;
 }
@@ -30,7 +34,7 @@ body {
 }
 
 .title_box {
-	width: 85vw;
+	width: 70vw;
 	margin: 0 auto;
 	position: relative;
 }
@@ -292,12 +296,13 @@ body {
 	font-size: 12px;
 }
 
-.starScore_box{
+.starScore_box {
 	display: none;
 }
 
-.commentInfo_box{
-	margin: 0 15px 20px 0;
+.comment_info {
+	width: 90%;
+	margin: 10px 0 20px 20px;
 	border: 1px solid #eeeeee;
 	border-radius: 10px;
 	background-color: #fafafa;

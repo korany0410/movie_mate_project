@@ -20,8 +20,14 @@
 	background: rgb(248, 248, 248);
 }
 
+.wall {
+	height: 100px;
+}
+
 .carousel-inner {
 	width: 85% !important;
+	width: 75% !important;
+	height: 460px !important;
 	margin: 0 auto;
 }
 
@@ -52,7 +58,7 @@ h1 {
 .carousel-control-prev, .carousel-control-next {
 	height: 40px;
 	width: 40px !important;
-	top: 40% !important;
+	top: 45% !important;
 	color: #000 !important;
 	font-weight: bold;
 	font-size: 25px;
@@ -69,11 +75,11 @@ h1 {
 }
 
 .carousel-control-prev {
-	left: 5% !important;
+	left: 10% !important;
 }
 
 .carousel-control-next {
-	right: 5% !important;
+	right: 10% !important;
 }
 
 .title {

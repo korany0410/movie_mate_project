@@ -1,7 +1,10 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import vo.MovieMate_CastVO;
 import vo.MovieMate_UserVO;
 
 public class MovieMate_UserDAO {
@@ -34,6 +37,13 @@ public class MovieMate_UserDAO {
 		int count = sqlSession.selectOne("mmuser.login", moviemate_uservo);
 		
 		return count;
+	}
+	
+	//회원명 검색 조회
+	public List<MovieMate_UserVO> search_user(String searchKeyword) {
+	 
+		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.search_user",searchKeyword);
+		return list;
 	}
 	
 }
