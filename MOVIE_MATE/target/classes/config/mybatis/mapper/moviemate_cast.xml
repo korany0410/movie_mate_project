@@ -9,6 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="openApi_insert" parameterType="vo.MovieMate_CastVO">
 		INSERT INTO moviemate_cast values (seq_cast_idx.nextVal, #{name}, #{type}, #{profile_img})
 	</insert>
+	
+	<select id="selectOne" resultType="int" parameterType="vo.MovieMate_CastVO">
+		SELECT cast_idx FROM moviemate_cast WHERE name = #{name}
+	</select>
 </mapper>
 
 

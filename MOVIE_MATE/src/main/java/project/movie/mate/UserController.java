@@ -2,6 +2,7 @@ package project.movie.mate;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.MovieMate_UserDAO;
@@ -25,13 +26,13 @@ public class UserController {
 	@RequestMapping("/signUp.do")
 	@ResponseBody
 	public String signUp(MovieMate_UserVO moviemate_uservo) {
-		
+
 		int res = moviemate_userdao.signUp(moviemate_uservo);
 
-		if(res < 1) {
+		if (res < 1) {
 			return "fail";
 		}
-		
+
 		return "success";
 	}
 
@@ -49,21 +50,22 @@ public class UserController {
 
 		return "imposiible";
 	}
-	
+
 	@RequestMapping("/movie_mate_login_screen.do")
 	public String movie_mate_login_screen() {
 
 		return "/WEB-INF/views/userInfo/movie_mate_login_screen.jsp";
 	}
-	
+
 	@RequestMapping("/login.do")
 	@ResponseBody
 	public String login(MovieMate_UserVO moviemate_uservo) {
-		
+
 		int result = moviemate_userdao.login(moviemate_uservo);
-		if(result < 1) {
+		if (result < 1) {
 			return "fail";
 		}
 		return "success";
 	}
+
 }
