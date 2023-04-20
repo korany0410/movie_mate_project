@@ -20,29 +20,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{film_rating}, #{star_score}, #{attandance})
 	</insert>
 
-<<<<<<< HEAD
+
 	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date DESC) no, m.*
 		FROM moviemate_movie m)sub WHERE no BETWEEN 1 AND 15
 	</select>
 
-=======
 
-
-	<!-- <select id="boxoffi_list" resultType="vo.MovieMate_MovieVO" parameterType="vo.MovieMate_MovieVO"> 
-		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date DESC) no, m.* FROM 
-		moviemate_movie m)sub WHERE no BETWEEN 1 AND 15 </select> -->
-
-
-	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
+<!-- 	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date
 		DESC) no, m.*
 		FROM moviemate_movie m)sub WHERE no BETWEEN 1 AND 30
 	</select>
+ -->
 
->>>>>>> 6b8cb872be4ec3733bc3a81b1436b5fb7e13ae18
+
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT *
@@ -51,17 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DESC) no, m.*
 		FROM moviemate_movie m
 		) sub
-		WHERE no BETWEEN 1 AND 30
+		WHERE no BETWEEN 1 AND 15
 	</select>
-
-<<<<<<< HEAD
-	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
+ 
+	<!-- <select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
       parameterType="vo.Movie_CastVO">
         SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
-    </select>
-      
+    </select>  -->
 	
-=======
+
 	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		select * from moviemate_movie
@@ -74,6 +66,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
     </select>
 		
+
+
+
+
+      
 		
 
 	
@@ -81,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 
->>>>>>> 6b8cb872be4ec3733bc3a81b1436b5fb7e13ae18
+
 </mapper>
 
 

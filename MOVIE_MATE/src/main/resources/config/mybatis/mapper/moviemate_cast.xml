@@ -11,14 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectOne" resultType="int" parameterType="vo.MovieMate_CastVO">
-<<<<<<< HEAD
+
       SELECT cast_idx FROM moviemate_cast WHERE name = #{name}
    	</select>
 	
-=======
-		SELECT cast_idx FROM moviemate_cast WHERE name = #{name}
-	</select>
->>>>>>> 6b8cb872be4ec3733bc3a81b1436b5fb7e13ae18
+
+		
 </mapper>
 
 

@@ -267,7 +267,7 @@ public class MovieController {
 		return "/WEB-INF/views/data/data_check.jsp";
 	}
 
-	// Movie Mate Top 10 영화
+	
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
@@ -279,15 +279,19 @@ public class MovieController {
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
+		// 박스오피스 순위
 		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
 		model.addAttribute("boxoffi_list", boxOffice_list);
-
+		
+		// Movie Mate Top 10 영화
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
 		model.addAttribute("top10_list", top10_list);
+		
 		//화제감독의추천작
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 	      model.addAttribute("director_list", director_list);
-
+	      
+        // 이 주의 배우 
 		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list();
 		model.addAttribute("recommend_list", recommend_list);
 

@@ -31,14 +31,8 @@ public class MovieMate_MovieDAO {
 	// 박스오피스 순위
 	public List<MovieMate_MovieVO> boxOffice_list() {
 
-
-		
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffice_list");
 		
-
-		
-
-
 		return list;
 	}
 
