@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DESC) no, m.*
 		FROM moviemate_movie m
 		) sub
-		WHERE no BETWEEN 1 AND 30
+		WHERE no BETWEEN 1 AND 15
 	</select>
 
 	<select id="search_movie" resultType="vo.MovieMate_MovieVO"
@@ -53,15 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.Movie_CastVO">
-		SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
+		SELECT * FROM moviemate_movie WHERE
+		movie_idx = #{movie_idx}
 	</select>
-
-
-
-
-
-
-
 
 </mapper>
 

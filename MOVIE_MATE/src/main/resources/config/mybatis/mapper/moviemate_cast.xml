@@ -24,7 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="vo.MovieMate_CastVO">
 		SELECT cast_idx FROM moviemate_cast WHERE name = #{name}
 	</select>
-
 </mapper>
 
 

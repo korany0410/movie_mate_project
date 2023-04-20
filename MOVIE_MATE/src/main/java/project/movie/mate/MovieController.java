@@ -287,13 +287,20 @@ public class MovieController {
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
+		// 박스오피스 순위
 		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
 		model.addAttribute("boxoffi_list", boxOffice_list);
 
+		// Movie Mate Top 10 영화
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
 		model.addAttribute("top10_list", top10_list);
 
 		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+
+		// 화제감독의추천작
+		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
+		model.addAttribute("director_list", director_list);
+
 		model.addAttribute("recommend_list", recommend_list);
 
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
@@ -303,6 +310,9 @@ public class MovieController {
 
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
+
+		total_chart.put("director", director_list);
+		total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
 
 		total_chart.put("masterpiece", masterpiece_list);
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
@@ -330,17 +340,6 @@ public class MovieController {
 
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
-
-	/*
-	 * // 명작 영화
-	 * 
-	 * @RequestMapping(value = {"/","/movie_mate_main_screen.do"} ) public String
-	 * movie_mate_main_screen2(Model model) {
-	 * 
-	 * List<MovieMate_MovieVO> masterpiece_list =
-	 * moviemate_moviedao.masterpiece_list(); model.addAttribute("masterpiece_list",
-	 * masterpiece_list); return "/WEB-INF/views/show/movie_mate_main_screen.jsp"; }
-	 */
 
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
