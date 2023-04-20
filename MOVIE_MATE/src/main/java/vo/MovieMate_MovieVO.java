@@ -1,12 +1,21 @@
 package vo;
 
 public class MovieMate_MovieVO {
-	private int movie_idx, star_score, attandance;
+	private int movie_idx, attandance;
+	double star_score;
 	private String profile_img, title, release_date, running_time, film_rating;
 	private String movie_info, genre, company, background_img, nation;
 
 	public String getNation() {
 		return nation;
+	}
+
+	public double getStar_score() {
+		return star_score;
+	}
+
+	public void setStar_score(double star_score) {
+		this.star_score = star_score;
 	}
 
 	public void setNation(String nation) {
@@ -19,14 +28,6 @@ public class MovieMate_MovieVO {
 
 	public void setMovie_idx(int movie_idx) {
 		this.movie_idx = movie_idx;
-	}
-
-	public int getStar_score() {
-		return star_score;
-	}
-
-	public void setStar_score(int star_score) {
-		this.star_score = star_score;
 	}
 
 	public int getAttandance() {

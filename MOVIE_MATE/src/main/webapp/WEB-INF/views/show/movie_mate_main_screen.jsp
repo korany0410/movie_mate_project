@@ -6,34 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.img1 {
-	display: block;
-	height: 300px;
-}
-
-.carousel-inner {
-	width: 70% !important;
-	margin: 0 auto;
-}
-
-.carousel-item {
-	width: 100% !important;
-}
-
-.movie1 {
-	width: 20%;
-	float: left;
-}
-
-.movie1>* {
-	width: 90%;
-	margin: 0 auto;
-}
-h3{padding:40PX 80px 0 300px;}
-
-
-</style>
+<link rel="stylesheet" href="/mate/resources/css/mainScreen.css?ver=1" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -53,110 +26,58 @@ h3{padding:40PX 80px 0 300px;}
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<h3>Movie Mate Top 10 영화</h3>
-	
-	<div id="carouselExample" class="carousel slide">
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<c:forEach var="i" begin="0" end="4">
-					<div class="movie1">
-						<img class="img1" alt="" src="${top10_list[i].profile_img}">
-						<div class="fw-bold">${top10_list[i].title }</div>
-						<div>${top10_list[i].nation }</div>
-						<div>${top10_list[i].genre }</div>
-						
+	<c:forEach var="map" items="${ total_chart }" varStatus="status">
+		<div id="${map.key}" class="carousel slide">
+			<div class="carousel-inner">
+				<div class="title">${total_chart_name.get(map.key)}</div>
+				<div class="carousel-item active">
+					<c:forEach var="i" begin="0" end="4">
+						<div class="movieInfo_box">
+							<img class="profile_img" alt=""
+								src="${map.value[i].profile_img }">
+							<div class="fw-bold">${map.value[i].title }</div>
+							<div>${map.value[i].nation }</div>
+							<div>${map.value[i].genre }</div>
+						</div>
+					</c:forEach>
+				</div>
+				<c:forEach var="index" begin="1" end="2">
+					<div class="carousel-item">
+						<c:forEach var="i" begin="${index * 5}" end="${index * 5 + 4}">
+							<div class="movieInfo_box">
+								<img class="profile_img" alt=""
+									src="${map.value[i].profile_img }">
+								<div class="fw-bold">${map.value[i].title }</div>
+								<div>${map.value[i].nation }</div>
+								<div>${map.value[i].genre }</div>
+							</div>
+						</c:forEach>
 					</div>
 				</c:forEach>
-				<div class="carousel-caption d-none d-md-block"></div>
 			</div>
-			<div class="carousel-item">
-				<c:forEach var="i" begin="5" end="9">
-					<div class="movie1">
-						<img class="img1" alt="" src="${top10_list[i].profile_img }">
-						<div  class="fw-bold">${top10_list[i].title }</div>
-						<div>${top10_list[i].nation }</div>
-						<div>${top10_list[i].genre }</div>
-					</div>
-				</c:forEach>
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
-			<div class="carousel-item">
-				<c:forEach var="i" begin="10" end="14">
-					<div class="movie1">
-						<img class="img1" alt="" src="${top10_list[i].profile_img }">
-						<div class="fw-bold">${top10_list[i].title }</div>
-						<div>${top10_list[i].nation }</div>
-						<div>${top10_list[i].genre }</div>
-					</div>
-				</c:forEach>
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
+			<input type="button" class="carousel-control-prev"
+				data-bs-target="#${ map.key }" data-bs-slide="prev" value="&lt;" />
+			<input type="button" class="carousel-control-next"
+				data-bs-target="#${ map.key }" data-bs-slide="next" value="&gt;" />
 		</div>
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#carouselExample" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#carouselExample" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>	
-		</button>
-	</div>
-	
-	<h3>화제의 감독 미야자키 하야오의 작품</h3>
-	
-	<div id="carouselExample" class="carousel slide">
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<c:forEach var="i" begin="0" end="4">
-					<div class="movie1">
-						<img class="img1" alt="" src="${director_list[i].profile_img}">
-						<div class="fw-bold">${director_list[i].title }</div>
-						<div>${director_list[i].nation }</div>
-						<div>${director_list[i].genre }</div>
-						
-					</div>
-				</c:forEach>
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
-			<div class="carousel-item">
-				<c:forEach var="i" begin="5" end="9">
-					<div class="movie1">
-						<img class="img1" alt="" src="${director_list[i].profile_img }">
-						<div  class="fw-bold">${director_list[i].title }</div>
-						<div>${director_list[i].nation }</div>
-						<div>${director_list[i].genre }</div>
-					</div>
-				</c:forEach>
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
-			<div class="carousel-item">
-				<c:forEach var="i" begin="10" end="14">
-					<div class="movie1">
-						<img class="img1" alt="" src="${director_list[i].profile_img }">
-						<div class="fw-bold">${director_list[i].title }</div>
-						<div>${director_list[i].nation }</div>
-						<div>${director_list[i].genre }</div>
-					</div>
-				</c:forEach>
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
-		</div>
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#carouselExample" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#carouselExample" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>	
-		</button>
-	</div>
-	
+	</c:forEach>
 </body>
-
-
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,21 +3,36 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mcast">
-	<select id="movie_idx" resultType="int" parameterType="vo.MovieMate_MovieVO">
-		SELECT movie_idx FROM moviemate_movie WHERE title = #{title} AND release_date = TO_DATE(#{release_date},'YYYY/MM/DD')
+	<select id="movie_idx" resultType="int"
+		parameterType="vo.MovieMate_MovieVO">
+		SELECT movie_idx FROM moviemate_movie WHERE title =
+		#{title} AND release_date = TO_DATE(#{release_date},'YYYY/MM/DD')
 	</select>
-	
-	<select id="cast_idx" resultType="int" parameterType="vo.MovieMate_CastVO">
+
+	<select id="cast_idx" resultType="int"
+		parameterType="vo.MovieMate_CastVO">
 		SELECT cast_idx FROM moviemate_cast WHERE name = #{name}
 	</select>
-	
-	<select id="openApi_count" resultType="int" parameterType="vo.Movie_CastVO">
-		SELECT COUNT(*) FROM movie_cast WHERE movie_idx = #{movie_idx} AND cast_idx = #{cast_idx}
+
+	<select id="openApi_count" resultType="int"
+		parameterType="vo.Movie_CastVO">
+		SELECT COUNT(*) FROM movie_cast WHERE movie_idx =
+		#{movie_idx} AND cast_idx = #{cast_idx}
+	</select>
+
+	<insert id="openApi_insert" parameterType="vo.Movie_CastVO">
+		INSERT INTO movie_cast
+		values(#{movie_idx}, #{cast_idx})
+	</insert>
+
+	<select id="selectList" resultType="vo.Movie_CastVO"
+		parameterType="vo.MovieMate_MovieVO">
+		SELECT * FROM movie_cast WHERE movie_idx = #{movie_idx}
 	</select>
 	
-	<insert id="openApi_insert" parameterType="vo.Movie_CastVO">
-		INSERT INTO movie_cast values(#{movie_idx}, #{cast_idx})
-	</insert>
+	<select id="selectCastList" resultType="vo.Movie_CastVO" parameterType="vo.Movie_CastVO">
+      SELECT * FROM movie_cast WHERE cast_idx = #{cast_idx}
+   	</select>
 	
 </mapper>
 
