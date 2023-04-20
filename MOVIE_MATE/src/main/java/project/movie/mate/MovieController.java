@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.MovieMate_CastDAO;
 import dao.MovieMate_CommentDAO;
@@ -277,24 +279,36 @@ public class MovieController {
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
+		// Movie Mate 명작 영화
+		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
+		model.addAttribute("masterpiece_list", masterpiece_list);
+
 		HttpSession session = request.getSession();
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
 		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
-		System.out.println(boxOffice_list.size());
 		model.addAttribute("boxoffi_list", boxOffice_list);
-		// 테스트 중입니다.
+
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
-		/* System.out.println(top10_list.size()); */
 		model.addAttribute("top10_list", top10_list);
+
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+		model.addAttribute("recommend_list", recommend_list);
 
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
 		HashMap<String, String> total_chart_name = new HashMap<String, String>();
 		total_chart.put("boxOffice", boxOffice_list);
 		total_chart_name.put("boxOffice", "박스오피스 순위");
+
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
+
+		total_chart.put("masterpiece", masterpiece_list);
+		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
+
+		total_chart.put("recommend", recommend_list);
+		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
 
 		model.addAttribute("total_chart", total_chart);
 		model.addAttribute("total_chart_name", total_chart_name);
@@ -336,16 +350,30 @@ public class MovieController {
 		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
 		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
 		List<MovieMate_UserVO> search_user_result = moviemate_userdao.search_user(keyword);
-		
+
 		System.out.println("영화 검색결과 수" + search_movie_result.size());
 		System.out.println("배우 검색결과 수" + search_cast_result.size());
 		System.out.println("유저 검색결과 수" + search_user_result.size());
 
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("search_movie", search_movie_result);
 		model.addAttribute("search_cast", search_cast_result);
 		model.addAttribute("search_user", search_user_result);
 
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
+	}
+
+	@RequestMapping("/movie_mate_search_content.do")
+	@ResponseBody
+	public Map<String, Object> movie_mate_search_content(String keyword) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
+		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
+
+		resultMap.put("search_movie_result", search_movie_result);
+		resultMap.put("search_cast_result", search_cast_result);
+
+		return resultMap;
 	}
 
 }

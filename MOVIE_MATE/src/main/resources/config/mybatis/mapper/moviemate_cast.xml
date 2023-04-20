@@ -16,7 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="search_cast" resultType="vo.MovieMate_CastVO"
 		parameterType="string">
 		SELECT * FROM moviemate_cast WHERE name LIKE
-		'%' || #{keyword} || '%'
+		'%' ||
+		#{keyword} || '%'
+	</select>
+
+	<select id="selectOne" resultType="int"
+		parameterType="vo.MovieMate_CastVO">
+		SELECT cast_idx FROM moviemate_cast WHERE name = #{name}
 	</select>
 
 </mapper>

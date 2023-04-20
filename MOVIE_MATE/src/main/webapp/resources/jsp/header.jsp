@@ -42,8 +42,8 @@
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">
-				<img src="/mate/resources/images/logo_main.png" alt="" height="30">
+			<a class="navbar-brand" href="movie_mate_main_screen.do">
+				<img src="/mate/resources/images/logo_main.png" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
