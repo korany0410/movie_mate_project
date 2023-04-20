@@ -43,6 +43,12 @@ body {
 }
 
 .title_img {
+	width: 210px;
+	height: 315px;
+	object-fit: fill;
+}
+
+.title_img {
 	border-radius: 20px;
 }
 
@@ -228,6 +234,7 @@ body {
 	color: #7900FF;
 	border: none;
 	background-color: white;
+	border: none;
 }
 
 .content_box {
@@ -236,6 +243,8 @@ body {
 
 .content_info>* {
 	padding: 0 0 0 10px;
+	font-size: 13px;
+	font-weight: bold;
 }
 
 .content_movie_info {
@@ -248,4 +257,97 @@ body {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
 	display: -webkit-box;
+}
+
+.carousel-item {
+	margin: 0 0 0 30px;
+}
+
+.cast_info {
+	margin: 10px 0 0 0;
+	border-bottom: 1px solid #eeeeee;
+	width: 70%;
+	height: 50px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+	height: 40px;
+	width: 40px !important;
+	top: 50% !important;
+	color: #000 !important;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.carousel-control-next {
+	right: 3% !important;
+}
+
+.cast_name {
+	font-weight: bold;
+}
+
+.cast_type {
+	color: gray;
+	font-size: 12px;
+}
+
+.starScore_box{
+	display: none;
+}
+
+.commentInfo_box{
+	margin: 0 15px 20px 0;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	background-color: #fafafa;
+}
+
+.myComment_box {
+	display: none;
+	height: 60px !important;
+	min-height: 60px !important;
+	border: 1px solid #eeeeee;
+}
+
+.myComment_input_box {
+	display: none;
+	min-height: 60px !important;
+	height: 60px !important;
+	border: 1px solid #eeeeee;
+}
+
+.comment_name {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 5px;
+	height: 30px;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	display: -webkit-box;
+	height: 30px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.comment_content {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 5px;
+	min-height: 150px;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	display: -webkit-box;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.cocomment {
+	padding: 5px;
 }

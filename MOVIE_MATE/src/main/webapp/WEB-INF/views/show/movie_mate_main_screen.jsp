@@ -41,8 +41,10 @@
 						<form>
 							<div class="movieInfo_box"
 								onclick="choice_screen(${map.value[i].movie_idx});">
-								<img class="profile_img" alt="${map.value[i].title}"
-									src="${map.value[i].profile_img }">
+								<div class="img_box">
+									<img class="profile_img" alt="${map.value[i].title}"
+										src="${map.value[i].profile_img }">
+								</div>
 								<div class="fw-bold info">${map.value[i].title}</div>
 								<div class="info">${fn:substring(map.value[i].release_date,0,4)}
 									• ${map.value[i].nation}</div>
@@ -56,8 +58,10 @@
 						<c:forEach var="i" begin="${index * 5}" end="${index * 5 + 4}">
 							<div class="movieInfo_box"
 								onclick="choice_screen(${map.value[i].movie_idx});">
-								<img class="profile_img" alt="${map.value[i].title}"
-									src="${map.value[i].profile_img }">
+								<div class="img_box">
+									<img class="profile_img" alt="${map.value[i].title}"
+										src="${map.value[i].profile_img }">
+								</div>
 								<div class="fw-bold">${map.value[i].title }</div>
 								<div>${map.value[i].nation }</div>
 								<div>${map.value[i].genre }</div>
@@ -74,6 +78,7 @@
 	</c:forEach>
 </body>
 </html>
+
 
 
 

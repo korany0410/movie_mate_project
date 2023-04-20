@@ -39,6 +39,14 @@
 	console.log(isLogin);
 	console.log(score.value);
     }
+    window.onload = function() {
+	var isLogin = "${isLogin}";
+	var comment_box1 = document.getElementById('comment_1');
+	if(isLogin == 'no'){
+		comment_box1.style.display = "block";
+	}
+		console.log("a");
+    }
 </script>
 </head>
 <body>
@@ -91,6 +99,8 @@
 		<div class="second_box row">
 			<div class="dummy col-1"></div>
 			<div class="left_box col-6">
+				<div class="myComment_box" id="comment_1">내가 코멘트 남긴 내용</div>
+				<div class="myComment_input_box"></div>
 				<div class="info_box">
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
@@ -113,18 +123,48 @@
 					<div id="cast_list" class="carousel slide">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<c:forEach var="i" begin="0" end="4">
-									<form>
-										<div class="movieInfo_box">a</div>
-									</form>
-								</c:forEach>
-							</div>
-							<c:forEach var="index" begin="1" end="2">
-								<div class="carousel-item">
-									<c:forEach var="i" begin="5" end="9">
-										<div class="movieInfo_box">
+								<div class="row">
+									<c:forEach var="i" begin="0" end="5">
+										<div class="movieInfo_box col-6">
+											<form>
+												<div class="cast_info">
+													<div class="cast_name">${cast_list[i].name}</div>
+													<div class="cast_type">
+														<c:if test="${cast_list[i].type eq 'actor' }">
+															<span>배우</span>
+														</c:if>
+														<c:if test="${cast_list[i].type eq 'director' }">
+															<span>감독</span>
+														</c:if>
+													</div>
+												</div>
+											</form>
 										</div>
 									</c:forEach>
+								</div>
+							</div>
+							<c:forEach var="index" begin="1" end="${maxCast_page - 1}">
+								<div class="carousel-item">
+									<div class="row">
+										<c:forEach var="i" begin="${index * 6 }"
+											end="${index * 6 + 5}">
+											<div class="movieInfo_box col-6">
+												<form>
+													<div class="cast_info">
+														<div class="cast_name">${cast_list[i].name}</div>
+														<div class="cast_type">
+															<c:if test="${cast_list[i].type eq 'actor' }">
+																<span>배우</span>
+															</c:if>
+															<c:if test="${cast_list[i].type eq 'director' }">
+																<span>감독</span>
+															</c:if>
+														</div>
+													</div>
+												</form>
+											</div>
+										</c:forEach>
+									</div>
 								</div>
 							</c:forEach>
 						</div>
@@ -135,8 +175,59 @@
 					</div>
 				</div>
 				<div class="starScore_box"></div>
-				<div class="comment_box"></div>
-				<div class="similar_box"></div>
+				<div class="comment_box">
+					<div class="head_title">코멘트</div>
+					<div id="comment_list" class="carousel slide">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<div class="row">
+									<c:forEach var="i" begin="0" end="1">
+										<div class="commentInfo_box col-5">
+											<form>
+												<div class="comment_info">
+													<div class="comment_name">${comment_list[i].com_username}이름</div>
+													<div class="comment_content">
+														${comment_list[i].com_content } 코멘트 내용</div>
+													<div class="cocomment">
+														<span>댓글 수</span>
+													</div>
+												</div>
+											</form>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+							<c:forEach var="index" begin="1" end="2">
+								<div class="carousel-item">
+									<div class="row">
+										<c:forEach var="i" begin="${index * 2 }"
+											end="${index * 2 + 1}">
+											<div class="commentInfo_box col-5">
+												<form>
+													<div class="comment_info">
+														<div class="comment_name">${comment_list[i].com_username}이름</div>
+														<div class="comment_content">
+															${comment_list[i].com_content } 코멘트 내용</div>
+														<div class="cocomment">
+															<span>댓글 수</span>
+														</div>
+													</div>
+												</form>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+						<input type="button" class="carousel-control-prev"
+							data-bs-target="#comment_list" data-bs-slide="prev" value="&lt;" />
+						<input type="button" class="carousel-control-next"
+							data-bs-target="#comment_list" data-bs-slide="next" value="&gt;" />
+					</div>
+				</div>
+				<div class="similar_box">
+					<div class="head_title">비슷한 작품</div>
+				</div>
 			</div>
 			<div class="right_box col-4"></div>
 			<div class="dummy col-1"></div>

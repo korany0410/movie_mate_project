@@ -22,8 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectOne" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
-		SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
-		</select>
+		SELECT * FROM moviemate_movie WHERE movie_idx =
+		#{movie_idx}
+	</select>
 
 	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
@@ -31,12 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DESC) no, m.*
 		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
 		'no_data.jpg') m )
-		WHERE (no BETWEEN 1 AND 15)
-	</select>
-
-	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO"
-		parameterType="vo.MovieMate_MovieVO">
-
+		WHERE no BETWEEN 1 AND 30
 	</select>
 
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO"
@@ -46,6 +42,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
 		'no_data.jpg') m )
 		WHERE (no BETWEEN 1 AND 15)
+	</select>
+
+	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.MovieMate_MovieVO">
+		select * from moviemate_movie
+		where release_date
+		between '19900101' and '20100101' and star_score > 4
+	</select>
+
+	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.Movie_CastVO">
+		SELECT * FROM moviemate_movie WHERE movie_idx =
+		#{movie_idx}
 	</select>
 
 </mapper>

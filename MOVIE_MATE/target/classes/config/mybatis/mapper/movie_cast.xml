@@ -29,6 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM movie_cast WHERE movie_idx = #{movie_idx}
 	</select>
+
+	<select id="selectCastList" resultType="vo.Movie_CastVO"
+		parameterType="vo.Movie_CastVO">
+		SELECT * FROM movie_cast WHERE cast_idx = #{cast_idx}
+	</select>
+
 </mapper>
 
 
