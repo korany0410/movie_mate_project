@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> 마이 페이지 화면 </h1>
+
+<!-- <h1> 마이 페이지 화면 </h1> -->
+<header>
+   <%@ include file="/resources/jsp/header.jsp"%>
+</header>
+
+
 </body>
 </html>

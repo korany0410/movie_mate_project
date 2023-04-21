@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,32 +25,51 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
 	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
 	crossorigin="anonymous"></script>
-	
-	
-	
+
+
+
 </head>
+<script type="text/javascript">
+    function choice_screen(idx) {
+	location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
+    }
+</script>
 <body>
+	<!--<h1>메인 스크린 화면</h1>  -->
+	<header>
+		<%@ include file="/resources/jsp/header.jsp"%>
+	</header>
+	<div class="wall"></div>
 	<c:forEach var="map" items="${ total_chart }" varStatus="status">
 		<div id="${map.key}" class="carousel slide">
 			<div class="carousel-inner">
 				<div class="title">${total_chart_name.get(map.key)}</div>
 				<div class="carousel-item active">
 					<c:forEach var="i" begin="0" end="4">
-						<div class="movieInfo_box">
-							<img class="profile_img" alt=""
-								src="${map.value[i].profile_img }">
-							<div class="fw-bold">${map.value[i].title }</div>
-							<div>${map.value[i].nation }</div>
-							<div>${map.value[i].genre }</div>
-						</div>
+						<form>
+							<div class="movieInfo_box"
+								onclick="choice_screen(${map.value[i].movie_idx});">
+								<div class="img_box">
+									<img class="profile_img" alt="${map.value[i].title}"
+										src="${map.value[i].profile_img }">
+								</div>
+								<div class="fw-bold info">${map.value[i].title}</div>
+								<div class="info">${fn:substring(map.value[i].release_date,0,4)}
+									• ${map.value[i].nation}</div>
+								<div class="info">평균★${map.value[i].star_score}</div>
+							</div>
+						</form>
 					</c:forEach>
 				</div>
 				<c:forEach var="index" begin="1" end="2">
 					<div class="carousel-item">
 						<c:forEach var="i" begin="${index * 5}" end="${index * 5 + 4}">
-							<div class="movieInfo_box" >
-								<img class="profile_img" alt=""
-									src="${map.value[i].profile_img }">
+							<div class="movieInfo_box"
+								onclick="choice_screen(${map.value[i].movie_idx});">
+								<div class="img_box">
+									<img class="profile_img" alt="${map.value[i].title}"
+										src="${map.value[i].profile_img }">
+								</div>
 								<div class="fw-bold">${map.value[i].title }</div>
 								<div>${map.value[i].nation }</div>
 								<div>${map.value[i].genre }</div>
