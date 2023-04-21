@@ -1,0 +1,358 @@
+@charset "UTF-8";
+
+body {
+	overflow-x: hidden;
+}
+
+.wall {
+	height: 60px;
+}
+
+.main_box {
+	width: 100%;
+}
+
+.left, .right {
+	height: 80px;
+}
+
+.left {
+	background: linear-gradient(to right, rgba(121, 0, 255, 0.1) 10%, white
+		100%);
+}
+
+.right {
+	background: linear-gradient(to left, rgba(121, 0, 255, 0.1) 10%, white
+		100%);
+}
+
+.movieTitle_box {
+	width: 100vw;
+	height: 310px;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
+
+.title_box {
+	width: 70vw;
+	margin: 0 auto;
+	position: relative;
+}
+
+.main_img {
+	position: absolute;
+	width: 210px;
+	height: 315px;
+	top: -20px;
+}
+
+.title_img {
+	width: 210px;
+	height: 315px;
+	object-fit: fill;
+}
+
+.title_img {
+	border-radius: 20px;
+}
+
+.title_info {
+	position: absolute;
+	left: 230px;
+}
+
+.title {
+	margin: 10px 0 5px 0;
+	font-weight: bold;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.release_date {
+	color: gray;
+}
+
+.input_box {
+	margin: 35px 0 0 0;
+}
+
+.input_box>* {
+	float: left;
+	height: 60px;
+}
+
+.evaluation {
+	width: 150px;
+	text-align: center;
+}
+
+.eval_title {
+	color: gray;
+	font-size: 10px;
+}
+
+.stick {
+	padding: 0 0 30px 0;
+	color: #c8c8c8;
+	font-size: 40px;
+}
+
+.inter {
+	margin: 0 0 0 20px;
+	padding: 13px 0 10px 0;
+	font-size: 20px;
+	color: gray;
+}
+
+.starpoint_wrap {
+	display: inline-block;
+}
+
+.starpoint_box {
+	position: relative;
+	background: url("/mate/resources/images/sp_star.png") 0 0 no-repeat;
+	font-size: 0;
+}
+
+.starpoint_box .starpoint_bg {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 29px;
+	background: url("/mate/resources/images/sp_star.png") 0 -30px no-repeat;
+	pointer-events: none;
+}
+
+.starpoint_box .label_star {
+	display: inline-block;
+	width: 15px;
+	height: 28px;
+	box-sizing: border-box;
+}
+
+.starpoint_box .star_radio {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.starpoint_box .star_radio:nth-of-type(1):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(1):checked ~ .starpoint_bg {
+	width: 10%;
+}
+
+.starpoint_box .star_radio:nth-of-type(2):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(2):checked ~ .starpoint_bg {
+	width: 20%;
+}
+
+.starpoint_box .star_radio:nth-of-type(3):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(3):checked ~ .starpoint_bg {
+	width: 30%;
+}
+
+.starpoint_box .star_radio:nth-of-type(4):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(4):checked ~ .starpoint_bg {
+	width: 40%;
+}
+
+.starpoint_box .star_radio:nth-of-type(5):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(5):checked ~ .starpoint_bg {
+	width: 50%;
+}
+
+.starpoint_box .star_radio:nth-of-type(6):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(6):checked ~ .starpoint_bg {
+	width: 60%;
+}
+
+.starpoint_box .star_radio:nth-of-type(7):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(7):checked ~ .starpoint_bg {
+	width: 70%;
+}
+
+.starpoint_box .star_radio:nth-of-type(8):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(8):checked ~ .starpoint_bg {
+	width: 80%;
+}
+
+.starpoint_box .star_radio:nth-of-type(9):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(9):checked ~ .starpoint_bg {
+	width: 90%;
+}
+
+.starpoint_box .star_radio:nth-of-type(10):hover ~ .starpoint_bg,
+	.starpoint_box .star_radio:nth-of-type(10):checked ~ .starpoint_bg {
+	width: 100%;
+}
+
+.blind {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	margin: -1px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.second_box {
+	width: 100%;
+	background-color: #fafafa;
+}
+
+.left_box {
+	margin: 20px 0 0 0 !important;
+	border: 1px solid #f6f6f6;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.left_box>* {
+	width: 98%;
+	min-height: 175px;
+	margin: 5px auto;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.head_box {
+	height: 65px;
+	overflow: hidden;
+}
+
+.head_title {
+	margin: 5px;
+	float: left;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.head_btn {
+	margin: 5px;
+	float: right;
+}
+
+.more_btn {
+	margin: 8px 0 0 0;
+	color: #7900FF;
+	border: none;
+	background-color: white;
+	border: none;
+}
+
+.content_box {
+	text-align: left;
+}
+
+.content_info>* {
+	padding: 0 0 0 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.content_movie_info {
+	margin: 10px 0 25px 0;
+	max-height: 50px;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	display: -webkit-box;
+}
+
+.carousel-item {
+	margin: 0 0 0 30px;
+}
+
+.cast_info {
+	margin: 10px 0 0 0;
+	border-bottom: 1px solid #eeeeee;
+	width: 70%;
+	height: 50px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+	height: 40px;
+	width: 40px !important;
+	top: 50% !important;
+	color: #000 !important;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.carousel-control-next {
+	right: 3% !important;
+}
+
+.cast_name {
+	font-weight: bold;
+}
+
+.cast_type {
+	color: gray;
+	font-size: 12px;
+}
+
+.starScore_box {
+	display: none;
+}
+
+.comment_info {
+	width: 90%;
+	margin: 10px 0 20px 20px;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	background-color: #fafafa;
+}
+
+.myComment_box {
+	display: none;
+	height: 60px !important;
+	min-height: 60px !important;
+	border: 1px solid #eeeeee;
+}
+
+.myComment_input_box {
+	display: none;
+	min-height: 60px !important;
+	height: 60px !important;
+	border: 1px solid #eeeeee;
+}
+
+.comment_name {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 5px;
+	height: 30px;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	display: -webkit-box;
+	height: 30px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.comment_content {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 5px;
+	min-height: 150px;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	display: -webkit-box;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.cocomment {
+	padding: 5px;
+}

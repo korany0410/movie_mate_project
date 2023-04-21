@@ -1,0 +1,31 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+	background-color: white !important;
+	width: 100% !important;
+	z-index: 999;
+	background-color: white;
+	margin: 0 auto;
+}
+.container-fluid{
+	width: 1500px !important;
+}
+
+.btn {
+	border: 1px solid #bcbcbc !important;
+	color: black !important;
+}
+
+.btn:hover {
+	background-color: #7900FF !important;
+	color: white !important;
+	border: 1px solid #7900FF !important;
+}
+.form-control{
+	width: 350px;
+	background-color: #f3f6f4 !important;
+}
