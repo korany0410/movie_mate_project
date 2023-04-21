@@ -24,16 +24,14 @@ public class MovieMate_MovieDAO {
 			int res = sqlSession.insert("mmmovie.openApi_insert", movievo);
 		}
 		// System.out.println("res : " + res);
-
-		return count;
+        return count;
 	}
 
 	// 박스오피스 순위
 	public List<MovieMate_MovieVO> boxOffice_list() {
 
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffice_list");
-		
-		return list;
+        return list;
 	}
 
 	// Movie Mate Top 10 영화
@@ -82,5 +80,42 @@ public class MovieMate_MovieDAO {
 		}
 		return movie_list;
 	}
+	
+	// 평균 별점이 높은 영화 
+	public List<MovieMate_MovieVO> avg_star_list(){
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.avg_star_list");
+		return list;
+	}
+	
+	// 이 주의 추천 장르 
+	public List<MovieMate_MovieVO> genre_list(){
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.genre_list");
+		return list;
+	}
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

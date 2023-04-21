@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="boxoffice_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date DESC) no, m.*
-		FROM moviemate_movie m)sub WHERE no BETWEEN 1 AND 15
+		FROM moviemate_movie m)sub WHERE release_date &lt;= sysdate
 	</select>
 
 
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="vo.MovieMate_MovieVO">
 		select * from moviemate_movie
 		where release_date
-		between'19900101'and '20100101'and star_score > 4
+		between'20100101'and '20230101'and star_score > 4
 	</select>
 
 	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
@@ -66,7 +66,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
     </select>
 		
-
+    <select id="avg_star_list" resultType="vo.MovieMate_MovieVO"
+         parameterType="vo.MovieMate_MovieVO">
+         select *
+         from moviemate_movie
+         where release_date &gt;= '20151231'   
+         order by star_score DESC
+    </select>
+    
+    <select id="genre_list" resultType="vo.MovieMate_MovieVO"
+         parameterType="vo.MovieMate_MovieVO">
+         select *
+         from moviemate_movie
+         where genre = '액션'  
+            
+    </select>                               
 
 
 
