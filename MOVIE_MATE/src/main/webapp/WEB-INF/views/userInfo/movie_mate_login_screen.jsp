@@ -20,20 +20,21 @@
 
 		sendRequest(url, param, resFn, "POST");
 	}
+		
+		function resFn() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var result = xhr.responseText;
 
-	function resFn() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var result = xhr.responseText;
-
-			if (result == 'success') {
-				alert("로그인 성공했습니다.");
-				location.href = "movie_mate_main_screen.do";
-			} else {
-				alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-				return;
+				if (result == 'success') {
+					alert("로그인 성공했습니다.");
+					location.href = "movie_mate_main_screen.do";
+				} else {
+					alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+					return;
+				}
 			}
 		}
-	}
+	
 </script>
 
 
@@ -54,7 +55,7 @@
 
 		<div>
 			<input type="button" name="button" value="로그인"
-				onclick="send(this.form);">
+				onclick="send(this.form);" onkeyup="enterkey();">
 		</div>
 
 
