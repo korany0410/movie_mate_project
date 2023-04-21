@@ -31,13 +31,30 @@
 		// 검색어 가져오기
 		var keyword = f.keyword.value.trim();
 		f.keyword.value = keyword;
-		
+
 		f.action = "movie_mate_search_screen.do";
 		f.submit();
 		console.log(f.keyword.value);
 	}
 </script>
+<script>
+	const loginBtn = document.getElementbyId("login_btn");
+	const singupBtn = document.getElementbyId("signup_btn");
+	const userBtn = document.createElement("user_btn");
 
+	//로그인이나 회원가입이 성공했을 때 버튼을 변경하는 함수를 정의
+	function success() {
+		//로그인과 회원가입 버튼 숨기기
+		loginBtn.style.display = "none";
+		signupBtn.style.display = "none";
+		
+		  // 회원가입 버튼의 부모 요소를 찾아서 이용자 버튼을 추가 
+		  const parent = signupButton.parentNode;
+		  parent.insertBefore(userBtn, signupBtn);
+		}
+
+	}
+</script>
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
@@ -54,16 +71,14 @@
 				</form>
 
 				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-					<li class="nav-item">
-						<a class="nav-link" href="movie_mate_login_screen.do">로그인</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+							href="movie_mate_login_screen.do" id="login_btn">로그인</a></li>
 				</ul>
 				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-					<li class="nav-item">
-						<a class="nav-link" href="movie_mate_signUp_screen.do">
-							<button class="btn btn-outline-success">회원가입</button>
-						</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+							href="movie_mate_signUp_screen.do">
+							<button class="btn btn-outline-success" id="signup_btn">회원가입</button>
+						</a></li>
 				</ul>
 			</div>
 		</div>
