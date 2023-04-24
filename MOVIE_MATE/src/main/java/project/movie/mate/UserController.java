@@ -1,9 +1,14 @@
 package project.movie.mate;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import dao.MovieMate_UserDAO;
 import vo.MovieMate_MovieVO;
@@ -13,6 +18,9 @@ import vo.MovieMate_UserVO;
 public class UserController {
 
 	MovieMate_UserDAO moviemate_userdao;
+
+	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	HttpServletRequest request;
 
 	public UserController(MovieMate_UserDAO moviemate_userdao) {
 		this.moviemate_userdao = moviemate_userdao;
@@ -62,11 +70,32 @@ public class UserController {
 	@ResponseBody
 	public String login(MovieMate_UserVO moviemate_uservo) {
 
-		int result = moviemate_userdao.login(moviemate_uservo);
-		if (result < 1) {
+		MovieMate_UserVO user_info = moviemate_userdao.login(moviemate_uservo);
+		if (user_info == null) {
 			return "fail";
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("isLogin", "yes");
+			session.setAttribute("username", user_info.getUsername());
+			session.setAttribute("userIdx", user_info.getUser_idx());
+			session.setAttribute("userImg", user_info.getProfile_img());
+			System.out.println("로그인 성공");
+			System.out.println("---유저 정보---");
+			System.out.println("이메일 : " + user_info.getEmail());
+			System.out.println("이름 : " + user_info.getUsername());
+			System.out.println("비밀번호 : " + user_info.getPwd());
+			return "success";
 		}
-		return "success";
+	}
+
+	@RequestMapping("/logout.do")
+	public String logout() {
+
+		HttpSession session = request.getSession();
+		session.setAttribute("isLogin", "no");
+		session.setAttribute("user_info", null);
+
+		return "movie_mate_main_screen.do";
 	}
 
 	
