@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DESC) no, m.*
 		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
 		'no_data.jpg' AND release_date &lt;= sysdate) m )
-		WHERE no BETWEEN 1 AND 30
+		WHERE no BETWEEN 1 AND 15
 	</select>
 
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO"
@@ -75,7 +75,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          select *
          from moviemate_movie
          where genre = '액션'       
-    </select>      
+    </select>
+    
+    <select id="famous_list" resultType="vo.MovieMate_MovieVO"
+         parameterType="vo.MovieMate_MovieVO"> 
+         select * 
+         from moviemate_movie 
+         WHERE genre = '공포'
+    </select>     
                              
 </mapper>
 

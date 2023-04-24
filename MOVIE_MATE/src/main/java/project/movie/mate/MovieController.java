@@ -302,8 +302,7 @@ public class MovieController {
 		// 화제감독의추천작
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 		model.addAttribute("director_list", director_list);
-
-		model.addAttribute("recommend_list", recommend_list);
+    	model.addAttribute("recommend_list", recommend_list);
 		
 		// 평균별점
 		List<MovieMate_MovieVO> avg_star_list = moviemate_moviedao.avg_star_list();
@@ -312,6 +311,11 @@ public class MovieController {
 		// 이 주의 추천 장르
 		List<MovieMate_MovieVO> genre_list = moviemate_moviedao.genre_list();
 		model.addAttribute("genre_list", genre_list);
+		
+	    // 이 주의 인플루언서
+		List<MovieMate_MovieVO> famous_list = moviemate_moviedao.famous_list();
+		model.addAttribute("famous_list", famous_list);
+		 
 
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
 		HashMap<String, String> total_chart_name = new HashMap<String, String>();
@@ -337,7 +341,10 @@ public class MovieController {
 		
 		total_chart.put("genre", genre_list);
 		total_chart_name.put("genre", "이 주의 추천 장르 '액션'");
-
+		
+		total_chart.put("famous", famous_list);
+        total_chart_name.put("famous", "이 주의 인플루언서 추천 영화 "); 
+		
 		model.addAttribute("total_chart", total_chart);
 		model.addAttribute("total_chart_name", total_chart_name);
 

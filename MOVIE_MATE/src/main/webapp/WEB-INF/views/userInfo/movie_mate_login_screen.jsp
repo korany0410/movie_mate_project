@@ -62,7 +62,7 @@
 			계정이 없으신가요?<input type="button" name="button" value="회원가입"
 				onclick="location.href='movie_mate_signUp_screen.do'">
 		</div>
-
+    
 	</form>
 
 </body>

@@ -46,4 +46,29 @@ public class MovieMate_UserDAO {
 		return list;
 	}
 	
+	// 마이페이지 
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
