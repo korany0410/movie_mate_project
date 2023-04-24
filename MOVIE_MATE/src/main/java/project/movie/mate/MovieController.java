@@ -287,11 +287,9 @@ public class MovieController {
 			session.setAttribute("userIdx", null);
 			session.setAttribute("userImg", null);
 		}
-<<<<<<< HEAD
-=======
+
 		System.out.println("로그인 여부 : " + session.getAttribute("isLogin"));
 		System.out.println("로그인 정보 : " + session.getAttribute("username"));
->>>>>>> 5559a4fbe00156a26e84d5bef48a40fd6e41a475
 
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
@@ -355,7 +353,7 @@ public class MovieController {
 			System.out.println(user_name);
 			System.out.println(user_idx);
 			System.out.println(movie_idx);
-			
+
 			vo.setUser_idx(user_idx);
 			vo.setMovie_idx(movie_idx);
 
@@ -418,7 +416,6 @@ public class MovieController {
 		return resultMap;
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
 	public String movie_mate_myChoice_moreInfo(Model model, int movie_idx) {
 		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
@@ -430,7 +427,8 @@ public class MovieController {
 		model.addAttribute("min", min);
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
-=======
+	}
+
 	@RequestMapping("/movie_user_want.do")
 	@ResponseBody
 	public String movie_user(Movie_UserVO movie_uservo) {
@@ -446,19 +444,19 @@ public class MovieController {
 	@RequestMapping("/update_comment.do")
 	public String update_comment() {
 		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
-		
+
 		HttpSession session = request.getSession();
 		String user_name = (String) session.getAttribute("username");
 
 		my_comment.setCom_username(user_name);
 		my_comment = moviemate_commentdao.my_comment(my_comment);
-		
-		if(my_comment == null) {
-			
+
+		if (my_comment == null) {
+
 		}
-		
+
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
->>>>>>> 5559a4fbe00156a26e84d5bef48a40fd6e41a475
+
 	}
 
 }

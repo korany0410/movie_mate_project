@@ -16,9 +16,7 @@
 
 	<h3>원제 : ${movie.title}</h3>
 	<hr>
-	<h3>개봉 연도 : 
-	
-	 ${fn:split(movie.release_date, '/')[0]}</h3>
+	<h3>개봉 연도 : ${fn:split(movie.release_date, '/')[0]}</h3>
 	
 	<hr>
 	<h3>국가 : ${movie.nation}</h3>
