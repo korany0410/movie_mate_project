@@ -104,5 +104,10 @@ public class MovieMate_MovieDAO {
 		}
 		return movie_list;
 	}
-
+	//더보기
+		public MovieMate_MovieVO selectOne(int movie_idx) {
+		    MovieMate_MovieVO vo = sqlSession.selectOne("mmmovie.moviemate_movie", movie_idx);
+		    
+		    return vo;
+		}
 }

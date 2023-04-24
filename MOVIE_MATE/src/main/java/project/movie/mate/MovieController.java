@@ -283,7 +283,7 @@ public class MovieController {
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
-		
+
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
 		model.addAttribute("masterpiece_list", masterpiece_list);
@@ -386,6 +386,19 @@ public class MovieController {
 		resultMap.put("search_cast_result", search_cast_result);
 
 		return resultMap;
+	}
+
+	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
+	public String movie_mate_myChoice_moreInfo(Model model, int movie_idx) {
+		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
+		model.addAttribute("movie", vo);
+
+		int hour = Integer.parseInt(vo.getRunning_time()) / 60;
+		int min = Integer.parseInt(vo.getRunning_time()) % 60;
+		model.addAttribute("hour", hour);
+		model.addAttribute("min", min);
+
+		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
 	}
 
 }

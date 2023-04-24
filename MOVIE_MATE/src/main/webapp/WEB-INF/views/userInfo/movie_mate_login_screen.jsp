@@ -13,7 +13,6 @@
 	function send(f) {
 		var email = f.email.value;
 		var pwd = f.pwd.value;
-		var keyCode = window.event.keyCode;
 
 		url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd;
@@ -55,7 +54,7 @@
 
 		<div>
 			<input type="button" name="button" value="로그인"
-				onclick="send(this.form);" onkeyup="enterkey();">
+				onclick="send(this.form);" >
 		</div>
 
 
