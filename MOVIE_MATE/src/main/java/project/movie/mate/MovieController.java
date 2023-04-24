@@ -418,13 +418,15 @@ public class MovieController {
 
 	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
 	public String movie_mate_myChoice_moreInfo(Model model, int movie_idx) {
+
 		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
 		model.addAttribute("movie", vo);
-
-		int hour = Integer.parseInt(vo.getRunning_time()) / 60;
-		int min = Integer.parseInt(vo.getRunning_time()) % 60;
-		model.addAttribute("hour", hour);
-		model.addAttribute("min", min);
+		if (vo.getRunning_time() != null && !vo.getRunning_time().isEmpty()) {
+			int hour = Integer.parseInt(vo.getRunning_time()) / 60;
+			int min = Integer.parseInt(vo.getRunning_time()) % 60;
+			model.addAttribute("hour", hour);
+			model.addAttribute("min", min);
+		}
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
 	}
