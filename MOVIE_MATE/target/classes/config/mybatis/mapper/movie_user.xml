@@ -3,17 +3,39 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="muser">
-	
+	<select id="selectOne" resultType="int"
+		parameterType="vo.Movie_UserVO">
+		SELECT COUNT(*) from movie_user
+		WHERE movie_idx =
+		#{movie_idx} AND user_idx = #{user_idx}
+	</select>
+
+	<insert id="initialize" parameterType="vo.Movie_UserVO">
+		INSERT INTO movie_user
+		VALUES(#{user_idx},#{movie_idx},0,'no')
+	</insert>
+
+	<select id="want" resultType="String"
+		parameterType="vo.Movie_UserVO">
+		SELECT want_view from movie_user
+		WHERE movie_idx =
+		#{movie_idx} AND user_idx = #{user_idx}
+	</select>
+
+	<update id="change" parameterType="vo.Movie_UserVO">
+		UPDATE movie_user set
+		want_view = #{want_view}
+		WHERE
+		movie_idx =
+		#{movie_idx} AND user_idx =
+		#{user_idx}
+	</update>
+
+	<select id="info" resultType="vo.Movie_UserVO"
+		parameterType="vo.Movie_UserVO">
+		SELECT * from movie_user
+		WHERE movie_idx =
+		#{movie_idx}
+		AND user_idx = #{user_idx}
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-

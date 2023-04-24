@@ -6,6 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectList" resultType="vo.MovieMate_CommentVO" parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM moviemate_comment WHERE m_ref = #{movie_idx}
 	</select>
+	
+	<select id="myComment" resultType="vo.MovieMate_CommentVO" parameterType="vo.MovieMate_CommentVO">
+		SELECT * FROM moviemate_comment WHERE com_username = #{com_username}
+	</select>
 </mapper>
 
 

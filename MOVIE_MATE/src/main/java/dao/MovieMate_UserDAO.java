@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MovieMate_CastVO;
+import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
+
 
 public class MovieMate_UserDAO {
 
@@ -32,11 +34,11 @@ public class MovieMate_UserDAO {
 	}
 	
 	//(로그인 확인)
-	public int login(MovieMate_UserVO moviemate_uservo) {
+	public MovieMate_UserVO login(MovieMate_UserVO moviemate_uservo) {
 		
-		int count = sqlSession.selectOne("mmuser.login", moviemate_uservo);
+		MovieMate_UserVO user_info = sqlSession.selectOne("mmuser.login", moviemate_uservo);
 		
-		return count;
+		return user_info;
 	}
 	
 	//회원명 검색 조회
@@ -45,5 +47,7 @@ public class MovieMate_UserDAO {
 		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.search_user",searchKeyword);
 		return list;
 	}
+	
+	
 	
 }

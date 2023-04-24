@@ -26,26 +26,53 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
 	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
 	crossorigin="anonymous"></script>
+<script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript">
-    function setStarScore(i) {
-	var score = document.getElementById('starpoint_' + i);
+    function isLogin() {
 	var isLogin = "${isLogin}";
 	if(isLogin == 'no'){
 	    if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
 			location.href="movie_mate_login_screen.do";
-			console.log("a");
+			return;
 	    }
 	}
-	console.log(isLogin);
-	console.log(score.value);
+    }   
+    function setStarScore(i) {
+	var score = document.getElementById('starpoint_' + i);
+	isLogin();
     }
-    window.onload = function() {
-	var isLogin = "${isLogin}";
-	var comment_box1 = document.getElementById('comment_1');
-	if(isLogin == 'no'){
-		comment_box1.style.display = "block";
+    
+    function want_view(f) {
+	isLogin();
+	var user_idx = f.user_idx.value;
+	var movie_idx = f.movie_idx.value;
+	var url = "movie_user_want.do";
+	var param = "user_idx=" + user_idx + "&movie_idx=" + movie_idx;
+	
+	sendRequest(url, param, resFnWant, "GET");
+    }
+    
+    function resFnWant() {
+	if(xhr.readyState == 4 && xhr.status == 200){
+	    var result = xhr.responseText;
+	    console.log(result);
+		var img = document.getElementById('want');
+	    if(result == 'yes'){
+			img.src = "/mate/resources/images/check.png";
+	    } else {
+			img.src = "/mate/resources/images/plus.png";
+	    }
 	}
-		console.log("a");
+    }
+    
+    function write_comment() {
+	isLogin();
+	var input_box = document.getElementById('myComment_input_box');
+	input_box.style.display = "block";
+	}
+    
+    function update_comment(f) {
+		console.log(f);
     }
 </script>
 </head>
@@ -78,8 +105,7 @@
 									<div class="starpoint_box">
 										<c:forEach var="i" begin="1" end="10">
 											<label for="starpoint_${i}" class="label_star"
-												title="${i / 2.0}">
-												<span class="blind">${i / 2.0}</span>
+												title="${i / 2.0}"> <span class="blind">${i / 2.0}</span>
 											</label>
 											<input type="radio" name="starpoint" id="starpoint_${i}"
 												class="star_radio" value="${i / 2.0}"
@@ -89,11 +115,27 @@
 									</div>
 								</div>
 							</div>
-							<div class="inter">
-								<div>+ 보고싶어요</div>
+							<div class="inter" id="wanted">
+								<c:choose>
+									<c:when test="${movieUser_info.want_view eq 'no' }">
+										<img id="want" src="/mate/resources/images/plus.png" alt="" />
+									</c:when>
+									<c:otherwise>
+										<img id="want" src="/mate/resources/images/check.png" alt="" />
+									</c:otherwise>
+								</c:choose>
+								<form>
+									<input type="hidden" name="user_idx" value="${userIdx}" />
+									<input type="hidden" name="movie_idx"
+										value="${movie_info.movie_idx}" />
+									<input class="want_btn" type="button" value="보고싶어요"
+										onclick="want_view(this.form);" />
+								</form>
 							</div>
-							<div class="inter">
-								<div>연필 코멘트</div>
+							<div class="inter" id="commented">
+								<img id="pancel" src="/mate/resources/images/pancel.png" alt="" />
+								<input class="want_btn" type="button" value="글쓰기"
+									onclick="write_comment();" />
 							</div>
 						</div>
 					</div>
@@ -103,13 +145,23 @@
 		<div class="second_box row">
 			<div class="dummy col-2"></div>
 			<div class="left_box col-5">
-				<div class="myComment_box" id="comment_1">내가 코멘트 남긴 내용</div>
-				<div class="myComment_input_box"></div>
+				<div id="myComment_box" id="comment_1">내가 코멘트 남긴 내용</div>
+				<div id="myComment_input_box">
+					<label for="exampleFormControlTextarea1" class="input_title">${movie_info.title}</label>
+					<form>
+						<textarea class="form-control input_box"
+							id="exampleFormControlTextarea1" name="com_content" rows="3"></textarea>
+						<input type="hidden" name="m_ref" value=${movie_info.movie_idx }/>
+						<input type="hidden" name="com_username" value="${username}" />
+						<input type="button" class="update_btn" value="저장"
+							onclick="update_comment(this.form);" />
+					</form>
+				</div>
 				<div class="info_box">
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
-							<input class="more_btn" type="button" value="더보기" />
+							<input class="more_btn" type="button" value="더보기" onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
 					<div class="content_box">
@@ -147,7 +199,7 @@
 									</c:forEach>
 								</div>
 							</div>
-							<c:forEach var="index" begin="1" end="${maxCast_page - 1}">
+							<c:forEach var="index" begin="1" end="${maxCast_page}">
 								<div class="carousel-item">
 									<div class="row">
 										<c:forEach var="i" begin="${index * 6 }"
@@ -201,7 +253,7 @@
 									</c:forEach>
 								</div>
 							</div>
-							<c:forEach var="index" begin="1" end="2">
+							<c:forEach var="index" begin="1" end="${maxComment_page}">
 								<div class="carousel-item">
 									<div class="row">
 										<c:forEach var="i" begin="${index * 2 }"

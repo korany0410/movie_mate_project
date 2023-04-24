@@ -98,8 +98,8 @@ body {
 }
 
 .inter {
+	display: flex;
 	margin: 0 0 0 20px;
-	padding: 13px 0 10px 0;
 	font-size: 20px;
 	color: gray;
 }
@@ -308,18 +308,21 @@ body {
 	background-color: #fafafa;
 }
 
-.myComment_box {
-	display: none;
+#myComment_box {
 	height: 60px !important;
 	min-height: 60px !important;
-	border: 1px solid #eeeeee;
+	border-bottom: 1px solid #eeeeee;
 }
 
-.myComment_input_box {
+#myComment_input_box {
 	display: none;
+	border-bottom: 1px solid #eeeeee;
 	min-height: 60px !important;
-	height: 60px !important;
-	border: 1px solid #eeeeee;
+}
+
+.input_box {
+	width: 100% !important;
+	margin: 0 auto;
 }
 
 .comment_name {
@@ -355,4 +358,49 @@ body {
 
 .cocomment {
 	padding: 5px;
+}
+
+#want {
+	margin-top: 7px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	transition: all 0.1s linear;
+}
+
+#wanted:hover #want {
+	transform: scale(1.2);
+}
+
+#pancel {
+	margin-top: 16px;
+	margin-right: 10px;
+	width: 25px;
+	height: 25px;
+	transition: all 0.1s linear;
+}
+
+#commented:hover #pancel {
+	transform: scale(1.2);
+}
+
+.input_title {
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.input_box {
+	margin-bottom: 5px;
+}
+
+.want_btn {
+	margin-top: 7px;
+	height: 40px;
+	border: none;
+	background-color: white;
+	color: gray;
+}
+
+.update_btn {
+	border: none;
 }

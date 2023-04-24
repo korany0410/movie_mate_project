@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,7 @@
 
 
 <script>
+<<<<<<< HEAD
 	function search(f) {
 		// 검색어 가져오기
 		var keyword = f.keyword.value.trim();
@@ -36,17 +38,22 @@
 		f.submit();
 		console.log(f.keyword.value);
 	}
+=======
+    function search(f) {
+	// 검색어 가져오기
+	var keyword = f.keyword.value.trim();
+	f.keyword.value = keyword;
 
-	//로그인이나 회원가입이 성공했을 때 버튼을 변경하는 함수를 정의
-	function success() {
-		//로그인과 회원가입 버튼 숨기기
-		loginBtn.style.display = "none";
-		signupBtn.style.display = "none";
+	f.action = "movie_mate_search_screen.do";
+	f.submit();
+	console.log(f.keyword.value);
+    }
 
-		// 회원가입 버튼의 부모 요소를 찾아서 이용자 버튼을 추가 
-		const parent = signupButton.parentNode;
-		parent.insertBefore(userBtn, signupBtn);
+    function logout() {
+	if (confirm("로그아웃 하시겠습니까?")) {
+	    location.href = "logout.do";
 	}
+    }
 </script>
 </head>
 <body>
@@ -63,16 +70,38 @@
 						onkeydown="if(event.keyCode==13) { event.preventDefault(); search(this.form); }">
 				</form>
 
-				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-					<li class="nav-item"><a class="nav-link"
-							href="movie_mate_login_screen.do" id="login_btn">로그인</a></li>
-				</ul>
-				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-					<li class="nav-item"><a class="nav-link"
-							href="movie_mate_signUp_screen.do">
-							<button class="btn btn-outline-success" id="signup_btn">회원가입</button>
-						</a></li>
-				</ul>
+				<c:choose>
+					<c:when test="${isLogin eq 'no' }">
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item"><a class="nav-link"
+									href="movie_mate_login_screen.do">로그인</a></li>
+						</ul>
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item"><a class="nav-link"
+									href="movie_mate_signUp_screen.do">
+									<button class="btn btn-outline-success">회원가입</button>
+								</a></li>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item profile_box"><a class="nav-link"
+									href="movie_mate_mypage_screen.do">
+									<c:if test="${userImg eq 'no_data.jpg'}">
+										<span><img class="profile"
+											src="/mate/resources/images/user.png" alt="" /></span>
+									</c:if>
+								</a></li>
+						</ul>
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item"><a class="nav-link"
+									href="javascript:logout();">
+									<button class="btn btn-outline-success">로그아웃</button>
+								</a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+
 			</div>
 		</div>
 	</nav>
