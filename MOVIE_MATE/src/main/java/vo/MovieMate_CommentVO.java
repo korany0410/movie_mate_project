@@ -61,6 +61,9 @@ public class MovieMate_CommentVO {
 	}
 
 	public String getCom_username() {
+		if(this.com_username == null) {
+			return "none";
+		}
 		return com_username;
 	}
 

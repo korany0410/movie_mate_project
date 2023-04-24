@@ -21,4 +21,11 @@ public class MovieMate_CommentDAO {
 
 		return comment_list;
 	}
+
+	public MovieMate_CommentVO my_comment(MovieMate_CommentVO commentvo) {
+
+		MovieMate_CommentVO vo = sqlSession.selectOne("mmcomment.myComment", commentvo);
+
+		return vo;
+	}
 }

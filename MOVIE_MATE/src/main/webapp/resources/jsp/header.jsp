@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,23 +28,29 @@
 <script type="text/javascript" src="/mate/resources/js/header.js"></script>
 
 <script>
-	function search(f) {
-		// 검색어 가져오기
-		var keyword = f.keyword.value.trim();
-		f.keyword.value = keyword;
-		
-		f.action = "movie_mate_search_screen.do";
-		f.submit();
-		console.log(f.keyword.value);
+    function search(f) {
+	// 검색어 가져오기
+	var keyword = f.keyword.value.trim();
+	f.keyword.value = keyword;
+
+	f.action = "movie_mate_search_screen.do";
+	f.submit();
+	console.log(f.keyword.value);
+    }
+
+    function logout() {
+	if (confirm("로그아웃 하시겠습니까?")) {
+	    location.href = "logout.do";
 	}
+    }
 </script>
 
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="movie_mate_main_screen.do">
-				<img src="/mate/resources/images/logo_main.png" alt="" height="35">
+			<a class="navbar-brand" href="movie_mate_main_screen.do"> <img
+				src="/mate/resources/images/logo_main.png" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
@@ -53,18 +60,41 @@
 						onkeydown="if(event.keyCode==13) { event.preventDefault(); search(this.form); }">
 				</form>
 
-				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-					<li class="nav-item">
-						<a class="nav-link" href="movie_mate_login_screen.do">로그인</a>
-					</li>
-				</ul>
-				<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-					<li class="nav-item">
-						<a class="nav-link" href="movie_mate_signUp_screen.do">
-							<button class="btn btn-outline-success">회원가입</button>
-						</a>
-					</li>
-				</ul>
+				<c:choose>
+					<c:when test="${isLogin eq 'no' }">
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item">
+								<a class="nav-link" href="movie_mate_login_screen.do">로그인</a>
+							</li>
+						</ul>
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item">
+								<a class="nav-link" href="movie_mate_signUp_screen.do">
+									<button class="btn btn-outline-success">회원가입</button>
+								</a>
+							</li>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item profile_box">
+								<a class="nav-link" href="movie_mate_mypage_screen.do"> <c:if
+										test="${userImg eq 'no_data.jpg'}">
+										<span><img class="profile" src="/mate/resources/images/user.png" alt="" /></span>
+									</c:if>
+								</a>
+							</li>
+						</ul>
+						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
+							<li class="nav-item">
+								<a class="nav-link" href="javascript:logout();">
+									<button class="btn btn-outline-success">로그아웃</button>
+								</a>
+							</li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+
 			</div>
 		</div>
 	</nav>
