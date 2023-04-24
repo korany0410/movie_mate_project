@@ -24,7 +24,7 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mate/resources/css/reset.css">
 <link rel="stylesheet" href="/mate/resources/css/header.css?ver=1">
-<script type="text/javascript" src="/mate/resources/js/header.js"></script>
+
 
 <script>
 	function search(f) {
@@ -36,23 +36,16 @@
 		f.submit();
 		console.log(f.keyword.value);
 	}
-</script>
-<script>
-	const loginBtn = document.getElementbyId("login_btn");
-	const singupBtn = document.getElementbyId("signup_btn");
-	const userBtn = document.createElement("user_btn");
 
 	//로그인이나 회원가입이 성공했을 때 버튼을 변경하는 함수를 정의
 	function success() {
 		//로그인과 회원가입 버튼 숨기기
 		loginBtn.style.display = "none";
 		signupBtn.style.display = "none";
-		
-		  // 회원가입 버튼의 부모 요소를 찾아서 이용자 버튼을 추가 
-		  const parent = signupButton.parentNode;
-		  parent.insertBefore(userBtn, signupBtn);
-		}
 
+		// 회원가입 버튼의 부모 요소를 찾아서 이용자 버튼을 추가 
+		const parent = signupButton.parentNode;
+		parent.insertBefore(userBtn, signupBtn);
 	}
 </script>
 </head>
@@ -84,6 +77,5 @@
 		</div>
 	</nav>
 </body>
-
 
 </html>

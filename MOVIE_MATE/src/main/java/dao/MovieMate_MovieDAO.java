@@ -28,37 +28,44 @@ public class MovieMate_MovieDAO {
 		return count;
 	}
 
-	// 박스오피스 순위
+	// 유저가 고른 영화 정보
+	public MovieMate_MovieVO selectOne(MovieMate_MovieVO movievo) {
+
+		MovieMate_MovieVO vo = sqlSession.selectOne("mmmovie.selectOne", movievo);
+
+		return vo;
+	}
+
+	// 박스오피스
 	public List<MovieMate_MovieVO> boxOffice_list() {
 
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.boxoffice_list");
-		
+
 		return list;
 	}
 
 	// Movie Mate Top 10 영화
-
 	public List<MovieMate_MovieVO> top10_list() {
 
 		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.top10_list");
 
 		return list;
 	}
-	//화제의 감독 작품
-	public List<MovieMate_MovieVO> director_list() {
-	      MovieMate_CastVO vo = new MovieMate_CastVO();
-	      vo.setName("스티븐 스필버그");
-	      int cast_idx = sqlSession.selectOne("mmcast.selectOne", vo);
-	      Movie_CastVO vo_3 = new Movie_CastVO();
-	      vo_3.setCast_idx(cast_idx);
-	      List<Movie_CastVO> list = sqlSession.selectList("mcast.selectCastList", vo_3);
-	      List<MovieMate_MovieVO> movie_list = new ArrayList<MovieMate_MovieVO>();
-	      for(Movie_CastVO movie : list) {
-	         movie_list.add(sqlSession.selectOne("mmmovie.selectMovieIdx", movie));
-	      }
-	      return movie_list;
-	   }
 
+	// 화제의 감독 작품
+	public List<MovieMate_MovieVO> director_list() {
+		MovieMate_CastVO vo = new MovieMate_CastVO();
+		vo.setName("스티븐 스필버그");
+		int cast_idx = sqlSession.selectOne("mmcast.selectOne", vo);
+		Movie_CastVO vo_3 = new Movie_CastVO();
+		vo_3.setCast_idx(cast_idx);
+		List<Movie_CastVO> list = sqlSession.selectList("mcast.selectCastList", vo_3);
+		List<MovieMate_MovieVO> movie_list = new ArrayList<MovieMate_MovieVO>();
+		for (Movie_CastVO movie : list) {
+			movie_list.add(sqlSession.selectOne("mmmovie.selectMovieIdx", movie));
+		}
+		return movie_list;
+	}
 
 	// 영화명 검색 조회
 	public List<MovieMate_MovieVO> search_movie(String searchKeyword) {

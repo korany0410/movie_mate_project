@@ -279,14 +279,15 @@ public class MovieController {
 	@RequestMapping(value = { "/", "/movie_mate_main_screen.do" })
 	public String movie_mate_main_screen(Model model) {
 
-		// Movie Mate 명작 영화
-		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
-		model.addAttribute("masterpiece_list", masterpiece_list);
-
 		HttpSession session = request.getSession();
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
 		}
+
+		// Movie Mate 명작 영화
+		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
+		model.addAttribute("masterpiece_list", masterpiece_list);
+
 		// 박스오피스 순위
 		List<MovieMate_MovieVO> boxOffice_list = moviemate_moviedao.boxOffice_list();
 		model.addAttribute("boxoffi_list", boxOffice_list);
@@ -295,6 +296,7 @@ public class MovieController {
 		List<MovieMate_MovieVO> top10_list = moviemate_moviedao.top10_list();
 		model.addAttribute("top10_list", top10_list);
 
+		// 이주의 배우
 		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
 
 		// 화제감독의추천작
@@ -329,11 +331,22 @@ public class MovieController {
 	@RequestMapping("/movie_mate_choice_screen.do")
 	public String movie_mate_choice_screen(Model model, MovieMate_MovieVO moviemate_movievo) {
 
-		List<Movie_CastVO> cast_list = movie_castdao.selectList(moviemate_movievo);
+		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
+		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
 
-		System.out.println(cast_list.size());
-		System.out.println(comment_list.size());
+		System.out.println("캐스팅된 사람 수 : " + cast_list.size());
+		System.out.println("댓글 개수 : " + comment_list.size());
+		int cast_page = cast_list.size() / 6;
+		if (cast_page == 0) {
+			cast_page = 1;
+		}
+		int comment_page = comment_list.size() / 2;
+		if (comment_page == 0) {
+			comment_page = 1;
+		}
+		model.addAttribute("maxCast_page", cast_page);
+		model.addAttribute("maxComment_page", comment_page);
 		model.addAttribute("movie_info", moviemate_movievo);
 		model.addAttribute("cast_list", cast_list);
 		model.addAttribute("comment_list", comment_list);
@@ -347,32 +360,27 @@ public class MovieController {
 		System.out.println("search_screen.do parameter keyword : " + keyword);
 		// 검색 결과를 받아와서 model에 추가
 		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
-		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
+		// List<MovieMate_CastVO> search_cast_result =
+		// moviemate_castdao.search_cast(keyword);
 		List<MovieMate_UserVO> search_user_result = moviemate_userdao.search_user(keyword);
 
 		System.out.println("영화 검색결과 수" + search_movie_result.size());
-		System.out.println("배우 검색결과 수" + search_cast_result.size());
+		// System.out.println("배우 검색결과 수" + search_cast_result.size());
 		System.out.println("유저 검색결과 수" + search_user_result.size());
+		
+		int movie_page = 0;
+
+		if(search_movie_result.size() > 9) {
+			movie_page = search_movie_result.size() / 9;
+		}
 
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("search_movie", search_movie_result);
-		model.addAttribute("search_cast", search_cast_result);
+		model.addAttribute("movie_page", movie_page);
+		// model.addAttribute("search_cast", search_cast_result);
 		model.addAttribute("search_user", search_user_result);
 
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
-	}
-
-	@RequestMapping("/movie_mate_search_content.do")
-	@ResponseBody
-	public Map<String, Object> movie_mate_search_content(String keyword) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
-		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
-
-		resultMap.put("search_movie_result", search_movie_result);
-		resultMap.put("search_cast_result", search_cast_result);
-
-		return resultMap;
 	}
 
 }
