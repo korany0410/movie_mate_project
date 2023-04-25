@@ -27,21 +27,16 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
-<<<<<<< HEAD
-	function send(f) {
-		var email = f.email.value;
-		var pwd = f.pwd.value;
-=======
+
     function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var keyCode = window.event.keyCode;
->>>>>>> 5559a4fbe00156a26e84d5bef48a40fd6e41a475
+
 
 	url = "login.do";
 	param = "email=" + email + "&pwd=" + pwd;
 
-<<<<<<< HEAD
 		sendRequest(url, param, resFn, "POST");
 	}
 		
@@ -59,24 +54,7 @@
 			}
 		}
 	
-=======
-	sendRequest(url, param, resFn, "POST");
-    }
 
-    function resFn() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
-	    var result = xhr.responseText;
-
-	    if (result == 'success') {
-		alert("로그인 성공했습니다.");
-		location.href = "movie_mate_main_screen.do";
-	    } else {
-		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-		return;
-	    }
-	}
-    }
->>>>>>> 5559a4fbe00156a26e84d5bef48a40fd6e41a475
 </script>
 
 
@@ -105,25 +83,7 @@
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
-<<<<<<< HEAD
 
-		<div>
-			<input type="password" name="pwd" placeholder="비밀번호">
-		</div>
-
-		<div>
-			<input type="button" name="button" value="로그인"
-				onclick="send(this.form);" >
-		</div>
-
-
-		<div>
-			계정이 없으신가요?<input type="button" name="button" value="회원가입"
-				onclick="location.href='movie_mate_signUp_screen.do'">
-		</div>
-
-=======
->>>>>>> 5559a4fbe00156a26e84d5bef48a40fd6e41a475
 	</form>
 </body>
 </html>

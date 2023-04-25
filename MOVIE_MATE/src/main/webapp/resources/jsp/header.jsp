@@ -28,17 +28,7 @@
 
 
 <script>
-<<<<<<< HEAD
-	function search(f) {
-		// 검색어 가져오기
-		var keyword = f.keyword.value.trim();
-		f.keyword.value = keyword;
 
-		f.action = "movie_mate_search_screen.do";
-		f.submit();
-		console.log(f.keyword.value);
-	}
-=======
     function search(f) {
 	// 검색어 가져오기
 	var keyword = f.keyword.value.trim();
