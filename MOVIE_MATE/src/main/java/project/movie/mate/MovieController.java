@@ -383,6 +383,18 @@ public class MovieController {
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
 
+	@RequestMapping("/movie_mate_choiceCast_screen.do")
+	public String movie_mate_choiceCast_screen(Model model, int cast_idx ) {
+		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.movie_castList(cast_idx);
+		
+		model.addAttribute("cast", vo);
+		
+		
+		return  "/WEB-INF/views/show/movie_mate_choiceCast_screen.jsp";
+	}
+	
+	
+	
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
 

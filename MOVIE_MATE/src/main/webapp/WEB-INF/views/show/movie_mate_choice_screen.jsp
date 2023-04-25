@@ -74,6 +74,10 @@
     function update_comment(f) {
 		console.log(f);
     }
+    
+    function choiceCast_screen(idx){
+    	location.href = "movie_mate_choiceCast_screen.do?cast_idx=" + idx;
+    }
 </script>
 </head>
 <body>
@@ -183,7 +187,7 @@
 									<c:forEach var="i" begin="0" end="5">
 										<div class="movieInfo_box col-6">
 											<form>
-												<div class="cast_info">
+												<div class="cast_info" onclick="choiceCast_screen(${cast_list[i].cast_idx})">
 													<div class="cast_name">${cast_list[i].name}</div>
 													<div class="cast_type">
 														<c:if test="${cast_list[i].type eq 'actor' }">
@@ -206,7 +210,7 @@
 											end="${index * 6 + 5}">
 											<div class="movieInfo_box col-6">
 												<form>
-													<div class="cast_info">
+													<div class="cast_info" onclick="choiceCast_screen(${cast_list[i].cast_idx})">
 														<div class="cast_name">${cast_list[i].name}</div>
 														<div class="cast_type">
 															<c:if test="${cast_list[i].type eq 'actor' }">
