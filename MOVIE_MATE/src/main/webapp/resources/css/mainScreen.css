@@ -16,7 +16,7 @@
 	width: 100%;
 	height: 100%;
 	border: 1px solid rgb(234, 233, 232);
-	border-radius: 5px;
+	border-radius: 10px;
 	background: rgb(248, 248, 248);
 }
 
@@ -25,15 +25,15 @@
 }
 
 .carousel-inner {
-	width: 85% !important;
-	width: 75% !important;
-	height: 460px !important;
+	width: 88% !important;
+	max-height: 650px !important;
 	margin: 0 auto;
 }
 
 .carousel-item {
 	width: 100% !important;
 	height: 100% !important;
+	margin-bottom: 25px !important;
 }
 
 .carousel-item:hover {
@@ -75,16 +75,16 @@ h1 {
 }
 
 .carousel-control-prev {
-	left: 10% !important;
+	left: 4% !important;
 }
 
 .carousel-control-next {
-	right: 10% !important;
+	right: 4% !important;
 }
 
 .title {
-	font-weight: bold;
+	font-weight: 900;
 	font-size: 25px;
-	margin: 10px 0;
+	margin: 10px 0 20px 0;
 	height: 40px;
 }

@@ -92,7 +92,9 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("isLogin", "no");
-		session.setAttribute("user_info", null);
+		session.setAttribute("username", null);
+		session.setAttribute("userIdx", null);
+		session.setAttribute("userImg", null);
 
 		return "movie_mate_main_screen.do";
 	}

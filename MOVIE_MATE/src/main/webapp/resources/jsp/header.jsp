@@ -25,14 +25,11 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mate/resources/css/reset.css">
 <link rel="stylesheet" href="/mate/resources/css/header.css?ver=1">
-<script type="text/javascript" src="/mate/resources/js/header.js"></script>
-
 <script>
     function search(f) {
 	// 검색어 가져오기
 	var keyword = f.keyword.value.trim();
 	f.keyword.value = keyword;
-
 	f.action = "movie_mate_search_screen.do";
 	f.submit();
 	console.log(f.keyword.value);
@@ -44,7 +41,6 @@
 	}
     }
 </script>
-
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
@@ -59,7 +55,6 @@
 						placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요." aria-label="Search"
 						onkeydown="if(event.keyCode==13) { event.preventDefault(); search(this.form); }">
 				</form>
-
 				<c:choose>
 					<c:when test="${isLogin eq 'no' }">
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
@@ -80,7 +75,10 @@
 							<li class="nav-item profile_box">
 								<a class="nav-link" href="movie_mate_mypage_screen.do"> <c:if
 										test="${userImg eq 'no_data.jpg'}">
-										<span><img class="profile" src="/mate/resources/images/user.png" alt="" /></span>
+										<span>
+											<img class="profile" src="/mate/resources/images/user.png"
+												alt="" />
+										</span>
 									</c:if>
 								</a>
 							</li>
@@ -94,11 +92,8 @@
 						</ul>
 					</c:otherwise>
 				</c:choose>
-
 			</div>
 		</div>
 	</nav>
 </body>
-
-
 </html>

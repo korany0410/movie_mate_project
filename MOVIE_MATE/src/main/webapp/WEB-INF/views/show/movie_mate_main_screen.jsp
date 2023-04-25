@@ -67,9 +67,10 @@
 									<img class="profile_img" alt="${map.value[i].title}"
 										src="${map.value[i].profile_img }">
 								</div>
-								<div class="fw-bold">${map.value[i].title }</div>
-								<div>${map.value[i].nation }</div>
-								<div>${map.value[i].genre }</div>
+								<div class="fw-bold info">${map.value[i].title}</div>
+								<div class="info">${fn:substring(map.value[i].release_date,0,4)}
+									• ${map.value[i].nation}</div>
+								<div class="info">평균★${map.value[i].star_score}</div>
 							</div>
 						</c:forEach>
 					</div>

@@ -28,4 +28,18 @@ public class MovieMate_CommentDAO {
 
 		return vo;
 	}
+
+	public int insert_comment(MovieMate_CommentVO commentvo) {
+
+		int res = sqlSession.insert("mmcomment.insert", commentvo);
+
+		return res;
+	}
+
+	public int update_comment(MovieMate_CommentVO commentvo) {
+
+		int res = sqlSession.update("mmcomment.update", commentvo);
+		
+		return res;
+	}
 }

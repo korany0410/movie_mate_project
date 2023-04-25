@@ -182,7 +182,6 @@ public class MovieController {
 									content = "내용설명이 한국어로 존재하지 않습니다.";
 								}
 								moviemate_movievo.setMovie_info(content);
-
 								break;
 							} else {
 								content = "내용설명이 한국어로 존재하지 않습니다.";
@@ -281,12 +280,14 @@ public class MovieController {
 	public String movie_mate_main_screen(Model model) {
 
 		HttpSession session = request.getSession();
+
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
-			session.setAttribute("username", null);
+			session.setAttribute("userName", null);
 			session.setAttribute("userIdx", null);
 			session.setAttribute("userImg", null);
 		}
+
 		System.out.println("로그인 여부 : " + session.getAttribute("isLogin"));
 		System.out.println("로그인 정보 : " + session.getAttribute("username"));
 
@@ -333,43 +334,45 @@ public class MovieController {
 	@RequestMapping("/movie_mate_choice_screen.do")
 	public String movie_mate_choice_screen(Model model, MovieMate_MovieVO moviemate_movievo) {
 
+		HttpSession session = request.getSession();
 		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
+		List<MovieMate_MovieVO> movie_list =  moviemate_moviedao.select_similarList(moviemate_movievo);
 		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
-		HttpSession session = request.getSession();
 
 		if (session.getAttribute("isLogin").equals("yes")) {
-
 			int user_idx = (int) session.getAttribute("userIdx");
 			int movie_idx = moviemate_movievo.getMovie_idx();
 			String user_name = (String) session.getAttribute("username");
 
 			my_comment.setCom_username(user_name);
+			my_comment.setM_ref(movie_idx);
 			my_comment = moviemate_commentdao.my_comment(my_comment);
 
-			System.out.println(user_name);
-			System.out.println(user_idx);
-			System.out.println(movie_idx);
-			
 			vo.setUser_idx(user_idx);
 			vo.setMovie_idx(movie_idx);
 
 			int count = movie_userdao.selectOne(vo);
-
 			if (count < 1) {
 				movie_userdao.initialize(vo);
 			}
-
 		}
 
 		Movie_UserVO mu_vo = movie_userdao.selectInfo(vo);
 
 		System.out.println("캐스팅된 사람 수 : " + cast_list.size());
 		System.out.println("댓글 개수 : " + comment_list.size());
-		int cast_page = cast_list.size() / 6;
-		int comment_page = comment_list.size() / 2;
+
+		int cast_page = 0;
+		int comment_page = 0;
+		if (cast_list.size() > 6) {
+			cast_page = cast_list.size() / 6;
+		}
+		if (comment_page > 2) {
+			comment_page = comment_list.size() / 2;
+		}
 
 		model.addAttribute("movieUser_info", mu_vo);
 		model.addAttribute("maxCast_page", cast_page);
@@ -377,6 +380,8 @@ public class MovieController {
 		model.addAttribute("movie_info", moviemate_movievo);
 		model.addAttribute("cast_list", cast_list);
 		model.addAttribute("comment_list", comment_list);
+		model.addAttribute("my_comment", my_comment);
+		model.addAttribute("movie_user", mu_vo);
 
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
@@ -384,12 +389,12 @@ public class MovieController {
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
 
-		System.out.println("search_screen.do parameter keyword : " + keyword);
 		// 검색 결과를 받아와서 model에 추가
 		List<MovieMate_MovieVO> search_movie_result = moviemate_moviedao.search_movie(keyword);
 		List<MovieMate_CastVO> search_cast_result = moviemate_castdao.search_cast(keyword);
 		List<MovieMate_UserVO> search_user_result = moviemate_userdao.search_user(keyword);
 
+		System.out.println("search_screen.do parameter keyword : " + keyword);
 		System.out.println("영화 검색결과 수" + search_movie_result.size());
 		System.out.println("배우 검색결과 수" + search_cast_result.size());
 		System.out.println("유저 검색결과 수" + search_user_result.size());
@@ -428,20 +433,29 @@ public class MovieController {
 	}
 
 	@RequestMapping("/update_comment.do")
-	public String update_comment() {
-		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
-		
-		HttpSession session = request.getSession();
-		String user_name = (String) session.getAttribute("username");
+	public String update_comment(MovieMate_CommentVO my_comment) {
 
-		my_comment.setCom_username(user_name);
-		my_comment = moviemate_commentdao.my_comment(my_comment);
-		
-		if(my_comment == null) {
-			
+		MovieMate_CommentVO vo = moviemate_commentdao.my_comment(my_comment);
+
+		System.out.println(vo);
+		int movie_idx = my_comment.getM_ref();
+
+		if (vo == null) {
+			System.out.println("데이터 인서트");
+			moviemate_commentdao.insert_comment(my_comment);
+		} else {
+			moviemate_commentdao.update_comment(my_comment);
 		}
-		
-		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
+
+		return "movie_mate_choice_screen.do?movie_idx=" + movie_idx;
 	}
 
+	@RequestMapping("/update_starScore.do")
+	@ResponseBody
+	public String update_starScore(Movie_UserVO vo) {
+
+		movie_userdao.update_starScore(vo);
+
+		return Double.toString(vo.getStar_score());
+	}
 }
