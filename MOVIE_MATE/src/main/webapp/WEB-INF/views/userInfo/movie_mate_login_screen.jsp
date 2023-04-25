@@ -27,12 +27,10 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
-
     function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var keyCode = window.event.keyCode;
-
 
 	url = "login.do";
 	param = "email=" + email + "&pwd=" + pwd;
@@ -54,7 +52,6 @@
 			}
 		}
 	
-
 </script>
 
 

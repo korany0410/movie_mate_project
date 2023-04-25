@@ -25,15 +25,11 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mate/resources/css/reset.css">
 <link rel="stylesheet" href="/mate/resources/css/header.css?ver=1">
-
-
 <script>
-
     function search(f) {
 	// 검색어 가져오기
 	var keyword = f.keyword.value.trim();
 	f.keyword.value = keyword;
-
 	f.action = "movie_mate_search_screen.do";
 	f.submit();
 	console.log(f.keyword.value);
@@ -49,8 +45,8 @@
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="movie_mate_main_screen.do">
-				<img src="/mate/resources/images/logo_main.png" alt="" height="35">
+			<a class="navbar-brand" href="movie_mate_main_screen.do"> <img
+				src="/mate/resources/images/logo_main.png" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
@@ -59,42 +55,45 @@
 						placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요." aria-label="Search"
 						onkeydown="if(event.keyCode==13) { event.preventDefault(); search(this.form); }">
 				</form>
-
 				<c:choose>
 					<c:when test="${isLogin eq 'no' }">
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-							<li class="nav-item"><a class="nav-link"
-									href="movie_mate_login_screen.do">로그인</a></li>
+							<li class="nav-item">
+								<a class="nav-link" href="movie_mate_login_screen.do">로그인</a>
+							</li>
 						</ul>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-							<li class="nav-item"><a class="nav-link"
-									href="movie_mate_signUp_screen.do">
+							<li class="nav-item">
+								<a class="nav-link" href="movie_mate_signUp_screen.do">
 									<button class="btn btn-outline-success">회원가입</button>
-								</a></li>
+								</a>
+							</li>
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-							<li class="nav-item profile_box"><a class="nav-link"
-									href="movie_mate_mypage_screen.do">
-									<c:if test="${userImg eq 'no_data.jpg'}">
-										<span><img class="profile"
-											src="/mate/resources/images/user.png" alt="" /></span>
+							<li class="nav-item profile_box">
+								<a class="nav-link" href="movie_mate_mypage_screen.do"> <c:if
+										test="${userImg eq 'no_data.jpg'}">
+										<span>
+											<img class="profile" src="/mate/resources/images/user.png"
+												alt="" />
+										</span>
 									</c:if>
-								</a></li>
+								</a>
+							</li>
 						</ul>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
-							<li class="nav-item"><a class="nav-link"
-									href="javascript:logout();">
+							<li class="nav-item">
+								<a class="nav-link" href="javascript:logout();">
 									<button class="btn btn-outline-success">로그아웃</button>
-								</a></li>
+								</a>
+							</li>
 						</ul>
 					</c:otherwise>
 				</c:choose>
-
 			</div>
 		</div>
 	</nav>
 </body>
-
 </html>
