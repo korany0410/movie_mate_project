@@ -15,9 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{username}
 	</select>
 
-	<select id="login" resultType="int"
+	<select id="login" resultType="vo.MovieMate_UserVO"
 		parameterType="vo.MovieMate_UserVO">
-		SELECT COUNT(*) FROM moviemate_user WHERE email =
+		SELECT * FROM moviemate_user WHERE email =
 		#{email} AND pwd = #{pwd}
 	</select>
 
@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM moviemate_user WHERE username LIKE
 		'%' || #{keyword} || '%'
 	</select>
+	
+    <select id="mypage" resultType="vo.MovieMate_UserVO"
+	     parameterType="string">
+	    select * from moviemate_user WHERE email =
+		#{email} AND pwd = #{pwd}
+	</select> 
 </mapper>
 
 

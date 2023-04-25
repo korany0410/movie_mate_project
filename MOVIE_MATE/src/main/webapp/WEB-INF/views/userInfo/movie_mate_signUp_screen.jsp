@@ -114,7 +114,10 @@
 <body>
 	<form>
 		<div id="main_box">
-			<div class="logo_box input-group mb-2">moviemate로고</div>
+			<div class="logo_box input-group mb-2">
+				<img class="logo_img" alt=""
+					src="/mate/resources/images/logo_sub.png">
+			</div>
 			<div class="input_box input-group mb-2" id="id_box">
 				<input type="text" name="username" placeholder="이름"
 					class="form-control" id="username" aria-describedby="basic-addon2"

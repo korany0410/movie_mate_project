@@ -116,7 +116,7 @@ public class MovieMate_MovieDAO {
 	}
 	
 	
-	  // 이 주의 인플루언서 
+	// 이 주의 인플루언서 
 	  public List<MovieMate_MovieVO> famous_list(){
 	  List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.famous_list");
 	  return list; }

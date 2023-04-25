@@ -32,11 +32,11 @@ public class MovieMate_UserDAO {
 	}
 	
 	//(로그인 확인)
-	public int login(MovieMate_UserVO moviemate_uservo) {
+	public MovieMate_UserVO login(MovieMate_UserVO moviemate_uservo) {
 		
-		int count = sqlSession.selectOne("mmuser.login", moviemate_uservo);
+		MovieMate_UserVO user_info = sqlSession.selectOne("mmuser.login", moviemate_uservo);
 		
-		return count;
+		return user_info;
 	}
 	
 	//회원명 검색 조회
@@ -47,8 +47,12 @@ public class MovieMate_UserDAO {
 	}
 	
 	// 마이페이지 
-	
-	
+
+	 public List<MovieMate_UserVO> mypage(String page){
+	  
+	  List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
+	  return list; }
+	 
 }
 
 

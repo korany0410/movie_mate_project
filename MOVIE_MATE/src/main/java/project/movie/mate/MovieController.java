@@ -40,7 +40,7 @@ import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
-import vo.Movie_CastVO;
+import vo.Movie_UserVO;
 
 @Controller
 public class MovieController {
@@ -182,6 +182,7 @@ public class MovieController {
 									content = "내용설명이 한국어로 존재하지 않습니다.";
 								}
 								moviemate_movievo.setMovie_info(content);
+
 								break;
 							} else {
 								content = "내용설명이 한국어로 존재하지 않습니다.";
@@ -282,8 +283,13 @@ public class MovieController {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("isLogin") == null) {
 			session.setAttribute("isLogin", "no");
+			session.setAttribute("username", null);
+			session.setAttribute("userIdx", null);
+			session.setAttribute("userImg", null);
 		}
-		
+		System.out.println("로그인 여부 : " + session.getAttribute("isLogin"));
+		System.out.println("로그인 정보 : " + session.getAttribute("username"));
+
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
 		model.addAttribute("masterpiece_list", masterpiece_list);
@@ -298,11 +304,13 @@ public class MovieController {
 
 		// 이주의 배우
 		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 		model.addAttribute("director_list", director_list);
-    	model.addAttribute("recommend_list", recommend_list);
+
+    	/*model.addAttribute("recommend_list", recommend_list);*/
 		
 		// 평균별점
 		List<MovieMate_MovieVO> avg_star_list = moviemate_moviedao.avg_star_list();
@@ -317,22 +325,22 @@ public class MovieController {
 		model.addAttribute("famous_list", famous_list);
 		 
 
+
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
 		HashMap<String, String> total_chart_name = new HashMap<String, String>();
+
 		total_chart.put("boxOffice", boxOffice_list);
 		total_chart_name.put("boxOffice", "박스오피스 순위");
-
+		
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
 
-		
 		total_chart.put("director", director_list);
 	    total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
-
-
-		total_chart.put("masterpiece", masterpiece_list);
+	    
+        total_chart.put("masterpiece", masterpiece_list);
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
-
+		
 		total_chart.put("recommend", recommend_list);
 		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
 		
@@ -357,17 +365,42 @@ public class MovieController {
 		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
+		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
+		Movie_UserVO vo = new Movie_UserVO();
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute("isLogin").equals("yes")) {
+
+			int user_idx = (int) session.getAttribute("userIdx");
+			int movie_idx = moviemate_movievo.getMovie_idx();
+			String user_name = (String) session.getAttribute("username");
+
+			my_comment.setCom_username(user_name);
+			my_comment = moviemate_commentdao.my_comment(my_comment);
+
+			System.out.println(user_name);
+			System.out.println(user_idx);
+			System.out.println(movie_idx);
+			
+			vo.setUser_idx(user_idx);
+			vo.setMovie_idx(movie_idx);
+
+			int count = movie_userdao.selectOne(vo);
+
+			if (count < 1) {
+				movie_userdao.initialize(vo);
+			}
+
+		}
+
+		Movie_UserVO mu_vo = movie_userdao.selectInfo(vo);
 
 		System.out.println("캐스팅된 사람 수 : " + cast_list.size());
 		System.out.println("댓글 개수 : " + comment_list.size());
 		int cast_page = cast_list.size() / 6;
-		if (cast_page == 0) {
-			cast_page = 1;
-		}
 		int comment_page = comment_list.size() / 2;
-		if (comment_page == 0) {
-			comment_page = 1;
-		}
+
+		model.addAttribute("movieUser_info", mu_vo);
 		model.addAttribute("maxCast_page", cast_page);
 		model.addAttribute("maxComment_page", comment_page);
 		model.addAttribute("movie_info", moviemate_movievo);
@@ -409,6 +442,35 @@ public class MovieController {
 		resultMap.put("search_cast_result", search_cast_result);
 
 		return resultMap;
+	}
+
+	@RequestMapping("/movie_user_want.do")
+	@ResponseBody
+	public String movie_user(Movie_UserVO movie_uservo) {
+
+		System.out.println(movie_uservo.getUser_idx());
+		System.out.println(movie_uservo.getMovie_idx());
+
+		String status = movie_userdao.change(movie_uservo);
+
+		return status;
+	}
+
+	@RequestMapping("/update_comment.do")
+	public String update_comment() {
+		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
+		
+		HttpSession session = request.getSession();
+		String user_name = (String) session.getAttribute("username");
+
+		my_comment.setCom_username(user_name);
+		my_comment = moviemate_commentdao.my_comment(my_comment);
+		
+		if(my_comment == null) {
+			
+		}
+		
+		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
 
 }

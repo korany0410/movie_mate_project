@@ -1,9 +1,16 @@
 @charset "UTF-8";
 
+body {
+	background-color: #fafafa;
+	overflow-y: hidden;
+}
+
 #main_box {
 	width: 450px;
-	margin: 200px auto;
-	border: 1px solid black;
+	margin: 100px auto;
+	border: 1px solid gray;
+	border-radius: 10px;
+	background-color: white;
 }
 
 .btn {
@@ -13,6 +20,11 @@
 .input-group {
 	width: 400px;
 	margin: 0 auto;
+}
+
+.logo_img {
+	width: 350px;
+	margin: 15px;
 }
 
 .input-group-text {
