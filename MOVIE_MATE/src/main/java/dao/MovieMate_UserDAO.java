@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import vo.MovieMate_CastVO;
+import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
+
 
 public class MovieMate_UserDAO {
 
@@ -46,6 +48,7 @@ public class MovieMate_UserDAO {
 		return list;
 	}
 	
+
 	// 마이페이지 
 
 	 public List<MovieMate_UserVO> mypage(String page){
@@ -53,7 +56,7 @@ public class MovieMate_UserDAO {
 	  List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
 	  return list; }
 	 
-}
+    }
 
 
 

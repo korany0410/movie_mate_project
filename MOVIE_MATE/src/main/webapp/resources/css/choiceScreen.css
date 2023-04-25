@@ -84,6 +84,7 @@ body {
 .evaluation {
 	width: 150px;
 	text-align: center;
+	margin-top: 10px;
 }
 
 .eval_title {
@@ -99,7 +100,7 @@ body {
 
 .inter {
 	display: flex;
-	margin: 0 0 0 20px;
+	margin: 10px 0 0 20px;
 	font-size: 20px;
 	color: gray;
 }
@@ -264,19 +265,19 @@ body {
 }
 
 .carousel-item {
-	margin: 0 0 0 30px;
+	margin: 0 0 0 5px;
 }
 
 .cast_info {
-	margin: 10px 0 0 0;
+	margin: 10px 0 10px 0;
 	border-bottom: 1px solid #eeeeee;
-	width: 70%;
+	width: 85%;
 	height: 50px;
 }
 
 .carousel-control-prev, .carousel-control-next {
-	height: 40px;
-	width: 40px !important;
+	height: 35px;
+	width: 35px !important;
 	top: 50% !important;
 	color: #000 !important;
 	font-weight: bold;
@@ -284,7 +285,11 @@ body {
 }
 
 .carousel-control-next {
-	right: 3% !important;
+
+}
+
+.carousel-control-prev{
+	left: -3% !important;
 }
 
 .cast_name {
@@ -300,17 +305,29 @@ body {
 	display: none;
 }
 
-.comment_info {
+.commentIngo_box {
+	padding: 0 !important;
+}
+
+.com_box{
 	width: 90%;
-	margin: 10px 0 20px 20px;
+}
+
+.row{
+	width: 100%;
+}
+
+.comment_info {
+	width: 100%;
+	margin: 10px 0 20px 0;
 	border: 1px solid #eeeeee;
 	border-radius: 10px;
 	background-color: #fafafa;
 }
 
 #myComment_box {
-	height: 60px !important;
-	min-height: 60px !important;
+	display: flex;
+	min-height: 0px !important;
 	border-bottom: 1px solid #eeeeee;
 }
 
@@ -360,6 +377,17 @@ body {
 	padding: 5px;
 }
 
+.p_img {
+	margin: 15px 10px 15px 10px; 
+	width : 40px;
+	height: 40px;
+	border-radius: 100px;
+}
+
+.comment_box{
+	margin: 10px 10px 15px 10px;
+}
+
 #want {
 	margin-top: 7px;
 	margin-right: 3px;
@@ -403,4 +431,24 @@ body {
 
 .update_btn {
 	border: none;
+}
+
+.cast_btn {
+	visibility: hidden !important;
+}
+
+#cast_list:hover .cast_btn{
+	visibility: visible !important;
+}
+
+.comment_btn {
+	visibility: hidden !important;
+}
+
+#comment_list:hover .comment_btn{
+	visibility: visible !important;
+}
+
+.cast_info:hover{
+	cursor: pointer;
 }

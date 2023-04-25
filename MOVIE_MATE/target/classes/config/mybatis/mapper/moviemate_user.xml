@@ -32,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    select * from moviemate_user WHERE email =
 		#{email} AND pwd = #{pwd}
 	</select> 
+
 </mapper>
 
 

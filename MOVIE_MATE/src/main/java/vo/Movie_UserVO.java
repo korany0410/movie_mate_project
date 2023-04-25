@@ -1,7 +1,8 @@
 package vo;
 
 public class Movie_UserVO {
-	private int movie_idx, user_idx, star_score;
+	private int movie_idx, user_idx;
+	double star_score;
 	private String want_view;
 
 	public int getMovie_idx() {
@@ -20,11 +21,11 @@ public class Movie_UserVO {
 		this.user_idx = user_idx;
 	}
 
-	public int getStar_score() {
+	public double getStar_score() {
 		return star_score;
 	}
 
-	public void setStar_score(int star_score) {
+	public void setStar_score(double star_score) {
 		this.star_score = star_score;
 	}
 

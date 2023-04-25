@@ -28,11 +28,12 @@
 
 <script>
 	function send(f) {
+		console.log("a");
 		var email = f.email.value;
 		var pwd = f.pwd.value;
 		var keyCode = window.event.keyCode;
-
-		url = "login.do";
+	
+      	url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd;
 
 		sendRequest(url, param, resFn, "POST");
@@ -52,8 +53,6 @@
 		}
 	}
 </script>
-
-
 </head>
 <body>
 	<form>
@@ -79,6 +78,7 @@
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
+
 	</form>
 </body>
 </html>

@@ -84,6 +84,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          WHERE genre = '공포'
     </select>     
                              
+	
+	<select id ="moviemate_movie" resultType="vo.MovieMate_MovieVO"
+		parameterType="int">
+		select * from moviemate_movie where movie_idx = #{movie_idx}
+	</select>
+
+
 </mapper>
 
 
