@@ -76,7 +76,7 @@ public class UserController {
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("isLogin", "yes");
-			session.setAttribute("username", user_info.getUsername());
+			session.setAttribute("userName", user_info.getUsername());
 			session.setAttribute("userIdx", user_info.getUser_idx());
 			session.setAttribute("userImg", user_info.getProfile_img());
 			System.out.println("로그인 성공");
@@ -93,7 +93,7 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("isLogin", "no");
-		session.setAttribute("username", null);
+		session.setAttribute("userName", null);
 		session.setAttribute("userIdx", null);
 		session.setAttribute("userImg", null);
 
