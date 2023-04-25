@@ -327,7 +327,7 @@ body {
 
 #myComment_box {
 	display: flex;
-	min-height: 0px !important;
+	min-height: 60px !important;
 	border-bottom: 1px solid #eeeeee;
 }
 

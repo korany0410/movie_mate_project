@@ -338,14 +338,14 @@ public class MovieController {
 		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
-		List<MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
+		//List<MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
 		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
 
 		if (session.getAttribute("isLogin").equals("yes")) {
 			int user_idx = (int) session.getAttribute("userIdx");
 			int movie_idx = moviemate_movievo.getMovie_idx();
-			String user_name = (String) session.getAttribute("username");
+			String user_name = (String) session.getAttribute("userName");
 
 			my_comment.setCom_username(user_name);
 			my_comment.setM_ref(movie_idx);
@@ -354,6 +354,7 @@ public class MovieController {
 			System.out.println(user_name);
 			System.out.println(user_idx);
 			System.out.println(movie_idx);
+			System.out.println(my_comment);
 
 			vo.setUser_idx(user_idx);
 			vo.setMovie_idx(movie_idx);
