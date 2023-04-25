@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="initialize" parameterType="vo.Movie_UserVO">
 		INSERT INTO movie_user
-		VALUES(#{user_idx},#{movie_idx},0,'no')
+		VALUES(#{user_idx},#{movie_idx}, 0, 'no')
 	</insert>
 
 	<select id="want" resultType="String"
@@ -23,19 +23,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<update id="change" parameterType="vo.Movie_UserVO">
-		UPDATE movie_user set
+		UPDATE movie_user SET
 		want_view = #{want_view}
 		WHERE
-		movie_idx =
-		#{movie_idx} AND user_idx =
+		movie_idx = #{movie_idx}
+		AND user_idx =
 		#{user_idx}
 	</update>
 
 	<select id="info" resultType="vo.Movie_UserVO"
 		parameterType="vo.Movie_UserVO">
 		SELECT * from movie_user
-		WHERE movie_idx =
-		#{movie_idx}
+		WHERE movie_idx = #{movie_idx}
 		AND user_idx = #{user_idx}
 	</select>
+
+	<update id="update_starScore" parameterType="vo.Movie_UserVO">
+		UPDATE movie_user
+		SET star_score = #{star_score}
+		WHERE movie_idx = #{movie_idx}
+		AND
+		user_idx = #{user_idx}
+	</update>
 </mapper>

@@ -50,4 +50,11 @@ public class Movie_UserDAO {
 		
 		return res;
 	}
+	
+	public int update_starScore(Movie_UserVO vo) {
+		
+		int res = sqlSession.update("muser.update_starScore", vo);
+		
+		return res;
+	}
 }

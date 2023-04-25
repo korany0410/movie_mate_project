@@ -84,7 +84,6 @@ public class MovieMate_MovieDAO {
 	}
 
 	// Movie Mate가 추천하는 이 주의 배우
-
 	public List<MovieMate_MovieVO> recommend_list(String keyword) {
 		List<MovieMate_MovieVO> movie_list = new ArrayList<MovieMate_MovieVO>();
 		MovieMate_CastVO vo = new MovieMate_CastVO();
@@ -104,10 +103,19 @@ public class MovieMate_MovieDAO {
 		}
 		return movie_list;
 	}
-	//더보기
-		public MovieMate_MovieVO selectOne(int movie_idx) {
-		    MovieMate_MovieVO vo = sqlSession.selectOne("mmmovie.moviemate_movie", movie_idx);
-		    
-		    return vo;
-		}
+
+	// 비슷한 작품 12개 추천
+	public List<MovieMate_MovieVO> select_similarList(MovieMate_MovieVO movievo) {
+		List<MovieMate_MovieVO> vo = new ArrayList<MovieMate_MovieVO>();
+		String[] keyword = movievo.getGenre().split(",");
+		String release_date = movievo.getRelease_date();
+		return vo;
+	}
+
+	// 더보기
+	public MovieMate_MovieVO selectOne(int movie_idx) {
+		MovieMate_MovieVO vo = sqlSession.selectOne("mmmovie.moviemate_movie", movie_idx);
+
+		return vo;
+	}
 }

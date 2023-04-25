@@ -8,13 +8,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="myComment" resultType="vo.MovieMate_CommentVO" parameterType="vo.MovieMate_CommentVO">
-		SELECT * FROM moviemate_comment WHERE com_username = #{com_username}
+		SELECT * FROM moviemate_comment WHERE com_username = #{com_username} AND m_ref = #{m_ref}
 	</select>
+	
+	<insert id="insert" parameterType="vo.MovieMate_CommentVO">
+		INSERT INTO moviemate_comment VALUES(seq_comment_idx.nextVal,#{com_username},#{com_content},
+		0, #{m_ref}, 0, 0, 0, seq_comment_idx.currVal, sysdate)
+	</insert>
+	
+	<update id="update" parameterType="vo.MovieMate_CommentVO">
+		UPDATE moviemate_comment SET com_content = #{com_content}
+		WHERE comment_idx = #{comment_idx}
+	</update>
 </mapper>
-
-
-
-
 
 
 

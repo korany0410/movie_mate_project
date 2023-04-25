@@ -33,17 +33,39 @@
 	if(isLogin == 'no'){
 	    if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
 			location.href="movie_mate_login_screen.do";
-			return;
 	    }
+		return "login_no";
 	}
+	return "login_yes";
     }   
     function setStarScore(i) {
+	if(isLogin() == "login_no"){
+	    return;
+	}
 	var score = document.getElementById('starpoint_' + i);
-	isLogin();
+	var user_idx = "${userIdx}";
+	var movie_idx = document.getElementById('movie_idx');
+	console.log(score.value);
+	console.log(user_idx);
+	console.log(movie_idx.value);
+	var url = "update_starScore.do";
+	var param = "user_idx=" + user_idx + "&movie_idx=" + movie_idx.value
+	+ "&star_score=" + score.value;
+	
+	sendRequest(url, param, resFnStar, "GET");
+    }
+    
+    function resFnStar() {
+	if(xhr.readyState == 4 && xhr.status == 200){
+	    var result = xhr.responseText * 2;
+	    console.log(result);
+	}
     }
     
     function want_view(f) {
-	isLogin();
+	if(isLogin() == "login_no"){
+	    return;
+	}
 	var user_idx = f.user_idx.value;
 	var movie_idx = f.movie_idx.value;
 	var url = "movie_user_want.do";
@@ -66,13 +88,16 @@
     }
     
     function write_comment() {
-	isLogin();
+	if(isLogin() == "login_no"){
+	    return;
+	}
 	var input_box = document.getElementById('myComment_input_box');
 	input_box.style.display = "block";
 	}
     
     function update_comment(f) {
-		console.log(f);
+		f.action = "update_comment.do";
+		f.submit();
     }
 </script>
 </head>
@@ -107,9 +132,18 @@
 											<label for="starpoint_${i}" class="label_star"
 												title="${i / 2.0}"> <span class="blind">${i / 2.0}</span>
 											</label>
-											<input type="radio" name="starpoint" id="starpoint_${i}"
-												class="star_radio" value="${i / 2.0}"
-												onclick="setStarScore(${i});">
+											<c:choose>
+												<c:when test="${i eq movie_user.star_score * 2 }">
+													<input type="radio" name="starpoint" id="starpoint_${i}"
+														class="star_radio" value="${i / 2.0}"
+														onclick="setStarScore(${i});" checked="checked">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="starpoint" id="starpoint_${i}"
+														class="star_radio" value="${i / 2.0}"
+														onclick="setStarScore(${i});">
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 										<span class="starpoint_bg"></span>
 									</div>
@@ -120,13 +154,16 @@
 									<c:when test="${movieUser_info.want_view eq 'no' }">
 										<img id="want" src="/mate/resources/images/plus.png" alt="" />
 									</c:when>
+									<c:when test="${empty movieUser_info.want_view}">
+										<img id="want" src="/mate/resources/images/plus.png" alt="" />
+									</c:when>
 									<c:otherwise>
 										<img id="want" src="/mate/resources/images/check.png" alt="" />
 									</c:otherwise>
 								</c:choose>
 								<form>
 									<input type="hidden" name="user_idx" value="${userIdx}" />
-									<input type="hidden" name="movie_idx"
+									<input type="hidden" name="movie_idx" id="movie_idx"
 										value="${movie_info.movie_idx}" />
 									<input class="want_btn" type="button" value="보고싶어요"
 										onclick="want_view(this.form);" />
@@ -145,14 +182,30 @@
 		<div class="second_box row">
 			<div class="dummy col-2"></div>
 			<div class="left_box col-5">
-				<div id="myComment_box" id="comment_1">내가 코멘트 남긴 내용</div>
+				<c:if test="${not empty my_comment}">
+					<div id="myComment_box">
+						<div class="img_box">
+							<c:choose>
+								<c:when test="${userImg eq 'no_data.jpg'}">
+									<img class="p_img" src="/mate/resources/images/user.png" alt="" />
+								</c:when>
+							</c:choose>
+							<c:if test=""></c:if>
+						</div>
+						<div class="comment_box">${my_comment.com_content}</div>
+					</div>
+				</c:if>
 				<div id="myComment_input_box">
 					<label for="exampleFormControlTextarea1" class="input_title">${movie_info.title}</label>
 					<form>
 						<textarea class="form-control input_box"
 							id="exampleFormControlTextarea1" name="com_content" rows="3"></textarea>
-						<input type="hidden" name="m_ref" value=${movie_info.movie_idx }/>
-						<input type="hidden" name="com_username" value="${username}" />
+						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" />
+						<input type="hidden" name="com_username" value="${userName}" />
+						<c:if test="${not empty my_comment }">
+							<input type="hidden" name="comment_idx"
+								value="${my_comment.comment_idx}" />
+						</c:if>
 						<input type="button" class="update_btn" value="저장"
 							onclick="update_comment(this.form);" />
 					</form>
@@ -224,9 +277,9 @@
 								</div>
 							</c:forEach>
 						</div>
-						<input type="button" class="carousel-control-prev"
+						<input type="button" class="carousel-control-prev cast_btn"
 							data-bs-target="#cast_list" data-bs-slide="prev" value="&lt;" />
-						<input type="button" class="carousel-control-next"
+						<input type="button" class="carousel-control-next cast_btn"
 							data-bs-target="#cast_list" data-bs-slide="next" value="&gt;" />
 					</div>
 				</div>
@@ -234,11 +287,11 @@
 				<div class="comment_box">
 					<div class="head_title">코멘트</div>
 					<div id="comment_list" class="carousel slide">
-						<div class="carousel-inner">
+						<div class="carousel-inner com_box">
 							<div class="carousel-item active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="1">
-										<div class="commentInfo_box col-5">
+										<div class="commentInfo_box col-6">
 											<form>
 												<div class="comment_info">
 													<div class="comment_name">${comment_list[i].com_username}이름</div>
@@ -275,9 +328,9 @@
 								</div>
 							</c:forEach>
 						</div>
-						<input type="button" class="carousel-control-prev"
+						<input type="button" class="carousel-control-prev comment_btn"
 							data-bs-target="#comment_list" data-bs-slide="prev" value="&lt;" />
-						<input type="button" class="carousel-control-next"
+						<input type="button" class="carousel-control-next comment_btn"
 							data-bs-target="#comment_list" data-bs-slide="next" value="&gt;" />
 					</div>
 				</div>
