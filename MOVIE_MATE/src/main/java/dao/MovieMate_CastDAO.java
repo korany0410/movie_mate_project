@@ -38,10 +38,10 @@ public class MovieMate_CastDAO {
 	}
 	
 	// 해당 배우의 모든 영화출연 리스트
-	public List<MovieMate_MovieVO> cast_movieList(MovieMate_CastVO moviemate_castvo){
-		
-		List<Movie_>
-	}
+//	public List<MovieMate_MovieVO> cast_movieList(MovieMate_CastVO moviemate_castvo){
+//		
+//
+//	}
 	
 	
 
