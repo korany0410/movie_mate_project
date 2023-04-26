@@ -45,5 +45,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND
 		user_idx = #{user_idx}
 	</update>
+
+	<select id="watchList" resultType="vo.Movie_UserVO"
+		parameterType="vo.Movie_UserVO">
+		select * from movie_user
+		where movie_idx = #{movie_idx}
+		and
+		star_score = #{star_score}
+	</select>
+
+	<select id="starList" resultType="vo.Movie_UserVO"
+		parameterType="int">
+		SELECT * FROM movie_user WHERE user_idx = #{user_idx} AND star_score &gt; 0
+	</select>
+
+	<select id="wantList" resultType="vo.Movie_UserVO"
+		parameterType="int">
+		SELECT * FROM movie_user WHERE user_idx = #{user_idx} AND want_view = 'yes'
+	</select>
+
 </mapper>
 

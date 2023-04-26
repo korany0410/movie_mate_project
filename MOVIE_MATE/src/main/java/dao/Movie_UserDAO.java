@@ -1,7 +1,11 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import vo.MovieMate_MovieVO;
 import vo.Movie_UserVO;
 
 public class Movie_UserDAO {
@@ -56,5 +60,27 @@ public class Movie_UserDAO {
 		int res = sqlSession.update("muser.update_starScore", vo);
 		
 		return res;
-	}
+	}		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

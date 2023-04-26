@@ -294,9 +294,9 @@
 										<div class="commentInfo_box col-6">
 											<form>
 												<div class="comment_info">
-													<div class="comment_name">${comment_list[i].com_username}이름</div>
+													<div class="comment_name">${comment_list[i].com_username}</div>
 													<div class="comment_content">
-														${comment_list[i].com_content } 코멘트 내용</div>
+														${comment_list[i].com_content}</div>
 													<div class="cocomment">
 														<span>댓글 수</span>
 													</div>
@@ -314,9 +314,9 @@
 											<div class="commentInfo_box col-5">
 												<form>
 													<div class="comment_info">
-														<div class="comment_name">${comment_list[i].com_username}이름</div>
+														<div class="comment_name">${comment_list[i].com_username}</div>
 														<div class="comment_content">
-															${comment_list[i].com_content } 코멘트 내용</div>
+															${comment_list[i].com_content}</div>
 														<div class="cocomment">
 															<span>댓글 수</span>
 														</div>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,7 @@
 	<h3>원제 : ${movie.title}</h3>
 	<hr>
 	<h3>개봉 연도 : ${fn:split(movie.release_date, '/')[0]}</h3>
-	
+
 	<hr>
 	<h3>국가 : ${movie.nation}</h3>
 	<hr>
@@ -38,11 +38,22 @@
 	</c:if>
 
 	<c:if test="${empty movie.film_rating }">
-	<h3>연령 등급 정보 없음</h3>
+		<h3>연령 등급 정보 없음</h3>
 	</c:if>
-	
+
 	<hr>
 	<h3>내용 : ${movie.movie_info}</h3>
 	<hr>
+
+	<c:forEach var="vo" items="${myStarScore_list}">
+		<div>
+			<img alt="" src="${vo.profile_img}">
+		</div>
+	</c:forEach>
+	<c:forEach var="vo" items="${myWant_list}">
+		<div>
+			<img alt="" src="${vo.profile_img}">
+		</div>
+	</c:forEach>
 </body>
 </html>

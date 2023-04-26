@@ -106,7 +106,11 @@ public class UserController {
 		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
 	}
 	
-	
+	@RequestMapping("/mymovie.do")
+	public String mymovie() {
+		
+		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
+	}
 
 	
 	

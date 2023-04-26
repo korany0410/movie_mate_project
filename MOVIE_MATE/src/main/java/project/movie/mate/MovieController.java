@@ -311,49 +311,47 @@ public class MovieController {
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 		model.addAttribute("director_list", director_list);
 
-    	/*model.addAttribute("recommend_list", recommend_list);*/
-		
+		/* model.addAttribute("recommend_list", recommend_list); */
+
 		// 평균별점
 		List<MovieMate_MovieVO> avg_star_list = moviemate_moviedao.avg_star_list();
 		model.addAttribute("avg_star_list", avg_star_list);
-		
+
 		// 이 주의 추천 장르
 		List<MovieMate_MovieVO> genre_list = moviemate_moviedao.genre_list();
 		model.addAttribute("genre_list", genre_list);
-		
-	    // 이 주의 인플루언서
+
+		// 이 주의 인플루언서
 		List<MovieMate_MovieVO> famous_list = moviemate_moviedao.famous_list();
 		model.addAttribute("famous_list", famous_list);
-		 
-
 
 		HashMap<String, List<MovieMate_MovieVO>> total_chart = new LinkedHashMap<String, List<MovieMate_MovieVO>>();
 		HashMap<String, String> total_chart_name = new HashMap<String, String>();
 
 		total_chart.put("boxOffice", boxOffice_list);
 		total_chart_name.put("boxOffice", "박스오피스 순위");
-		
+
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
 
 		total_chart.put("director", director_list);
-	    total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
-	    
-        total_chart.put("masterpiece", masterpiece_list);
+		total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
+
+		total_chart.put("masterpiece", masterpiece_list);
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
-		
+
 		total_chart.put("recommend", recommend_list);
 		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
-		
+
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");
-		
+
 		total_chart.put("genre", genre_list);
 		total_chart_name.put("genre", "이 주의 추천 장르 '액션'");
-		
+
 		total_chart.put("famous", famous_list);
-        total_chart_name.put("famous", "이 주의 인플루언서 추천 영화 "); 
-		
+		total_chart_name.put("famous", "이 주의 인플루언서 추천 영화 ");
+
 		model.addAttribute("total_chart", total_chart);
 		model.addAttribute("total_chart_name", total_chart_name);
 
@@ -367,14 +365,15 @@ public class MovieController {
 		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
-		List<MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
+		// List<MovieMate_MovieVO> movie_list =
+		// moviemate_moviedao.select_similarList(moviemate_movievo);
 		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
 
 		if (session.getAttribute("isLogin").equals("yes")) {
 			int user_idx = (int) session.getAttribute("userIdx");
 			int movie_idx = moviemate_movievo.getMovie_idx();
-			String user_name = (String) session.getAttribute("username");
+			String user_name = (String) session.getAttribute("userName");
 
 			my_comment.setCom_username(user_name);
 			my_comment.setM_ref(movie_idx);
@@ -383,6 +382,7 @@ public class MovieController {
 			System.out.println(user_name);
 			System.out.println(user_idx);
 			System.out.println(movie_idx);
+			System.out.println(my_comment);
 
 			vo.setUser_idx(user_idx);
 			vo.setMovie_idx(movie_idx);
@@ -448,20 +448,20 @@ public class MovieController {
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
 	}
 
-	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
-	public String movie_mate_myChoice_moreInfo(Model model, int movie_idx) {
-
-		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
-		model.addAttribute("movie", vo);
-		if (vo.getRunning_time() != null && !vo.getRunning_time().isEmpty()) {
-			int hour = Integer.parseInt(vo.getRunning_time()) / 60;
-			int min = Integer.parseInt(vo.getRunning_time()) % 60;
-			model.addAttribute("hour", hour);
-			model.addAttribute("min", min);
-		}
-
-		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
-	}
+//	@RequestMapping("/movie_mate_choice_moreInfo.do")
+//	public String movie_mate_choice_moreInfo(Model model, int movie_idx) {
+//
+//		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
+//		model.addAttribute("movie", vo);
+//		if (vo.getRunning_time() != null && !vo.getRunning_time().isEmpty()) {
+//			int hour = Integer.parseInt(vo.getRunning_time()) / 60;
+//			int min = Integer.parseInt(vo.getRunning_time()) % 60;
+//			model.addAttribute("hour", hour);
+//			model.addAttribute("min", min);
+//		}
+//
+//		return "/WEB-INF/views/show/movie_mate_choice_moreInfo.jsp";
+//	}
 
 	@RequestMapping("/movie_user_want.do")
 	@ResponseBody
@@ -500,5 +500,23 @@ public class MovieController {
 		movie_userdao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
+	}
+
+	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
+	public String movie_mate_myChoice_moreInfo(Model model) {
+		HttpSession session = request.getSession();
+
+		int user_idx = (int) session.getAttribute("userIdx");
+
+		List<MovieMate_MovieVO> myStarScore_list = moviemate_moviedao.myList_starScore(user_idx);
+		List<MovieMate_MovieVO> myWant_list = moviemate_moviedao.myList_want(user_idx);
+		
+		System.out.println("내가 별점준 영화 갯수 : " + myStarScore_list.size());
+		System.out.println("내가 좋아요 영화 갯수 : " + myWant_list.size());
+		
+		model.addAttribute("myStarScore_list", myStarScore_list);
+		model.addAttribute("myWant_list", myWant_list);
+
+		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
 	}
 }
