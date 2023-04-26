@@ -511,6 +511,10 @@ body {
 	height: 370px;
 }
 
+.right_box:hover{
+	cursor: pointer;
+}
+
 .adImg_box {
 	position: relative;
 	width: 100%;

@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/mate/resources/images/logo_icon_1.png"/>
+<link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_1.png"/>
+<title>무비메이트</title>
 <link rel="stylesheet" href="/mate/resources/css/choiceScreen.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <link
@@ -102,6 +104,10 @@
     
     function choice_screen(idx) {
 	location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
+    }
+    
+    function watcha() {
+	window.open('https://watcha.com/?browser_open_type=external');
     }
 </script>
 </head>
@@ -219,7 +225,7 @@
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
 							<input class="more_btn" type="button" value="더보기"
-								onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
+								onclick="location.href='movie_mate_Choice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
 					<div class="content_box">
@@ -355,7 +361,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="right_box col-3">
+			<div class="right_box col-3" onclick="watcha();">
 				<div class="adImg_box">
 					<img class="ad_img" src="/mate/resources/images/ad.png" alt="" />
 				</div>
