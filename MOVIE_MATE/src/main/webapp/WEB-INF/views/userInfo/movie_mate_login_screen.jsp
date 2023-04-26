@@ -48,18 +48,14 @@
 
 				if (result == 'success') {
 					alert("로그인 성공했습니다.");
-					location.href = "movie_mate_main_screen.do";
+					window.history.go(-1);
 				} else {
 					alert("아이디 또는 비밀번호가 일치하지 않습니다.");
 					return;
 				}
 			}
-		}
-	
-   
+		} 
 </script>
-
-
 </head>
 <body>
 	<form>

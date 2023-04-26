@@ -99,6 +99,10 @@
 		f.action = "update_comment.do";
 		f.submit();
     }
+    
+    function choice_screen(idx) {
+	location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
+    }
 </script>
 </head>
 <body>
@@ -214,7 +218,8 @@
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
-							<input class="more_btn" type="button" value="더보기" onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
+							<input class="more_btn" type="button" value="더보기"
+								onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
 					<div class="content_box">
@@ -231,7 +236,7 @@
 					<div class="head_title">출연/제작</div>
 					<div id="cast_list" class="carousel slide">
 						<div class="carousel-inner">
-							<div class="carousel-item active">
+							<div class="carousel-item actor active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="5">
 										<div class="movieInfo_box col-6">
@@ -253,7 +258,7 @@
 								</div>
 							</div>
 							<c:forEach var="index" begin="1" end="${maxCast_page}">
-								<div class="carousel-item">
+								<div class="carousel-item actor">
 									<div class="row">
 										<c:forEach var="i" begin="${index * 6 }"
 											end="${index * 6 + 5}">
@@ -311,7 +316,7 @@
 									<div class="row">
 										<c:forEach var="i" begin="${index * 2 }"
 											end="${index * 2 + 1}">
-											<div class="commentInfo_box col-5">
+											<div class="commentInfo_box col-6">
 												<form>
 													<div class="comment_info">
 														<div class="comment_name">${comment_list[i].com_username}</div>
@@ -336,10 +341,35 @@
 				</div>
 				<div class="similar_box">
 					<div class="head_title">비슷한 작품</div>
+					<div class="row">
+						<c:forEach var="map" items="${movie_list}" varStatus="status">
+							<div class="similar_movie col-3"
+								onclick="choice_screen(${map.value.movie_idx});">
+								<div class="movieImg_box">
+									<img class="movie_img" alt="" src="${map.value.profile_img}">
+								</div>
+								<div class="fw-bold info star_title">${map.value.title}</div>
+								<div class="info star_comment">평균★${map.value.star_score}</div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
-			<div class="right_box col-4"></div>
-			<div class="dummy col-1"></div>
+			<div class="right_box col-3">
+				<div class="adImg_box">
+					<img class="ad_img" src="/mate/resources/images/ad.png" alt="" />
+				</div>
+				<div class="ad_content">
+					<div class="ad_box">
+						<div style="font-weight: bold; font-size: 15px;">#왓챠영화파티</div>
+						<div style="color: gray; font-size: 12px">재방송은 없다! 기회는 단 한번!</div>
+					</div>
+					<div class="ad_btn">
+						<input class="now" type="button" value="지금 왓챠!" />
+					</div>
+				</div>
+			</div>
+			<div class="dummy col-2"></div>
 		</div>
 	</div>
 </body>
