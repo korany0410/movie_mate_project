@@ -420,7 +420,7 @@ public class MovieController {
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
 	}
 
-	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
+	@RequestMapping("/movie_mate_Choice_moreInfo.do")
 	public String movie_mate_myChoice_moreInfo(Model model, int movie_idx) {
 
 		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
@@ -432,7 +432,7 @@ public class MovieController {
 			model.addAttribute("min", min);
 		}
 
-		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
+		return "/WEB-INF/views/show/movie_mate_choice_moreInfo_screen.jsp";
 	}
 
 	@RequestMapping("/movie_user_want.do")
