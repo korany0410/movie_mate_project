@@ -25,7 +25,7 @@
 		<div class="cast_name">${cast_name}</div>
 		<div>
 			<c:if test="${cast_type eq 'actor' }">
-				<span class="cast_type">출연</span>
+				<span class="cast_type">배우</span>
 			</c:if>
 			<c:if test="${cast_type eq 'director' }">
 				<span class="cast_type">감독</span>
