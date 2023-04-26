@@ -48,6 +48,18 @@ public class MovieMate_UserDAO {
 		return list;
 	}
 	
+	//회원 정보 수정
+	public MovieMate_UserVO userInfo(int user_idx) {
+		
+		MovieMate_UserVO vo = sqlSession.selectOne("mmuser.userInfo", user_idx);
+		
+		return vo;
+	}
 	
+	
+	/*
+	 * public int modify(MovieMate_UserVO vo) { int res =
+	 * sqlSession.update("mmuser.userInfo_modify", vo); return res; }
+	 */
 	
 }

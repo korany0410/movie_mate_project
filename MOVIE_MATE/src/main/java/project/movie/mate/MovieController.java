@@ -473,4 +473,5 @@ public class MovieController {
 
 		return Double.toString(vo.getStar_score());
 	}
+	
 }

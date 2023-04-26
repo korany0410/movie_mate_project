@@ -100,7 +100,29 @@ public class UserController {
 		return "movie_mate_main_screen.do";
 	}
 
-	
-	
-	
+	@RequestMapping("/movie_mate_modify_screen.do")
+	public String movie_mate_modify_screen(Model model) {
+
+		HttpSession session = request.getSession();
+
+		int user_idx = (int) session.getAttribute("userIdx");
+		MovieMate_UserVO user_info = moviemate_userdao.userInfo(user_idx);
+		System.out.println("수정페이지 로그인 정보 : " + user_idx);
+		model.addAttribute("userInfo", user_info);
+		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
+	}
+
+	/*
+	 * @RequestMapping("/movie_mate_modify_screen.do")
+	 * 
+	 * @ResponseBody public String modify(MovieMate_UserVO vo) { MovieMate_UserDAO
+	 * dao = new MovieMate_UserDAO(); int res = dao.modify(vo); String result =
+	 * "수정 성공";
+	 * 
+	 * if (res == 0) { result = "수정 실패"; }
+	 * 
+	 * return result; }
+	 */
+
+
 }

@@ -27,7 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'%' || #{keyword} || '%'
 	</select>
 	
+	<select id="userInfo" resultType="vo.MovieMate_UserVO" parameterType="int">
+		SELECT * FROM moviemate_user WHERE user_idx = #{user_idx}
+	</select>
 	
+	<!-- <update id="userInfo_modify" parameterType="MovieMate_UserVO">
+    update moviemate_user set username=#{username}, pwd=#{pwd}
+    where user_idx=#{user_idx}
+	</update> -->
 </mapper>
 
 
