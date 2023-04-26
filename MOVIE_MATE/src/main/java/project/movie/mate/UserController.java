@@ -93,7 +93,7 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("isLogin", "no");
-		session.setAttribute("username", null);
+		session.setAttribute("userName", null);
 		session.setAttribute("userIdx", null);
 		session.setAttribute("userImg", null);
 

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+.wall{
+	height: 100px;
+}
+.center_box{
+	width: 80vw;
+	margin: 0 auto;
+}
+.cast_name{
+	font-size: 30px;
+	font-weight: bold;
+}
+.cast_type{
+	font-size: 16px;
+	font-weight: bold;
+	color: #979ba2;
+}
+.movie{
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.isup_box:hover .isup_li{
+	background-color: #eeeeef;
+	cursor: pointer;
+}
+.isup_li{
+	align-items: center;
+}
+.isup_img{
+	height: 20px;
+	align-items: center;
+}
+
+.title_img{
+	width: 80px;
+}

@@ -37,13 +37,6 @@ public class MovieMate_CastDAO {
 		return cast_list;
 	}
 	
-	// 해당 캐스트의 모든 영화 리스트
-	public List<MovieMate_MovieVO> cast_movieList(MovieMate_CastVO moviemate_castvo){
-		
-
-		return cast_movieList;
-	}
-	
 	
 
 	// 배우명 검색 조회

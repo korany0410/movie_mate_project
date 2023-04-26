@@ -100,8 +100,8 @@
 		f.submit();
     }
     
-    function choiceCast_screen(idx){
-    	location.href = "movie_mate_choiceCast_screen.do?cast_idx=" + idx;
+    function choiceCast_screen(idx, name, type){
+    	location.href = "movie_mate_choiceCast_screen.do?cast_idx=" + idx + "&name=" + name + "&type=" + type ;
     }
 </script>
 </head>
@@ -124,8 +124,8 @@
 					<div class="title_info">
 						<div class="title">${movie_info.title}</div>
 						<div class="release_date">
-							<span> ${fn:substring(movie_info.release_date,0,4)} • </span>
-							<span> ${movie_info.genre} • ${movie_info.nation} </span>
+							<span> ${fn:substring(movie_info.release_date,0,4)} • </span> <span>
+								${movie_info.genre} • ${movie_info.nation} </span>
 						</div>
 						<div class="input_box">
 							<div class="evaluation">
@@ -166,11 +166,10 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" />
-									<input type="hidden" name="movie_idx" id="movie_idx"
-										value="${movie_info.movie_idx}" />
-									<input class="want_btn" type="button" value="보고싶어요"
-										onclick="want_view(this.form);" />
+									<input type="hidden" name="user_idx" value="${userIdx}" /> <input
+										type="hidden" name="movie_idx" id="movie_idx"
+										value="${movie_info.movie_idx}" /> <input class="want_btn"
+										type="button" value="보고싶어요" onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
@@ -218,7 +217,8 @@
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
-							<input class="more_btn" type="button" value="더보기" onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
+							<input class="more_btn" type="button" value="더보기"
+								onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
 					<div class="content_box">
@@ -240,7 +240,8 @@
 									<c:forEach var="i" begin="0" end="5">
 										<div class="movieInfo_box col-6">
 											<form>
-												<div class="cast_info" onclick="choiceCast_screen(${cast_list[i].cast_idx})">
+												<div class="cast_info"
+													onclick="choiceCast_screen('${cast_list[i].cast_idx}','${cast_list[i].name}','${cast_list[i].type}')">
 													<div class="cast_name">${cast_list[i].name}</div>
 													<div class="cast_type">
 														<c:if test="${cast_list[i].type eq 'actor' }">
@@ -263,7 +264,8 @@
 											end="${index * 6 + 5}">
 											<div class="movieInfo_box col-6">
 												<form>
-													<div class="cast_info" onclick="choiceCast_screen(${cast_list[i].cast_idx})">
+													<div class="cast_info"
+														onclick="choiceCast_screen('${cast_list[i].cast_idx}','${cast_list[i].name}','${cast_list[i].type}')">
 														<div class="cast_name">${cast_list[i].name}</div>
 														<div class="cast_type">
 															<c:if test="${cast_list[i].type eq 'actor' }">
