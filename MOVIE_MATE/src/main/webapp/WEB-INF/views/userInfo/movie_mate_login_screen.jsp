@@ -30,6 +30,8 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
+
+
     function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
@@ -40,6 +42,7 @@
 
 	sendRequest(url, param, resFn, "POST");
     }
+
 
     function resFn() {
 	if (xhr.readyState == 4 && xhr.status == 200) {
@@ -53,7 +56,9 @@
 		return;
 	    }
 	}
-    }
+
+
+
 </script>
 </head>
 <body>

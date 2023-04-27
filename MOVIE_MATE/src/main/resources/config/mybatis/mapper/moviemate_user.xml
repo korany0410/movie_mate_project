@@ -27,7 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'%' || #{keyword} || '%'
 	</select>
 	
-	
+    <select id="mypage" resultType="vo.MovieMate_UserVO"
+	     parameterType="string">
+	    select * from moviemate_user WHERE email =
+		#{email} AND pwd = #{pwd}
+	</select> 
+
 </mapper>
 
 
