@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/mate/resources/images/logo_icon_2.png" />
+<link rel="apple-touch-icon"
+	href="/mate/resources/images/logo_icon_2.png" />
+<title>무비메이트</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -27,6 +30,7 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
+<<<<<<< HEAD
 	function send(f) {
 		console.log("a");
 		var email = f.email.value;
@@ -35,9 +39,32 @@
 	
       	url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd;
+=======
+    function send(f) {
+	var email = f.email.value;
+	var pwd = f.pwd.value;
+	var pathname = "${pathname}";
 
-		sendRequest(url, param, resFn, "POST");
+	url = "login.do";
+	param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
+
+	sendRequest(url, param, resFn, "POST");
+    }
+>>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
+
+    function resFn() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    var result = xhr.responseText;
+
+	    if (result != 'fail') {
+		alert("로그인 성공했습니다.");
+		location.href = result;
+	    } else {
+		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+		return;
+	    }
 	}
+<<<<<<< HEAD
 
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -52,6 +79,9 @@
 			}
 		}
 	}
+=======
+    }
+>>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
 </script>
 </head>
 <body>

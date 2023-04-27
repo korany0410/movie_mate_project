@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/mate/resources/images/logo_icon_2.png"/>
+<link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_2.png"/>
+<title>무비메이트</title>
 </head>
 <body>
 <h1> 회원 정보 수정 화면 </h1>

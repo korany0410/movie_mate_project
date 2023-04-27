@@ -6,7 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/mate/resources/images/logo_icon_1.png" />
+<link rel="apple-touch-icon"
+	href="/mate/resources/images/logo_icon_1.png" />
+<title>무비메이트</title>
 <link rel="stylesheet"
 	href="/mate/resources/css/search_screen.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css?ver=1" />
@@ -88,9 +91,13 @@ $(document).ready(function() {
 	<hr>
 	<%-- 콘텐츠, 유저 버튼--%>
 	<ul class="nav nav-underline">
-		<li class="nav-item"><a class="nav-link active"
-				aria-current="page" id="contentBtn" href="#">콘텐츠</a></li>
-		<li class="nav-item"><a class="nav-link" id="userBtn" href="#">유저</a></li>
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" id="contentBtn"
+				href="#">콘텐츠</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="userBtn" href="#">유저</a>
+		</li>
 	</ul>
 	<hr>
 	<%-- 검색결과 없을때 출력 --%>
@@ -223,9 +230,7 @@ $(document).ready(function() {
 		</div>
 	</div>
 
-	<footer style="height: 100px;">
-	
-	</footer>
+	<footer style="height: 100px;"> </footer>
 
 
 

@@ -1,4 +1,4 @@
-package vo;
+ package vo;
 
 public class MovieMate_CastVO {
 	private int cast_idx;

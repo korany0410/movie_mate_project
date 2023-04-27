@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Insert title here</title>
 
 
@@ -73,5 +74,14 @@ function myList() {
         
 		</div>
 	</div>	
+=======
+<link rel="icon" href="/mate/resources/images/logo_icon_2.png" />
+<link rel="apple-touch-icon"
+	href="/mate/resources/images/logo_icon_2.png" />
+<title>무비메이트</title>
+</head>
+<body>
+	<h1>마이 페이지 화면</h1>
+>>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
 </body>
 </html>

@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Insert title here</title>
 <link rel="stylesheet" href="/mate/resources/css/mainScreen.css?ver=1" />
 <link
@@ -67,9 +68,16 @@
 		location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
 	}
 </script>
+=======
+<link rel="icon" href="/mate/resources/images/logo_icon_2.png" />
+<link rel="apple-touch-icon"
+	href="/mate/resources/images/logo_icon_2.png" />
+<title>무비메이트</title>
+>>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
 </head>
 
 <body>
+<<<<<<< HEAD
 	<header>
 		<%@ include file="/resources/jsp/header.jsp"%>
 	</header>
@@ -181,5 +189,8 @@
 			data-bs-slide="next" value="&gt;" />
 	</div>
 
+=======
+	<h1>내가 고른 영화들 더보기 화면
+>>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
 </body>
 </html>
