@@ -4,16 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
 <title>Insert title here</title>
-
 <script src="/webapp/resources/js/httpRequest.js"></script>
-
-=======
 <link rel="icon" href="/mate/resources/images/logo_icon_2.png"/>
 <link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_2.png"/>
 <title>무비메이트</title>
->>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
+
 </head>
 
 <script>
