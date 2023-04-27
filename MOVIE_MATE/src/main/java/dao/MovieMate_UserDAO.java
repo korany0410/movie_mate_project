@@ -48,6 +48,34 @@ public class MovieMate_UserDAO {
 		return list;
 	}
 	
-	
-	
-}
+
+	// 마이페이지 
+
+	 public List<MovieMate_UserVO> mypage(String page){
+	  
+	  List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
+	  return list; }
+	 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -39,6 +39,14 @@
 		url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
 
+<script type="text/javascript">
+	function send(f) {
+		console.log("a");
+		var email = f.email.value;
+		var pwd = f.pwd.value;
+		var pathname = "${pathname}";
+		url = "login.do";
+		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
 		sendRequest(url, param, resFn, "POST");
 	}
 
@@ -83,7 +91,6 @@
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
-
 	</form>
 </body>
 </html>
