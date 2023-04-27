@@ -29,59 +29,33 @@
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
+
 <script>
 
-	function send(f) {
-		console.log("a");
-		var email = f.email.value;
-		var pwd = f.pwd.value;
-		var keyCode = window.event.keyCode;
-	
-      	url = "login.do";
-		param = "email=" + email + "&pwd=" + pwd;
 
+<script type="text/javascript">
     function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
-
 	url = "login.do";
 	param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-
 	sendRequest(url, param, resFn, "POST");
     }
-
-
-    function resFn() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
-	    var result = xhr.responseText;
-
-	    if (result != 'fail') {
-		alert("로그인 성공했습니다.");
-		location.href = result;
-	    } else {
-		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-		return;
-	    }
-	}
-
-
+    
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;
 
-			if (result == 'success') {
+			if (result != 'fail') {
 				alert("로그인 성공했습니다.");
-				location.href = "movie_mate_main_screen.do";
+				location.href = result;
 			} else {
 				alert("아이디 또는 비밀번호가 일치하지 않습니다.");
 				return;
 			}
 		}
 	}
-
-    }
-
 </script>
 </head>
 <body>
@@ -108,7 +82,6 @@
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
-
 	</form>
 </body>
 </html>
