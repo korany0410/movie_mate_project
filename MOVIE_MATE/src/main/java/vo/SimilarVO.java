@@ -2,7 +2,15 @@ package vo;
 
 public class SimilarVO {
 	private String release_date, genre;
-	private int number;
+	private int number, movie_idx;
+
+	public int getMovie_idx() {
+		return movie_idx;
+	}
+
+	public void setMovie_idx(int movie_idx) {
+		this.movie_idx = movie_idx;
+	}
 
 	public String getRelease_date() {
 		return release_date;

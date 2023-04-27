@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mmcomment">
 	<select id="selectList" resultType="vo.MovieMate_CommentVO" parameterType="vo.MovieMate_MovieVO">
-		SELECT * FROM moviemate_comment WHERE m_ref = #{movie_idx}
+		SELECT * FROM moviemate_comment WHERE m_ref = #{movie_idx} AND comment_idx = c_ref
 	</select>
 	
 	<select id="myComment" resultType="vo.MovieMate_CommentVO" parameterType="vo.MovieMate_CommentVO">

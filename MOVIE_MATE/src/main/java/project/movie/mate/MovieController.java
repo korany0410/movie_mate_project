@@ -398,6 +398,25 @@ public class MovieController {
 	public String movie_mate_choiceCast_screen(Model model, MovieMate_CastVO vo) {
 
 		System.out.println("캐스트 idx 테스트 : " + vo.getCast_idx());
+		HttpSession session = request.getSession();
+		int user_idx;
+		if (session.getAttribute("userIdx") == null) {
+			model.addAttribute("user_castInfo", null);
+		} else {
+			user_idx = (int) session.getAttribute("userIdx");
+			User_CastVO uc_vo = new User_CastVO();
+			uc_vo.setUser_idx(user_idx);
+			uc_vo.setCast_idx(vo.getCast_idx());
+
+			uc_vo = user_castdao.selectOne(uc_vo);
+			if (uc_vo == null) {
+				model.addAttribute("user_castInfo", null);
+			} else {
+				model.addAttribute("user_castInfo", uc_vo);
+			}
+
+		}
+
 		int isUpCount = user_castdao.isup_count(vo);
 		List<MovieMate_MovieVO> movie_list = moviemate_moviedao.castMovieList(vo);
 		model.addAttribute("movie_list", movie_list);
@@ -425,7 +444,7 @@ public class MovieController {
 		int movie_page = 0;
 
 		if (search_movie_result.size() > 9) {
-			movie_page = search_movie_result.size() / 9;
+			movie_page = (search_movie_result.size() - 1) / 9;
 		}
 
 		model.addAttribute("keyword", keyword);
@@ -460,7 +479,7 @@ public class MovieController {
 		System.out.println(movie_uservo.getMovie_idx());
 
 		String status = movie_userdao.change(movie_uservo);
-	
+
 		return status;
 	}
 
@@ -468,6 +487,8 @@ public class MovieController {
 	@ResponseBody
 	public String cast_user(User_CastVO user_castvo) {
 
+		MovieMate_CastVO count = new MovieMate_CastVO();
+		count.setCast_idx(user_castvo.getCast_idx());
 		User_CastVO vo = user_castdao.selectOne(user_castvo);
 		if (vo == null) {
 			user_castdao.insertData(user_castvo);
@@ -480,7 +501,8 @@ public class MovieController {
 			}
 		}
 		user_castdao.updateData(user_castvo);
-		return user_castvo.getIsUp();
+		int isUpCount = user_castdao.isup_count(count);
+		return user_castvo.getIsUp() + "/" + isUpCount;
 	}
 
 	@RequestMapping("/update_comment.do")
@@ -509,6 +531,16 @@ public class MovieController {
 		movie_userdao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
+	}
+
+	@RequestMapping("/movie_mate_comment.do")
+	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
+
+		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(vo);
+
+		model.addAttribute("comment_list", comment_list);
+
+		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 	}
 
 }

@@ -10,30 +10,38 @@
 }
 
 .cast_name {
+	margin-top: 20px;
 	font-size: 30px;
 	font-weight: bold;
+	font-size: 30px;
 }
 
 .cast_type {
 	font-size: 16px;
 	font-weight: bold;
 	color: #979ba2;
+	margin-bottom: 15px;
 }
 
 .movie {
 	font-size: 22px;
 	font-weight: bold;
+	margin-top: 20px;
+}
+
+.isup_box:hover .isup_img {
+	content: url("/mate/resources/images/isup_clicked.png");
 }
 
 .isup_box:hover .isup_li {
 	background-color: #eeeeef;
+	color: black !important;
 	cursor: pointer;
 }
 
 .isup_li {
 	font-size: 16px;
-	font-weight: bold;
-	color: #979ba2;
+	color: #636363;
 	text-align: center;
 }
 
@@ -44,6 +52,7 @@
 
 .row {
 	margin: auto 0 !important;
+	co
 }
 
 .text {
@@ -52,13 +61,13 @@
 }
 
 .col1 {
-	padding-top: 2px;
-	font-size: 12px !important;
+	font-size: 14px !important;
 	color: gray;
 }
 
 .col2 {
-	color: red;
+	font-size: 14px !important;
+	color: #7900ff;
 }
 
 .wall-2 {
@@ -66,8 +75,12 @@
 }
 
 .title_img {
-	margin: 15px 10px; 
-	width : 60px;
+	margin: 15px 10px;
+	width: 60px;
 	height: 90px;
 	border-radius: 10px;
+}
+
+.movie_list:hover {
+	cursor: pointer;
 }
