@@ -60,7 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.Movie_CastVO">
-<<<<<<< HEAD
 	  	SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
     </select>
 		
@@ -88,16 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'no_data.jpg')
     </select>     
                              
-	
-	<select id ="moviemate_movie" resultType="vo.MovieMate_MovieVO"
-=======
-		SELECT * FROM moviemate_movie WHERE
-		movie_idx =
-		#{movie_idx}
-	</select>
-
 	<select id="moviemate_movie" resultType="vo.MovieMate_MovieVO"
->>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
 		parameterType="int">
 		select * from moviemate_movie where movie_idx =
 		#{movie_idx}

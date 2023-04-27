@@ -525,7 +525,8 @@ public class MovieController {
 		model.addAttribute("myStarScore_list", myStarScore_list);
 		model.addAttribute("myWant_list", myWant_list);
 
-		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo.jsp";
+		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo_screen.jsp";
+		}
 
 	@RequestMapping("/movie_mate_comment.do")
 	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {

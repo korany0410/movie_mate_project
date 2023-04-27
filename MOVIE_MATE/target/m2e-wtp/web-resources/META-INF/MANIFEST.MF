@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: ITSC
-=======
-Built-By: bolta
->>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
 Build-Jdk: 11.0.18
 Created-By: Maven Integration for Eclipse
 
