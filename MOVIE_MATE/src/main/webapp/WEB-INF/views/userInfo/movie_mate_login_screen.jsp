@@ -30,7 +30,7 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
-<<<<<<< HEAD
+
 	function send(f) {
 		console.log("a");
 		var email = f.email.value;
@@ -39,7 +39,7 @@
 	
       	url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd;
-=======
+
     function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
@@ -50,7 +50,7 @@
 
 	sendRequest(url, param, resFn, "POST");
     }
->>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
+
 
     function resFn() {
 	if (xhr.readyState == 4 && xhr.status == 200) {
@@ -64,7 +64,7 @@
 		return;
 	    }
 	}
-<<<<<<< HEAD
+
 
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -79,9 +79,9 @@
 			}
 		}
 	}
-=======
+
     }
->>>>>>> 9ad79109b6a1f279c4a7355c0762a75d65414ffd
+
 </script>
 </head>
 <body>
