@@ -64,10 +64,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		movie_idx =
 		#{movie_idx}
 	</select>
-	
-	<select id ="moviemate_movie" resultType="vo.MovieMate_MovieVO"
+
+	<select id="moviemate_movie" resultType="vo.MovieMate_MovieVO"
 		parameterType="int">
-		select * from moviemate_movie where movie_idx = #{movie_idx}
+		select * from moviemate_movie where movie_idx =
+		#{movie_idx}
+	</select>
+
+	<select id="selectCategory" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.SimilarVO">
+		SELECT * FROM (SELECT RANK() OVER(ORDER BY release_date
+		DESC) no, m.*
+		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
+		'no_data.jpg' AND genre LIKE '%' ||
+		#{genre} || '%' AND movie_idx != #{movie_idx}) m )
+		WHERE no BETWEEN 1 AND #{number}
 	</select>
 
 </mapper>
