@@ -30,7 +30,7 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
-    function send(f) {
+	function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
@@ -44,7 +44,6 @@
     function resFn() {
 	if (xhr.readyState == 4 && xhr.status == 200) {
 	    var result = xhr.responseText;
-
 	    if (result != 'fail') {
 		alert("로그인 성공했습니다.");
 		location.href = result;
@@ -53,7 +52,6 @@
 		return;
 	    }
 	}
-    }
 </script>
 </head>
 <body>
