@@ -127,10 +127,6 @@
 			data-bs-target="#starScore" data-bs-slide="next" value="&gt;" />
 	</div>
 	<hr>
-
-
-
-
 	<div id="want" class="carousel slide">
 		<div class="carousel-inner">
 			<div class="title">보고싶어요</div>
