@@ -30,7 +30,7 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script>
-	function send(f) {
+    function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
@@ -52,6 +52,7 @@
 		return;
 	    }
 	}
+    }
 </script>
 </head>
 <body>
