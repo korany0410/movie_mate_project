@@ -34,7 +34,7 @@
 	font-size: 16px;
 	font-weight: bold;
 	color: #979ba2;
-	align-items: center;
+	text-align: center;
 }
 
 .isup_img {
@@ -42,6 +42,32 @@
 	align-items: center;
 }
 
+.row {
+	margin: auto 0 !important;
+}
+
+.text {
+	font-size: 16px;
+	max-height: 123px;
+}
+
+.col1 {
+	padding-top: 2px;
+	font-size: 12px !important;
+	color: gray;
+}
+
+.col2 {
+	color: red;
+}
+
+.wall-2 {
+	min-height: 50px;
+}
+
 .title_img {
-	width: 80px;
+	margin: 15px 10px; 
+	width : 60px;
+	height: 90px;
+	border-radius: 10px;
 }

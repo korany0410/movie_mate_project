@@ -3,7 +3,27 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ucast">
-	
+	<select id="isupCount" parameterType="vo.MovieMate_CastVO"
+		resultType="int">
+		select count(*) from user_cast where cast_idx=#{cast_idx}
+		and isup = 'yes'
+	</select>
+	<select id="userCastData" parameterType="vo.User_CastVO"
+		resultType="vo.User_CastVO">
+		select * from user_cast WHERE cast_idx = #{cast_idx} and
+		user_idx = #{user_idx}
+	</select>
+	<insert id="insertData" parameterType="vo.User_CastVO">
+		insert into user_cast
+		values(#{cast_idx}, #{user_idx}, 'yes')
+	</insert>
+	<update id="updateData" parameterType="vo.User_CastVO">
+		update user_cast set
+		isup = #{isUp} where cast_idx = #{cast_idx} and
+		user_idx = #{user_idx}
+	</update>
+
+
 </mapper>
 
 
