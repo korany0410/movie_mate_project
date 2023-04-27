@@ -2,12 +2,15 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/mate/resources/images/logo_icon_1.png" />
+<link rel="apple-touch-icon"
+	href="/mate/resources/images/logo_icon_1.png" />
+<title>무비메이트</title>
 </head>
 <body>
 	<!-- <h1> 내가 고른 영화들 더보기 화면 </h1> -->
@@ -17,7 +20,7 @@
 	<h3>원제 : ${movie.title}</h3>
 	<hr>
 	<h3>개봉 연도 : ${fn:split(movie.release_date, '/')[0]}</h3>
-	
+
 	<hr>
 	<h3>국가 : ${movie.nation}</h3>
 	<hr>
@@ -38,9 +41,9 @@
 	</c:if>
 
 	<c:if test="${empty movie.film_rating }">
-	<h3>연령 등급 정보 없음</h3>
+		<h3>연령 등급 정보 없음</h3>
 	</c:if>
-	
+
 	<hr>
 	<h3>내용 : ${movie.movie_info}</h3>
 	<hr>

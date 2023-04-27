@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
 import vo.Movie_CastVO;
+import vo.SimilarVO;
 
 public class MovieMate_MovieDAO {
 
@@ -105,17 +107,40 @@ public class MovieMate_MovieDAO {
 	}
 
 	// 비슷한 작품 12개 추천
-	public List<MovieMate_MovieVO> select_similarList(MovieMate_MovieVO movievo) {
-		List<MovieMate_MovieVO> vo = new ArrayList<MovieMate_MovieVO>();
-		String[] keyword = movievo.getGenre().split(",");
+	public HashMap<Integer, MovieMate_MovieVO> select_similarList(MovieMate_MovieVO movievo) {
+		HashMap<Integer, MovieMate_MovieVO> total_map = new HashMap<Integer, MovieMate_MovieVO>();
+		HashMap<Integer, MovieMate_MovieVO> return_map = new HashMap<Integer, MovieMate_MovieVO>();
+		String[] keywords = movievo.getGenre().split(",");
 		String release_date = movievo.getRelease_date();
-		return vo;
+		SimilarVO si = new SimilarVO();
+		si.setRelease_date(release_date);
+		si.setMovie_idx(movievo.getMovie_idx());
+		int nums = (12 / keywords.length) - 1;
+		while (total_map.size() <= 12) {
+			nums++;
+			si.setNumber(nums);
+			for (String keyword : keywords) {
+				System.out.println(keyword);
+				si.setGenre(keyword);
+				List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.selectCategory", si);
+				System.out.println("각 장르별 영화 갯수 : " + list.size());
+				for (MovieMate_MovieVO vo : list) {
+					total_map.put(vo.getMovie_idx(), vo);
+				}
+			}
+		}
+		for (int key : total_map.keySet()) {
+			return_map.put(key, total_map.get(key));
+			if (return_map.size() == 12) {
+				break;
+			}
+		}
+		return return_map;
 	}
 
 	// 더보기
 	public MovieMate_MovieVO selectOne(int movie_idx) {
 		MovieMate_MovieVO vo = sqlSession.selectOne("mmmovie.moviemate_movie", movie_idx);
-
 		return vo;
 	}
 }

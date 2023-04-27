@@ -338,7 +338,7 @@ public class MovieController {
 		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
-		//List<MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
+		HashMap<Integer, MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
 		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
 
@@ -369,14 +369,15 @@ public class MovieController {
 
 		System.out.println("캐스팅된 사람 수 : " + cast_list.size());
 		System.out.println("댓글 개수 : " + comment_list.size());
+		System.out.println("비슷한 영화 개수 : " + movie_list.size());
 
 		int cast_page = 0;
 		int comment_page = 0;
 		if (cast_list.size() > 6) {
-			cast_page = cast_list.size() / 6;
+			cast_page = (cast_list.size() - 1) / 6;
 		}
-		if (comment_page > 2) {
-			comment_page = comment_list.size() / 2;
+		if (comment_list.size() > 2) {
+			comment_page = (comment_list.size() - 1) / 2;
 		}
 
 		model.addAttribute("movieUser_info", mu_vo);
@@ -387,6 +388,7 @@ public class MovieController {
 		model.addAttribute("comment_list", comment_list);
 		model.addAttribute("my_comment", my_comment);
 		model.addAttribute("movie_user", mu_vo);
+		model.addAttribute("movie_list", movie_list);
 
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
@@ -408,7 +410,7 @@ public class MovieController {
 		int movie_page = 0;
 
 		if (search_movie_result.size() > 9) {
-			movie_page = search_movie_result.size() / 9;
+			movie_page = (search_movie_result.size() - 1) / 9;
 		}
 
 		model.addAttribute("keyword", keyword);
@@ -469,8 +471,19 @@ public class MovieController {
 	@ResponseBody
 	public String update_starScore(Movie_UserVO vo) {
 
+		System.out.println("starScore" + vo.getStar_score());
 		movie_userdao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
+	}
+
+	@RequestMapping("/movie_mate_comment.do")
+	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
+
+		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(vo);
+
+		model.addAttribute("comment_list", comment_list);
+
+		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 	}
 }
