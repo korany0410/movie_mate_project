@@ -3,57 +3,183 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/mate/resources/css/mainScreen.css?ver=1" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+	crossorigin="anonymous"></script>
+
+<style>
+.img1 {
+	display: inline;
+}
+
+.img2 {
+	display: inline;
+}
+
+.title {
+	display: inline;
+	font-weight: bold;
+}
+
+.score {
+	display: inline;
+	color: red;
+}
+
+.movieInfo_box {
+	padding-top: 5rem;
+	padding-bottom: 3rem;
+	width: 10rem;
+	height: 10 rem;
+}
+
+.wall {
+	padding: 10px
+}
+
+
+</style>
+
+<script type="text/javascript">
+	function choice_screen(idx) {
+		location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
+	}
+</script>
 </head>
+
 <body>
-	<!-- <h1> 내가 고른 영화들 더보기 화면 </h1> -->
-	<h1>기본정보</h1>
-	<hr>
+	<header>
+		<%@ include file="/resources/jsp/header.jsp"%>
+	</header>
 
-	<h3>원제 : ${movie.title}</h3>
-	<hr>
-	<h3>개봉 연도 : ${fn:split(movie.release_date, '/')[0]}</h3>
-
-	<hr>
-	<h3>국가 : ${movie.nation}</h3>
-	<hr>
-	<h3>장르 : ${movie.genre}</h3>
-	<hr>
-	<c:if test="${ !empty movie.running_time }">
-		<h3>상영시간 : ${hour}시간 ${min}분</h3>
-	</c:if>
-
-	<c:if test="${empty movie.running_time}">
-		<h3>상영시간 정보 없음</h3>
-	</c:if>
-
-
-	<hr>
-	<c:if test="${ !empty movie.film_rating }">
-		<h3>연령 등급 : ${movie.film_rating}</h3>
-	</c:if>
-
-	<c:if test="${empty movie.film_rating }">
-		<h3>연령 등급 정보 없음</h3>
-	</c:if>
-
-	<hr>
-	<h3>내용 : ${movie.movie_info}</h3>
-	<hr>
-
-	<c:forEach var="vo" items="${myStarScore_list}">
-		<div>
-			<img alt="" src="${vo.profile_img}">
+	<div class="wall">
+		<hr>
+	</div>
+	<div id="starScore" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="title">평가</div>
+			<div class="carousel-item active">
+				<c:forEach var="i" begin="0" end="9">
+					<c:if test="${not empty myStarScore_list[i]}">
+						<form>
+							<div class="movieInfo_box"
+								onclick="choice_screen(${myStarScore_list[i].movie_idx});">
+								<div class="img_box">
+									<img class="profile_img" alt="${myStarScore_list[i].title}"
+										src="${myStarScore_list[i].profile_img }">
+								</div>
+								<div class="fw-bold info">${myStarScore_list[i].title}</div>
+								<div class="info">${fn:substring(myStarScore_list[i].release_date,0,4)}
+									• ${myStarScore_list[i].nation}</div>
+								<div class="info">평균★${myStarScore_list[i].star_score}</div>
+							</div>
+						</form>
+					</c:if>
+				</c:forEach>
+			</div>
+			<c:forEach var="index" begin="1" end="2">
+				<div class="carousel-item">
+					<c:forEach var="i" begin="${index * 10}" end="${index *10 + 4}">
+						<c:if test="${not empty myStarScore_list[i]}">
+							<form>
+								<div class="movieInfo_box"
+									onclick="choice_screen(${myStarScore_list[i].movie_idx});">
+									<div class="img_box">
+										<img class="profile_img" alt="${myStarScore_list[i].title}"
+											src="${myStarScore_list[i].profile_img }">
+									</div>
+									<div class="fw-bold info">${myStarScore_list[i].title}</div>
+									<div class="info">${fn:substring(myStarScore_list[i].release_date,0,4)}
+										• ${myStarScore_list[i].nation}</div>
+									<div class="info">평균★${myStarScore_list[i].star_score}</div>
+								</div>
+							</form>
+						</c:if>
+					</c:forEach>
+				</div>
+			</c:forEach>
 		</div>
-	</c:forEach>
-	<c:forEach var="vo" items="${myWant_list}">
-		<div>
-			<img alt="" src="${vo.profile_img}">
+		<input type="button" class="carousel-control-prev"
+			data-bs-target="#starScore" data-bs-slide="prev" value="&lt;" /> <input
+			type="button" class="carousel-control-next"
+			data-bs-target="#starScore" data-bs-slide="next" value="&gt;" />
+	</div>
+	<hr>
+
+
+
+
+	<div id="want" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="title">보고싶어요</div>
+			<div class="carousel-item active">
+				<c:forEach var="i" begin="0" end="9">
+					<c:if test="${not empty myWant_list[i]}">
+						<form>
+							<div class="movieInfo_box"
+								onclick="choice_screen(${myWant_list[i].movie_idx});">
+								<div class="img_box">
+									<img class="profile_img" alt="${myWant_list[i].title}"
+										src="${myWant_list[i].profile_img }">
+								</div>
+								<div class="fw-bold info">${myWant_list[i].title}</div>
+								<div class="info">${fn:substring(myWant_list[i].release_date,0,4)}
+									• ${myWant_list[i].nation}</div>
+								<div class="info">평균★${myWant_list[i].star_score}</div>
+							</div>
+						</form>
+					</c:if>
+				</c:forEach>
+			</div>
+			<c:forEach var="index" begin="1" end="2">
+				<div class="carousel-item">
+					<c:forEach var="i" begin="${index * 10}" end="${index * 10 + 10}">
+						<c:if test="${not empty myWant_list[i]}">
+							<form>
+								<div class="movieInfo_box"
+									onclick="choice_screen(${myWant_list[i].movie_idx});">
+									<div class="img_box">
+										<img class="profile_img" alt="${myWant_list[i].title}"
+											src="${myWant_list[i].profile_img }">
+									</div>
+									<div class="fw-bold info">${myWant_list[i].title}</div>
+									<div class="info">${fn:substring(myWant_list[i].release_date,0,4)}
+										• ${myWant_list[i].nation}</div>
+									<div class="info">평균★${myWant_list[i].star_score}</div>
+								</div>
+							</form>
+						</c:if>
+					</c:forEach>
+				</div>
+			</c:forEach>
 		</div>
-	</c:forEach>
+		<input type="button" class="carousel-control-prev"
+			data-bs-target="#want" data-bs-slide="prev" value="&lt;" /> <input
+			type="button" class="carousel-control-next" data-bs-target="#want"
+			data-bs-slide="next" value="&gt;" />
+	</div>
+
 </body>
 </html>

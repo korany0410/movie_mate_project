@@ -57,12 +57,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="starList" resultType="vo.Movie_UserVO"
 		parameterType="int">
 		SELECT * FROM movie_user WHERE user_idx = #{user_idx} AND star_score &gt; 0
+		
 	</select>
 
 	<select id="wantList" resultType="vo.Movie_UserVO"
 		parameterType="int">
 		SELECT * FROM movie_user WHERE user_idx = #{user_idx} AND want_view = 'yes'
 	</select>
-
+	
+	
 </mapper>
 

@@ -214,7 +214,7 @@
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
-							<input class="more_btn" type="button" value="더보기" onclick="location.href='movie_mate_myChoice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
+							<input class="more_btn" type="button" value="더보기" onclick="location.href='movie_mate_choice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
 					<div class="content_box">

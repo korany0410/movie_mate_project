@@ -31,7 +31,7 @@
 }
  .card{position: relative;     
        right: -650px;
-
+	   cursor: pointer;
 }
 
 .movie {text-decoration: none;}		

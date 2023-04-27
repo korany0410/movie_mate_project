@@ -448,20 +448,21 @@ public class MovieController {
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
 	}
 
-//	@RequestMapping("/movie_mate_choice_moreInfo.do")
-//	public String movie_mate_choice_moreInfo(Model model, int movie_idx) {
-//
-//		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
-//		model.addAttribute("movie", vo);
-//		if (vo.getRunning_time() != null && !vo.getRunning_time().isEmpty()) {
-//			int hour = Integer.parseInt(vo.getRunning_time()) / 60;
-//			int min = Integer.parseInt(vo.getRunning_time()) % 60;
-//			model.addAttribute("hour", hour);
-//			model.addAttribute("min", min);
-//		}
-//
-//		return "/WEB-INF/views/show/movie_mate_choice_moreInfo.jsp";
-//	}
+
+	@RequestMapping("/movie_mate_choice_moreInfo.do")
+	public String movie_mate_choice_moreInfo(Model model, int movie_idx) {
+
+		MovieMate_MovieVO vo = moviemate_moviedao.selectOne(movie_idx);
+		model.addAttribute("movie", vo);
+		if (vo.getRunning_time() != null && !vo.getRunning_time().isEmpty()) {
+			int hour = Integer.parseInt(vo.getRunning_time()) / 60;
+			int min = Integer.parseInt(vo.getRunning_time()) % 60;
+			model.addAttribute("hour", hour);
+			model.addAttribute("min", min);
+		}
+
+		return "/WEB-INF/views/show/movie_mate_choice_moreInfo_screen.jsp";
+	}
 
 	@RequestMapping("/movie_user_want.do")
 	@ResponseBody

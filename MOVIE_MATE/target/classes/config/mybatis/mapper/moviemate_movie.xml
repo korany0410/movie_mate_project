@@ -53,8 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		select * from moviemate_movie
-		where release_date
-     	between'20100101'and '20230101'and star_score > 4
+		where (release_date 
+     	between'20100101'and '20230101'and star_score > 4) and (profile_img !=
+		'no_data.jpg')
 	</select>
 
 	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
@@ -66,7 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          parameterType="vo.MovieMate_MovieVO">
          select *
          from moviemate_movie
-         where release_date &gt;= '20151231'   
+         where release_date &gt;= '20151231' and (profile_img !=
+		'no_data.jpg')   
          order by star_score DESC
     </select>
     
@@ -81,7 +83,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          parameterType="vo.MovieMate_MovieVO"> 
          select * 
          from moviemate_movie 
-         WHERE genre = '공포'
+         WHERE genre = '공포'and (profile_img !=
+		'no_data.jpg')
     </select>     
                              
 	
@@ -90,6 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from moviemate_movie where movie_idx = #{movie_idx}
 	</select>
 
+	
 
 </mapper>
 
