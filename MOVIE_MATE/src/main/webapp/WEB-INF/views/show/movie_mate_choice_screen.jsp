@@ -6,8 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/mate/resources/images/logo_icon_1.png"/>
-<link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_1.png"/>
+<link rel="icon" href="/mate/resources/images/logo_icon_1.png" />
+<link rel="apple-touch-icon"
+	href="/mate/resources/images/logo_icon_1.png" />
 <title>무비메이트</title>
 <link rel="stylesheet" href="/mate/resources/css/choiceScreen.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
@@ -39,7 +40,8 @@
 		return "login_no";
 	}
 	return "login_yes";
-    }   
+    }
+    
     function setStarScore(i) {
 	if(isLogin() == "login_no"){
 	    return;
@@ -190,8 +192,8 @@
 			</div>
 		</div>
 		<div class="second_box row">
-			<div class="dummy col-2"></div>
-			<div class="left_box col-5">
+			<div class="dummy col-1 col-lg-2"></div>
+			<div class="left_box col-6 col-lg-5">
 				<c:if test="${not empty my_comment}">
 					<div id="myComment_box">
 						<div class="img_box">
@@ -241,33 +243,11 @@
 				<div class="cast_box">
 					<div class="head_title">출연/제작</div>
 					<div id="cast_list" class="carousel slide">
-						<div class="carousel-inner">
+						<div class="carousel-inner cast_inner">
 							<div class="carousel-item actor active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="5">
-										<div class="movieInfo_box col-6">
-											<form>
-												<div class="cast_info">
-													<div class="cast_name">${cast_list[i].name}</div>
-													<div class="cast_type">
-														<c:if test="${cast_list[i].type eq 'actor' }">
-															<span>배우</span>
-														</c:if>
-														<c:if test="${cast_list[i].type eq 'director' }">
-															<span>감독</span>
-														</c:if>
-													</div>
-												</div>
-											</form>
-										</div>
-									</c:forEach>
-								</div>
-							</div>
-							<c:forEach var="index" begin="1" end="${maxCast_page}">
-								<div class="carousel-item actor">
-									<div class="row">
-										<c:forEach var="i" begin="${index * 6 }"
-											end="${index * 6 + 5}">
+										<c:if test="${not empty cast_list[i]}">
 											<div class="movieInfo_box col-6">
 												<form>
 													<div class="cast_info">
@@ -283,6 +263,32 @@
 													</div>
 												</form>
 											</div>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
+							<c:forEach var="index" begin="1" end="${maxCast_page}">
+								<div class="carousel-item actor">
+									<div class="row">
+										<c:forEach var="i" begin="${index * 6 }"
+											end="${index * 6 + 5}">
+											<c:if test="${not empty cast_list[i]}">
+												<div class="movieInfo_box col-6">
+													<form>
+														<div class="cast_info">
+															<div class="cast_name">${cast_list[i].name}</div>
+															<div class="cast_type">
+																<c:if test="${cast_list[i].type eq 'actor' }">
+																	<span>배우</span>
+																</c:if>
+																<c:if test="${cast_list[i].type eq 'director' }">
+																	<span>감독</span>
+																</c:if>
+															</div>
+														</div>
+													</form>
+												</div>
+											</c:if>
 										</c:forEach>
 									</div>
 								</div>
@@ -296,32 +302,19 @@
 				</div>
 				<div class="starScore_box"></div>
 				<div class="comment_box">
-					<div class="head_title">코멘트</div>
+					<div class="head_box">
+						<div class="head_title">코멘트</div>
+						<div class="head_btn">
+							<input class="more_btn" type="button" value="더보기"
+								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'"" />
+						</div>
+					</div>
 					<div id="comment_list" class="carousel slide">
 						<div class="carousel-inner com_box">
 							<div class="carousel-item active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="1">
-										<div class="commentInfo_box col-6">
-											<form>
-												<div class="comment_info">
-													<div class="comment_name">${comment_list[i].com_username}</div>
-													<div class="comment_content">
-														${comment_list[i].com_content}</div>
-													<div class="cocomment">
-														<span>댓글 수</span>
-													</div>
-												</div>
-											</form>
-										</div>
-									</c:forEach>
-								</div>
-							</div>
-							<c:forEach var="index" begin="1" end="${maxComment_page}">
-								<div class="carousel-item">
-									<div class="row">
-										<c:forEach var="i" begin="${index * 2 }"
-											end="${index * 2 + 1}">
+										<c:if test="${not empty comment_list[i]}">
 											<div class="commentInfo_box col-6">
 												<form>
 													<div class="comment_info">
@@ -334,6 +327,29 @@
 													</div>
 												</form>
 											</div>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
+							<c:forEach var="index" begin="1" end="${maxComment_page}">
+								<div class="carousel-item">
+									<div class="row">
+										<c:forEach var="i" begin="${index * 2 }"
+											end="${index * 2 + 1}">
+											<c:if test="${not empty comment_list[i]}">
+												<div class="commentInfo_box col-6">
+													<form>
+														<div class="comment_info">
+															<div class="comment_name">${comment_list[i].com_username}</div>
+															<div class="comment_content">
+																${comment_list[i].com_content}</div>
+															<div class="cocomment">
+																<span>댓글 수</span>
+															</div>
+														</div>
+													</form>
+												</div>
+											</c:if>
 										</c:forEach>
 									</div>
 								</div>
@@ -349,7 +365,7 @@
 					<div class="head_title">비슷한 작품</div>
 					<div class="row">
 						<c:forEach var="map" items="${movie_list}" varStatus="status">
-							<div class="similar_movie col-3"
+							<div class="similar_movie col-4 col-md-3"
 								onclick="choice_screen(${map.value.movie_idx});">
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
@@ -361,7 +377,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="right_box col-3" onclick="watcha();">
+			<div class="right_box col-4 col-lg-3" onclick="watcha();">
 				<div class="adImg_box">
 					<img class="ad_img" src="/mate/resources/images/ad.png" alt="" />
 				</div>
@@ -375,7 +391,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="dummy col-2"></div>
+			<div class="dummy col-1 col-lg-2"></div>
 		</div>
 	</div>
 </body>

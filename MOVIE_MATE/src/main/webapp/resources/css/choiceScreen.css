@@ -9,7 +9,7 @@ body {
 }
 
 .main_box {
-	width: 100%;
+	width: 1400px%;
 }
 
 .left, .right {
@@ -242,6 +242,10 @@ body {
 	border: none;
 }
 
+.cast_inner {
+	min-height: 210px;
+}
+
 .content_box {
 	text-align: left;
 }
@@ -315,6 +319,7 @@ body {
 
 .com_box {
 	width: 90%;
+	min-height: 245px;
 }
 
 .row {
@@ -508,10 +513,9 @@ body {
 	border-radius: 10px;
 	background-color: white;
 	border: 1px solid #f6f6f6;
-	height: 370px;
 }
 
-.right_box:hover{
+.right_box:hover {
 	cursor: pointer;
 }
 
@@ -545,14 +549,17 @@ body {
 	padding: 5px;
 }
 
-.ad_content{
-	display: flex;
+.ad_content {
+	width: 100%;
 }
 
-.ad_box{
+.ad_box {
+	float: left;
 	padding: 10px;
 }
 
-.ad_btn{
-	padding: 20px 0 0 120px;
+.ad_btn {
+	float: right;
+	padding-top: 20px;
+	margin-right: 20px;
 }

@@ -114,6 +114,7 @@ public class MovieMate_MovieDAO {
 		String release_date = movievo.getRelease_date();
 		SimilarVO si = new SimilarVO();
 		si.setRelease_date(release_date);
+		si.setMovie_idx(movievo.getMovie_idx());
 		int nums = (12 / keywords.length) - 1;
 		while (total_map.size() <= 12) {
 			nums++;

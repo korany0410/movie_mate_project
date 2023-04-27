@@ -410,7 +410,7 @@ public class MovieController {
 		int movie_page = 0;
 
 		if (search_movie_result.size() > 9) {
-			movie_page = search_movie_result.size() / 9;
+			movie_page = (search_movie_result.size() - 1) / 9;
 		}
 
 		model.addAttribute("keyword", keyword);
@@ -475,5 +475,15 @@ public class MovieController {
 		movie_userdao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
+	}
+
+	@RequestMapping("/movie_mate_comment.do")
+	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
+
+		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(vo);
+
+		model.addAttribute("comment_list", comment_list);
+
+		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 	}
 }

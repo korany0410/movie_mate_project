@@ -61,14 +61,15 @@ public class UserController {
 	}
 
 	@RequestMapping("/movie_mate_login_screen.do")
-	public String movie_mate_login_screen() {
+	public String movie_mate_login_screen(Model model, String pathname) {
 
+		model.addAttribute("pathname", pathname);
 		return "/WEB-INF/views/userInfo/movie_mate_login_screen.jsp";
 	}
 
 	@RequestMapping("/login.do")
 	@ResponseBody
-	public String login(MovieMate_UserVO moviemate_uservo) {
+	public String login(MovieMate_UserVO moviemate_uservo, String pathname) {
 
 		MovieMate_UserVO user_info = moviemate_userdao.login(moviemate_uservo);
 		if (user_info == null) {
@@ -84,7 +85,7 @@ public class UserController {
 			System.out.println("이메일 : " + user_info.getEmail());
 			System.out.println("이름 : " + user_info.getUsername());
 			System.out.println("비밀번호 : " + user_info.getPwd());
-			return "success";
+			return pathname;
 		}
 	}
 
