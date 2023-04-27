@@ -36,6 +36,8 @@ public class MovieMate_CastDAO {
 
 		return cast_list;
 	}
+	
+	
 
 	// 배우명 검색 조회
 	public List<MovieMate_CastVO> search_cast(String searchKeyword) {
