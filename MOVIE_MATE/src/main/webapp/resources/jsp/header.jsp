@@ -80,10 +80,13 @@
 							<li class="nav-item profile_box">
 								<a class="nav-link" href="movie_mate_mypage_screen.do"> <c:if
 										test="${userImg eq 'no_data.jpg'}">
-										<span>
+
+										<span><img class="profile" src="/mate/resources/images/user.png" onclick="location.href='movie_mate_mypage_screen.do'"></span>
+
+										<!-- <span>
 											<img class="profile" src="/mate/resources/images/user.png"
 												alt="" />
-										</span>
+										</span> -->
 									</c:if>
 								</a>
 							</li>
@@ -100,5 +103,6 @@
 			</div>
 		</div>
 	</nav>
+	
 </body>
 </html>

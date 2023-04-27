@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'%' || #{keyword} || '%'
 	</select>
 	
+
 	<select id="userInfo" resultType="vo.MovieMate_UserVO" parameterType="int">
 		SELECT * FROM moviemate_user WHERE user_idx = #{user_idx}
 	</select>
@@ -35,6 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     update moviemate_user set username=#{username}, pwd=#{pwd}
     where user_idx=#{user_idx}
 	</update> -->
+
+    <select id="mypage" resultType="vo.MovieMate_UserVO"
+	     parameterType="string">
+	    select * from moviemate_user WHERE email =
+		#{email} AND pwd = #{pwd}
+	</select> 
+
+
 </mapper>
 
 

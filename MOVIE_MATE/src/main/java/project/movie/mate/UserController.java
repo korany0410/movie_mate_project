@@ -100,6 +100,19 @@ public class UserController {
 
 		return "movie_mate_main_screen.do";
 	}
+	@RequestMapping("/movie_mate_mypage_screen.do")
+	public String mypage() {
+		
+		
+		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
+	}
+	
+	@RequestMapping("/mymovie.do")
+	public String mymovie() {
+		
+		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
+	}
+
 
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model) {
@@ -126,4 +139,6 @@ public class UserController {
 	 */
 
 
+
 }
+
