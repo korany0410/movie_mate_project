@@ -104,6 +104,10 @@
 		f.submit();
     }
     
+    function choiceCast_screen(idx, name, type){
+    	location.href = "movie_mate_choiceCast_screen.do?cast_idx=" + idx + "&name=" + name + "&type=" + type ;
+    }
+    
     function choice_screen(idx) {
 	location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
     }
@@ -132,8 +136,8 @@
 					<div class="title_info">
 						<div class="title">${movie_info.title}</div>
 						<div class="release_date">
-							<span> ${fn:substring(movie_info.release_date,0,4)} • </span>
-							<span> ${movie_info.genre} • ${movie_info.nation} </span>
+							<span> ${fn:substring(movie_info.release_date,0,4)} • </span> <span>
+								${movie_info.genre} • ${movie_info.nation} </span>
 						</div>
 						<div class="input_box">
 							<div class="evaluation">
@@ -174,11 +178,10 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" />
-									<input type="hidden" name="movie_idx" id="movie_idx"
-										value="${movie_info.movie_idx}" />
-									<input class="want_btn" type="button" value="보고싶어요"
-										onclick="want_view(this.form);" />
+									<input type="hidden" name="user_idx" value="${userIdx}" /> <input
+										type="hidden" name="movie_idx" id="movie_idx"
+										value="${movie_info.movie_idx}" /> <input class="want_btn"
+										type="button" value="보고싶어요" onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
@@ -249,23 +252,23 @@
 							<div class="carousel-item actor active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="5">
-										<c:if test="${not empty cast_list[i]}">
-											<div class="movieInfo_box col-6">
-												<form>
-													<div class="cast_info">
-														<div class="cast_name">${cast_list[i].name}</div>
-														<div class="cast_type">
-															<c:if test="${cast_list[i].type eq 'actor' }">
-																<span>배우</span>
-															</c:if>
-															<c:if test="${cast_list[i].type eq 'director' }">
-																<span>감독</span>
-															</c:if>
-														</div>
+
+										<div class="movieInfo_box col-6">
+											<form>
+												<div class="cast_info"
+													onclick="choiceCast_screen('${cast_list[i].cast_idx}','${cast_list[i].name}','${cast_list[i].type}')">
+													<div class="cast_name">${cast_list[i].name}</div>
+													<div class="cast_type">
+														<c:if test="${cast_list[i].type eq 'actor' }">
+															<span>배우</span>
+														</c:if>
+														<c:if test="${cast_list[i].type eq 'director' }">
+															<span>감독</span>
+														</c:if>
 													</div>
-												</form>
-											</div>
-										</c:if>
+												</div>
+											</form>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -275,9 +278,11 @@
 										<c:forEach var="i" begin="${index * 6 }"
 											end="${index * 6 + 5}">
 											<c:if test="${not empty cast_list[i]}">
+
 												<div class="movieInfo_box col-6">
 													<form>
-														<div class="cast_info">
+														<div class="cast_info"
+															onclick="choiceCast_screen('${cast_list[i].cast_idx}','${cast_list[i].name}','${cast_list[i].type}')">
 															<div class="cast_name">${cast_list[i].name}</div>
 															<div class="cast_type">
 																<c:if test="${cast_list[i].type eq 'actor' }">
@@ -308,7 +313,7 @@
 						<div class="head_title">코멘트</div>
 						<div class="head_btn">
 							<input class="more_btn" type="button" value="더보기"
-								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'"" />
+								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'" " />
 						</div>
 					</div>
 					<div id="comment_list" class="carousel slide">
@@ -316,20 +321,18 @@
 							<div class="carousel-item active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="1">
-										<c:if test="${not empty comment_list[i]}">
-											<div class="commentInfo_box col-6">
-												<form>
-													<div class="comment_info">
-														<div class="comment_name">${comment_list[i].com_username}</div>
-														<div class="comment_content">
-															${comment_list[i].com_content}</div>
-														<div class="cocomment">
-															<span>댓글 수</span>
-														</div>
+										<div class="commentInfo_box col-6">
+											<form>
+												<div class="comment_info">
+													<div class="comment_name">${comment_list[i].com_username}</div>
+													<div class="comment_content">
+														${comment_list[i].com_content }</div>
+													<div class="cocomment">
+														<span>댓글 수</span>
 													</div>
-												</form>
-											</div>
-										</c:if>
+												</div>
+											</form>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -344,7 +347,7 @@
 														<div class="comment_info">
 															<div class="comment_name">${comment_list[i].com_username}</div>
 															<div class="comment_content">
-																${comment_list[i].com_content}</div>
+																${comment_list[i].com_content }</div>
 															<div class="cocomment">
 																<span>댓글 수</span>
 															</div>
