@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+.wall {
+	height: 100px;
+}
+
+.card {
+	position: relative;
+	right: -650px;
+	cursor: pointer;
+}
+
+.movie {
+	text-decoration: none;
+}
+
+.main_box {
+	width: 950px;
+	margin: 0 auto;
+}
+
+.main_box>* {
+	width: 100%;
+}
+
+.background {
+	width: 100%;
+	height: 300px;
+	border: 4px solid gray;
+	border-radius: 10px 10px 0 0;
+}
+
+.myProfile_box {
+	width: 950px;
+	height: 150px;
+	position: relative;
+	border-left: 4px solid gray;
+	border-right: 4px solid gray;
+}
+
+.user {
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+	border-radius: 100px;
+	position: absolute;
+	top: -40px;
+	left: 20px;
+}
+
+.profile_name {
+	position: absolute;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	top: 60px;
+	left: 20px;
+}
+
+.second_box {
+	border-left: 4px solid gray;
+	border-right: 4px solid gray;
+	padding: 20px;
+}
+
+.analyze {
+	border-top: 1px solid #c8c8c8;
+	border-bottom: 1px solid #c8c8c8;
+	padding: 10px 0;
+}
+
+.analyze:hover{
+	cursor: pointer;
+}
+
+.third_box {
+	margin-bottom: 40px;
+	padding: 20px;
+	border-bottom: 4px solid gray;
+	border-left: 4px solid gray;
+	border-right: 4px solid gray;
+	border-radius: 0 0 10px 10px;
+}
+
+.card_body {
+	width: 910px;
+	height: 150px;
+	border: 1px solid gray;
+}
+
+.card_body:hover {
+	cursor: pointer;
+}

@@ -11,7 +11,7 @@ import vo.MovieMate_MovieVO;
 import vo.Movie_CastVO;
 
 import vo.Movie_UserVO;
-
+import vo.MyPageList_ViewVO;
 import vo.SimilarVO;
 
 
@@ -165,27 +165,34 @@ public class MovieMate_MovieDAO {
 		return vo;
 	}
 
-	// 내가 별점 준 영화 리스트
-	public List<MovieMate_MovieVO> myList_starScore(int user_idx) {
 
-		List<Movie_UserVO> starList = sqlSession.selectList("muser.starList", user_idx);
-		List<MovieMate_MovieVO> list = new ArrayList<MovieMate_MovieVO>();
-		for (Movie_UserVO vo : starList) {
-			list.add(sqlSession.selectOne("mmmovie.selectOne", vo.getMovie_idx()));
+	// 내가 누른 인물의 모든 출연 영화 리스트
+	public List<MovieMate_MovieVO> castMovieList(MovieMate_CastVO vo) {
+
+		List<MovieMate_MovieVO> totalList = new ArrayList<MovieMate_MovieVO>();
+		List<Movie_CastVO> movieIdxList = sqlSession.selectList("mcast.selectCastList", vo);
+		for(Movie_CastVO mc_vo : movieIdxList) {
+			totalList.add(sqlSession.selectOne("mmmovie.selectMovieIdx", mc_vo));
 		}
-		return list;
+		return totalList;
+	}
+
+	// 내가 별점 준 영화 리스트
+	public List<MyPageList_ViewVO> myList_starScore(int user_idx) {
+
+		List<MyPageList_ViewVO> starList = sqlSession.selectList("muser.starList", user_idx);
+	
+		return starList;
 	}
 
 	// 내가 보고싶어요 준 영화 리스트
-	public List<MovieMate_MovieVO> myList_want(int user_idx) {
+	public List<MyPageList_ViewVO> myList_want(int user_idx) {
 
-		List<Movie_UserVO> wantList = sqlSession.selectList("muser.wantList", user_idx);
-		List<MovieMate_MovieVO> list = new ArrayList<MovieMate_MovieVO>();
-		for (Movie_UserVO vo : wantList) {
-			list.add(sqlSession.selectOne("mmmovie.selectOne", vo.getMovie_idx()));
-		}
-		return list;
+		List<MyPageList_ViewVO> wantList = sqlSession.selectList("muser.wantList", user_idx);
+	
+		return wantList;
 	}
+
 
 
 }

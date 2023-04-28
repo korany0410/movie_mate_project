@@ -9,7 +9,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +40,8 @@ import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
 import vo.Movie_UserVO;
+import vo.MyPageList_ViewVO;
+import vo.User_CastVO;
 
 @Controller
 public class MovieController {
@@ -424,6 +425,39 @@ public class MovieController {
 		return "/WEB-INF/views/show/movie_mate_choice_screen.jsp";
 	}
 
+	@RequestMapping("/movie_mate_choiceCast_screen.do")
+	public String movie_mate_choiceCast_screen(Model model, MovieMate_CastVO vo) {
+
+		System.out.println("캐스트 idx 테스트 : " + vo.getCast_idx());
+		HttpSession session = request.getSession();
+		int user_idx;
+		if (session.getAttribute("userIdx") == null) {
+			model.addAttribute("user_castInfo", null);
+		} else {
+			user_idx = (int) session.getAttribute("userIdx");
+			User_CastVO uc_vo = new User_CastVO();
+			uc_vo.setUser_idx(user_idx);
+			uc_vo.setCast_idx(vo.getCast_idx());
+
+			uc_vo = user_castdao.selectOne(uc_vo);
+			if (uc_vo == null) {
+				model.addAttribute("user_castInfo", null);
+			} else {
+				model.addAttribute("user_castInfo", uc_vo);
+			}
+
+		}
+
+		int isUpCount = user_castdao.isup_count(vo);
+		List<MovieMate_MovieVO> movie_list = moviemate_moviedao.castMovieList(vo);
+		model.addAttribute("movie_list", movie_list);
+		model.addAttribute("cast_name", vo.getName());
+		model.addAttribute("cast_type", vo.getType());
+		model.addAttribute("cast_info", vo);
+		model.addAttribute("isUpCount", isUpCount);
+		return "/WEB-INF/views/show/movie_mate_choiceCast_screen.jsp";
+	}
+
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
 
@@ -480,6 +514,28 @@ public class MovieController {
 		return status;
 	}
 
+	@RequestMapping("/cast_user_isup.do")
+	@ResponseBody
+	public String cast_user(User_CastVO user_castvo) {
+
+		MovieMate_CastVO count = new MovieMate_CastVO();
+		count.setCast_idx(user_castvo.getCast_idx());
+		User_CastVO vo = user_castdao.selectOne(user_castvo);
+		if (vo == null) {
+			user_castdao.insertData(user_castvo);
+			user_castvo.setIsUp("yes");
+		} else {
+			if (vo.getIsUp().equals("yes")) {
+				user_castvo.setIsUp("no");
+			} else {
+				user_castvo.setIsUp("yes");
+			}
+		}
+		user_castdao.updateData(user_castvo);
+		int isUpCount = user_castdao.isup_count(count);
+		return user_castvo.getIsUp() + "/" + isUpCount;
+	}
+
 	@RequestMapping("/update_comment.do")
 	public String update_comment(MovieMate_CommentVO my_comment) {
 
@@ -514,12 +570,24 @@ public class MovieController {
 
 		int user_idx = (int) session.getAttribute("userIdx");
 
-		List<MovieMate_MovieVO> myStarScore_list = moviemate_moviedao.myList_starScore(user_idx);
-		List<MovieMate_MovieVO> myWant_list = moviemate_moviedao.myList_want(user_idx);
+		List<MyPageList_ViewVO> myStarScore_list = moviemate_moviedao.myList_starScore(user_idx);
+		List<MyPageList_ViewVO> myWant_list = moviemate_moviedao.myList_want(user_idx);
 
 		System.out.println("내가 별점준 영화 갯수 : " + myStarScore_list.size());
 		System.out.println("내가 좋아요 영화 갯수 : " + myWant_list.size());
 
+		int maxStarPage = 0;
+		if (myStarScore_list.size() > 11) {
+			maxStarPage = (myStarScore_list.size() - 1) / 11;
+		}
+
+		int maxWantPage = 0;
+		if (myWant_list.size() > 11) {
+			maxWantPage = (myWant_list.size() - 1) / 11;
+		}
+
+		model.addAttribute("maxWantPage", maxWantPage);
+		model.addAttribute("maxStarPage", maxStarPage);
 		model.addAttribute("myStarScore_list", myStarScore_list);
 		model.addAttribute("myWant_list", myWant_list);
 
@@ -536,4 +604,5 @@ public class MovieController {
 		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 
 	}
+
 }

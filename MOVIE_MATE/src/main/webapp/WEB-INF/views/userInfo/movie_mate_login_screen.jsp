@@ -34,6 +34,12 @@
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
+	
+	console.log(pathname);
+	
+	if(pathname == "" || pathname == "logout.do"){
+	    pathname = "movie_mate_main_screen.do";
+	}
 
 	url = "login.do";
 	param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
@@ -79,7 +85,6 @@
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
-
 	</form>
 </body>
 </html>

@@ -150,8 +150,7 @@ $(document).ready(function() {
 			</div>
 			<input type="button" class="carousel-control-prev"
 				data-bs-target="#search_movie_result" data-bs-slide="prev"
-				value="&lt;" />
-			<input type="button" class="carousel-control-next"
+				value="&lt;" /> <input type="button" class="carousel-control-next"
 				data-bs-target="#search_movie_result" data-bs-slide="next"
 				value="&gt;" />
 		</div>
@@ -167,68 +166,70 @@ $(document).ready(function() {
 
 	<hr>
 	<%-- 영화 검색결과 출력 --%>
-	<div id="movie_box">
-		<div id="cast_list" class="carousel slide">
-			<div class="carousel-inner">
-				<div class="head_title">영화</div>
-				<div class="carousel-item active">
-					<div class="row">
-						<c:forEach var="i" begin="0" end="8">
-							<div class="movieInfo_box col-4">
-								<form class="box">
-									<div class="movieInfo_box_2"
-										onclick="choice_screen(${search_movie[i].movie_idx});">
-										<div class="img_box_2">
-											<img class="profile_img_2" alt="${search_movie[i].title}"
-												src="${search_movie[i].profile_img }">
-										</div>
-										<div class="info_box_2">
-											<div class="fw-bold info_2">${search_movie[i].title}</div>
-											<div class="info_3">${fn:substring(search_movie[i].release_date,0,4)}
-												• ${search_movie[i].nation}</div>
-											<%-- <div class="info">평균★${search_movie[i].star_score}</div> --%>
-										</div>
-									</div>
-								</form>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-				<c:forEach var="index" begin="1" end="${movie_page}">
-					<div class="carousel-item">
+	<c:if test="${not empty search_movie }">
+		<div id="movie_box">
+			<div id="cast_list" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="head_title">영화</div>
+					<div class="carousel-item active">
 						<div class="row">
-							<c:forEach var="i" begin="${index * 9 }" end="${index * 9 + 8}">
+							<c:forEach var="i" begin="0" end="8">
 								<div class="movieInfo_box col-4">
-									<form>
-										<div class="cast_info">
-											<div class="movieInfo_box_2"
-												onclick="choice_screen(${search_movie[i].movie_idx});">
-												<div class="img_box_2">
-													<img class="profile_img_2" alt="${search_movie[i].title}"
-														src="${search_movie[i].profile_img }">
-												</div>
-												<div class="info_box_2">
-													<div class="fw-bold info_2">${search_movie[i].title}</div>
-													<div class="info_3">${fn:substring(search_movie[i].release_date,0,4)}
-														• ${search_movie[i].nation}</div>
-													<%-- <div class="info">평균★${search_movie[i].star_score}</div> --%>
-												</div>
+									<form class="box">
+										<div class="movieInfo_box_2"
+											onclick="choice_screen(${search_movie[i].movie_idx});">
+											<div class="img_box_2">
+												<img class="profile_img_2" alt="${search_movie[i].title}"
+													src="${search_movie[i].profile_img }">
 											</div>
-
+											<div class="info_box_2">
+												<div class="fw-bold info_2">${search_movie[i].title}</div>
+												<div class="info_3">${fn:substring(search_movie[i].release_date,0,4)}
+													• ${search_movie[i].nation}</div>
+												<%-- <div class="info">평균★${search_movie[i].star_score}</div> --%>
+											</div>
 										</div>
 									</form>
 								</div>
 							</c:forEach>
 						</div>
 					</div>
-				</c:forEach>
+					<c:forEach var="index" begin="1" end="${movie_page}">
+						<div class="carousel-item">
+							<div class="row">
+								<c:forEach var="i" begin="${index * 9 }" end="${index * 9 + 8}">
+									<div class="movieInfo_box col-4">
+										<form>
+											<div class="cast_info">
+												<div class="movieInfo_box_2"
+													onclick="choice_screen(${search_movie[i].movie_idx});">
+													<div class="img_box_2">
+														<img class="profile_img_2" alt="${search_movie[i].title}"
+															src="${search_movie[i].profile_img }">
+													</div>
+													<div class="info_box_2">
+														<div class="fw-bold info_2">${search_movie[i].title}</div>
+														<div class="info_3">${fn:substring(search_movie[i].release_date,0,4)}
+															• ${search_movie[i].nation}</div>
+														<%-- <div class="info">평균★${search_movie[i].star_score}</div> --%>
+													</div>
+												</div>
+
+											</div>
+										</form>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<input type="button" class="carousel-control-prev"
+					data-bs-target="#cast_list" data-bs-slide="prev" value="&lt;" /> <input
+					type="button" class="carousel-control-next"
+					data-bs-target="#cast_list" data-bs-slide="next" value="&gt;" />
 			</div>
-			<input type="button" class="carousel-control-prev"
-				data-bs-target="#cast_list" data-bs-slide="prev" value="&lt;" />
-			<input type="button" class="carousel-control-next"
-				data-bs-target="#cast_list" data-bs-slide="next" value="&gt;" />
 		</div>
-	</div>
+	</c:if>
 
 	<footer style="height: 100px;"> </footer>
 

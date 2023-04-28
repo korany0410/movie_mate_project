@@ -99,21 +99,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DESC) no, m.*
 		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
 		'no_data.jpg' AND genre LIKE '%' ||
-		#{genre} || '%' AND movie_idx != #{movie_idx}) m )
+		#{genre} || '%' AND movie_idx !=
+		#{movie_idx}) m )
 		WHERE no BETWEEN 1 AND #{number}
 	</select>
-
-	
-
 </mapper>
-
-
-
-
-
-
-
-
-
-
 
