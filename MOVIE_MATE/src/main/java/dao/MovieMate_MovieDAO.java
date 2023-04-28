@@ -165,6 +165,18 @@ public class MovieMate_MovieDAO {
 		return vo;
 	}
 
+
+	// 내가 누른 인물의 모든 출연 영화 리스트
+	public List<MovieMate_MovieVO> castMovieList(MovieMate_CastVO vo) {
+
+		List<MovieMate_MovieVO> totalList = new ArrayList<MovieMate_MovieVO>();
+		List<Movie_CastVO> movieIdxList = sqlSession.selectList("mcast.selectCastList", vo);
+		for(Movie_CastVO mc_vo : movieIdxList) {
+			totalList.add(sqlSession.selectOne("mmmovie.selectMovieIdx", mc_vo));
+		}
+		return totalList;
+	}
+
 	// 내가 별점 준 영화 리스트
 	public List<MovieMate_MovieVO> myList_starScore(int user_idx) {
 
@@ -186,6 +198,7 @@ public class MovieMate_MovieDAO {
 		}
 		return list;
 	}
+
 
 
 }
