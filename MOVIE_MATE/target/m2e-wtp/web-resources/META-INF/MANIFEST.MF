@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: bymys
+=======
+Built-By: bolta
+>>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
 Build-Jdk: 11.0.18
 Created-By: Maven Integration for Eclipse
 

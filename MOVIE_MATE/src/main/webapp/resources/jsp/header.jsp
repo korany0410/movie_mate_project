@@ -26,32 +26,33 @@
 <link rel="stylesheet" href="/mate/resources/css/reset.css">
 <link rel="stylesheet" href="/mate/resources/css/header.css?ver=1">
 <script>
-    function search(f) {
-	// 검색어 가져오기
-	var keyword = f.keyword.value.trim();
-	f.keyword.value = keyword;
-	f.action = "movie_mate_search_screen.do";
-	f.submit();
-	console.log(f.keyword.value);
-    }
-
-    function logout() {
-	if (confirm("로그아웃 하시겠습니까?")) {
-	    location.href = "logout.do";
+	function search(f) {
+		// 검색어 가져오기
+		var keyword = f.keyword.value.trim();
+		f.keyword.value = keyword;
+		f.action = "movie_mate_search_screen.do";
+		f.submit();
+		console.log(f.keyword.value);
 	}
-    }
-    
-    function login() {
+
+	function logout() {
+		if (confirm("로그아웃 하시겠습니까?")) {
+			location.href = "logout.do";
+		}
+	}
+
+	function login() {
 		var pathname = (location.pathname + location.search).substring(6);
 		location.href = "movie_mate_login_screen.do?pathname=" + pathname;
-    }
+	}
+	
 </script>
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="movie_mate_main_screen.do"> <img
-				src="/mate/resources/images/logo_main.png" alt="" height="35">
+			<a class="navbar-brand" href="movie_mate_main_screen.do">
+				<img src="/mate/resources/images/logo_main.png" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
@@ -78,10 +79,11 @@
 					<c:otherwise>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
 							<li class="nav-item profile_box">
-								<a class="nav-link" href="movie_mate_mypage_screen.do"> <c:if
-										test="${userImg eq 'no_data.jpg'}">
+								<a class="nav-link" href="movie_mate_mypage_screen.do?username=${userName}">
+									<c:if test="${userImg eq 'no_data.jpg'}">
 
-										<span><img class="profile" src="/mate/resources/images/user.png" onclick="location.href='movie_mate_mypage_screen.do'"></span>
+										<span><img class="profile"
+												src="/mate/resources/images/user.png"></span>
 
 										<!-- <span>
 											<img class="profile" src="/mate/resources/images/user.png"
@@ -103,6 +105,6 @@
 			</div>
 		</div>
 	</nav>
-	
+
 </body>
 </html>

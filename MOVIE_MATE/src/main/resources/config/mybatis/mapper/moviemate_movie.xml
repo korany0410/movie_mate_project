@@ -103,8 +103,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{movie_idx}) m )
 		WHERE no BETWEEN 1 AND #{number}
 	</select>
-
-	
-
 </mapper>
 
