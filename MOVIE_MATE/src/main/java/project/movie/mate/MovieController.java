@@ -9,7 +9,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +35,7 @@ import dao.Movie_TagDAO;
 import dao.Movie_UserDAO;
 import dao.User_CastDAO;
 import db.DB;
+import vo.CommentList_ViewVO;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
@@ -365,7 +365,7 @@ public class MovieController {
 		HttpSession session = request.getSession();
 		moviemate_movievo = moviemate_moviedao.selectOne(moviemate_movievo);
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
-		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
+		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
 
 		// List<MovieMate_MovieVO> movie_list =
 		// moviemate_moviedao.select_similarList(moviemate_movievo);
@@ -457,7 +457,18 @@ public class MovieController {
 		model.addAttribute("isUpCount", isUpCount);
 		return "/WEB-INF/views/show/movie_mate_choiceCast_screen.jsp";
 	}
-
+	
+	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
+	public String movie_mate_comment_moreInfo_screen(Model model, MovieMate_CommentVO commentvo) {
+		
+		
+		
+		return "/WEB-INF/views/show/movie_mate_comment_moreInfo_screen.jsp";
+	}
+	
+	
+	
+	
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
 
@@ -587,7 +598,7 @@ public class MovieController {
 	@RequestMapping("/movie_mate_comment.do")
 	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
 
-		List<MovieMate_CommentVO> comment_list = moviemate_commentdao.selectList(vo);
+		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(vo);
 
 		model.addAttribute("comment_list", comment_list);
 

@@ -29,16 +29,6 @@
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
-<script>
-	function send(f) {
-		var email = f.email.value;
-		var pwd = f.pwd.value;
-		var keyCode = window.event.keyCode;
-		var pathname = "${pathname}";
-
-		url = "login.do";
-		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-
 <script type="text/javascript">
 	function send(f) {
 		console.log("a");

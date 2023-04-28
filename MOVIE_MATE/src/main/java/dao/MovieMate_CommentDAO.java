@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.CommentList_ViewVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 
@@ -15,9 +16,9 @@ public class MovieMate_CommentDAO {
 		this.sqlSession = sqlSession;
 	}
 
-	public List<MovieMate_CommentVO> selectList(MovieMate_MovieVO movievo) {
+	public List<CommentList_ViewVO> selectList(MovieMate_MovieVO movievo) {
 
-		List<MovieMate_CommentVO> comment_list = sqlSession.selectList("mmcomment.selectList", movievo);
+		List<CommentList_ViewVO> comment_list = sqlSession.selectList("mmcomment.selectList", movievo);
 
 		return comment_list;
 	}

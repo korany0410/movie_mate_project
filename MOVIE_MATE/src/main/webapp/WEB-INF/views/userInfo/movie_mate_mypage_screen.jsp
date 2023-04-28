@@ -70,7 +70,7 @@
 		<img class="user" src="/mate/resources/images/user.png">
 	</div>
 	<div class="wall"></div>
-	<div class="name">${ userName }</div>
+	<div class="name">${userInfo.username}</div>
 
 
 	<div class="card" style="width: 20rem; height: 20rem;">
