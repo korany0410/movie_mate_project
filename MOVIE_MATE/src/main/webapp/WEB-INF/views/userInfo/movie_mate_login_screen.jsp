@@ -28,24 +28,20 @@
 <link rel="stylesheet" href="/mate/resources/css/signUp.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
-
 <script>
     function send(f) {
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
 	
-	console.log(pathname);
-	
 	if(pathname == "" || pathname == "logout.do"){
 	    pathname = "movie_mate_main_screen.do";
+
+		url = "login.do";
+		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
+		sendRequest(url, param, resFn, "POST");
+
 	}
-
-	url = "login.do";
-	param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-
-	sendRequest(url, param, resFn, "POST");
-    }
 
     function resFn() {
 	if (xhr.readyState == 4 && xhr.status == 200) {

@@ -8,10 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import dao.MovieMate_UserDAO;
-import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
 
 @Controller
@@ -91,8 +89,8 @@ public class UserController {
 
 	@RequestMapping("/logout.do")
 	public String logout() {
-
 		HttpSession session = request.getSession();
+
 		session.setAttribute("isLogin", "no");
 		session.setAttribute("userName", null);
 		session.setAttribute("userIdx", null);
@@ -102,8 +100,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/movie_mate_mypage_screen.do")
-	public String mypage() {
+	public String mypage(Model model, MovieMate_UserVO vo) {
 
+		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(vo);
+
+		model.addAttribute("userInfo", userInfo);
 		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
 	}
 

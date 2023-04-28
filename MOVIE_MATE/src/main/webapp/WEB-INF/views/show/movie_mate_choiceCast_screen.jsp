@@ -12,6 +12,9 @@
 <link rel="icon" href="/mate/resources/images/logo_icon_1.png" />
 <link rel="apple-touch-icon" <title>무비메이트</title>
 	href="/mate/resources/images/logo_icon_1.png" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script>
 	function isLogin() {
@@ -41,25 +44,20 @@
 	function resFnIsup() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;
-			console.log(result.split("/"));
 			var yesOrNo = result.split("/")[0];
 			var isup_count = result.split("/")[1];
-			var img = document.getElementById('isup_img');
 			var box = document.getElementById('isup_li');
 			var count = document.getElementById('count');
-			var left = document.getElementById('left');
-			var right = document.getElementById('right');
-			console.log(box.style.backgroundColor);
-			console.log("${isUpCount}");
+			var icon = document.getElementById('like_icon');
 
 			if (yesOrNo == 'no') {
-				img.src = "/mate/resources/images/isup_unclicked.png";
 				box.style.color = "black";
 				count.innerText = isup_count;
+				icon.className = "bx bx-like";
 			} else {
-				img.src = "/mate/resources/images/isup_clicked_color.png";
 				box.style.color = "#7900FF";
 				count.innerText = isup_count;
+				icon.className = "bx bxs-like";
 			}
 
 		}
@@ -99,28 +97,28 @@
 						<c:when test="${empty user_castInfo}">
 							<li class="isup_li list-group-item" id="isup_li"
 								onclick="isup_clicked();">
-								<img class="isup_img" id="isup_img"
-									src="/mate/resources/images/isup_unclicked.png">
-								<span> 좋아요 </span> <span id="count">${isUpCount}</span> <span>명이
-									이 인물을 좋아합니다 </span>
+								<i id="like_icon" class='bx bx-like'></i>
+								<span> 좋아요 </span>
+								<span id="count">${isUpCount}</span>
+								<span>명이 이 인물을 좋아합니다 </span>
 							</li>
 						</c:when>
 						<c:when test="${user_castInfo.isUp eq 'no' }">
 							<li class="isup_li list-group-item" id="isup_li"
 								onclick="isup_clicked();">
-								<img class="isup_img" id="isup_img"
-									src="/mate/resources/images/isup_unclicked.png">
-								<span> 좋아요 </span> <span id="count">${isUpCount}</span> <span>명이
-									이 인물을 좋아합니다 </span>
+								<i id="like_icon" class='bx bx-like'></i>
+								<span> 좋아요 </span>
+								<span id="count">${isUpCount}</span>
+								<span>명이 이 인물을 좋아합니다 </span>
 							</li>
 						</c:when>
 						<c:otherwise>
 							<li style="color: #7900ff;" class="isup_li list-group-item"
 								id="isup_li" onclick="isup_clicked();">
-								<img class="isup_img" id="isup_img"
-									src="/mate/resources/images/isup_clicked_color.png">
-								<span> 좋아요 </span> <span id="count">${isUpCount}</span> <span>명이
-									이 인물을 좋아합니다 </span>
+								<i id="like_icon" class='bx bxs-like'></i>
+								<span> 좋아요 </span>
+								<span id="count">${isUpCount}</span>
+								<span>명이 이 인물을 좋아합니다 </span>
 							</li>
 						</c:otherwise>
 					</c:choose>
