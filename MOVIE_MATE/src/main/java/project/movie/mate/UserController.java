@@ -1,5 +1,6 @@
 package project.movie.mate;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,8 +18,11 @@ public class UserController {
 
 	MovieMate_UserDAO moviemate_userdao;
 
-	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	@Autowired
 	HttpServletRequest request;
+
+	@Autowired
+	ServletContext app;
 
 	public UserController(MovieMate_UserDAO moviemate_userdao) {
 		this.moviemate_userdao = moviemate_userdao;
@@ -115,9 +119,17 @@ public class UserController {
 	}
 
 	@RequestMapping("/movie_mate_modify_screen.do")
-	public String movie_mate_modify_screen() {
+	public String movie_mate_modify_screen(Model model, MovieMate_UserVO uservo) {
 
-		return "/WEB-INF/views/userInfo/movie_mate_modify" + "_screen.jsp";
+		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(uservo);
+
+		model.addAttribute("userInfo", userInfo);
+		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
 	}
 
+	@RequestMapping("/modify_userInfo.do")
+	public String modify_userInfo() {
+
+		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
+	}
 }

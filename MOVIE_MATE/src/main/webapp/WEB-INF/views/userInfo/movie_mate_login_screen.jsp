@@ -33,15 +33,16 @@
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
-	
-	if(pathname == "" || pathname == "logout.do"){
+
+	if (pathname == "" || pathname == "logout.do") {
 	    pathname = "movie_mate_main_screen.do";
 
-		url = "login.do";
-		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-		sendRequest(url, param, resFn, "POST");
+	    url = "login.do";
+	    param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
+	    sendRequest(url, param, resFn, "POST");
 
 	}
+    }
 
     function resFn() {
 	if (xhr.readyState == 4 && xhr.status == 200) {

@@ -10,9 +10,16 @@
 <title>무비메이트</title>
 <link rel="stylesheet" href="/mate/resources/css/myPage.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
+
 <script type="text/javascript">
     function myList() {
 	location.href = "movie_mate_myChoice_moreInfo.do";
+    }
+
+    function modify() {
+	location.href = "movie_mate_modify_screen.do?user_idx=${userIdx}&username=${userName}";
     }
 </script>
 </head>
@@ -23,6 +30,7 @@
 	<div class="wall"></div>
 	<div class="main_box">
 		<div class="first_box">
+			<i class='bx bxs-cog setting' onclick="modify();"></i>
 			<img class="background" src="/mate/resources/images/photo.png" alt="" />
 		</div>
 		<div class="myProfile_box">
@@ -39,14 +47,17 @@
 			<div class="profile_name">${userName }</div>
 		</div>
 		<div class="second_box">
-			<div class="analyze" onclick="analyzeList();">취향분석</div>
-		</div>
-		<div class="third_box">
-			<div class="movie">
-				<div class="card_body" onclick="myList();">
-					<div class="movie_title">영화</div>
-				</div>
+			<div class="analyze" onclick="analyzeList();">
+				<i class='bx bx-bar-chart-alt-2' style='color: #7900ff'></i>
+				취향분석
 			</div>
+		</div>
+		<div class="second_box last">
+			<div class="analyze" onclick="myList();">
+				<i class='bx bx-film' style='color: #7900ff'></i>
+				영화
+			</div>
+			<div style="height: 30px;"></div>
 		</div>
 	</div>
 </body>

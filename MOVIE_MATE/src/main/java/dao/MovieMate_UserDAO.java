@@ -54,11 +54,11 @@ public class MovieMate_UserDAO {
 		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
 		return list;
 	}
-	
+
 	public MovieMate_UserVO userInfo(MovieMate_UserVO vo) {
-		
+
 		MovieMate_UserVO res = sqlSession.selectOne("mmuser.userInfo", vo);
-		
+
 		return res;
 	}
 

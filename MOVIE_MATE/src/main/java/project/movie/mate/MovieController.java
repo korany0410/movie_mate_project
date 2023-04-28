@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -62,8 +63,11 @@ public class MovieController {
 
 	Random random = new Random();
 
-	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	@Autowired 
 	HttpServletRequest request;
+	
+	@Autowired
+	ServletContext app;
 
 	public MovieController(Movie_CastDAO movie_castdao, Movie_TagDAO movie_tagdao, Movie_UserDAO movie_userdao,
 			MovieMate_CastDAO moviemate_castdao, MovieMate_CommentDAO moviemate_commentdao,
@@ -313,8 +317,6 @@ public class MovieController {
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 		model.addAttribute("director_list", director_list);
 
-		/* model.addAttribute("recommend_list", recommend_list); */
-
 		// 평균별점
 		List<MovieMate_MovieVO> avg_star_list = moviemate_moviedao.avg_star_list();
 		model.addAttribute("avg_star_list", avg_star_list);
@@ -458,18 +460,13 @@ public class MovieController {
 		model.addAttribute("isUpCount", isUpCount);
 		return "/WEB-INF/views/show/movie_mate_choiceCast_screen.jsp";
 	}
-	
+
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
 	public String movie_mate_comment_moreInfo_screen(Model model, MovieMate_CommentVO commentvo) {
-		
-		
-		
+
 		return "/WEB-INF/views/show/movie_mate_comment_moreInfo_screen.jsp";
 	}
-	
-	
-	
-	
+
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
 
