@@ -69,7 +69,8 @@
       <div id="main_box">
          <div class="logo_box input-group mb-2">
             <img class="logo_img" alt=""
-               src="/mate/resources/images/logo_sub.png">
+               src="/mate/resources/images/logo_sub.png"
+               onclick="location.href='movie_mate_main_screen.do'">
          </div>
          <div class="input_box input-group mb-2" id="email_box">
             <input type="email" name="email" class="form-control"
@@ -89,43 +90,6 @@
          <div class="openApi_box input-group mb-2"></div>
       </div>
    </form>
-			if (result != 'fail') {
-				alert("로그인 성공했습니다.");
-				location.href = result;
-			} else {
-				alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-				return;
-			}
-		}
-
-	}
 </script>
 </head>
-<body>
-	<form>
-		<div id="main_box">
-			<div class="logo_box input-group mb-2">
-				<img class="logo_img" alt=""
-					src="/mate/resources/images/logo_sub.png">
-			</div>
-			<div class="input_box input-group mb-2" id="email_box">
-				<input type="email" name="email" class="form-control"
-					placeholder="이메일">
-			</div>
-			<div class="input_box input-group mb-2" id="pwd_box">
-				<input type="password" name="pwd" class="form-control"
-					placeholder="비밀번호">
-			</div>
-			<div class="input_box input-group mb-2">
-				<input type="button" name="button" value="로그인"
-					class="btn btn-outline-danger" onclick="send(this.form);">
-			</div>
-			<div class="link_box input-group mb-2" id="link_box">
-				계정이 없으신가요?
-				<a href="movie_mate_signUp_screen.do">회원가입</a>
-			</div>
-			<div class="openApi_box input-group mb-2"></div>
-		</div>
-	</form>
-</body>
 </html>
