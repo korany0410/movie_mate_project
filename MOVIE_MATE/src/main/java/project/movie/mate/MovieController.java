@@ -573,11 +573,7 @@ public class MovieController {
 		return Double.toString(vo.getStar_score());
 	}
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
 	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
 	public String movie_mate_myChoice_moreInfo(Model model) {
 		HttpSession session = request.getSession();

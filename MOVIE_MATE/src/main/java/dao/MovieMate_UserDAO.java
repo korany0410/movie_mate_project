@@ -46,7 +46,7 @@ public class MovieMate_UserDAO {
 		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.search_user", searchKeyword);
 		return list;
 	}
-<<<<<<< HEAD
+
 	
 
 	//회원 정보 수정
@@ -66,7 +66,7 @@ public class MovieMate_UserDAO {
 	  List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
 	  return list;}
 	  
-}
+
 	  
 	  
 	  

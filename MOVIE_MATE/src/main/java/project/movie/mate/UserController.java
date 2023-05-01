@@ -118,7 +118,6 @@ public class UserController {
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
 
-<<<<<<< HEAD
 
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model) {
@@ -146,11 +145,11 @@ public class UserController {
 
 
 
-}
-=======
+
+
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model, MovieMate_UserVO uservo) {
->>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
+
 
 		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(uservo);
 
