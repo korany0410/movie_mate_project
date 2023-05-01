@@ -10,6 +10,10 @@
 	href="/mate/resources/images/logo_icon_1.png" />
 <title>무비메이트</title>
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
+<link rel="stylesheet" href="/mate/resources/css/comment_screen.css" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
+<link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <link rel="stylesheet"
 	href="/mate/resources/css/comment_moreInfo_screen.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
@@ -20,9 +24,10 @@
 	<div class="wall" style="height: 100px"></div>
 	<div class="center_box">
 		<c:forEach var="vo" items="${comment_list}">
+
 			<div>${vo.username}</div>
-			<div>${vo.title }</div>
-			<div>${vo.release_date }</div>
+			<div>${vo.title}</div>
+			<div>${vo.release_date}</div>
 			<div class="comment_starWant">
 				<c:choose>
 					<c:when test="${vo.star_score gt 0 }">
@@ -34,11 +39,14 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div>${vo.movie_profile_img }</div>
+			<div>
+				<c:if test="${vo.user_profile_img eq 'no_data.jpg'}">
+				</c:if>
+			</div>
 			<div>${vo.content}</div>
 			<div>${vo.up}</div>
 			<div>댓글</div>
-			
+
 
 
 		</c:forEach>
