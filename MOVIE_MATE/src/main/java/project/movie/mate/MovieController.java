@@ -63,9 +63,9 @@ public class MovieController {
 
 	Random random = new Random();
 
-	@Autowired 
+	@Autowired
 	HttpServletRequest request;
-	
+
 	@Autowired
 	ServletContext app;
 
@@ -573,7 +573,6 @@ public class MovieController {
 		return Double.toString(vo.getStar_score());
 	}
 
-
 	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
 	public String movie_mate_myChoice_moreInfo(Model model) {
 		HttpSession session = request.getSession();
@@ -603,7 +602,6 @@ public class MovieController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo_screen.jsp";
 	}
-
 
 	@RequestMapping("/movie_mate_comment.do")
 	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {

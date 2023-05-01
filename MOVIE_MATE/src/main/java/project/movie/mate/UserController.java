@@ -1,5 +1,7 @@
 package project.movie.mate;
 
+import java.io.File;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import dao.MovieMate_UserDAO;
 import vo.MovieMate_UserVO;
@@ -54,6 +57,14 @@ public class UserController {
 		int count = moviemate_userdao.double_check(moviemate_uservo);
 
 		System.out.println("double_check.do -> count : " + count);
+		
+		HttpSession session = request.getSession();
+		
+		String s_name = (String) session.getAttribute("userName");
+		
+		if(s_name.equals(moviemate_uservo.getUsername())) {
+			return "possible";
+		}
 
 		if (count < 1) {
 			return "possible";
@@ -154,8 +165,47 @@ public class UserController {
 //	}
 
 	@RequestMapping("/modify_userInfo.do")
-	public String modify_userInfo() {
+	public String modify_userInfo(MovieMate_UserVO uservo) {
 
-		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
+		HttpSession session = request.getSession();
+
+		String webPath = "/resources/upload/";
+		String savePath = app.getRealPath(webPath);
+		System.out.println("절대경로 : " + savePath);
+
+		MultipartFile photo = uservo.getPhoto();
+
+		String profile_img = uservo.getProfile_img();
+		if (!photo.isEmpty()) {
+			profile_img = photo.getOriginalFilename();
+
+			File saveFile = new File(savePath, profile_img);
+
+			if (!saveFile.exists()) {
+				saveFile.mkdirs();
+			} else {
+				long time = System.currentTimeMillis();
+				profile_img = String.format("%d_%s", time, profile_img);
+				saveFile = new File(savePath, profile_img);
+			}
+
+			try {
+				photo.transferTo(saveFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+
+		uservo.setProfile_img(profile_img);
+		moviemate_userdao.update_userInfo(uservo);
+
+		session.setAttribute("userName", uservo.getUsername());
+		session.setAttribute("userImg", uservo.getProfile_img());
+
+		return "movie_mate_mypage_screen.do";
 	}
 }
