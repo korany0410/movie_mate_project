@@ -62,4 +62,11 @@ public class MovieMate_UserDAO {
 		return res;
 	}
 
+	public int update_userInfo(MovieMate_UserVO uservo) {
+
+		int res = sqlSession.update("mmuser.update_userInfo", uservo);
+		
+		return res;
+	}
+
 }

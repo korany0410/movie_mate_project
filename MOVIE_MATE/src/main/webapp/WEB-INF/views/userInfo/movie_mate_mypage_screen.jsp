@@ -36,15 +36,15 @@
 		<div class="myProfile_box">
 			<div class="profile_img">
 				<c:choose>
-					<c:when test="${userImg eq 'no_data.jpg'}">
+					<c:when test="${userInfo.profile_img eq 'no_data.jpg'}">
 						<img class="user" src="/mate/resources/images/user.png">
 					</c:when>
 					<c:otherwise>
-						<img class="user" src="${userImg}" alt="" />
+						<img class="user" src="/mate/resources/upload/${userInfo.profile_img}" alt="" />
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div class="profile_name">${userName }</div>
+			<div class="profile_name">${userInfo.username}</div>
 		</div>
 		<div class="second_box">
 			<div class="analyze" onclick="analyzeList();">

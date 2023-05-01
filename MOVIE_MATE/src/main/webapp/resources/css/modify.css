@@ -41,3 +41,21 @@
 .analyze {
 	display: flex;
 }
+
+.df {
+	overflow: hidden;
+}
+
+.go>*:hover {
+	cursor: pointer;
+}
+
+.bbb {
+	padding-top: 7px;
+	padding-right: 10px;
+}
+
+.ccc{
+	padding-top: 4px;
+	padding-left: 10px;
+}
