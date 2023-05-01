@@ -65,37 +65,8 @@ public class MovieMate_UserDAO {
 	  
 	  List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
 	  return list;}
-	  
 
 	  
-	  
-	  
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
-
-	// 마이페이지
-
-	public List<MovieMate_UserVO> mypage(String page) {
-
-		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
-		return list;
-	}
-
 	public MovieMate_UserVO userInfo(MovieMate_UserVO vo) {
 
 		MovieMate_UserVO res = sqlSession.selectOne("mmuser.userInfo", vo);
