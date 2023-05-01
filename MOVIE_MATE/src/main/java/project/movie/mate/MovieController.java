@@ -40,6 +40,7 @@ import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
+import vo.Movie_CommentVO;
 import vo.Movie_UserVO;
 import vo.User_CastVO;
 
@@ -371,7 +372,7 @@ public class MovieController {
 		// moviemate_moviedao.select_similarList(moviemate_movievo);
 
 		HashMap<Integer, MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
-     	MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
+		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
 
 		if (session.getAttribute("isLogin").equals("yes")) {
@@ -457,18 +458,16 @@ public class MovieController {
 		model.addAttribute("isUpCount", isUpCount);
 		return "/WEB-INF/views/show/movie_mate_choiceCast_screen.jsp";
 	}
-	
+
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
-	public String movie_mate_comment_moreInfo_screen(Model model, MovieMate_CommentVO commentvo) {
-		
-		
-		
+	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
+		HttpSession session = request.getSession();
+		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
+		model.addAttribute("comment_list", comment_view_list);
+
 		return "/WEB-INF/views/show/movie_mate_comment_moreInfo_screen.jsp";
 	}
-	
-	
-	
-	
+
 	@RequestMapping("/movie_mate_search_screen.do")
 	public String movie_mate_search_screen(Model model, String keyword) {
 
@@ -497,7 +496,6 @@ public class MovieController {
 
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
 	}
-
 
 	@RequestMapping("/movie_mate_choice_moreInfo.do")
 	public String movie_mate_choice_moreInfo(Model model, int movie_idx) {
@@ -576,7 +574,6 @@ public class MovieController {
 		return Double.toString(vo.getStar_score());
 	}
 
-
 	@RequestMapping("/movie_mate_myChoice_moreInfo.do")
 	public String movie_mate_myChoice_moreInfo(Model model) {
 		HttpSession session = request.getSession();
@@ -585,15 +582,15 @@ public class MovieController {
 
 		List<MovieMate_MovieVO> myStarScore_list = moviemate_moviedao.myList_starScore(user_idx);
 		List<MovieMate_MovieVO> myWant_list = moviemate_moviedao.myList_want(user_idx);
-		
+
 		System.out.println("내가 별점준 영화 갯수 : " + myStarScore_list.size());
 		System.out.println("내가 좋아요 영화 갯수 : " + myWant_list.size());
-		
+
 		model.addAttribute("myStarScore_list", myStarScore_list);
 		model.addAttribute("myWant_list", myWant_list);
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice_moreInfo_screen.jsp";
-		}
+	}
 
 	@RequestMapping("/movie_mate_comment.do")
 	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
@@ -601,6 +598,7 @@ public class MovieController {
 		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(vo);
 
 		model.addAttribute("comment_list", comment_list);
+		model.addAttribute("movie_idx", vo.getMovie_idx());
 
 		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 

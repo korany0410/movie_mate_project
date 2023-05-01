@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import vo.CommentList_ViewVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
+import vo.Movie_CommentVO;
 
 public class MovieMate_CommentDAO {
 
@@ -42,5 +43,11 @@ public class MovieMate_CommentDAO {
 		int res = sqlSession.update("mmcomment.update", commentvo);
 		
 		return res;
+	}
+	
+	public List<CommentList_ViewVO> selectCommentList(Movie_CommentVO vo){
+		
+		List<CommentList_ViewVO> comment_list = sqlSession.selectList("mmcomment.commentList", vo);
+		return comment_list;
 	}
 }

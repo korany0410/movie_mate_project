@@ -115,5 +115,7 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
+	
+	
 
 }

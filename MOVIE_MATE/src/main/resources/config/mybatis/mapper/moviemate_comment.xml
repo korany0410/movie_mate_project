@@ -5,14 +5,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="mmcomment">
 	<select id="selectList" resultType="vo.CommentList_ViewVO"
 		parameterType="vo.MovieMate_MovieVO">
-		select mmu.user_idx, mmu.username, mmu.profile_img,
-		mc.com_content content, mc.comment_idx, mc.up, mc.m_ref, mc.regdate,
-		mu.star_score, mu.want_view from moviemate_user mmu, moviemate_comment
-		mc, movie_user mu where mmu.username = mc.com_username AND mc.m_ref = mu.movie_idx AND
-		mmu.user_idx = mu.user_idx AND m_ref = #{movie_idx} AND comment_idx =
-		c_ref
-		AND(1=2 OR star_score > 0 Or want_view =
-		'yes')
+		SELECT mmu.user_idx, mmu.username, mmu.profile_img,
+		mc.com_content content,
+		mc.comment_idx, mc.up, mc.m_ref,
+		(select
+		count(*) from (select c_ref
+		from (select * from moviemate_user mmu,
+		moviemate_comment mc,
+		movie_user mu
+		where mmu.username = mc.com_username
+		AND mmu.user_idx = mu.user_idx
+		AND mc.m_ref = mu.movie_idx AND(1=2 OR
+		star_score > 0 OR want_view =
+		'yes')))
+		where c_ref = mc.c_ref) count,
+		mc.regdate, mu.star_score, mu.want_view
+		from moviemate_user mmu,
+		moviemate_comment mc, movie_user mu
+		where mmu.username =
+		mc.com_username AND mc.comment_idx = mc.c_ref AND
+		mmu.user_idx =
+		mu.user_idx
+		AND mc.m_ref = mu.movie_idx AND(1=2 OR star_score > 0 Or
+		want_view =
+		'yes') AND mc.m_ref = #{movie_idx}
 	</select>
 
 	<select id="myComment" resultType="vo.MovieMate_CommentVO"
@@ -33,6 +49,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		com_content = #{com_content}
 		WHERE comment_idx = #{comment_idx}
 	</update>
+
+	<select id="commentList" resultType="vo.CommentList_ViewVO"
+		parameterType="vo.Movie_CommentVO">
+		SELECT mmm.profile_img movie_profile_img,
+		mmm.release_date, mmm.title, mmm.movie_idx, mmu.user_idx,
+		mmu.username, mmu.profile_img user_profile_img, mc.com_content
+		content, mc.comment_idx, mc.up, mc.m_ref,
+		(select count(*) from (select
+		c_ref from (select * from moviemate_user mmu,
+		moviemate_comment mc,
+		movie_user mu
+		where mmu.username = mc.com_username AND mmu.user_idx =
+		mu.user_idx AND
+		mc.m_ref = mu.movie_idx AND(1=2 OR star_score > 0 OR
+		want_view =
+		'yes')))
+		where c_ref = mc.c_ref) count,
+		mc.regdate,
+		mu.star_score, mu.want_view
+		from moviemate_user mmu,
+		moviemate_comment
+		mc, movie_user mu, moviemate_movie mmm
+		where mmu.username =
+		mc.com_username AND mc.comment_idx = mc.c_ref AND
+		mc.m_ref =
+		mmm.movie_idx AND
+		mmu.user_idx = mu.user_idx AND mc.m_ref =
+		mu.movie_idx AND(1=2 OR mu.star_score >
+		0 OR mu.want_view ='yes') AND
+		mc.m_ref = #{movie_idx} AND mc.c_ref = #{comment_idx}
+	</select>
 </mapper>
 
 
