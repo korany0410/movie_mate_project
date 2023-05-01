@@ -12,7 +12,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous"/>
+	crossorigin="anonymous" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
@@ -29,8 +29,9 @@
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
-<script>
-	function send(f) {
+
+
+<%-- /*  function send(f) {
 		var email = f.email.value;
 		var pwd = f.pwd.value;
 		var keyCode = window.event.keyCode;
@@ -38,7 +39,7 @@
 
 		url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-
+  */ --%>
 <script type="text/javascript">
 	function send(f) {
 		console.log("a");
@@ -70,8 +71,8 @@
 	<form>
 		<div id="main_box">
 			<div class="logo_box input-group mb-2">
-				<img class="logo_img" alt=""
-					src="/mate/resources/images/logo_sub.png">
+				<img class="logo_img" src="/mate/resources/images/logo_sub.png"
+					onclick="location.href='movie_mate_main_screen.do'">
 			</div>
 			<div class="input_box input-group mb-2" id="email_box">
 				<input type="email" name="email" class="form-control"
@@ -82,12 +83,12 @@
 					placeholder="비밀번호">
 			</div>
 			<div class="input_box input-group mb-2">
-				<input type="button" name="button" value="로그인"
-					class="btn btn-outline-danger" onclick="send(this.form);">
+				<input type="button" name="button" style="background-color: #7900ff"
+					value="로그인" class="btn btn-outline-danger"
+					onclick="send(this.form);">
 			</div>
 			<div class="link_box input-group mb-2" id="link_box">
-				계정이 없으신가요?
-				<a href="movie_mate_signUp_screen.do">회원가입</a>
+				계정이 없으신가요? <a href="movie_mate_signUp_screen.do">회원가입</a>
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
