@@ -63,9 +63,9 @@ public class MovieController {
 
 	Random random = new Random();
 
-	@Autowired 
+	@Autowired
 	HttpServletRequest request;
-	
+
 	@Autowired
 	ServletContext app;
 

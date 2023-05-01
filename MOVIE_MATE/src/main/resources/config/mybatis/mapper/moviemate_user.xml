@@ -48,6 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE user_idx = #{user_idx}
 	</update>
 
+	<select id="userInfo_idx" resultType="vo.MovieMate_UserVO"
+		parameterType="int">
+		SELECT * FROM moviemate_user WHERE user_idx =
+		#{user_idx}
+	</select>
 </mapper>
 
 

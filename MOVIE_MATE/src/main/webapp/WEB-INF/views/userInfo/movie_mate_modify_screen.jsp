@@ -34,8 +34,8 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 </head>
 <script type="text/javascript">
-	var id_check = false;
-	var pwd_check = false;
+    var id_check = false;
+    var pwd_check = false;
     function profile_change(input) {
 	var file = input.files[0];
 	var img = document.getElementById('upload_img');
@@ -99,11 +99,11 @@
     }
 
     function modify() {
-	if(id_check == false){
+	if (id_check == false) {
 	    alert("아이디 형식이 다릅니다.");
 	    return;
 	}
-	if(pwd_check == false){
+	if (pwd_check == false) {
 	    alert("비밀번호 형식이 다릅니다.");
 	    return;
 	}
@@ -177,11 +177,9 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 			<div class="second_box last df">
-				<div class="cancel"
-					style="float: left; font-size: 32px;">
+				<div class="cancel" style="float: left; font-size: 32px;">
 					<i class='bx bx-left-arrow-alt' style='color: #7900ff;'></i>
 				</div>
 				<div class="go" style="float: right; font-size: 32px;"
@@ -193,5 +191,6 @@
 		<input type="hidden" name="user_idx" value="${userIdx}" />
 		<input type="hidden" name="profile_img" value="${userImg}">
 	</form>
+
 </body>
 </html>

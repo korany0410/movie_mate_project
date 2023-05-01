@@ -17,6 +17,10 @@ body {
 	margin: 0;
 }
 
+.logo_img:hover{
+	cursor: pointer;
+}
+
 .input-group {
 	width: 400px;
 	margin: 0 auto;
