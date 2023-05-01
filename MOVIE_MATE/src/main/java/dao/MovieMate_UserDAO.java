@@ -8,7 +8,6 @@ import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
 
-
 public class MovieMate_UserDAO {
 
 	SqlSession sqlSession;
@@ -19,9 +18,9 @@ public class MovieMate_UserDAO {
 
 	// (회원가입)
 	public int signUp(MovieMate_UserVO moviemate_uservo) {
-		
+
 		int res = sqlSession.insert("mmuser.signUp", moviemate_uservo);
-		
+
 		return res;
 	}
 
@@ -32,21 +31,22 @@ public class MovieMate_UserDAO {
 
 		return count;
 	}
-	
-	//(로그인 확인)
+
+	// (로그인 확인)
 	public MovieMate_UserVO login(MovieMate_UserVO moviemate_uservo) {
-		
+
 		MovieMate_UserVO user_info = sqlSession.selectOne("mmuser.login", moviemate_uservo);
-		
+
 		return user_info;
 	}
-	
-	//회원명 검색 조회
+
+	// 회원명 검색 조회
 	public List<MovieMate_UserVO> search_user(String searchKeyword) {
-	 
-		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.search_user",searchKeyword);
+
+		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.search_user", searchKeyword);
 		return list;
 	}
+<<<<<<< HEAD
 	
 
 	//회원 정보 수정
@@ -85,10 +85,22 @@ public class MovieMate_UserDAO {
 
 
 
+=======
+>>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
 
+	// 마이페이지
 
+	public List<MovieMate_UserVO> mypage(String page) {
 
+		List<MovieMate_UserVO> list = sqlSession.selectList("mmuser.mypage", page);
+		return list;
+	}
 
+	public MovieMate_UserVO userInfo(MovieMate_UserVO vo) {
 
+		MovieMate_UserVO res = sqlSession.selectOne("mmuser.userInfo", vo);
 
+		return res;
+	}
 
+}

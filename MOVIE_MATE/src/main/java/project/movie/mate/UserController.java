@@ -1,5 +1,6 @@
 package project.movie.mate;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import dao.MovieMate_UserDAO;
-import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
 
 @Controller
@@ -19,8 +18,11 @@ public class UserController {
 
 	MovieMate_UserDAO moviemate_userdao;
 
-	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	@Autowired
 	HttpServletRequest request;
+
+	@Autowired
+	ServletContext app;
 
 	public UserController(MovieMate_UserDAO moviemate_userdao) {
 		this.moviemate_userdao = moviemate_userdao;
@@ -91,8 +93,8 @@ public class UserController {
 
 	@RequestMapping("/logout.do")
 	public String logout() {
-
 		HttpSession session = request.getSession();
+
 		session.setAttribute("isLogin", "no");
 		session.setAttribute("userName", null);
 		session.setAttribute("userIdx", null);
@@ -100,19 +102,23 @@ public class UserController {
 
 		return "movie_mate_main_screen.do";
 	}
+
 	@RequestMapping("/movie_mate_mypage_screen.do")
-	public String mypage() {
-		
-		
+	public String mypage(Model model, MovieMate_UserVO vo) {
+
+		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(vo);
+
+		model.addAttribute("userInfo", userInfo);
 		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
 	}
-	
+
 	@RequestMapping("/mymovie.do")
 	public String mymovie() {
-		
+
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
 
+<<<<<<< HEAD
 
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model) {
@@ -141,4 +147,20 @@ public class UserController {
 
 
 }
+=======
+	@RequestMapping("/movie_mate_modify_screen.do")
+	public String movie_mate_modify_screen(Model model, MovieMate_UserVO uservo) {
+>>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
 
+		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(uservo);
+
+		model.addAttribute("userInfo", userInfo);
+		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
+	}
+
+	@RequestMapping("/modify_userInfo.do")
+	public String modify_userInfo() {
+
+		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
+	}
+}

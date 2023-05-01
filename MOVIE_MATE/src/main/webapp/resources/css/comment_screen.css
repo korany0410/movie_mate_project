@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.main_box{
+}
+
+.comment_box{
+	margin: 25px auto;
+	width: 900px;
+	background-color: #f2f2f2;
+	radius: 10px;
+
+}
+.comment_hr{ background-color: blue;}
+.comment_name{ cursor: pointer;}
+.comment_content{cursor: pointer;}

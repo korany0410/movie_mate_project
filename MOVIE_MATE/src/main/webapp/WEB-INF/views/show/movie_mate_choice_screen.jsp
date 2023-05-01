@@ -313,7 +313,7 @@
 						<div class="head_title">코멘트</div>
 						<div class="head_btn">
 							<input class="more_btn" type="button" value="더보기"
-								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'" " />
+								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
 					<div id="comment_list" class="carousel slide">
@@ -324,9 +324,9 @@
 										<div class="commentInfo_box col-6">
 											<form>
 												<div class="comment_info">
-													<div class="comment_name">${comment_list[i].com_username}</div>
+													<div class="comment_name">${comment_list[i].username}</div>
 													<div class="comment_content">
-														${comment_list[i].com_content }</div>
+														${comment_list[i].content }</div>
 													<div class="cocomment">
 														<span>댓글 수</span>
 													</div>
@@ -345,9 +345,9 @@
 												<div class="commentInfo_box col-6">
 													<form>
 														<div class="comment_info">
-															<div class="comment_name">${comment_list[i].com_username}</div>
+															<div class="comment_name">${comment_list[i].username}</div>
 															<div class="comment_content">
-																${comment_list[i].com_content }</div>
+																${comment_list[i].content }</div>
 															<div class="cocomment">
 																<span>댓글 수</span>
 															</div>
