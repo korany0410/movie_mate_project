@@ -103,7 +103,7 @@
    box-sizing: border-box;
 }
 
-.title {
+/* .title {
    margin: 0 auto;
     width: 240px;
     height: 44px;
@@ -113,7 +113,7 @@
     background-position: 0 0;
     background-size: 240px auto;
     margin-bottom: 20px;
-}
+} */
 .kakao{
    margin-top: 15px;
    height: 60px;
@@ -180,7 +180,7 @@ a {
 	</form>  
 	
 	<div class="wrap">
-    <div class="title">로그인</div>
+    <!-- <div class="title">로그인</div> -->
      <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code">
      	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
         
