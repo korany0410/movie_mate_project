@@ -56,14 +56,13 @@
 		url = "login.do";
 		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
 		sendRequest(url, param, resFn, "POST");
-	} */
+	}  */
 
 
-    function send(f) {
+   function send(f) {
    var email = f.email.value;
    var pwd = f.pwd.value;
    var pathname = "${pathname}";
-
    if (pathname == "" || pathname == "logout.do") {
        pathname = "movie_mate_main_screen.do";
 
@@ -74,7 +73,7 @@
 
 
    }
-    } 
+    }  
 
     function resFn() {
    if (xhr.readyState == 4 && xhr.status == 200) {
@@ -178,6 +177,8 @@ a {
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
+	</form>  
+	
 	<div class="wrap">
     <div class="title">로그인</div>
      <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code">
@@ -187,7 +188,6 @@ a {
       	<div class="kakao_txt">카카오톡으로 간편로그인 </div>
    	</a>
     </div>
-	</form>  
 	
     
 </body>
