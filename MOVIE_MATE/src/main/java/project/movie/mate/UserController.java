@@ -229,11 +229,7 @@ public class UserController {
 		return "movie_mate_mypage_screen.do";
 	}
 	
-<<<<<<< HEAD
-	
 
-	
-=======
 	@RequestMapping("/movie_mate_login_kakao.do")
 	public String kakao(@RequestParam String code) {
 		System.out.println(code);
@@ -242,7 +238,6 @@ public class UserController {
 	
 
   
->>>>>>> 30df2c8635d4e525351ebc117e85bbe706aae31f
 }
 
 

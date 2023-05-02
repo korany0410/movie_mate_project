@@ -49,12 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		com_content = #{com_content}
 		WHERE comment_idx = #{comment_idx}
 	</update>
-<<<<<<< HEAD
 	
 	<select id="commentCount" resultType="int">
 		select COUNT (*) from moviemate_comment
 	</select>
-=======
 
 	<select id="commentOrigin" resultType="vo.CommentList_ViewVO"
 		parameterType="vo.Movie_CommentVO">
@@ -127,7 +125,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(seq_comment_idx.nextVal, #{com_username}, #{com_content}, 0,
 		#{m_ref}, 0, 0, 0, #{c_ref}, sysdate)
 	</insert>
->>>>>>> 30df2c8635d4e525351ebc117e85bbe706aae31f
 </mapper>
 
 
