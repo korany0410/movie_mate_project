@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -42,6 +43,7 @@ import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
 import vo.Movie_CommentVO;
 import vo.Movie_UserVO;
+import vo.MyPageList_ViewVO;
 import vo.User_CastVO;
 
 @Controller
@@ -62,8 +64,11 @@ public class MovieController {
 
 	Random random = new Random();
 
-	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	@Autowired
 	HttpServletRequest request;
+
+	@Autowired
+	ServletContext app;
 
 	public MovieController(Movie_CastDAO movie_castdao, Movie_TagDAO movie_tagdao, Movie_UserDAO movie_userdao,
 			MovieMate_CastDAO moviemate_castdao, MovieMate_CommentDAO moviemate_commentdao,
@@ -313,8 +318,6 @@ public class MovieController {
 		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
 		model.addAttribute("director_list", director_list);
 
-		/* model.addAttribute("recommend_list", recommend_list); */
-
 		// 평균별점
 		List<MovieMate_MovieVO> avg_star_list = moviemate_moviedao.avg_star_list();
 		model.addAttribute("avg_star_list", avg_star_list);
@@ -461,9 +464,13 @@ public class MovieController {
 
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
 	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
-		HttpSession session = request.getSession();
+		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
 		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
-		model.addAttribute("comment_list", comment_view_list);
+		
+		System.out.println(comment_view_list.size());
+
+		model.addAttribute("origin", comment_view_origin);
+		model.addAttribute("list", comment_view_list);
 
 		return "/WEB-INF/views/show/movie_mate_comment_moreInfo_screen.jsp";
 	}
@@ -580,12 +587,24 @@ public class MovieController {
 
 		int user_idx = (int) session.getAttribute("userIdx");
 
-		List<MovieMate_MovieVO> myStarScore_list = moviemate_moviedao.myList_starScore(user_idx);
-		List<MovieMate_MovieVO> myWant_list = moviemate_moviedao.myList_want(user_idx);
+		List<MyPageList_ViewVO> myStarScore_list = moviemate_moviedao.myList_starScore(user_idx);
+		List<MyPageList_ViewVO> myWant_list = moviemate_moviedao.myList_want(user_idx);
 
 		System.out.println("내가 별점준 영화 갯수 : " + myStarScore_list.size());
 		System.out.println("내가 좋아요 영화 갯수 : " + myWant_list.size());
 
+		int maxStarPage = 0;
+		if (myStarScore_list.size() > 11) {
+			maxStarPage = (myStarScore_list.size() - 1) / 11;
+		}
+
+		int maxWantPage = 0;
+		if (myWant_list.size() > 11) {
+			maxWantPage = (myWant_list.size() - 1) / 11;
+		}
+
+		model.addAttribute("maxWantPage", maxWantPage);
+		model.addAttribute("maxStarPage", maxStarPage);
 		model.addAttribute("myStarScore_list", myStarScore_list);
 		model.addAttribute("myWant_list", myWant_list);
 
@@ -602,6 +621,15 @@ public class MovieController {
 
 		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 
+	}
+
+	@RequestMapping("/moviemate_cocomment_insert.do")
+	public String moviemate_cocomment_insert(Model model, MovieMate_CommentVO vo) {
+
+		moviemate_commentdao.cocomment_insert(vo);
+
+		return "redirect:movie_mate_comment_moreInfo_screen.do?movie_idx=" + vo.getM_ref() + "&comment_idx="
+				+ vo.getC_ref();
 	}
 
 }

@@ -1,1 +1,230 @@
 @charset "UTF-8";
+
+.center_box {
+	margin: 0 auto;
+	width: 1100px;
+	/*  background-color: #f2f2f2; */
+}
+
+.username {
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.movie_profile_img {
+	width: 120px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+}
+
+.movie_box {
+	display: flex;
+}
+
+.movie_info_box {
+	
+}
+
+.title {
+	font-size: 24px;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.release_date {
+	font-size: 15px;
+	color: rgba(0, 0, 0, 0.5);
+	font-weight: bold;
+}
+
+.profile_img {
+	margin-right: 10px;
+	margin-bottom: 15px;
+}
+
+.user_info {
+	font-size: 20px;
+}
+
+.profile {
+	width: 80px;
+}
+
+.comment {
+	max-width: 75px;
+	font-size: 18px;
+	border-radius: 18px;
+	padding: 1px 10px;
+	background-color: #f2f2f2;
+	margin-top: 83px;
+}
+
+.starWant {
+	max-width: 140px;
+	font-size: 18px;
+	border-radius: 18px;
+	padding: 1px 10px;
+	background-color: #f2f2f2;
+	margin-top: 63px;
+}
+
+.content {
+	font-size: 16px;
+	width: 1100px;
+	margin: 25px 0 40px 0;
+	width: 1100px;
+}
+
+.count-box {
+	display: flex;
+}
+
+.count {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.5);
+	font-weight: bold;
+	margin-right: 25px;
+	margin-bottom: 10px;
+}
+
+.button_box {
+	cursor: pointer;
+	height: 50px;
+	border-top: 1px solid rgba(0, 0, 0, 0.15);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	margin-bottom: 20px;
+}
+
+.col-4 {
+	font-size: 17px;
+	color: rgba(0, 0, 0, 0.6);
+	text-align: center;
+	color: rgba(0, 0, 0, 0.6);
+	text-align: center;
+	padding-top: 11px;
+}
+
+.col-4:hover {
+	background-color: #f2f2f2;
+	color: black;
+}
+
+.comment_user_box {
+	overflow: hidden;
+}
+
+.comment_profile_img {
+	margin-top: 15px;
+	float: left;
+}
+
+.com_username {
+	margin-top: 15px;
+	margin-left: 10px;
+	font-size: 16px;
+	float: left;
+}
+
+.comemnt_textarea {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	width: 1100px;
+	font-size: 15px;
+	border-radius: 7px;
+	margin: 5px 0 5px 0;
+}
+
+.update_btn {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 7px;
+	padding: 6px 25px;
+	background-color: white;
+	font-size: 15px;
+	float: right;
+}
+
+.update_btn:hover {
+	background-color: #7900ff;
+	color: white;
+	font-size: 15px;
+}
+
+.update_btn_cancel {
+	margin-right: 15px;
+}
+
+.cocomment_input_box {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	margin-top: 10px;
+	padding-bottom: 20px;
+}
+
+.cleanBot_box {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	margin: 20px 0 20px 0;
+	text-align: center;
+	padding: 10px 0 10px 0;
+	color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, 0.02);
+}
+
+.cocomment_user_box {
+	margin: 15px 0 15px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.cocomment_img_username_box {
+	display: flex;
+	float: left;
+}
+
+.cocomment_imgNameRegdateBox_Setting_box {
+	overflow: hidden;
+}
+
+.cocomment_img_usernameBox_regdate_box {
+	display: flex;
+	float: left;
+}
+
+.cocomment_username {
+	font-weight: bold;
+	margin: -4px 0 0 7px;
+	font-size: 15px;
+}
+
+.cocomment_regdate {
+	margin-top: -1px;
+	margin-left: 8px;
+	font-size: 10px;
+	margin-left: 8px;
+}
+
+.cocomment_setting {
+	float: left;
+	margin-left: 945px;
+	font-size: 23px;
+	cursor: pointer;
+}
+
+.cocomment_content {
+	margin: 11px 0 13px 37px;
+	overflow-x: hidden;
+}
+
+.cocomment_con {
+	overflow: auto;
+	white-space: pre-wrap;
+}
+
+.cocomment_upSetting_box {
+	display: flex;
+}
+
+.cocomment_up {
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	margin: 0 0 10px 37px;
+	cursor: pointer;
+}

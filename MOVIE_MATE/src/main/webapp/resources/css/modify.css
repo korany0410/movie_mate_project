@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.myProfile_box {
+	height: 100px !important;
+}
+
+.user {
+	filter: brightness(70%);
+}
+
+.profile_img {
+	position: relative;
+}
+
+.bxs-camera-plus {
+	left: 45px;
+	top: -10px;
+	position: absolute;
+	font-size: 50px;
+	position: absolute;
+}
+
+.bxs-camera-plus:hover {
+	cursor: pointer;
+}
+
+#file_input {
+	display: none;
+}
+
+.bx-check-circle {
+	color: #3ac979;
+	font-size: 30px;
+}
+
+.bx-x-circle {
+	color: #df1010;
+	font-size: 30px;
+}
+
+.analyze {
+	display: flex;
+}
+
+.df {
+	overflow: hidden;
+}
+
+.go>*:hover {
+	cursor: pointer;
+}
+
+.bbb {
+	padding-top: 7px;
+	padding-right: 10px;
+}
+
+.ccc{
+	padding-top: 4px;
+	padding-left: 10px;	
+}

@@ -1,5 +1,8 @@
 package project.movie.mate;
 
+import java.io.File;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import dao.MovieMate_UserDAO;
-import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
 
 @Controller
@@ -19,8 +21,11 @@ public class UserController {
 
 	MovieMate_UserDAO moviemate_userdao;
 
-	@Autowired // 자동주입 : spring으로부터 자동생성이 가능한 객체를 new없이 알아서 생성해 준다.
+	@Autowired
 	HttpServletRequest request;
+
+	@Autowired
+	ServletContext app;
 
 	public UserController(MovieMate_UserDAO moviemate_userdao) {
 		this.moviemate_userdao = moviemate_userdao;
@@ -52,6 +57,14 @@ public class UserController {
 		int count = moviemate_userdao.double_check(moviemate_uservo);
 
 		System.out.println("double_check.do -> count : " + count);
+		
+		HttpSession session = request.getSession();
+		
+		String s_name = (String) session.getAttribute("userName");
+		
+		if(s_name.equals(moviemate_uservo.getUsername())) {
+			return "possible";
+		}
 
 		if (count < 1) {
 			return "possible";
@@ -91,8 +104,8 @@ public class UserController {
 
 	@RequestMapping("/logout.do")
 	public String logout() {
-
 		HttpSession session = request.getSession();
+
 		session.setAttribute("isLogin", "no");
 		session.setAttribute("userName", null);
 		session.setAttribute("userIdx", null);
@@ -118,4 +131,83 @@ public class UserController {
 	
 	
 
+
+	@RequestMapping("/movie_mate_modify_screen.do")
+	public String movie_mate_modify_screen(Model model) {
+
+		HttpSession session = request.getSession();
+
+		int user_idx = (int) session.getAttribute("userIdx");
+		MovieMate_UserVO user_info = moviemate_userdao.userInfo_idx(user_idx);
+		System.out.println("수정페이지 로그인 정보 : " + user_idx);
+		model.addAttribute("userInfo", user_info);
+		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
+	}
+
+	/*
+	 * @RequestMapping("/movie_mate_modify_screen.do")
+	 * 
+	 * @ResponseBody public String modify(MovieMate_UserVO vo) { MovieMate_UserDAO
+	 * dao = new MovieMate_UserDAO(); int res = dao.modify(vo); String result =
+	 * "수정 성공";
+	 * 
+	 * if (res == 0) { result = "수정 실패"; }
+	 * 
+	 * return result; }
+	 */
+
+//	@RequestMapping("/movie_mate_modify_screen.do")
+//	public String movie_mate_modify_screen(Model model, MovieMate_UserVO uservo) {
+//
+//
+//		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(uservo);
+//
+//		model.addAttribute("userInfo", userInfo);
+//		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
+//	}
+
+	@RequestMapping("/modify_userInfo.do")
+	public String modify_userInfo(MovieMate_UserVO uservo) {
+
+		HttpSession session = request.getSession();
+
+		String webPath = "/resources/upload/";
+		String savePath = app.getRealPath(webPath);
+		System.out.println("절대경로 : " + savePath);
+
+		MultipartFile photo = uservo.getPhoto();
+
+		String profile_img = uservo.getProfile_img();
+		if (!photo.isEmpty()) {
+			profile_img = photo.getOriginalFilename();
+
+			File saveFile = new File(savePath, profile_img);
+
+			if (!saveFile.exists()) {
+				saveFile.mkdirs();
+			} else {
+				long time = System.currentTimeMillis();
+				profile_img = String.format("%d_%s", time, profile_img);
+				saveFile = new File(savePath, profile_img);
+			}
+
+			try {
+				photo.transferTo(saveFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+
+		uservo.setProfile_img(profile_img);
+		moviemate_userdao.update_userInfo(uservo);
+
+		session.setAttribute("userName", uservo.getUsername());
+		session.setAttribute("userImg", uservo.getProfile_img());
+
+		return "movie_mate_mypage_screen.do";
+	}
 }

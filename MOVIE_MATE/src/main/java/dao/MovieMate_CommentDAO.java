@@ -45,9 +45,18 @@ public class MovieMate_CommentDAO {
 		return res;
 	}
 	
+	public CommentList_ViewVO selectCommentOrigin(Movie_CommentVO vo){
+		CommentList_ViewVO comment_origin = sqlSession.selectOne("mmcomment.commentOrigin", vo);
+		return comment_origin;
+	}
+	
 	public List<CommentList_ViewVO> selectCommentList(Movie_CommentVO vo){
-		
 		List<CommentList_ViewVO> comment_list = sqlSession.selectList("mmcomment.commentList", vo);
 		return comment_list;
+	}
+	
+	public int cocomment_insert(MovieMate_CommentVO vo) {
+		int cocomment_insert = sqlSession.insert("mmcomment.cocommentInsert",vo);
+		return cocomment_insert;
 	}
 }
