@@ -42,6 +42,7 @@ import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
+import vo.Movie_CommentVO;
 import vo.Movie_UserVO;
 import vo.MyPageList_ViewVO;
 import vo.User_CastVO;
@@ -463,7 +464,14 @@ public class MovieController {
 	}
 
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
-	public String movie_mate_comment_moreInfo_screen(Model model, MovieMate_CommentVO commentvo) {
+	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
+		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
+		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
+		
+		System.out.println(comment_view_list.size());
+
+		model.addAttribute("origin", comment_view_origin);
+		model.addAttribute("list", comment_view_list);
 
 		return "/WEB-INF/views/show/movie_mate_comment_moreInfo_screen.jsp";
 	}
@@ -610,11 +618,13 @@ public class MovieController {
 		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(vo);
 
 		model.addAttribute("comment_list", comment_list);
+		model.addAttribute("movie_idx", vo.getMovie_idx());
 
 		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 
 	}
 
+<<<<<<< HEAD
 	@RequestMapping("/movie_count.do")
 	@ResponseBody
 	public String movie_count(Model model) {
@@ -622,6 +632,15 @@ public class MovieController {
 		int count_comment = moviemate_commentdao.selectCount();
 
 		return Integer.toString(count_comment + count_user);
+=======
+	@RequestMapping("/moviemate_cocomment_insert.do")
+	public String moviemate_cocomment_insert(Model model, MovieMate_CommentVO vo) {
+
+		moviemate_commentdao.cocomment_insert(vo);
+
+		return "redirect:movie_mate_comment_moreInfo_screen.do?movie_idx=" + vo.getM_ref() + "&comment_idx="
+				+ vo.getC_ref();
+>>>>>>> 30df2c8635d4e525351ebc117e85bbe706aae31f
 	}
 
 }

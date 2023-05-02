@@ -109,7 +109,7 @@ $(document).ready(function() {
 	</div>
 
 	<%-- 콘텐츠 검색결과 출력 --%>
-	<c:if test="${not empty search_movie }">
+	
 		<div id="search_movie_result" class="carousel slide">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
@@ -133,6 +133,7 @@ $(document).ready(function() {
 					<div class="carousel-item">
 						<c:forEach var="i" begin="${index * 6}" end="${index * 6 + 5}">
 							<c:if test="${not empty search_movie[i]}">
+							    <form>
 								<div class="movieInfo_box"
 									onclick="choice_screen(${search_movie[i].movie_idx});">
 									<div class="img_box">
@@ -143,6 +144,7 @@ $(document).ready(function() {
 									<div class="info">${search_movie[i].nation }</div>
 									<div class="info">${search_movie[i].genre }</div>
 								</div>
+								</form>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -154,7 +156,7 @@ $(document).ready(function() {
 				data-bs-target="#search_movie_result" data-bs-slide="next"
 				value="&gt;" />
 		</div>
-	</c:if>
+	
 	<%-- 유저 검색결과 출력 --%>
 	<div id="search_user_result">
 		<c:forEach var="user" items="${search_user}">
@@ -166,7 +168,7 @@ $(document).ready(function() {
 
 	<hr>
 	<%-- 영화 검색결과 출력 --%>
-	<c:if test="${not empty search_movie }">
+	  <c:if test="${not empty search_movie }">
 		<div id="movie_box">
 			<div id="cast_list" class="carousel slide">
 				<div class="carousel-inner">
@@ -174,6 +176,7 @@ $(document).ready(function() {
 					<div class="carousel-item active">
 						<div class="row">
 							<c:forEach var="i" begin="0" end="8">
+							
 								<div class="movieInfo_box col-4">
 									<form class="box">
 										<div class="movieInfo_box_2"
@@ -191,6 +194,7 @@ $(document).ready(function() {
 										</div>
 									</form>
 								</div>
+							 	
 							</c:forEach>
 						</div>
 					</div>
@@ -229,50 +233,9 @@ $(document).ready(function() {
 					data-bs-target="#cast_list" data-bs-slide="next" value="&gt;" />
 			</div>
 		</div>
-	</c:if>
+	 </c:if>
 
 	<footer style="height: 100px;"> </footer>
 
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

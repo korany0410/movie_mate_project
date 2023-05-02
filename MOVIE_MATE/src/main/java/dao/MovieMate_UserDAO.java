@@ -1,8 +1,18 @@
 package dao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
@@ -47,6 +57,14 @@ public class MovieMate_UserDAO {
 		return list;
 	}
 
+	// 회원 정보 수정
+	public MovieMate_UserVO userInfo_idx(int user_idx) {
+
+		MovieMate_UserVO vo = sqlSession.selectOne("mmuser.userInfo_idx", user_idx);
+
+		return vo;
+	}
+
 	// 마이페이지
 
 	public List<MovieMate_UserVO> mypage(String page) {
@@ -62,4 +80,33 @@ public class MovieMate_UserDAO {
 		return res;
 	}
 
-}
+	public int update_userInfo(MovieMate_UserVO uservo) {
+
+		int res = sqlSession.update("mmuser.update_userInfo", uservo);
+		
+		return res;
+	}
+	
+
+ }
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

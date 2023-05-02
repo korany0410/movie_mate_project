@@ -1,8 +1,19 @@
 package vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MovieMate_UserVO {
 	private int user_idx;
 	private String email, pwd, username, regdate, profile_img, type;
+	private MultipartFile photo;
+
+	public MultipartFile getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(MultipartFile photo) {
+		this.photo = photo;
+	}
 
 	public int getUser_idx() {
 		return user_idx;
@@ -45,7 +56,7 @@ public class MovieMate_UserVO {
 	}
 
 	public String getProfile_img() {
-		if(this.profile_img == null) {
+		if (this.profile_img == null) {
 			return "no_data.jpg";
 		}
 		return profile_img;
@@ -56,7 +67,7 @@ public class MovieMate_UserVO {
 	}
 
 	public String getType() {
-		if(this.type == null) {
+		if (this.type == null) {
 			return "common";
 		}
 		return type;
