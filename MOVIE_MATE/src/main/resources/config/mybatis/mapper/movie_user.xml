@@ -54,17 +54,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		star_score = #{star_score}
 	</select>
 
-	<select id="starList" resultType="vo.Movie_UserVO"
+	<select id="starList" resultType="vo.MyPageList_ViewVO"
 		parameterType="int">
-		SELECT * FROM movie_user WHERE user_idx = #{user_idx} AND star_score &gt; 0
-		
+		select c.movie_idx, b.star_score, b.want_view, c.profile_img, c.title from moviemate_user a, movie_user b,
+		moviemate_movie c where a.user_idx = b.user_idx AND b.movie_idx =
+		c.movie_idx and a.user_idx = #{user_idx} AND b.star_score &gt; 0
 	</select>
 
-	<select id="wantList" resultType="vo.Movie_UserVO"
+	<select id="wantList" resultType="vo.MyPageList_ViewVO"
 		parameterType="int">
-		SELECT * FROM movie_user WHERE user_idx = #{user_idx} AND want_view = 'yes'
+		select c.movie_idx, b.star_score, b.want_view, c.profile_img, c.title from moviemate_user a, movie_user b,
+		moviemate_movie c where a.user_idx = b.user_idx AND b.movie_idx =
+		c.movie_idx and a.user_idx = #{user_idx} AND b.want_view = 'yes'
 	</select>
-	
-	
+
+
 </mapper>
 

@@ -237,46 +237,5 @@ $(document).ready(function() {
 
 	<footer style="height: 100px;"> </footer>
 
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

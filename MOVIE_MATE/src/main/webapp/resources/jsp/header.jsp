@@ -40,18 +40,18 @@
 	    location.href = "logout.do";
 	}
     }
-    
+
     function login() {
-		var pathname = (location.pathname + location.search).substring(6);
-		location.href = "movie_mate_login_screen.do?pathname=" + pathname;
+	var pathname = (location.pathname + location.search).substring(6);
+	location.href = "movie_mate_login_screen.do?pathname=" + pathname;
     }
 </script>
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="movie_mate_main_screen.do"> <img
-				src="/mate/resources/images/logo_main.png" alt="" height="35">
+			<a class="navbar-brand" href="movie_mate_main_screen.do">
+				<img src="/mate/resources/images/logo_main.png" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
@@ -78,16 +78,16 @@
 					<c:otherwise>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
 							<li class="nav-item profile_box">
-								<a class="nav-link" href="movie_mate_mypage_screen.do"> <c:if
-										test="${userImg eq 'no_data.jpg'}">
-
-										<span><img class="profile" src="/mate/resources/images/user.png" onclick="location.href='movie_mate_mypage_screen.do'"></span>
-
-										<!-- <span>
-											<img class="profile" src="/mate/resources/images/user.png"
-												alt="" />
-										</span> -->
-									</c:if>
+								<a class="nav-link"
+									href="movie_mate_mypage_screen.do?username=${userName}">
+									<c:choose>
+										<c:when test="${userImg eq 'no_data.jpg'}">
+											<img class="profile" src="/mate/resources/images/user.png">
+										</c:when>
+										<c:otherwise>
+											<img class="profile" src="/mate/resources/upload/${userImg}" alt="" />
+										</c:otherwise>
+									</c:choose>
 								</a>
 							</li>
 						</ul>
@@ -103,6 +103,6 @@
 			</div>
 		</div>
 	</nav>
-	
+
 </body>
 </html>

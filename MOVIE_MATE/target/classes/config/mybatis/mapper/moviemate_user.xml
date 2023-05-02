@@ -15,24 +15,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{username}
 	</select>
 
+	<select id="userInfo" resultType="vo.MovieMate_UserVO"
+		parameterType="vo.MovieMate_UserVO">
+		SELECT * FROM moviemate_user WHERE username =
+		#{username}
+	</select>
+
 	<select id="login" resultType="vo.MovieMate_UserVO"
 		parameterType="vo.MovieMate_UserVO">
 		SELECT * FROM moviemate_user WHERE email =
-		#{email} AND pwd = #{pwd}
+		#{email} AND
+		pwd = #{pwd}
 	</select>
 
 	<select id="search_user" resultType="vo.MovieMate_UserVO"
 		parameterType="string">
 		SELECT * FROM moviemate_user WHERE username LIKE
-		'%' || #{keyword} || '%'
+		'%' ||
+		#{keyword} || '%'
+	</select>
+
+	<select id="mypage" resultType="vo.MovieMate_UserVO"
+		parameterType="string">
+		select * from moviemate_user WHERE email =
+		#{email} AND
+		pwd = #{pwd}
+	</select>
+
+	<update id="update_userInfo" parameterType="vo.MovieMate_UserVO">
+		UPDATE moviemate_user
+		SET username = #{username}, pwd = #{pwd}, profile_img = #{profile_img}
+		WHERE user_idx = #{user_idx}
+	</update>
+
+	<select id="userInfo_idx" resultType="vo.MovieMate_UserVO"
+		parameterType="int">
+		SELECT * FROM moviemate_user WHERE user_idx =
+		#{user_idx}
 	</select>
 	
-    <select id="mypage" resultType="vo.MovieMate_UserVO"
-	     parameterType="string">
-	    select * from moviemate_user WHERE email =
-		#{email} AND pwd = #{pwd}
-	</select> 
-
+	<!-- <select id="Login.do" resultType="vo.MovieMate_UserVO"
+	    parameterType="vo.MovieMate_UserVO">
+	    SELECT * FROM moviemate_user WHERE email =
+		#{email} AND
+		pwd = #{pwd}
+	</select> -->
 </mapper>
 
 
