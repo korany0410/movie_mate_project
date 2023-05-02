@@ -1,17 +1,32 @@
 package project.movie.mate;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import dao.MovieMate_UserDAO;
 import vo.MovieMate_UserVO;
@@ -74,8 +89,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/movie_mate_login_screen.do")
-	public String movie_mate_login_screen(Model model, String pathname) {
+	public String movie_mate_login_screen(Model model, String pathname, String code) {
 
+		if(code != null) {
+			System.out.println(code);
+		}
 		model.addAttribute("pathname", pathname);
 		return "/WEB-INF/views/userInfo/movie_mate_login_screen.jsp";
 	}
@@ -128,6 +146,8 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
+	
+	
 
 
 	@RequestMapping("/movie_mate_modify_screen.do")
@@ -208,4 +228,32 @@ public class UserController {
 
 		return "movie_mate_mypage_screen.do";
 	}
+	
+	@RequestMapping("/movie_mate_login_kakao.do")
+	public String kakao(@RequestParam String code) {
+		System.out.println(code);
+		return "kakaoLogin?code=" + code;
+	}
+	
+
+  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

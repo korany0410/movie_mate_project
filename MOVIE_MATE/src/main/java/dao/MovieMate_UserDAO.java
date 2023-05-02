@@ -1,8 +1,18 @@
 package dao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
@@ -76,5 +86,27 @@ public class MovieMate_UserDAO {
 		
 		return res;
 	}
+	
 
-}
+ }
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

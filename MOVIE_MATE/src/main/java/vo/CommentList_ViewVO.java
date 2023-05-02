@@ -1,9 +1,13 @@
 package vo;
 
+/**
+ * @author MINZI
+ *
+ */
 public class CommentList_ViewVO {
-	private int user_idx, comment_idx, up, m_ref;
+	private int movie_idx,user_idx, comment_idx, up, m_ref, count;
 	private double star_score;
-	private String username, profile_img, content, regdate, want_view;
+	private String username, user_profile_img, movie_profile_img, content, regdate, want_view, title, release_date;
 
 	public int getUser_idx() {
 		return user_idx;
@@ -53,13 +57,7 @@ public class CommentList_ViewVO {
 		this.username = username;
 	}
 
-	public String getProfile_img() {
-		return profile_img;
-	}
 
-	public void setProfile_img(String profile_img) {
-		this.profile_img = profile_img;
-	}
 
 	public String getContent() {
 		return content;
@@ -85,4 +83,53 @@ public class CommentList_ViewVO {
 		this.want_view = want_view;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getRelease_date() {
+		return release_date;
+	}
+
+	public void setRelease_date(String release_date) {
+		this.release_date = release_date;
+	}
+
+	public int getMovie_idx() {
+		return movie_idx;
+	}
+
+	public String getUser_profile_img() {
+		return user_profile_img;
+	}
+
+	public void setUser_profile_img(String user_profile_img) {
+		this.user_profile_img = user_profile_img;
+	}
+
+	public String getMovie_profile_img() {
+		return movie_profile_img;
+	}
+
+	public void setMovie_profile_img(String movie_profile_img) {
+		this.movie_profile_img = movie_profile_img;
+	}
+
+	public void setMovie_idx(int movie_idx) {
+		this.movie_idx = movie_idx;
+	}
+
+	
 }
