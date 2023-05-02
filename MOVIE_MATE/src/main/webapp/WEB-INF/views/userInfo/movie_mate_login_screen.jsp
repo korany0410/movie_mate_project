@@ -28,31 +28,8 @@
 <link rel="stylesheet" href="/mate/resources/css/signUp.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
-<<<<<<< HEAD
 
-<script type="text/javascript">
-	function send(f) {
-		var email = f.email.value;
-		var pwd = f.pwd.value;
-		var pathname = "${pathname}";
-		url = "login.do";
-		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-		sendRequest(url, param, resFn, "POST");
-	}
 
-	function resFn() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var result = xhr.responseText;
-
-			if (result != 'fail') {
-				alert("로그인 성공했습니다.");
-				location.href = result;
-			} else {
-				alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-				return;
-			}
-		}
-=======
 <script>
     function send(f) {
 	var email = f.email.value;
@@ -66,7 +43,7 @@
 	    param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
 	    sendRequest(url, param, resFn, "POST");
 
->>>>>>> f1c11b04dd6cd6b883082ff67fe283686ed4682e
+
 	}
     }
 

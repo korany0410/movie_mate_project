@@ -88,6 +88,10 @@
 				data-bs-target="#${ map.key }" data-bs-slide="next" value="&gt;" />
 		</div>
 	</c:forEach>
+	<footer>
+		<%@ include file="/resources/jsp/footer.jsp"%>
+	</footer>
+	
 	
 	
 </body>

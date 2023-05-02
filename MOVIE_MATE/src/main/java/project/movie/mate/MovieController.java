@@ -15,6 +15,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -63,9 +64,9 @@ public class MovieController {
 
 	Random random = new Random();
 
-	@Autowired 
+	@Autowired
 	HttpServletRequest request;
-	
+
 	@Autowired
 	ServletContext app;
 
@@ -612,6 +613,15 @@ public class MovieController {
 
 		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 
+	}
+
+	@RequestMapping("/movie_count.do")
+	@ResponseBody
+	public String movie_count(Model model) {
+		int count_user = movie_userdao.selectCount();
+		int count_comment = moviemate_commentdao.selectCount();
+
+		return Integer.toString(count_comment + count_user);
 	}
 
 }

@@ -132,4 +132,8 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_mypage_screen.jsp";
 	}
+	
+	
+
+	
 }
