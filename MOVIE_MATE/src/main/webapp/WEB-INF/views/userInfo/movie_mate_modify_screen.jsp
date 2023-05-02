@@ -34,81 +34,81 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 </head>
 <script type="text/javascript">
-    var id_check = false;
-    var pwd_check = false;
-    function profile_change(input) {
-	var file = input.files[0];
-	var img = document.getElementById('upload_img');
-	img.src = URL.createObjectURL(file);
-    }
+	var id_check = false;
+	var pwd_check = false;
+	function profile_change(input) {
+		var file = input.files[0];
+		var img = document.getElementById('upload_img');
+		img.src = URL.createObjectURL(file);
+	}
 
-    function username_confirm() {
-	var username = document.getElementById('username').value;
-	var username_check = document.getElementById('username_check');
-	check = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
-	if (check.test(username)) {
-	    var url = "double_check.do";
-	    var param = "username=" + username;
-	    sendRequest(url, param, resNameCheck, "GET");
-	} else {
-	    username_check.className = "bx bx-x-circle";
+	function username_confirm() {
+		var username = document.getElementById('username').value;
+		var username_check = document.getElementById('username_check');
+		check = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
+		if (check.test(username)) {
+			var url = "double_check.do";
+			var param = "username=" + username;
+			sendRequest(url, param, resNameCheck, "GET");
+		} else {
+			username_check.className = "bx bx-x-circle";
+		}
 	}
-    }
 
-    function resNameCheck() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
-	    var result = xhr.responseText;
-	    if (result == 'possible') {
-		id_check = true;
-		username_check.className = "bx bx-check-circle";
-	    } else {
-		id_check = false;
-		username_check.className = "bx bx-x-circle";
-	    }
+	function resNameCheck() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = xhr.responseText;
+			if (result == 'possible') {
+				id_check = true;
+				username_check.className = "bx bx-check-circle";
+			} else {
+				id_check = false;
+				username_check.className = "bx bx-x-circle";
+			}
+		}
 	}
-    }
 
-    function password_confirm() {
-	var password = document.getElementById('pwd').value;
-	var pwd_check = document.getElementById('pwd_check');
-	var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-	if (check.test(password)) {
-	    pwd_check.className = "bx bx-check-circle";
-	} else {
-	    pwd_check.className = "bx bx-x-circle";
+	function password_confirm() {
+		var password = document.getElementById('pwd').value;
+		var pwd_check = document.getElementById('pwd_check');
+		var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+		if (check.test(password)) {
+			pwd_check.className = "bx bx-check-circle";
+		} else {
+			pwd_check.className = "bx bx-x-circle";
+		}
 	}
-    }
 
-    function password_confirm_confirm() {
-	var pwd = document.getElementById('pwd').value;
-	var pwd_confirm = document.getElementById('pwd_confirm').value;
-	var pwd_confirm_check = document.getElementById('pwd_confirm_check');
-	var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-	if (check.test(pwd_confirm)) {
-	    if (pwd == pwd_confirm) {
-		pwd_check = true;
-		pwd_confirm_check.className = "bx bx-check-circle";
-	    } else {
-		pwd_check = false;
-		pwd_confirm_check.className = "bx bx-x-circle";
-	    }
-	} else {
-	    pwd_check = false;
-	    pwd_confirm_check.className = "bx bx-x-circle";
+	function password_confirm_confirm() {
+		var pwd = document.getElementById('pwd').value;
+		var pwd_confirm = document.getElementById('pwd_confirm').value;
+		var pwd_confirm_check = document.getElementById('pwd_confirm_check');
+		var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+		if (check.test(pwd_confirm)) {
+			if (pwd == pwd_confirm) {
+				pwd_check = true;
+				pwd_confirm_check.className = "bx bx-check-circle";
+			} else {
+				pwd_check = false;
+				pwd_confirm_check.className = "bx bx-x-circle";
+			}
+		} else {
+			pwd_check = false;
+			pwd_confirm_check.className = "bx bx-x-circle";
+		}
 	}
-    }
 
-    function modify() {
-	if (id_check == false) {
-	    alert("아이디 형식이 다릅니다.");
-	    return;
+	function modify() {
+		if (id_check == false) {
+			alert("아이디 형식이 다릅니다.");
+			return;
+		}
+		if (pwd_check == false) {
+			alert("비밀번호 형식이 다릅니다.");
+			return;
+		}
+		document.getElementById('go_modify').submit();
 	}
-	if (pwd_check == false) {
-	    alert("비밀번호 형식이 다릅니다.");
-	    return;
-	}
-	document.getElementById('go_modify').submit();
-    }
 </script>
 <body>
 	<header>
@@ -136,18 +136,17 @@
 								src="/mate/resources/upload/${userImg}" alt="" />
 						</c:otherwise>
 					</c:choose>
-					<label for="file_input">
-						<i class='bx bxs-camera-plus' style='color: #ffffff;'
-							onchange="profile_change(this);"></i>
+					<label for="file_input"> <i class='bx bxs-camera-plus'
+						style='color: #ffffff;' onchange="profile_change(this);"></i>
 					</label>
 				</div>
 			</div>
 			<div class="second_box">
 				<div class="analyze">
 					<i class='bx bxs-envelope bbb'
-						style='color: #7900ff; font-size: 25px'></i>
-					<input class="form-control" type="text"
-						placeholder="${userInfo.email}" readonly="readonly" />
+						style='color: #7900ff; font-size: 25px'></i> <input
+						class="form-control" type="text" placeholder="${userInfo.email}"
+						readonly="readonly" />
 				</div>
 			</div>
 			<div class="second_box">
@@ -155,8 +154,8 @@
 					<i class='bx bxs-face bbb' style='color: #7900ff; font-size: 25px'></i>
 					<input class="form-control" name="username" id="username"
 						type="text" placeholder="${userInfo.username}"
-						value="${userInfo.username}" onkeyup="username_confirm();" />
-					<i id="username_check" class='bx bx-check-circle ccc'></i>
+						value="${userInfo.username}" onkeyup="username_confirm();" /> <i
+						id="username_check" class='bx bx-check-circle ccc'></i>
 				</div>
 			</div>
 			<div class="second_box">
@@ -166,14 +165,14 @@
 						<div style="display: flex">
 							<input class="form-control pwd" type="password" id="pwd"
 								placeholder="${fn:substring(userInfo.pwd,0,4)}****"
-								onkeyup="password_confirm();" />
-							<i id="pwd_check" class='bx bx-x-circle ccc'></i>
+								onkeyup="password_confirm();" /> <i id="pwd_check"
+								class='bx bx-x-circle ccc'></i>
 						</div>
 						<div style="display: flex;">
 							<input class="form-control pwd_confirm" type="password"
 								name="pwd" id="pwd_confirm"
-								onkeyup="password_confirm_confirm();" />
-							<i id="pwd_confirm_check" class='bx bx-x-circle ccc'></i>
+								onkeyup="password_confirm_confirm();" /> <i
+								id="pwd_confirm_check" class='bx bx-x-circle ccc'></i>
 						</div>
 					</div>
 				</div>
@@ -188,8 +187,9 @@
 				</div>
 			</div>
 		</div>
-		<input type="hidden" name="user_idx" value="${userIdx}" />
-		<input type="hidden" name="profile_img" value="${userImg}">
+		<div style="height: 30px;"></div>
+		<input type="hidden" name="user_idx" value="${userIdx}" /> <input
+			type="hidden" name="profile_img" value="${userImg}">
 	</form>
 
 </body>
