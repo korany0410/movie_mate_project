@@ -230,24 +230,7 @@ public class UserController {
 	@RequestMapping("/user_comment_isup.do")
 	@ResponseBody
 	public String user_comment(User_CommentVO uc_vo) {
-//		MovieMate_CommentVO count = new MovieMate_CommentVO();
-//		count.setComment_idx(user_commentvo.getComment_idx());
-//		User_CommentDAO user_commentdao = null ;
-//		User_CommentVO vo = user_commentdao.selectOne(user_commentvo);
-//		if (vo == null) {
-//			user_commentdao.insertData(user_commentvo);
-//			user_commentvo.setIsup("yes");
-//		} else {
-//			if (vo.getIsup().equals("yes")) {
-//				user_commentvo.setIsup("no");
-//			} else {
-//				user_commentvo.setIsup("yes");
-//			}
-//		}
-//		user_commentdao.updateData(user_commentvo);
-//		int isUpCount = user_commentdao.isup_count(count);
 
-//		return user_commentvo.getIsup() + "/" + isUpCount;
 		User_CommentVO data = user_commentdao.selectOne(uc_vo);
 
 		if (data == null) {
@@ -269,28 +252,5 @@ public class UserController {
 		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up);
 
 	}
-
-//	@RequestMapping("/user_user_isup.do")
-//	@ResponseBody
-//	public String user_user(User_UserVO user_uservo) {
-//
-//		CommentList_ViewVO count = new CommentList_ViewVO();
-//		count.setUser_idx(user_uservo.getMyUser_idx());
-//		User_UserVO vo = User_UserDAO.selectOne(user_uservo);
-//		if (vo == null) {
-//			user_uservo.insertData(user_uservo);
-//			user_uservo.setUp("yes");
-//		} else {
-//			if (vo.getIsUp().equals("yes")) {
-//				user_uservo.setUp("no");
-//			} else {
-//				user_uservo.setUp("yes");
-//			}
-//		}
-//		user_userdao.updateData(user_uservo);
-//		int isUpCount = user_userdao.isup_count(count);
-//		
-//		return user_uservo.getIsUp() + "/" + isUpCount;
-//	}
 
 }

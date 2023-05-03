@@ -1,10 +1,10 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.CommentList_ViewVO;
 import vo.MovieMate_MovieVO;
 import vo.Movie_UserVO;
 
@@ -47,40 +47,24 @@ public class Movie_UserDAO {
 
 		return want_view;
 	}
-	
+
 	public Movie_UserVO selectInfo(Movie_UserVO vo) {
-		
+
 		Movie_UserVO res = sqlSession.selectOne("muser.info", vo);
-		
+
 		return res;
 	}
-	
+
 	public int update_starScore(Movie_UserVO vo) {
-		
+
 		int res = sqlSession.update("muser.update_starScore", vo);
-		
+
 		return res;
-	}		
+	}
+
+	public int selectCount() {
+		  int count = sqlSession.selectOne("muser.movieCount");
+		  return count;
+		}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
