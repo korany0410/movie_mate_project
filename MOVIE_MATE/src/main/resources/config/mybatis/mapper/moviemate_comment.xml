@@ -49,9 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		com_content = #{com_content}
 		WHERE comment_idx = #{comment_idx}
 	</update>
-	
+
 	<select id="commentCount" resultType="int">
-		select COUNT (*) from moviemate_comment
+		select COUNT (*) from
+		moviemate_comment
 	</select>
 
 	<select id="commentOrigin" resultType="vo.CommentList_ViewVO"
@@ -137,8 +138,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET up = up - 1 WHERE comment_idx = #{comment_idx}
 	</update>
 
-	<select id="reload" parameterType="vo.User_CommentVO" resultType="int">
-		SELECT up FROM moviemate_comment WHERE comment_idx = #{comment_idx}
+	<select id="reload" parameterType="vo.User_CommentVO"
+		resultType="int">
+		SELECT up FROM moviemate_comment WHERE comment_idx =
+		#{comment_idx}
 	</select>
 
 

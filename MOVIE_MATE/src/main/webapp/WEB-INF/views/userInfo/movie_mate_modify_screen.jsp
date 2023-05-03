@@ -34,7 +34,7 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 </head>
 <script type="text/javascript">
-    var id_check = false;
+    var id_check = true;
     var pwd_check = false;
     function profile_change(input) {
 	var file = input.files[0];
@@ -73,9 +73,9 @@
 	var pwd_check = document.getElementById('pwd_check');
 	var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 	if (check.test(password)) {
-	    pwd_check.className = "bx bx-check-circle";
+	    pwd_check.className = "bx bx-check-circle ccc";
 	} else {
-	    pwd_check.className = "bx bx-x-circle";
+	    pwd_check.className = "bx bx-x-circle ccc";
 	}
     }
 
@@ -87,14 +87,11 @@
 	if (check.test(pwd_confirm)) {
 	    if (pwd == pwd_confirm) {
 		pwd_check = true;
-		pwd_confirm_check.className = "bx bx-check-circle";
+		pwd_confirm_check.className = "bx bx-check-circle ccc";
 	    } else {
 		pwd_check = false;
-		pwd_confirm_check.className = "bx bx-x-circle";
+		pwd_confirm_check.className = "bx bx-x-circle ccc";
 	    }
-	} else {
-	    pwd_check = false;
-	    pwd_confirm_check.className = "bx bx-x-circle";
 	}
     }
 
@@ -191,6 +188,6 @@
 		<input type="hidden" name="user_idx" value="${userIdx}" />
 		<input type="hidden" name="profile_img" value="${userImg}">
 	</form>
-
+	<div class="wall"></div>
 </body>
 </html>

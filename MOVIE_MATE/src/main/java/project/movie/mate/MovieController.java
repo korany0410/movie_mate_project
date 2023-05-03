@@ -6,9 +6,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
@@ -37,6 +41,9 @@ import dao.Movie_TagDAO;
 import dao.Movie_UserDAO;
 import dao.User_CastDAO;
 import db.DB;
+import vo.BestGenre_ViewVO;
+import vo.BestMovie_ViewVO;
+import vo.CastList_ViewVO;
 import vo.CommentList_ViewVO;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
@@ -45,6 +52,7 @@ import vo.MovieMate_UserVO;
 import vo.Movie_CommentVO;
 import vo.Movie_UserVO;
 import vo.MyPageList_ViewVO;
+import vo.StarChart_ViewVO;
 import vo.User_CastVO;
 import vo.User_CommentVO;
 
@@ -52,6 +60,8 @@ import vo.User_CommentVO;
 public class MovieController {
 
 	private static final String VIEW_PATH = null;
+
+	private static final int String = 0;
 
 	Movie_CastDAO movie_castdao;
 	Movie_TagDAO movie_tagdao;
@@ -293,6 +303,7 @@ public class MovieController {
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("isLogin") == null) {
+			session.setMaxInactiveInterval(3600);
 			session.setAttribute("isLogin", "no");
 			session.setAttribute("userName", null);
 			session.setAttribute("userIdx", null);
@@ -300,7 +311,10 @@ public class MovieController {
 		}
 
 		System.out.println("로그인 여부 : " + session.getAttribute("isLogin"));
-		System.out.println("로그인 정보 : " + session.getAttribute("username"));
+		System.out.println("로그인 정보 : ");
+		System.out.println("유저이름 : " + session.getAttribute("userName"));
+		System.out.println("유저IDX : " + session.getAttribute("userIdx"));
+		System.out.println("유저이미지 : " + session.getAttribute("userImg"));
 
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
@@ -470,7 +484,7 @@ public class MovieController {
 	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
 		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
 		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
-		
+
 		System.out.println(comment_view_list.size());
 
 		model.addAttribute("origin", comment_view_origin);
@@ -490,7 +504,6 @@ public class MovieController {
 
 		System.out.println("search_screen.do parameter keyword : " + keyword);
 		System.out.println("영화 검색결과 수" + search_movie_result.size());
-		// System.out.println("배우 검색결과 수" + search_cast_result.size());
 		System.out.println("유저 검색결과 수" + search_user_result.size());
 
 		int movie_page = 0;
@@ -499,10 +512,16 @@ public class MovieController {
 			movie_page = (search_movie_result.size() - 1) / 9;
 		}
 
+		int slide_page = 0;
+
+		if (search_movie_result.size() > 6) {
+			slide_page = (search_movie_result.size() - 1) / 6;
+		}
+
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("search_movie", search_movie_result);
 		model.addAttribute("movie_page", movie_page);
-		// model.addAttribute("search_cast", search_cast_result);
+		model.addAttribute("slide_page", slide_page);
 		model.addAttribute("search_user", search_user_result);
 
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
@@ -627,6 +646,137 @@ public class MovieController {
 
 	}
 
+	@RequestMapping("/movie_mate_analyze_screen.do")
+	public String movie_mate_analyze(Model model, MovieMate_UserVO uservo) {
+
+		List<StarChart_ViewVO> star_scoreList = movie_userdao.star_scoreList(uservo);
+		HashMap<Double, Integer> star_map = new LinkedHashMap<Double, Integer>();
+
+		for (int i = 1; i <= 10; i++) {
+			star_map.put(i / 2.0, 0);
+		}
+
+		for (StarChart_ViewVO vo : star_scoreList) {
+			star_map.put(vo.getStar_score(), vo.getCount());
+		}
+
+		double avg = 0;
+		double most = 0;
+		int count = 0;
+
+		for (Double key : star_map.keySet()) {
+			avg += key * star_map.get(key);
+			count += star_map.get(key);
+			if (most <= star_map.get(key)) {
+				most = star_map.get(key);
+				model.addAttribute("most", star_map.get(key));
+			}
+		}
+		avg = avg / count;
+
+		List<CastList_ViewVO> actorList = moviemate_castdao.actorList(uservo);
+		List<CastList_ViewVO> directorList = moviemate_castdao.directorList(uservo);
+		List<BestMovie_ViewVO> movieList = moviemate_moviedao.bestMovieList(uservo);
+		List<BestGenre_ViewVO> genreList = moviemate_moviedao.bestGenreList(uservo);
+
+		System.out.println("배우 수 : " + actorList.size());
+		System.out.println("감독 수 : " + directorList.size());
+		System.out.println("영화 국가 종류 : " + movieList.size());
+
+		List<CastList_ViewVO> bestActorList = new ArrayList<CastList_ViewVO>();
+		List<CastList_ViewVO> bestDirectorList = new ArrayList<CastList_ViewVO>();
+		HashMap<String, double[]> bestMovieList = new LinkedHashMap<String, double[]>();
+		HashMap<String, double[]> bestGenreList = new LinkedHashMap<String, double[]>();
+
+		int runtime = moviemate_moviedao.runtime(uservo);
+
+		for (BestMovie_ViewVO vo : movieList) {
+			for (String nation : vo.getNation().split(",")) {
+				double[] origin = bestMovieList.getOrDefault(nation, new double[2]);
+				double[] insert = new double[] { vo.getAvg(), vo.getCount() };
+				insert[0] = Math.round((insert[0] + origin[0]) / 2);
+				insert[1]++;
+				bestMovieList.put(nation, insert);
+			}
+		}
+
+		for (BestGenre_ViewVO vo : genreList) {
+			for (String genre : vo.getGenre().split(",")) {
+				double[] origin = bestGenreList.getOrDefault(genre, new double[2]);
+				double[] insert = new double[] { vo.getAvg(), vo.getCount() };
+				insert[0] = Math.round((insert[0] + origin[0]) / 2);
+				insert[1]++;
+				bestGenreList.put(genre, insert);
+			}
+		}
+		List<String> keySet = new ArrayList<String>(bestMovieList.keySet());
+		List<String> keySet2 = new ArrayList<String>(bestGenreList.keySet());
+
+		keySet.sort(new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return (int) (bestMovieList.get(o2)[0] - bestMovieList.get(o1)[0]);
+			}
+		});
+
+		keySet2.sort(new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return (int) (bestGenreList.get(o2)[0] - bestGenreList.get(o1)[0]);
+			}
+		});
+
+		for (String key : keySet) {
+			System.out.println(key + " : " + bestMovieList.get(key)[0] + "," + bestMovieList.get(key)[1]);
+		}
+
+		for (String key : keySet2) {
+			System.out.println(key + " : " + bestGenreList.get(key)[0] + "," + bestGenreList.get(key)[1]);
+		}
+
+		if (actorList.size() <= 15) {
+			bestActorList = actorList;
+		} else {
+			for (int i = 0; i < 15; i++) {
+				bestActorList.add(actorList.get(i));
+			}
+		}
+
+		int bestActorSize = 0;
+
+		if (bestActorList.size() >= 3) {
+			bestActorSize = (bestActorList.size() - 1) / 3;
+		}
+
+		int bestDirectorSize = 0;
+
+		if (bestDirectorList.size() >= 3) {
+			bestDirectorSize = (bestDirectorList.size() - 1) / 3;
+		}
+
+		if (directorList.size() <= 15) {
+			bestDirectorList = directorList;
+		} else {
+			for (int i = 0; i < 15; i++) {
+				bestDirectorList.add(directorList.get(i));
+			}
+		}
+
+		model.addAttribute("bestActorSize", bestActorSize);
+		model.addAttribute("bestDirectorSize", bestDirectorSize);
+		model.addAttribute("bestActorList", bestActorList);
+		model.addAttribute("bestDirectorList", bestDirectorList);
+		model.addAttribute("avg", Math.round(avg * 10.0) / 10.0);
+		model.addAttribute("size", star_map.size());
+		model.addAttribute("star_map", star_map);
+		model.addAttribute("bestMovieV", bestMovieList);
+		model.addAttribute("bestMovieK", keySet);
+		model.addAttribute("bestGenreV", bestGenreList);
+		model.addAttribute("bestGenreK", keySet2);
+		model.addAttribute("runtime", runtime);
+		return "/WEB-INF/views/userInfo/movie_mate_analyze_screen.jsp";
+
+	}
 
 	@RequestMapping("/movie_count.do")
 	@ResponseBody
@@ -634,7 +784,8 @@ public class MovieController {
 		int count_user = movie_userdao.selectCount();
 		int count_comment = moviemate_commentdao.selectCount();
 
-		return Integer.toString(count_comment + count_user);}
+		return Integer.toString(count_comment + count_user);
+	}
 
 	@RequestMapping("/moviemate_cocomment_insert.do")
 	public String moviemate_cocomment_insert(Model model, MovieMate_CommentVO vo) {
@@ -645,7 +796,5 @@ public class MovieController {
 				+ vo.getC_ref();
 
 	}
-	
-	
-	
+
 }

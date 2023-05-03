@@ -54,31 +54,32 @@ public class MovieMate_CommentDAO {
 		return res;
 	}
 
-	public CommentList_ViewVO selectCommentOrigin(Movie_CommentVO vo) {
-		
-		CommentList_ViewVO comment_origin = sqlSession.selectOne("mmcomment.commentOrigin", vo);
-		
-		return comment_origin;
-	}
-
 	public List<CommentList_ViewVO> selectCommentList(Movie_CommentVO vo) {
-		
+
 		List<CommentList_ViewVO> comment_list = sqlSession.selectList("mmcomment.commentList", vo);
-		
+
 		return comment_list;
 	}
 
 	public int cocomment_insert(MovieMate_CommentVO vo) {
-		
+
 		int cocomment_insert = sqlSession.insert("mmcomment.cocommentInsert", vo);
-		
+
 		return cocomment_insert;
+
+	}
+
+	public CommentList_ViewVO selectCommentOrigin(Movie_CommentVO vo) {
+
+		CommentList_ViewVO comment_origin = sqlSession.selectOne("mmcomment.commentOrigin", vo);
+
+		return comment_origin;
 	}
 
 	public int isup_count(CommentList_ViewVO vo) {
-		
+
 		int res = sqlSession.selectOne("mmcomment.isupCount", vo);
-		
+
 		return res;
 	}
 
@@ -97,23 +98,23 @@ public class MovieMate_CommentDAO {
 	}
 
 	public int updateData(CommentList_ViewVO vo) {
-		
+
 		int res = sqlSession.update("mmcomment.updateData", vo);
-		
+
 		return res;
 	}
 
 	public int increaseUp(User_CommentVO vo) {
-		
+
 		int res = sqlSession.update("mmcomment.increaseUp", vo);
-		
+
 		return res;
 	}
 
 	public int decreaseUp(User_CommentVO vo) {
-		
+
 		int res = sqlSession.update("mmcomment.decreaseUp", vo);
-		
+
 		return res;
 	}
 

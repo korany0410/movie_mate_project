@@ -90,12 +90,32 @@
 					<input type="hidden" name="movie_idx" value="${movie_idx}">
 					<input type="hidden" name="comment_idx" value="${vo.comment_idx}">
 					<div class="comment_info">
+<<<<<<< HEAD
+						<div class="comment_name" onclick="user_info('${vo.username}')">${vo.username}</div>
+						<c:if test="${vo.profile_img eq 'no_data.jpg'}">
+ 
+						</c:if>
+						<c:choose>
+							<c:when test="${vo.star_score gt 0 }">
+								<div>${vo.star_score }</div>
+							</c:when>
+							<c:otherwise>
+								<div>${vo.want_view}</div>
+							</c:otherwise>
+						</c:choose>
+						<hr class="comment_hr">
+						<div class="comment_content"
+							onclick="comment_moreInfo('${vo.comment_idx}')">${vo.content}</div>
+						<div class="cocomment">
+							<span>댓글 수</span>
+=======
 						<div class="comment_user_box">
 							<span class="user_box_profile_img">
 								<c:if test="${vo.user_profile_img eq 'no_data.jpg'}">
 								</c:if>
 							</span>
 							<div class="user_box_name" onclick="user_info('${vo.username}')">${vo.username}</div>
+>>>>>>> e4483e11074e296092da92289357d4aa12be8438
 						</div>
 						<div class="comment_starWant">
 							<c:choose>
@@ -120,6 +140,5 @@
 			</div>
 		</c:forEach>
 	</div>
-
 </body>
 </html>

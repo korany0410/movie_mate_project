@@ -5,11 +5,11 @@ body {
 }
 
 .wall {
-	height: 60px;
+	height: 100px;
 }
 
 .main_box {
-	width: 1400px%;
+	width: 1400px;
 }
 
 .left, .right {
@@ -284,12 +284,16 @@ body {
 }
 
 .carousel-control-prev, .carousel-control-next {
-	height: 35px;
-	width: 35px !important;
+	height: 30px;
+	width: 30px !important;
 	top: 50% !important;
 	color: #000 !important;
 	font-weight: bold;
 	font-size: 25px;
+	line-height: 15px;
+	border: 1px solid gray !important;
+	border-radius: 50px !important;
+	opacity: 1 !important;
 }
 
 .carousel-control-next {
@@ -594,4 +598,9 @@ body {
 	background-color: rgba(0, 0, 0, 0.1);
 	border-radius: 7px;
 	color: black;
+}
+
+.commentInfo_box {
+	width: 44% !important;
+	margin: 0 10px;
 }

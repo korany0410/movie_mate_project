@@ -1,6 +1,14 @@
 package project.movie.mate;
 
 import java.io.File;
+import java.util.List;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +27,9 @@ import dao.MovieMate_UserDAO;
 import dao.User_CommentDAO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_UserVO;
+import vo.Movie_UserVO;
+import vo.StarChart_ViewVO;
+
 import vo.User_CommentVO;
 
 @Controller
@@ -154,28 +165,6 @@ public class UserController {
 		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
 	}
 
-	/*
-	 * @RequestMapping("/movie_mate_modify_screen.do")
-	 * 
-	 * @ResponseBody public String modify(MovieMate_UserVO vo) { MovieMate_UserDAO
-	 * dao = new MovieMate_UserDAO(); int res = dao.modify(vo); String result =
-	 * "수정 성공";
-	 * 
-	 * if (res == 0) { result = "수정 실패"; }
-	 * 
-	 * return result; }
-	 */
-
-//	@RequestMapping("/movie_mate_modify_screen.do")
-//	public String movie_mate_modify_screen(Model model, MovieMate_UserVO uservo) {
-//
-//
-//		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(uservo);
-//
-//		model.addAttribute("userInfo", userInfo);
-//		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
-//	}
-
 	@RequestMapping("/modify_userInfo.do")
 	public String modify_userInfo(MovieMate_UserVO uservo) {
 
@@ -250,7 +239,5 @@ public class UserController {
 
 		int up = moviemate_commentdao.reload(uc_vo);
 		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up);
-
 	}
-
 }
