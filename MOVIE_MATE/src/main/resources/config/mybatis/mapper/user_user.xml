@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uuser">
+	<select id="isupCount" parameterType="vo.MovieMate_UserVO"
+		resultType="int">
+		select count(*) from user_user where otherUser_idx=#{otherUser_idx}
+		and isup = 'yes'
+	</select>
+	<select id="userUserData" parameterType="vo.User_UserVO"
+		resultType="vo.User_CastVO">
+		select * from user_user WHERE otherUser_idx = #{otherUser_idx} and
+		myUser_idx = #{myUser_idx}
+	</select>
+	<insert id="insertData" parameterType="vo.User_UserVO">
+		insert into user_user
+		values(#{otherUser_idx}, #{myUser_idx}, 'yes')
+	</insert>
+	<update id="updateData" parameterType="vo.User_UserVO">
+		update user_user set
+		isup = #{isUp} where otherUser_idx = #{otherUser_idx} and
+		myUser_idx = #{myUser_idx}
+	</update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

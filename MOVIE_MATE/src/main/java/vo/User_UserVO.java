@@ -28,4 +28,6 @@ public class User_UserVO {
 		this.isup = isup;
 	}
 
+
+
 }

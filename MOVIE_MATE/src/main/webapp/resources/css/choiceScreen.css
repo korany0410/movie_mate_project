@@ -313,7 +313,7 @@ body {
 	display: none;
 }
 
-.commentIngo_box {
+.commentInfo_box {
 	padding: 0 !important;
 }
 
@@ -564,4 +564,34 @@ body {
 	float: right;
 	padding-top: 20px;
 	margin-right: 20px;
+}
+
+.commentInfo_box {
+	cursor: pointer;
+}
+
+.comment_info {
+	cursor: pointer;
+}
+
+.cocomment_upComment_box {
+	display: flex;
+	padding: 3px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.cocomment_comment {
+	margin-left: 6px;
+}
+
+.cocomment_up:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 7px;
+	color: black;
+}
+
+.cocomment_comment:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 7px;
+	color: black;
 }

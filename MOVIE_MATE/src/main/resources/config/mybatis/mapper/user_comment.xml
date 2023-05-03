@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ucomment">
+	<select id="isupCount" parameterType="vo.MovieMate_CommentVO"
+		resultType="int">
+		select count(*) from user_comment where comment_idx=#{comment_idx}
+		and isup = 'yes'
+	</select>
+	<select id="userCommentData" parameterType="vo.User_CommentVO"
+		resultType="vo.User_CommentVO">
+		select * from user_comment WHERE comment_idx = #{comment_idx} and
+		user_idx = #{user_idx}
+	</select>
+	<insert id="insertData" parameterType="vo.User_CommentVO">
+		insert into user_comment
+		values(#{user_idx}, #{comment_idx}, 'yes')
+	</insert>
+	<update id="updateData" parameterType="vo.User_CommentVO">
+		update user_comment set
+		isup = #{isup} where comment_idx = #{comment_idx} and
+		user_idx = #{user_idx}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
