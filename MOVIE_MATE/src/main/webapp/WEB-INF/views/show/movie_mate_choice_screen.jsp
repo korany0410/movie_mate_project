@@ -12,6 +12,8 @@
 <title>무비메이트</title>
 <link rel="stylesheet" href="/mate/resources/css/choiceScreen.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -115,6 +117,62 @@
     function watcha() {
 	window.open('https://watcha.com/?browser_open_type=external');
     }
+    
+    function go_cocomment(cidx, midx) {
+		location.href = "movie_mate_comment_moreInfo_screen.do?comment_idx="+cidx+"&movie_idx="+midx;
+	}
+    function go_userInfo(username) {
+		location.href = "movie_mate_mypage_screen.do?username="+username;
+	}
+    
+    
+	function isup_clicked(idx) {
+		if (isLogin() == "login_no") {
+			return;
+		}
+	
+		var url = "user_comment_isup.do";
+		var param = "comment_idx=" + idx + "&user_idx=${userIdx}";
+		
+		console.log(idx);
+		console.log(${userIdx});
+
+		sendRequest(url, param, resFnup, "GET");
+	}
+
+	function resFnup() {
+		
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = xhr.responseText;	
+			
+			var dom = document.getElementById(result.split("/")[0]);
+			
+			dom.innerText = result.split("/")[1];
+			console.log(result);
+			/*
+			var yesOrNo = result.split("/")[0];
+			var up_count = result.split("/")[1];
+			var box = document.getElementById('up_li');
+			var count = document.getElementById('count');
+			var icon = document.getElementById('like_icon');
+
+			if (yesOrNo == 'no') {
+				box.style.color = "black";
+				count.innerText = up_count;
+				icon.className = "bx bx-like";
+			} else {
+				box.style.color = "#7900FF";
+				count.innerText = up_count;
+				icon.className = "bx bxs-like";
+			}
+			*/
+		}
+	}
+    
+/* 	function moreInfo(idx) {
+		location.href = "movie_mate_comment_moreInfo_screen.do?comment_idx"+idx;
+	} */
+	
 </script>
 </head>
 <body>
@@ -136,8 +194,8 @@
 					<div class="title_info">
 						<div class="title">${movie_info.title}</div>
 						<div class="release_date">
-							<span> ${fn:substring(movie_info.release_date,0,4)} • </span> <span>
-								${movie_info.genre} • ${movie_info.nation} </span>
+							<span> ${fn:substring(movie_info.release_date,0,4)} • </span>
+							<span> ${movie_info.genre} • ${movie_info.nation} </span>
 						</div>
 						<div class="input_box">
 							<div class="evaluation">
@@ -146,7 +204,8 @@
 									<div class="starpoint_box">
 										<c:forEach var="i" begin="1" end="10">
 											<label for="starpoint_${i}" class="label_star"
-												title="${i / 2.0}"> <span class="blind">${i / 2.0}</span>
+												title="${i / 2.0}">
+												<span class="blind">${i / 2.0}</span>
 											</label>
 											<c:choose>
 												<c:when test="${i eq movie_user.star_score * 2 }">
@@ -178,10 +237,11 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" /> <input
-										type="hidden" name="movie_idx" id="movie_idx"
-										value="${movie_info.movie_idx}" /> <input class="want_btn"
-										type="button" value="보고싶어요" onclick="want_view(this.form);" />
+									<input type="hidden" name="user_idx" value="${userIdx}" />
+									<input type="hidden" name="movie_idx" id="movie_idx"
+										value="${movie_info.movie_idx}" />
+									<input class="want_btn" type="button" value="보고싶어요"
+										onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
@@ -230,16 +290,16 @@
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
 
-							<input class="more_btn" type="button" value="더보기" onclick="location.href='movie_mate_choice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
-                    		
+							<input class="more_btn" type="button" value="더보기"
+								onclick="location.href='movie_mate_choice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
+
 
 						</div>
 					</div>
 					<div class="content_box">
 						<div class="content_title"></div>
 						<div class="content_info">
-							<div>${fn:substring(movie_info.release_date,0,4)}•
-								${movie_info.genre}</div>
+							<div>${fn:substring(movie_info.release_date,0,4)}•${movie_info.genre}</div>
 							<div>${movie_info.nation}•${movie_info.film_rating}</div>
 							<div class="content_movie_info">${movie_info.movie_info}</div>
 						</div>
@@ -255,7 +315,7 @@
 
 										<div class="movieInfo_box col-6">
 											<form>
-												<div class="cast_info"
+												<div class="comment_box"
 													onclick="choiceCast_screen('${cast_list[i].cast_idx}','${cast_list[i].name}','${cast_list[i].type}')">
 													<div class="cast_name">${cast_list[i].name}</div>
 													<div class="cast_type">
@@ -278,10 +338,9 @@
 										<c:forEach var="i" begin="${index * 6 }"
 											end="${index * 6 + 5}">
 											<c:if test="${not empty cast_list[i]}">
-
 												<div class="movieInfo_box col-6">
 													<form>
-														<div class="cast_info"
+														<div class="comment_box"
 															onclick="choiceCast_screen('${cast_list[i].cast_idx}','${cast_list[i].name}','${cast_list[i].type}')">
 															<div class="cast_name">${cast_list[i].name}</div>
 															<div class="cast_type">
@@ -324,11 +383,25 @@
 										<div class="commentInfo_box col-6">
 											<form>
 												<div class="comment_info">
-													<div class="comment_name">${comment_list[i].username}</div>
-													<div class="comment_content">
-														${comment_list[i].content }</div>
-													<div class="cocomment">
-														<span>댓글 수</span>
+													<div class="comment_name"
+														onclick="go_userInfo('${comment_list[i].username}')">
+														${comment_list[i].username}</div>
+													<div class="go_cocomment"
+														onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
+														<div class="comment_content">${comment_list[i].content }</div>
+													</div>
+													<div class="cocomment_upComment_box">
+														<div class="cocomment_up" id="up">
+															<i id="like_icon" class='bx bx-like'
+																onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
+															<span id="${comment_list[i].comment_idx}">
+																${comment_list[i].up} </span>
+														</div>
+														<div class="cocomment_comment"
+															onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
+															<i class='bx bx-message-rounded'></i>
+															${comment_list[i].count}
+														</div>
 													</div>
 												</div>
 											</form>
@@ -342,14 +415,29 @@
 										<c:forEach var="i" begin="${index * 2 }"
 											end="${index * 2 + 1}">
 											<c:if test="${not empty comment_list[i]}">
-												<div class="commentInfo_box col-6">
+												<div class="commentInfo_box col-6"
+													onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
 													<form>
 														<div class="comment_info">
-															<div class="comment_name">${comment_list[i].username}</div>
-															<div class="comment_content">
-																${comment_list[i].content }</div>
-															<div class="cocomment">
-																<span>댓글 수</span>
+															<div class="comment_name"
+																onclick="go_userInfo('${comment_list[i].username}')">
+																${comment_list[i].username}</div>
+															<div class="go_cocomment"
+																onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+																<div class="comment_content">${comment_list[i].content }</div>
+															</div>
+															<div class="cocomment_upComment">
+																<div class="cocomment_up_box" id="up">
+																	<i id="like_icon" class='bx bx-like'
+																		onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
+																	<span id="${comment_list[i].comment_idx}">
+																		${comment_list[i].up} </span>
+																</div>
+																<div class="cocomment_comment"
+																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+																	<i class='bx bx-message-rounded'></i>
+																	${comment_list[i].count}
+																</div>
 															</div>
 														</div>
 													</form>

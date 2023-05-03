@@ -54,6 +54,7 @@ import vo.Movie_UserVO;
 import vo.MyPageList_ViewVO;
 import vo.StarChart_ViewVO;
 import vo.User_CastVO;
+import vo.User_CommentVO;
 
 @Controller
 public class MovieController {
@@ -80,6 +81,8 @@ public class MovieController {
 
 	@Autowired
 	ServletContext app;
+
+	private MovieMate_MovieDAO user_commentdao;
 
 	public MovieController(Movie_CastDAO movie_castdao, Movie_TagDAO movie_tagdao, Movie_UserDAO movie_userdao,
 			MovieMate_CastDAO moviemate_castdao, MovieMate_CommentDAO moviemate_commentdao,
@@ -788,5 +791,7 @@ public class MovieController {
 				+ vo.getC_ref();
 
 	}
-
+	
+	
+	
 }
