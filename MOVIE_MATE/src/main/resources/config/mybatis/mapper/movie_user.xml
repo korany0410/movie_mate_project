@@ -68,18 +68,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		c.movie_idx and a.user_idx = #{user_idx} AND b.want_view = 'yes'
 	</select>
 	
-<<<<<<< HEAD
 	<select id="star_scoreList" resultType="vo.StarChart_ViewVO" parameterType="vo.MovieMate_UserVO">
 		SELECT star_score, COUNT(*) count FROM movie_user WHERE user_idx = #{user_idx} AND star_score > 0
 		GROUP BY star_score ORDER BY star_score
 	</select>
-=======
+
 	<select id ="movieCount" resultType="int">  
 		select count(*) from movie_user
             where (want_view = 'yes' and star_score = 0)
             or (want_view = 'no' and star_score > 0)
 	</select>
 
->>>>>>> e4483e11074e296092da92289357d4aa12be8438
 </mapper>
 

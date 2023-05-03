@@ -22,6 +22,5 @@
 		<mapper resource="config/mybatis/mapper/moviemate_movie.xml" />
 		<mapper resource="config/mybatis/mapper/moviemate_tag.xml" />
 		<mapper resource="config/mybatis/mapper/moviemate_user.xml" />
-		<mapper resource="config/mybatis/mapper/user_cast.xml" />
 	</mappers>
 </configuration>

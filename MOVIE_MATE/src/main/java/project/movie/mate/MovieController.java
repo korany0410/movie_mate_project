@@ -481,7 +481,7 @@ public class MovieController {
 	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
 		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
 		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
-		
+
 		System.out.println(comment_view_list.size());
 
 		model.addAttribute("origin", comment_view_origin);
@@ -638,7 +638,6 @@ public class MovieController {
 
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/movie_mate_analyze_screen.do")
 	public String movie_mate_analyze(Model model, MovieMate_UserVO uservo) {
 
@@ -680,7 +679,7 @@ public class MovieController {
 		List<CastList_ViewVO> bestDirectorList = new ArrayList<CastList_ViewVO>();
 		HashMap<String, double[]> bestMovieList = new LinkedHashMap<String, double[]>();
 		HashMap<String, double[]> bestGenreList = new LinkedHashMap<String, double[]>();
-		
+
 		int runtime = moviemate_moviedao.runtime(uservo);
 
 		for (BestMovie_ViewVO vo : movieList) {
@@ -755,7 +754,6 @@ public class MovieController {
 			}
 		}
 
-		
 		model.addAttribute("bestActorSize", bestActorSize);
 		model.addAttribute("bestDirectorSize", bestDirectorSize);
 		model.addAttribute("bestActorList", bestActorList);
@@ -771,7 +769,6 @@ public class MovieController {
 		return "/WEB-INF/views/userInfo/movie_mate_analyze_screen.jsp";
 
 	}
-=======
 
 	@RequestMapping("/movie_count.do")
 	@ResponseBody
@@ -779,7 +776,8 @@ public class MovieController {
 		int count_user = movie_userdao.selectCount();
 		int count_comment = moviemate_commentdao.selectCount();
 
-		return Integer.toString(count_comment + count_user);}
+		return Integer.toString(count_comment + count_user);
+	}
 
 	@RequestMapping("/moviemate_cocomment_insert.do")
 	public String moviemate_cocomment_insert(Model model, MovieMate_CommentVO vo) {
@@ -791,5 +789,4 @@ public class MovieController {
 
 	}
 
->>>>>>> e4483e11074e296092da92289357d4aa12be8438
 }

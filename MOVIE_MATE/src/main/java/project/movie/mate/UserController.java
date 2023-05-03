@@ -3,16 +3,14 @@ package project.movie.mate;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-<<<<<<< HEAD
 import java.util.List;
-=======
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
->>>>>>> e4483e11074e296092da92289357d4aa12be8438
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -97,7 +95,7 @@ public class UserController {
 	@RequestMapping("/movie_mate_login_screen.do")
 	public String movie_mate_login_screen(Model model, String pathname, String code) {
 
-		if(code != null) {
+		if (code != null) {
 			System.out.println(code);
 		}
 		model.addAttribute("pathname", pathname);
@@ -152,8 +150,6 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
-	
-	
 
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model) {
@@ -211,33 +207,11 @@ public class UserController {
 
 		return "movie_mate_mypage_screen.do";
 	}
-	
 
 	@RequestMapping("/movie_mate_login_kakao.do")
 	public String kakao(@RequestParam String code) {
 		System.out.println(code);
 		return "kakaoLogin?code=" + code;
 	}
-	
 
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
