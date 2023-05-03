@@ -21,6 +21,10 @@
     function modify() {
 	location.href = "movie_mate_modify_screen.do?user_idx=${userIdx}&username=${userName}";
     }
+
+    function analyzeList() {
+	location.href = "movie_mate_analyze_screen.do?user_idx=${userIdx}";
+    }
 </script>
 </head>
 <body>
@@ -40,7 +44,8 @@
 						<img class="user" src="/mate/resources/images/user.png">
 					</c:when>
 					<c:otherwise>
-						<img class="user" src="/mate/resources/upload/${userInfo.profile_img}" alt="" />
+						<img class="user"
+							src="/mate/resources/upload/${userInfo.profile_img}" alt="" />
 					</c:otherwise>
 				</c:choose>
 			</div>

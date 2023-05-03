@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.CastList_ViewVO;
 import vo.CommentList_ViewVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
+import vo.MovieMate_UserVO;
 
 public class MovieMate_CommentDAO {
 
@@ -40,7 +42,8 @@ public class MovieMate_CommentDAO {
 	public int update_comment(MovieMate_CommentVO commentvo) {
 
 		int res = sqlSession.update("mmcomment.update", commentvo);
-		
+
 		return res;
 	}
+
 }

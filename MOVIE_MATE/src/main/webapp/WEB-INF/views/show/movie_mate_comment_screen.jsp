@@ -39,7 +39,7 @@
 					<div class="comment_info">
 						<div class="comment_name" onclick="user_info('${vo.username}')">${vo.username}</div>
 						<c:if test="${vo.profile_img eq 'no_data.jpg'}">
-
+ 
 						</c:if>
 						<c:choose>
 							<c:when test="${vo.star_score gt 0 }">
@@ -60,6 +60,5 @@
 			</div>
 		</c:forEach>
 	</div>
-
 </body>
 </html>

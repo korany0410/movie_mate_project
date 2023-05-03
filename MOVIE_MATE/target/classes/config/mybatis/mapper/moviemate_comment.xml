@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="myComment" resultType="vo.MovieMate_CommentVO"
 		parameterType="vo.MovieMate_CommentVO">
 		SELECT * FROM moviemate_comment WHERE com_username =
-		#{com_username} AND m_ref = #{m_ref}
+		#{com_username} AND m_ref = #{m_ref} AND comment_idx = c_ref
 	</select>
 
 	<insert id="insert" parameterType="vo.MovieMate_CommentVO">
