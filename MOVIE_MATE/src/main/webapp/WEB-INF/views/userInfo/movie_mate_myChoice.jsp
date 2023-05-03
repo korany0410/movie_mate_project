@@ -7,7 +7,8 @@
 <link rel="icon" href="/mate/resources/images/logo_icon_2.png" />
 <link rel="apple-touch-icon"
 	href="/mate/resources/images/logo_icon_2.png" />
-<title>무비메이트</title>
+
+
 </head>
 <body>
 

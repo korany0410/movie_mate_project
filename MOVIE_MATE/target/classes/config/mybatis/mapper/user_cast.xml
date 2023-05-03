@@ -19,7 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<update id="updateData" parameterType="vo.User_CastVO">
 		update user_cast set
-		isup = #{isUp} where cast_idx = #{cast_idx} and
+		isup =
+		#{isUp} where cast_idx = #{cast_idx} and
 		user_idx = #{user_idx}
 	</update>
 

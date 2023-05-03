@@ -41,6 +41,13 @@ public class MovieMate_CommentDAO {
 	public int update_comment(MovieMate_CommentVO commentvo) {
 
 		int res = sqlSession.update("mmcomment.update", commentvo);
+
+		return res;
+	}
+
+	public int selectCount() {
+		
+		int res = sqlSession.selectOne("mmcomment.commentCount");
 		
 		return res;
 	}
