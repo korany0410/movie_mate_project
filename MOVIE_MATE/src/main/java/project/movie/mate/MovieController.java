@@ -504,7 +504,6 @@ public class MovieController {
 
 		System.out.println("search_screen.do parameter keyword : " + keyword);
 		System.out.println("영화 검색결과 수" + search_movie_result.size());
-		// System.out.println("배우 검색결과 수" + search_cast_result.size());
 		System.out.println("유저 검색결과 수" + search_user_result.size());
 
 		int movie_page = 0;
@@ -513,10 +512,16 @@ public class MovieController {
 			movie_page = (search_movie_result.size() - 1) / 9;
 		}
 
+		int slide_page = 0;
+
+		if (search_movie_result.size() > 6) {
+			slide_page = (search_movie_result.size() - 1) / 6;
+		}
+
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("search_movie", search_movie_result);
 		model.addAttribute("movie_page", movie_page);
-		// model.addAttribute("search_cast", search_cast_result);
+		model.addAttribute("slide_page", slide_page);
 		model.addAttribute("search_user", search_user_result);
 
 		return "/WEB-INF/views/show/movie_mate_search_screen.jsp";
@@ -791,7 +796,5 @@ public class MovieController {
 				+ vo.getC_ref();
 
 	}
-	
-	
-	
+
 }

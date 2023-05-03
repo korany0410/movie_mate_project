@@ -264,6 +264,10 @@
 								<c:when test="${userImg eq 'no_data.jpg'}">
 									<img class="p_img" src="/mate/resources/images/user.png" alt="" />
 								</c:when>
+								<c:otherwise>
+									<img class="p_img" src="/mate/resources/upload/${userImg}"
+										alt="" />
+								</c:otherwise>
 							</c:choose>
 							<c:if test=""></c:if>
 						</div>
@@ -400,7 +404,7 @@
 														<div class="cocomment_comment"
 															onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
 															<i class='bx bx-message-rounded'></i>
-															${comment_list[i].count}
+															${comment_list[i].count - 1}
 														</div>
 													</div>
 												</div>
@@ -436,7 +440,7 @@
 																<div class="cocomment_comment"
 																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
 																	<i class='bx bx-message-rounded'></i>
-																	${comment_list[i].count}
+																	${comment_list[i].count - 1}
 																</div>
 															</div>
 														</div>
