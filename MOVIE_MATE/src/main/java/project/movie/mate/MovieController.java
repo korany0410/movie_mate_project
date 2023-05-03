@@ -19,6 +19,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -48,6 +49,7 @@ import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.MovieMate_UserVO;
+import vo.Movie_CommentVO;
 import vo.Movie_UserVO;
 import vo.MyPageList_ViewVO;
 import vo.StarChart_ViewVO;
@@ -476,7 +478,14 @@ public class MovieController {
 	}
 
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
-	public String movie_mate_comment_moreInfo_screen(Model model, MovieMate_CommentVO commentvo) {
+	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
+		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
+		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
+		
+		System.out.println(comment_view_list.size());
+
+		model.addAttribute("origin", comment_view_origin);
+		model.addAttribute("list", comment_view_list);
 
 		return "/WEB-INF/views/show/movie_mate_comment_moreInfo_screen.jsp";
 	}
@@ -623,11 +632,13 @@ public class MovieController {
 		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(vo);
 
 		model.addAttribute("comment_list", comment_list);
+		model.addAttribute("movie_idx", vo.getMovie_idx());
 
 		return "/WEB-INF/views/show/movie_mate_comment_screen.jsp";
 
 	}
 
+<<<<<<< HEAD
 	@RequestMapping("/movie_mate_analyze_screen.do")
 	public String movie_mate_analyze(Model model, MovieMate_UserVO uservo) {
 
@@ -760,4 +771,25 @@ public class MovieController {
 		return "/WEB-INF/views/userInfo/movie_mate_analyze_screen.jsp";
 
 	}
+=======
+
+	@RequestMapping("/movie_count.do")
+	@ResponseBody
+	public String movie_count(Model model) {
+		int count_user = movie_userdao.selectCount();
+		int count_comment = moviemate_commentdao.selectCount();
+
+		return Integer.toString(count_comment + count_user);}
+
+	@RequestMapping("/moviemate_cocomment_insert.do")
+	public String moviemate_cocomment_insert(Model model, MovieMate_CommentVO vo) {
+
+		moviemate_commentdao.cocomment_insert(vo);
+
+		return "redirect:movie_mate_comment_moreInfo_screen.do?movie_idx=" + vo.getM_ref() + "&comment_idx="
+				+ vo.getC_ref();
+
+	}
+
+>>>>>>> e4483e11074e296092da92289357d4aa12be8438
 }

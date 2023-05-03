@@ -21,9 +21,15 @@
     function modify() {
 	location.href = "movie_mate_modify_screen.do?user_idx=${userIdx}&username=${userName}";
     }
+<<<<<<< HEAD
 
     function analyzeList() {
 	location.href = "movie_mate_analyze_screen.do?user_idx=${userIdx}";
+=======
+    
+    function analyzeList(){
+    location.href = "movie_mate_myChoice.do";
+>>>>>>> e4483e11074e296092da92289357d4aa12be8438
     }
 </script>
 </head>

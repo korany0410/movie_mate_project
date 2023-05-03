@@ -35,6 +35,6 @@ body {
 	padding: 0;
 }
 
-.btn-outline-danger {
+.btn-outline-danger {background-color:#7900ff;
 	width: 400px;
 }
