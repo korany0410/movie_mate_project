@@ -146,6 +146,8 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
+	
+	
 
 
 	@RequestMapping("/movie_mate_modify_screen.do")
