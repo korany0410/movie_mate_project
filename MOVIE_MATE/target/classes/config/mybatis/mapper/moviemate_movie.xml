@@ -32,7 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DESC) no, m.*
 		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
 		'no_data.jpg' AND release_date &lt;= sysdate) m )
-		WHERE no BETWEEN 1 AND 15
+		WHERE no BETWEEN 1
+		AND 15
 	</select>
 
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO"
@@ -53,40 +54,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="masterpiece_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		select * from moviemate_movie
-		where (release_date 
-     	between'20100101'and '20230101'and star_score > 4) and (profile_img !=
+		where (release_date
+		between'20100101'and '20230101'and star_score > 4) and (profile_img !=
 		'no_data.jpg')
 	</select>
 
 	<select id="selectMovieIdx" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.Movie_CastVO">
-	  	SELECT * FROM moviemate_movie WHERE movie_idx = #{movie_idx}
-    </select>
-		
-    <select id="avg_star_list" resultType="vo.MovieMate_MovieVO"
-         parameterType="vo.MovieMate_MovieVO">
-         select *
-         from moviemate_movie
-         where release_date &gt;= '20151231' and (profile_img !=
-		'no_data.jpg')   
-         order by star_score DESC
-    </select>
-    
-    <select id="genre_list" resultType="vo.MovieMate_MovieVO"
-         parameterType="vo.MovieMate_MovieVO">
-         select *
-         from moviemate_movie
-         where genre = '액션'       
-    </select>
-    
-    <select id="famous_list" resultType="vo.MovieMate_MovieVO"
-         parameterType="vo.MovieMate_MovieVO"> 
-         select * 
-         from moviemate_movie 
-         WHERE genre = '공포'and (profile_img !=
+		SELECT * FROM moviemate_movie WHERE movie_idx =
+		#{movie_idx}
+	</select>
+
+	<select id="avg_star_list" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.MovieMate_MovieVO">
+		select *
+		from moviemate_movie
+		where release_date &gt;=
+		'20151231' and (profile_img !=
 		'no_data.jpg')
-    </select>     
-                             
+		order by star_score DESC
+	</select>
+
+	<select id="genre_list" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.MovieMate_MovieVO">
+		select *
+		from moviemate_movie
+		where genre = '액션'
+	</select>
+
+	<select id="famous_list" resultType="vo.MovieMate_MovieVO"
+		parameterType="vo.MovieMate_MovieVO">
+		select *
+		from moviemate_movie
+		WHERE genre = '공포'and
+		(profile_img !=
+		'no_data.jpg')
+	</select>
+
 	<select id="moviemate_movie" resultType="vo.MovieMate_MovieVO"
 		parameterType="int">
 		select * from moviemate_movie where movie_idx =
@@ -103,9 +107,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{movie_idx}) m )
 		WHERE no BETWEEN 1 AND #{number}
 	</select>
-	
-	
-	
+
+	<select id="bestMovieList" resultType="vo.BestMovie_ViewVO"
+		parameterType="vo.MovieMate_UserVO">
+		select mmm.nation, AVG(mu.star_score) * 20 avg,
+		COUNT(mmm.nation) count FROM moviemate_movie mmm, movie_user mu WHERE
+		mmm.movie_idx = mu.movie_idx AND mu.star_score > 0 AND mu.user_idx =
+		#{user_idx} GROUP BY mmm.nation
+		ORDER BY count DESC
+	</select>
+
+	<select id="bestGenreList" resultType="vo.BestGenre_ViewVO"
+		parameterType="vo.MovieMate_UserVO">
+		select mmm.genre, AVG(mu.star_score) * 20 avg,
+		COUNT(mmm.nation) count FROM moviemate_movie mmm, movie_user mu WHERE
+		mmm.movie_idx = mu.movie_idx AND mu.star_score > 0 AND mu.user_idx =
+		#{user_idx} GROUP BY mmm.genre
+		ORDER BY count DESC
+	</select>
+
+	<select id="runtime" resultType="int"
+		parameterType="vo.MovieMate_UserVO">
+		SELECT ROUND(sum(running_time) / 60) FROM moviemate_movie mmm, movie_user mu
+		WHERE mmm.movie_idx = mu.movie_idx AND mu.user_idx = #{user_idx}
+	</select>
 
 </mapper>
 

@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import vo.CommentList_ViewVO;
 import vo.MovieMate_MovieVO;
+import vo.MovieMate_UserVO;
 import vo.Movie_UserVO;
+import vo.StarChart_ViewVO;
 
 public class Movie_UserDAO {
 
@@ -60,11 +62,18 @@ public class Movie_UserDAO {
 		int res = sqlSession.update("muser.update_starScore", vo);
 
 		return res;
+
+	}
+
+	public List<StarChart_ViewVO> star_scoreList(MovieMate_UserVO vo) {
+
+		List<StarChart_ViewVO> res = sqlSession.selectList("muser.star_scoreList", vo);
+
+		return res;
 	}
 
 	public int selectCount() {
-		  int count = sqlSession.selectOne("muser.movieCount");
-		  return count;
-		}
-
+		int count = sqlSession.selectOne("muser.movieCount");
+		return count;
+	}
 }

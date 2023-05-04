@@ -3,8 +3,11 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
+
+import vo.CastList_ViewVO;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
+import vo.MovieMate_UserVO;
 import vo.Movie_CastVO;
 
 public class MovieMate_CastDAO {
@@ -45,6 +48,20 @@ public class MovieMate_CastDAO {
 		List<MovieMate_CastVO> list = sqlSession.selectList("mmcast.search_cast", searchKeyword);
 
 		return list;
+	}
+	
+	public List<CastList_ViewVO> actorList(MovieMate_UserVO vo) {
+		
+		List<CastList_ViewVO> res = sqlSession.selectList("mmcast.actorList", vo);
+		
+		return res;
+	}
+
+	public List<CastList_ViewVO> directorList(MovieMate_UserVO vo) {
+		
+		List<CastList_ViewVO> res = sqlSession.selectList("mmcast.directorList", vo);
+		
+		return res;
 	}
 
 }

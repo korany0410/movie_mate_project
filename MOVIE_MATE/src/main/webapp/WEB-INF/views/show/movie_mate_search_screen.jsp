@@ -81,8 +81,6 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-
-	<!--<h1>서치 스크린 화면</h1>  -->
 	<header>
 		<%@ include file="/resources/jsp/header.jsp"%>
 	</header>
@@ -109,54 +107,87 @@ $(document).ready(function() {
 	</div>
 
 	<%-- 콘텐츠 검색결과 출력 --%>
-	
-		<div id="search_movie_result" class="carousel slide">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
+
+	<div id="search_movie_result" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<div class="row item">
 					<c:forEach var="i" begin="0" end="5">
-						<form>
-							<div class="movieInfo_box"
+						<c:if test="${not empty search_movie[i]}">
+							<div class="movieInfo_box col-2"
 								onclick="choice_screen(${search_movie[i].movie_idx});">
-								<div class="img_box">
-									<img class="profile_img" alt="${search_movie[i].title}"
-										src="${search_movie[i].profile_img }">
-								</div>
-								<div class="fw-bold info">${search_movie[i].title}</div>
-								<div class="info">${fn:substring(search_movie[i].release_date,0,4)}
-									• ${search_movie[i].nation}</div>
-								<div class="info">평균★${search_movie[i].star_score}</div>
+								<form>
+									<div class="img_box">
+										<c:choose>
+											<c:when
+												test="${search_movie[i].profile_img eq 'no_data.jpg'}">
+												<img class="profile_img" alt="${search_movie[i].title}"
+													src="/mate/resources/images/no_data.png">
+											</c:when>
+											<c:when test="${empty search_movie[i].profile_img}">
+												<img class="profile_img" alt="${search_movie[i].title}"
+													src="/mate/resources/images/no_data.png">
+											</c:when>
+											<c:otherwise>
+												<img class="profile_img" alt="${search_movie[i].title}"
+													src="${search_movie[i].profile_img}">
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div class="fw-bold info">${search_movie[i].title}</div>
+									<div class="info">${fn:substring(search_movie[i].release_date,0,4)}
+										• ${search_movie[i].nation}</div>
+									<div class="info">평균★${search_movie[i].star_score}</div>
+								</form>
 							</div>
-						</form>
+						</c:if>
 					</c:forEach>
 				</div>
-				<c:forEach var="index" begin="1" end="${movie_page}">
-					<div class="carousel-item">
+			</div>
+			<c:forEach var="index" begin="1" end="${slide_page}">
+				<div class="carousel-item">
+					<div class="row item">
 						<c:forEach var="i" begin="${index * 6}" end="${index * 6 + 5}">
 							<c:if test="${not empty search_movie[i]}">
-							    <form>
-								<div class="movieInfo_box"
+								<div class="movieInfo_box col-2"
 									onclick="choice_screen(${search_movie[i].movie_idx});">
-									<div class="img_box">
-										<img class="profile_img" alt="${search_movie[i].title}"
-											src="${search_movie[i].profile_img }">
-									</div>
-									<div class="fw-bold info">${search_movie[i].title }</div>
-									<div class="info">${search_movie[i].nation }</div>
-									<div class="info">${search_movie[i].genre }</div>
+									<form>
+										<div class="img_box">
+											<c:choose>
+												<c:when
+													test="${search_movie[i].profile_img eq 'no_data.jpg'}">
+													<img class="profile_img" alt="${search_movie[i].title}"
+														src="/mate/resources/images/no_data.png">
+												</c:when>
+												<c:when test="${empty search_movie[i].profile_img}">
+													<img class="profile_img" alt="${search_movie[i].title}"
+														src="/mate/resources/images/no_data.png">
+												</c:when>
+												<c:otherwise>
+													<img class="profile_img" alt="${search_movie[i].title}"
+														src="${search_movie[i].profile_img}">
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<div class="fw-bold info">${search_movie[i].title }</div>
+										<div class="info">${search_movie[i].nation }</div>
+										<div class="info">${search_movie[i].genre }</div>
+									</form>
 								</div>
-								</form>
 							</c:if>
 						</c:forEach>
 					</div>
-				</c:forEach>
-			</div>
-			<input type="button" class="carousel-control-prev"
-				data-bs-target="#search_movie_result" data-bs-slide="prev"
-				value="&lt;" /> <input type="button" class="carousel-control-next"
-				data-bs-target="#search_movie_result" data-bs-slide="next"
-				value="&gt;" />
+				</div>
+			</c:forEach>
 		</div>
-	
+		<input type="button" class="carousel-control-prev"
+			data-bs-target="#search_movie_result" data-bs-slide="prev"
+			value="&lt;" />
+		<input type="button" class="carousel-control-next"
+			data-bs-target="#search_movie_result" data-bs-slide="next"
+			value="&gt;" />
+	</div>
+
 	<%-- 유저 검색결과 출력 --%>
 	<div id="search_user_result">
 		<c:forEach var="user" items="${search_user}">
@@ -164,11 +195,9 @@ $(document).ready(function() {
 			<p>${user.username}</p>
 		</c:forEach>
 	</div>
-
-
 	<hr>
 	<%-- 영화 검색결과 출력 --%>
-	  <c:if test="${not empty search_movie }">
+	<c:if test="${not empty search_movie }">
 		<div id="movie_box">
 			<div id="cast_list" class="carousel slide">
 				<div class="carousel-inner">
@@ -176,25 +205,37 @@ $(document).ready(function() {
 					<div class="carousel-item active">
 						<div class="row">
 							<c:forEach var="i" begin="0" end="8">
-							
-								<div class="movieInfo_box col-4">
-									<form class="box">
-										<div class="movieInfo_box_2"
-											onclick="choice_screen(${search_movie[i].movie_idx});">
-											<div class="img_box_2">
-												<img class="profile_img_2" alt="${search_movie[i].title}"
-													src="${search_movie[i].profile_img }">
+								<c:if test="${not empty search_movie[i]}">
+									<div class="movieInfo_box col-4">
+										<form class="box">
+											<div class="movieInfo_box_2"
+												onclick="choice_screen(${search_movie[i].movie_idx});">
+												<div class="img_box_2">
+													<c:choose>
+														<c:when
+															test="${search_movie[i].profile_img eq 'no_data.jpg'}">
+															<img class="profile_img_2" alt="${search_movie[i].title}"
+																src="/mate/resources/images/no_data.png">
+														</c:when>
+														<c:when test="${empty search_movie[i].profile_img}">
+															<img class="profile_img_2" alt="${search_movie[i].title}"
+																src="/mate/resources/images/no_data.png">
+														</c:when>
+														<c:otherwise>
+															<img class="profile_img_2" alt="${search_movie[i].title}"
+																src="${search_movie[i].profile_img}">
+														</c:otherwise>
+													</c:choose>
+												</div>
+												<div class="info_box_2">
+													<div class="fw-bold info_2">${search_movie[i].title}</div>
+													<div class="info_3">${fn:substring(search_movie[i].release_date,0,4)}
+														• ${search_movie[i].nation}</div>
+												</div>
 											</div>
-											<div class="info_box_2">
-												<div class="fw-bold info_2">${search_movie[i].title}</div>
-												<div class="info_3">${fn:substring(search_movie[i].release_date,0,4)}
-													• ${search_movie[i].nation}</div>
-												<%-- <div class="info">평균★${search_movie[i].star_score}</div> --%>
-											</div>
-										</div>
-									</form>
-								</div>
-							 	
+										</form>
+									</div>
+								</c:if>
 							</c:forEach>
 						</div>
 					</div>
@@ -228,13 +269,12 @@ $(document).ready(function() {
 					</c:forEach>
 				</div>
 				<input type="button" class="carousel-control-prev"
-					data-bs-target="#cast_list" data-bs-slide="prev" value="&lt;" /> <input
-					type="button" class="carousel-control-next"
+					data-bs-target="#cast_list" data-bs-slide="prev" value="&lt;" />
+				<input type="button" class="carousel-control-next"
 					data-bs-target="#cast_list" data-bs-slide="next" value="&gt;" />
 			</div>
 		</div>
-	 </c:if>
-
+	</c:if>
 	<footer style="height: 100px;"> </footer>
 
 </body>

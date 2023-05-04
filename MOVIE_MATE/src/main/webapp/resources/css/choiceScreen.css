@@ -5,11 +5,11 @@ body {
 }
 
 .wall {
-	height: 60px;
+	height: 100px;
 }
 
 .main_box {
-	width: 1400px%;
+	width: 1400px;
 }
 
 .left, .right {
@@ -284,12 +284,16 @@ body {
 }
 
 .carousel-control-prev, .carousel-control-next {
-	height: 35px;
-	width: 35px !important;
+	height: 30px;
+	width: 30px !important;
 	top: 50% !important;
 	color: #000 !important;
 	font-weight: bold;
 	font-size: 25px;
+	line-height: 15px;
+	border: 1px solid gray !important;
+	border-radius: 50px !important;
+	opacity: 1 !important;
 }
 
 .carousel-control-next {
@@ -313,7 +317,7 @@ body {
 	display: none;
 }
 
-.commentIngo_box {
+.commentInfo_box {
 	padding: 0 !important;
 }
 
@@ -564,4 +568,39 @@ body {
 	float: right;
 	padding-top: 20px;
 	margin-right: 20px;
+}
+
+.commentInfo_box {
+	cursor: pointer;
+}
+
+.comment_info {
+	cursor: pointer;
+}
+
+.cocomment_upComment_box {
+	display: flex;
+	padding: 3px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.cocomment_comment {
+	margin-left: 6px;
+}
+
+.cocomment_up:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 7px;
+	color: black;
+}
+
+.cocomment_comment:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 7px;
+	color: black;
+}
+
+.commentInfo_box {
+	width: 44% !important;
+	margin: 0 10px;
 }

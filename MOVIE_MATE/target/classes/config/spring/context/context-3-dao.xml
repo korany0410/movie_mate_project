@@ -3,37 +3,40 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<bean id="movieCast_dao" class="dao.Movie_CastDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="movieTag_dao" class="dao.Movie_TagDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="movieUser_dao" class="dao.Movie_UserDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="moviemateCast_dao" class="dao.MovieMate_CastDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="moviemateComment_dao" class="dao.MovieMate_CommentDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="moviemateGenreRec_dao" class="dao.MovieMate_Genre_RecDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="moviemateMovie_dao" class="dao.MovieMate_MovieDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="moviemateTag_dao" class="dao.MovieMate_TagDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="moviemateUser_dao" class="dao.MovieMate_UserDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-<bean id="userCast_dao" class="dao.User_CastDAO">
-	<property name="sqlSession" ref="sqlSessionBean"></property>
-</bean>
-
-<bean id="kakao" class="service.KakaoLoginService"></bean>
+	<bean id="movieCast_dao" class="dao.Movie_CastDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="movieTag_dao" class="dao.Movie_TagDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="movieUser_dao" class="dao.Movie_UserDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="moviemateCast_dao" class="dao.MovieMate_CastDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="moviemateComment_dao" class="dao.MovieMate_CommentDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="moviemateGenreRec_dao"
+		class="dao.MovieMate_Genre_RecDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="moviemateMovie_dao" class="dao.MovieMate_MovieDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="moviemateTag_dao" class="dao.MovieMate_TagDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="moviemateUser_dao" class="dao.MovieMate_UserDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="userCast_dao" class="dao.User_CastDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="userComment_dao" class="dao.User_CommentDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	<bean id="kakao" class="service.KakaoLoginService"></bean>
 
 </beans>
