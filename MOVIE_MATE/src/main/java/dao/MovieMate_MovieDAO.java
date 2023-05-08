@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.BestGenre_ViewVO;
+import vo.BestMovie_ViewVO;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_MovieVO;
+import vo.MovieMate_UserVO;
 import vo.Movie_CastVO;
 
 import vo.Movie_UserVO;
@@ -193,6 +196,29 @@ public class MovieMate_MovieDAO {
 		return wantList;
 	}
 
+	// 내가 좋아요 누른 영화 중 베스트 영화
+	public List<BestMovie_ViewVO> bestMovieList(MovieMate_UserVO vo){
+		
+		List<BestMovie_ViewVO> res = sqlSession.selectList("mmmovie.bestMovieList", vo);
+		
+		return res;
+	}
+	
+	// 내가 좋아요 누른 영화중 베스트 장르
+	public List<BestGenre_ViewVO> bestGenreList(MovieMate_UserVO vo){
+		
+		List<BestGenre_ViewVO> res = sqlSession.selectList("mmmovie.bestGenreList", vo);
+		
+		return res;
+	}
+	
+	// 런타임
+	public int runtime(MovieMate_UserVO vo) {
+		
+		int res = sqlSession.selectOne("mmmovie.runtime", vo);
+		
+		return res;
+	}
 
 
 }

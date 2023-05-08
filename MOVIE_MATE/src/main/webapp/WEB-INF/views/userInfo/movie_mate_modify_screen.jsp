@@ -41,7 +41,14 @@
 		var img = document.getElementById('upload_img');
 		img.src = URL.createObjectURL(file);
 	}
-
+    var id_check = true;
+    var pwd_check = false;
+    function profile_change(input) {
+	var file = input.files[0];
+	var img = document.getElementById('upload_img');
+	img.src = URL.createObjectURL(file);
+    }
+    
 	function username_confirm() {
 		var username = document.getElementById('username').value;
 		var username_check = document.getElementById('username_check');
@@ -77,7 +84,17 @@
 		} else {
 			pwd_check.className = "bx bx-x-circle";
 		}
+
+    function password_confirm() {
+	var password = document.getElementById('pwd').value;
+	var pwd_check = document.getElementById('pwd_check');
+	var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+	if (check.test(password)) {
+	    pwd_check.className = "bx bx-check-circle ccc";
+	} else {
+	    pwd_check.className = "bx bx-x-circle ccc";
 	}
+
 
 	function password_confirm_confirm() {
 		var pwd = document.getElementById('pwd').value;
@@ -96,6 +113,21 @@
 			pwd_check = false;
 			pwd_confirm_check.className = "bx bx-x-circle";
 		}
+
+    function password_confirm_confirm() {
+	var pwd = document.getElementById('pwd').value;
+	var pwd_confirm = document.getElementById('pwd_confirm').value;
+	var pwd_confirm_check = document.getElementById('pwd_confirm_check');
+	var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+	if (check.test(pwd_confirm)) {
+	    if (pwd == pwd_confirm) {
+		pwd_check = true;
+		pwd_confirm_check.className = "bx bx-check-circle ccc";
+	    } else {
+		pwd_check = false;
+		pwd_confirm_check.className = "bx bx-x-circle ccc";
+	    }
+
 	}
 
 	function modify() {
@@ -191,6 +223,6 @@
 		<input type="hidden" name="user_idx" value="${userIdx}" /> <input
 			type="hidden" name="profile_img" value="${userImg}">
 	</form>
-
+	<div class="wall"></div>
 </body>
 </html>

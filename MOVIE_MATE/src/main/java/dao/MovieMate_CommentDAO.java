@@ -8,6 +8,8 @@ import vo.CommentList_ViewVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
 import vo.Movie_CommentVO;
+import vo.User_CastVO;
+import vo.User_CommentVO;
 
 public class MovieMate_CommentDAO {
 
@@ -46,24 +48,81 @@ public class MovieMate_CommentDAO {
 	}
 
 	public int selectCount() {
-		
+
 		int res = sqlSession.selectOne("mmcomment.commentCount");
-		
+
 		return res;
 	}
-	
-	public CommentList_ViewVO selectCommentOrigin(Movie_CommentVO vo){
-		CommentList_ViewVO comment_origin = sqlSession.selectOne("mmcomment.commentOrigin", vo);
-		return comment_origin;
-	}
-	
-	public List<CommentList_ViewVO> selectCommentList(Movie_CommentVO vo){
+
+	public List<CommentList_ViewVO> selectCommentList(Movie_CommentVO vo) {
+
 		List<CommentList_ViewVO> comment_list = sqlSession.selectList("mmcomment.commentList", vo);
+
 		return comment_list;
 	}
-	
+
 	public int cocomment_insert(MovieMate_CommentVO vo) {
-		int cocomment_insert = sqlSession.insert("mmcomment.cocommentInsert",vo);
+
+		int cocomment_insert = sqlSession.insert("mmcomment.cocommentInsert", vo);
+
 		return cocomment_insert;
+
 	}
+
+	public CommentList_ViewVO selectCommentOrigin(Movie_CommentVO vo) {
+
+		CommentList_ViewVO comment_origin = sqlSession.selectOne("mmcomment.commentOrigin", vo);
+
+		return comment_origin;
+	}
+
+	public int isup_count(CommentList_ViewVO vo) {
+
+		int res = sqlSession.selectOne("mmcomment.isupCount", vo);
+
+		return res;
+	}
+
+	public CommentList_ViewVO commentselectOne(CommentList_ViewVO vo) {
+
+		CommentList_ViewVO res = sqlSession.selectOne("mmcomment.userCommentData", vo);
+
+		return res;
+	}
+
+	public int insertData(CommentList_ViewVO vo) {
+
+		int res = sqlSession.insert("mmcomment.insertData", vo);
+
+		return res;
+	}
+
+	public int updateData(CommentList_ViewVO vo) {
+
+		int res = sqlSession.update("mmcomment.updateData", vo);
+
+		return res;
+	}
+
+	public int increaseUp(User_CommentVO vo) {
+
+		int res = sqlSession.update("mmcomment.increaseUp", vo);
+
+		return res;
+	}
+
+	public int decreaseUp(User_CommentVO vo) {
+
+		int res = sqlSession.update("mmcomment.decreaseUp", vo);
+
+		return res;
+	}
+
+	public int reload(User_CommentVO vo) {
+
+		int res = sqlSession.selectOne("mmcomment.reload", vo);
+
+		return res;
+	}
+
 }

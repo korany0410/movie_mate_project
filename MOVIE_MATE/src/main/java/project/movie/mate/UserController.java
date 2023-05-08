@@ -1,8 +1,8 @@
 package project.movie.mate;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
+import java.util.List;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -14,27 +14,30 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
+import dao.MovieMate_CommentDAO;
 import dao.MovieMate_UserDAO;
+import dao.User_CommentDAO;
+import vo.MovieMate_CommentVO;
 import vo.MovieMate_UserVO;
+import vo.Movie_UserVO;
+import vo.StarChart_ViewVO;
+
+import vo.User_CommentVO;
 
 @Controller
 public class UserController {
 
 	MovieMate_UserDAO moviemate_userdao;
+	User_CommentDAO user_commentdao;
+	MovieMate_CommentDAO moviemate_commentdao;
 
 	@Autowired
 	HttpServletRequest request;
@@ -42,8 +45,11 @@ public class UserController {
 	@Autowired
 	ServletContext app;
 
-	public UserController(MovieMate_UserDAO moviemate_userdao) {
+	public UserController(MovieMate_UserDAO moviemate_userdao, User_CommentDAO user_commentdao,
+			MovieMate_CommentDAO moviemate_commentdao) {
 		this.moviemate_userdao = moviemate_userdao;
+		this.user_commentdao = user_commentdao;
+		this.moviemate_commentdao = moviemate_commentdao;
 	}
 
 	@RequestMapping("/movie_mate_signUp_screen.do")
@@ -72,12 +78,12 @@ public class UserController {
 		int count = moviemate_userdao.double_check(moviemate_uservo);
 
 		System.out.println("double_check.do -> count : " + count);
-		
+
 		HttpSession session = request.getSession();
-		
+
 		String s_name = (String) session.getAttribute("userName");
-		
-		if(s_name.equals(moviemate_uservo.getUsername())) {
+
+		if (s_name.equals(moviemate_uservo.getUsername())) {
 			return "possible";
 		}
 
@@ -91,7 +97,7 @@ public class UserController {
 	@RequestMapping("/movie_mate_login_screen.do")
 	public String movie_mate_login_screen(Model model, String pathname, String code) {
 
-		if(code != null) {
+		if (code != null) {
 			System.out.println(code);
 		}
 		model.addAttribute("pathname", pathname);
@@ -146,9 +152,6 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
-	
-	
-
 
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model) {
@@ -161,28 +164,6 @@ public class UserController {
 		model.addAttribute("userInfo", user_info);
 		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
 	}
-
-	/*
-	 * @RequestMapping("/movie_mate_modify_screen.do")
-	 * 
-	 * @ResponseBody public String modify(MovieMate_UserVO vo) { MovieMate_UserDAO
-	 * dao = new MovieMate_UserDAO(); int res = dao.modify(vo); String result =
-	 * "수정 성공";
-	 * 
-	 * if (res == 0) { result = "수정 실패"; }
-	 * 
-	 * return result; }
-	 */
-
-//	@RequestMapping("/movie_mate_modify_screen.do")
-//	public String movie_mate_modify_screen(Model model, MovieMate_UserVO uservo) {
-//
-//
-//		MovieMate_UserVO userInfo = moviemate_userdao.userInfo(uservo);
-//
-//		model.addAttribute("userInfo", userInfo);
-//		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
-//	}
 
 	@RequestMapping("/modify_userInfo.do")
 	public String modify_userInfo(MovieMate_UserVO uservo) {
@@ -228,33 +209,36 @@ public class UserController {
 
 		return "movie_mate_mypage_screen.do";
 	}
-	
 
 	@RequestMapping("/movie_mate_login_kakao.do")
 	public String kakao(@RequestParam String code) {
 		System.out.println(code);
 		return "kakaoLogin?code=" + code;
 	}
+
+	@RequestMapping("/user_comment_isup.do")
+	@ResponseBody
+	public String user_comment(User_CommentVO uc_vo) {
+
+		User_CommentVO data = user_commentdao.selectOne(uc_vo);
+
+		if (data == null) {
+			user_commentdao.insertData(uc_vo);
+			moviemate_commentdao.increaseUp(uc_vo);
+		} else {
+			if (data.getIsup().equals("yes")) {
+				data.setIsup("no");
+				user_commentdao.updateData(data);
+				moviemate_commentdao.decreaseUp(data);
+			} else {
+				data.setIsup("yes");
+				user_commentdao.updateData(data);
+				moviemate_commentdao.increaseUp(data);
+			}
+		}
+
+		int up = moviemate_commentdao.reload(uc_vo);
+		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + data.getIsup();
+	}
 	
-
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
