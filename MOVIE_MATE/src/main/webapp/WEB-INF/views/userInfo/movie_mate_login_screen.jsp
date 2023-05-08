@@ -6,14 +6,20 @@
 <link rel="icon" href="/mate/resources/images/logo_icon_2.png" />
 <link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_2.png" />
 <title>무비메이트</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mate/resources/css/signUp.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
@@ -47,18 +53,18 @@
 	}
 </script>
 <style type="text/css">
-.wrap {
+/* .wrap {
 	width: 490px;
-	padding: 40px 20px 20px 20px;
+	padding: 200px 20px 20px 20px;
 	background-color: #f5f6f7;
 	position: absolute;
-	top: 50%;
+	top: 80%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 30px;
 	box-sizing: border-box;
-}
-
+	display: block;
+} */
 
 /* .title {
    margin: 0 auto;
@@ -71,18 +77,20 @@
     background-size: 240px auto;
     margin-bottom: 20px;
 } */
-.kakao{
-   margin-top: 15px;
-   height: 60px;
-   border: solid 1px #FEE500;
-   background: #FEE500;
-   color: #3c1d1e;
-   font-size: 18px; 
-   box-sizing: border-box;
-   border-radius: 5px;
-   cursor: pointer;
-   width: 450px;
-   display: flex;
+.kakao {
+	height: 60px;
+	border: solid 1px #FEE500;
+	background: #FEE500;
+	color: #3c1d1e;
+	font-size: 18px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 450px;
+	display: flex;
+	margin: 0 auto;
+	position: relative;
+	top: -80px;
 }
 
 .kakao_i {
@@ -92,7 +100,6 @@
 	background-size: 90%;
 	background-position: 50%;
 	margin: 0 20px;
-
 }
 
 .kakao_txt {
@@ -114,7 +121,8 @@ a {
 	<form>
 		<div id="main_box">
 			<div class="logo_box input-group mb-2">
-				<img class="logo_img" src="/mate/resources/images/logo_sub.png" onclick="location.href='movie_mate_main_screen.do'">
+				<img class="logo_img" src="/mate/resources/images/logo_sub.png"
+					onclick="location.href='movie_mate_main_screen.do'">
 			</div>
 			<div class="input_box input-group mb-2" id="email_box">
 				<input type="email" name="email" class="form-control" placeholder="이메일">
@@ -123,24 +131,22 @@ a {
 				<input type="password" name="pwd" class="form-control" placeholder="비밀번호">
 			</div>
 			<div class="input_box input-group mb-2">
-				<input type="button" name="button" style="background-color: #7900ff" value="로그인" class="btn btn-outline-danger"
-					onclick="send(this.form);">
+				<input type="button" name="button" style="background-color: #7900ff" value="로그인"
+					class="btn btn-outline-danger" onclick="send(this.form);">
 			</div>
 			<div class="link_box input-group mb-2" id="link_box">
-				계정이 없으신가요?
-				<a href="movie_mate_signUp_screen.do">회원가입</a>
+				계정이 없으신가요? <a href="movie_mate_signUp_screen.do">회원가입</a>
 			</div>
 			<div class="openApi_box input-group mb-2"></div>
 		</div>
 	</form>
-	<div class="wrap">
-    <!-- <div class="title">로그인</div> -->
-     <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code">
-     	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
-     	<div class="kakao_i"></div>
-      	<div class="kakao_txt">카카오톡으로 간편로그인 </div>
-   	</a>
-    </div>
-   
+
+	<!-- <div class="title"></div> -->
+	<a class="kakao"
+		href="https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code">
+		<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
+		<div class="kakao_i"></div>
+		<div class="kakao_txt">카카오톡으로 간편로그인</div>
+	</a>
 </body>
 </html>

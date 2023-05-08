@@ -1,38 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/mate/resources/images/logo_icon_2.png" />
-<link rel="apple-touch-icon"
-	href="/mate/resources/images/logo_icon_2.png" />
-<title>무비메이트</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/mate/resources/css/signUp.css?ver=1" />
-<link rel="stylesheet" href="/mate/resources/css/reset.css" />
+<title>Insert title here</title>
+<link rel="stylesheet" href="/mate/resources/css/kakaoSignUp.css?ver=1">
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript">
+
 	var user_check1 = false;
 	var user_check2 = false;
 	var email_check = false;
 	var pwd_check = false;
+
+	window.onload = function() {
+		check_username = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,18}$/;
+		check_email = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
+		var username = "${name}";
+		var email = "${email}";
+		console.log(username);
+		console.log(email);
+		user_check1 = check_username.test(username);
+		email_check = check_email.test(email);
+		console.log("user_check1 = " + user_check1);
+		console.log("user_email = " + email_check);
+	}
 	function signUp(f) {
 		if (!(user_check1 && user_check2)) {
 			if (!user_check1) {
@@ -75,10 +67,10 @@
 	}
 
 	function double_check(f) {
+		console.log(f);
 		var username = f.username.value;
 		var url = "double_check.do";
 		var param = "username=" + username;
-		console.log(username);
 		sendRequest(url, param, resDouble, "GET");
 	}
 
@@ -96,12 +88,13 @@
 		}
 	}
 
+	// /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
 	function validation(v) {
 		var check;
 		var value = document.getElementById(v).value;
 		console.log(value);
 		if (v == 'username') {
-			check = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
+			check = /^[A-Za-z][A-Za-z0-9]{2,18}[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
 			user_check1 = check.test(value);
 			user_check2 = false;
 		} else if (v == 'email') {
@@ -114,40 +107,99 @@
 		console.log(check.test(value));
 	}
 </script>
+
+<style>
+ .img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin: 0 auto;
+	display: block;
+	
+}
+
+ .img2 {
+	margin: 0 auto;
+	display: block;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	cursor: pointer;
+}
+
+#id_box {margin-top: 20px;
+
+}
+
+.form-control{height: 30px;
+width: 300px;
+position: relative;
+right: -50px;
+margin-bottom: 20px;
+}
+
+#signUp_btn{cursor: pointer;
+ background-color:#7900ff;
+	width: 300px;
+	height: 30px;
+	border-radius: 10px;
+	color: white;
+	position: relative;
+	right: -75px;
+}  
+
+#joong {position: relative;
+		left: 50px;}
+
+
+
+</style>
 </head>
 <body>
-	<form>
+	<%-- <form>
+		<img class="img2" src="/mate/resources/images/logo_main.png" alt="" height="35">
+		<h2>회원가입</h2>
+		<h2>프로필 이미지</h2>
+		<img class="img" src="${image}" /><span>이름</span> <input type="text" name="username" placeholder="이름"
+			class="form-control" id="username" aria-describedby="basic-addon2"
+			onkeyup="validation('username');" value="${name}" /> <input type="button" class="btn"
+			value="중복" onclick="double_check(this.form);" /> email <input type=text value="${email}"
+			onkeyup="validation('email');" name="email" /> <input type="password"
+			onkeyup="validation('pwd');" name="pwd" id="pwd" /> <input type="button" value="회원가입"
+			onclick="signUp(this.form);" />
+	</form> --%>
+	
+	<form class="form">
 		<div id="main_box">
 			<div class="logo_box input-group mb-2">
-				<img class="logo_img" alt=""
-					src="/mate/resources/images/logo_sub.png">
+			<img class="img2" src="/mate/resources/images/logo_main.png" alt="" height="35" onclick="location.href='movie_mate_main_screen.do'">
+            <img class="img" src="${image}" />
+				
 			</div>
 			<div class="input_box input-group mb-2" id="id_box">
-				<input type="text" name="username" placeholder="이름"
+				<input type="text" name="username" 
 					class="form-control" id="username" aria-describedby="basic-addon2"
-					onkeyup="validation('username');" /> <span
+					onkeyup="validation('username');" value="${name}" /> <span
 					class="input-group-text" id="basic-addon2"> <input
-					type="button" class="btn" value="중복"
+					type="button" class="btn" value="중복" id="joong"
 					onclick="double_check(this.form);" />
 				</span>
 			</div>
 			<div class="input_box input-group mb-2" id="email_box">
-				<input type="text" name="email" placeholder="이메일"
-					class="form-control" id="email" onkeyup="validation('email');" />
+				<input type="text" name="email" 
+					class="form-control" id="email" onkeyup="validation('email');" value="${email}" />
 			</div>
 			<div class="input_box input-group mb-2" id="pwd_box">
-				<input type="text" name="pwd" placeholder="비밀번호"
-					class="form-control" id="pwd" onkeyup="validation('pwd');" />
+				<input type="password" name="pwd" placeholder="비밀번호"
+					class="form-control" id="pwd" onkeyup="validation('pwd');"/>
 			</div>
-			<div class="input_box input-group mb-2">
-				<input type="button" value="회원가입" class="btn btn-outline-danger"
+		     
+		     <input type="button" value="회원가입" class="btn btn-outline-danger"
 					id="signUp_btn" onclick="signUp(this.form);" />
-			</div>
-			<div class="link_box input-group mb-2" id="link_box">
-				이미 가입하셨나요? <a href="movie_mate_login_screen.do">로그인</a>
-			</div>
-			<div class="openApi_box input-group mb-2"></div>
+			
 		</div>
 	</form>
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

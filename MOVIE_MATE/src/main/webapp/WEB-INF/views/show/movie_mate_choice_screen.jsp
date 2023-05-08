@@ -399,5 +399,10 @@
 			<div class="dummy col-1 col-lg-2"></div>
 		</div>
 	</div>
+	
+	<footer>
+		<%@ include file="/resources/jsp/footer.jsp"%>
+	</footer>
+	
 </body>
 </html>

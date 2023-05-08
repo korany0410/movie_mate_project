@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+body {
+	background-color: #fafafa;
+	overflow-y: hidden;
+}
+
+#main_box {
+	height: 600px !important;
+	width: 450px;
+	margin: 0px auto;
+	border: 1px solid gray;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.btn {
+	margin: 0;
+}
+
+.logo_img:hover{
+	cursor: pointer;
+}
+
+.input-group {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.logo_img {
+	width: 350px;
+	margin: 15px;
+}
+
+.input-group-text {
+	padding: 0;
+}
+
+.btn-outline-danger {background-color:#7900ff;
+	width: 400px;
+}

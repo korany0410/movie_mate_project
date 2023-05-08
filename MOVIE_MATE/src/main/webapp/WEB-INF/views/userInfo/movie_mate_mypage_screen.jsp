@@ -21,6 +21,10 @@
     function modify() {
 	location.href = "movie_mate_modify_screen.do?user_idx=${userIdx}&username=${userName}";
     }
+    
+    function analyzeList(){
+    location.href = "movie_mate_myChoice.do";
+    }
 </script>
 </head>
 <body>
@@ -60,5 +64,7 @@
 			<div style="height: 30px;"></div>
 		</div>
 	</div>
+	
+	
 </body>
 </html>

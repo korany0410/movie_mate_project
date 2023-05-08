@@ -72,12 +72,12 @@ public class UserController {
 		int count = moviemate_userdao.double_check(moviemate_uservo);
 
 		System.out.println("double_check.do -> count : " + count);
-		
+
 		HttpSession session = request.getSession();
-		
+
 		String s_name = (String) session.getAttribute("userName");
-		
-		if(s_name.equals(moviemate_uservo.getUsername())) {
+
+		if (s_name != null && s_name.equals(moviemate_uservo.getUsername())) {
 			return "possible";
 		}
 
@@ -91,7 +91,7 @@ public class UserController {
 	@RequestMapping("/movie_mate_login_screen.do")
 	public String movie_mate_login_screen(Model model, String pathname, String code) {
 
-		if(code != null) {
+		if (code != null) {
 			System.out.println(code);
 		}
 		model.addAttribute("pathname", pathname);
@@ -146,9 +146,6 @@ public class UserController {
 
 		return "/WEB-INF/views/userInfo/movie_mate_myChoice.jsp";
 	}
-	
-	
-
 
 	@RequestMapping("/movie_mate_modify_screen.do")
 	public String movie_mate_modify_screen(Model model) {
@@ -228,32 +225,12 @@ public class UserController {
 
 		return "movie_mate_mypage_screen.do";
 	}
-	
+
 	@RequestMapping("/movie_mate_login_kakao.do")
 	public String kakao(@RequestParam String code) {
 		System.out.println(code);
 		return "kakaoLogin?code=" + code;
 	}
 	
-
-  
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -15,6 +15,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -623,6 +624,15 @@ public class MovieController {
 
 	}
 
+
+	@RequestMapping("/movie_count.do")
+	@ResponseBody
+	public String movie_count(Model model) {
+		int count_user = movie_userdao.selectCount();
+		int count_comment = moviemate_commentdao.selectCount();
+
+		return Integer.toString(count_comment + count_user);}
+
 	@RequestMapping("/moviemate_cocomment_insert.do")
 	public String moviemate_cocomment_insert(Model model, MovieMate_CommentVO vo) {
 
@@ -630,6 +640,7 @@ public class MovieController {
 
 		return "redirect:movie_mate_comment_moreInfo_screen.do?movie_idx=" + vo.getM_ref() + "&comment_idx="
 				+ vo.getC_ref();
+
 	}
 
 }
