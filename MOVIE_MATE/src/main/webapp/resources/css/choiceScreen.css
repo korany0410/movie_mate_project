@@ -9,7 +9,7 @@ body {
 }
 
 .main_box {
-	width: 1400px;
+	width: 100vw;
 }
 
 .left, .right {
@@ -306,6 +306,11 @@ body {
 
 .cast_name {
 	font-weight: bold;
+	color: rgba(0,0,0,7);
+}
+.cast_name:hover{
+	color:black;
+	font-size: 17px;
 }
 
 .cast_type {
@@ -399,6 +404,10 @@ body {
 
 .comment_box {
 	margin: 10px 10px 15px 10px;
+	cursor: pointer;
+}
+.comment_box:hover{
+	font-weight: 900;
 }
 
 #want {
@@ -582,10 +591,16 @@ body {
 	display: flex;
 	padding: 3px;
 	color: rgba(0, 0, 0, 0.6);
+
+}
+cocomment_up{
+	
+	
 }
 
 .cocomment_comment {
 	margin-left: 6px;
+	
 }
 
 .cocomment_up:hover {
