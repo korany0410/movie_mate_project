@@ -39,9 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="top10_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
 		SELECT * FROM (SELECT RANK() OVER(ORDER BY star_score
-		DESC) no, m.*
+		DESC, release_date desc) no, m.*
 		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
-		'no_data.jpg') m )
+		'no_data.jpg' AND release_date &lt;= '20200101') m )
 		WHERE (no BETWEEN 1 AND 15)
 	</select>
 
@@ -128,9 +128,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="runtime" resultType="int"
 		parameterType="vo.MovieMate_UserVO">
-		SELECT ROUND(sum(running_time) / 60) FROM moviemate_movie mmm, movie_user mu
-		WHERE mmm.movie_idx = mu.movie_idx AND mu.user_idx = #{user_idx}
+		SELECT ROUND(sum(running_time) / 60) FROM
+		moviemate_movie mmm, movie_user mu
+		WHERE mmm.movie_idx = mu.movie_idx
+		AND mu.user_idx = #{user_idx}
 	</select>
+
+	<update id="update_starScore" parameterType="vo.Movie_UserVO">
+		UPDATE
+		moviemate_movie SET star_score = #{star_score} WHERE movie_idx =
+		#{movie_idx}
+	</update>
+
 
 </mapper>
 

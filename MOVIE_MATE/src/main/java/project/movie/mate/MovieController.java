@@ -626,6 +626,10 @@ public class MovieController {
 
 		System.out.println("starScore" + vo.getStar_score());
 		movie_userdao.update_starScore(vo);
+		double avg = movie_userdao.avg(vo);
+		avg = Math.round(avg * 10) / 10.0;
+		vo.setStar_score(avg);
+		moviemate_moviedao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
 	}

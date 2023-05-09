@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .main_box {
-	min-height: 60vh;
+	min-height: 60vh !important;
 }
 
 .comment_box {
@@ -21,9 +21,11 @@
 	float: left;
 	display: flex;
 }
-.cocomment_profile_img{
+
+.cocomment_profile_img {
 	margin-right: 5px;
 }
+
 .user_box_name {
 	cursor: pointer;
 	padding-bottom: 15px;
@@ -34,7 +36,8 @@
 .comment_starWant {
 	font-size: 18px;
 	border-radius: 18px;
-	padding: 1px 10px; background-color : white;
+	padding: 1px 10px;
+	background-color: white;
 	float: right;
 	background-color: white;
 }
@@ -52,25 +55,30 @@
 .bxs-star {
 	font-size: 16px;
 }
-.cocomment_upComment_box{
+
+.cocomment_upComment_box {
 	display: flex;
 	margin-top: 10px;
 	font-size: 18px;
 }
-.cocomment_up{
+
+.cocomment_up {
 	cursor: pointer;
 	padding: 2px 6px 2px 6px;
 	border-radius: 5px;
 }
-.cocomment_up:hover{
+
+.cocomment_up:hover {
 	background-color: #c8c8c8;
 }
-.cocomment_comment{
-	cursor:pointer;
+
+.cocomment_comment {
+	cursor: pointer;
 	margin-left: 15px;
 	padding: 2px 6px 2px 6px;
 	border-radius: 5px;
 }
-.cocomment_comment:hover{
+
+.cocomment_comment:hover {
 	background-color: #c8c8c8;
 }

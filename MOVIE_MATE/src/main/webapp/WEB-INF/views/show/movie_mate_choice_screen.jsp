@@ -162,11 +162,6 @@
 		
 		}
 	}
-    
-/* 	function moreInfo(idx) {
-		location.href = "movie_mate_comment_moreInfo_screen.do?comment_idx"+idx;
-	} */
-	
 </script>
 </head>
 <body>
@@ -281,7 +276,7 @@
 							onclick="update_comment(this.form);" />
 					</form>
 				</div>
-				<div class="info_box">
+				<div class="Choiceinfo_box">
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
