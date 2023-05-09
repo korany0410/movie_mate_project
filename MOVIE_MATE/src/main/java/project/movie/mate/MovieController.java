@@ -329,7 +329,7 @@ public class MovieController {
 		model.addAttribute("top10_list", top10_list);
 
 		// 이주의 배우
-		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("마동석");
 		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
@@ -364,7 +364,7 @@ public class MovieController {
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
 
 		total_chart.put("recommend", recommend_list);
-		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
+		total_chart_name.put("recommend", "MovieMate 이 주의 마동석");
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");
