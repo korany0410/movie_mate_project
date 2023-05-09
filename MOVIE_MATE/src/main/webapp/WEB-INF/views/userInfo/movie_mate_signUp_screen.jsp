@@ -76,8 +76,9 @@
 
     function double_check(f) {
 	var username = f.username.value;
+	var email = f.email.value;
 	var url = "double_check.do";
-	var param = "username=" + username;
+	var param = "username=" + username + "&email=" + email;
 	sendRequest(url, param, resDouble, "GET");
     }
 

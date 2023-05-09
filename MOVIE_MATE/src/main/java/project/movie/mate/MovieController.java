@@ -600,6 +600,10 @@ public class MovieController {
 
 		System.out.println("starScore" + vo.getStar_score());
 		movie_userdao.update_starScore(vo);
+		double avg = movie_userdao.avg(vo);
+		avg = Math.round(avg * 10) / 10.0;
+		vo.setStar_score(avg);
+		moviemate_moviedao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
 	}
@@ -669,7 +673,7 @@ public class MovieController {
 			count += star_map.get(key);
 			if (most <= star_map.get(key)) {
 				most = star_map.get(key);
-				model.addAttribute("most", star_map.get(key));
+				model.addAttribute("most", key);
 			}
 		}
 		avg = avg / count;
@@ -767,7 +771,7 @@ public class MovieController {
 		model.addAttribute("bestActorList", bestActorList);
 		model.addAttribute("bestDirectorList", bestDirectorList);
 		model.addAttribute("avg", Math.round(avg * 10.0) / 10.0);
-		model.addAttribute("size", star_map.size());
+		model.addAttribute("size", count);
 		model.addAttribute("star_map", star_map);
 		model.addAttribute("bestMovieV", bestMovieList);
 		model.addAttribute("bestMovieK", keySet);

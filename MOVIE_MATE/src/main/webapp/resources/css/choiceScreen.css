@@ -5,11 +5,11 @@ body {
 }
 
 .wall {
-	height: 100px;
+	height: 60px;
 }
 
 .main_box {
-	width: 1400px;
+	width: 100vw;
 }
 
 .left, .right {

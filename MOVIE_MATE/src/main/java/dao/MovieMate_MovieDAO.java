@@ -219,6 +219,14 @@ public class MovieMate_MovieDAO {
 		
 		return res;
 	}
+	
+	// 영화 평균 계산
+	public int  update_starScore(Movie_UserVO vo) {
+		
+		int res = sqlSession.update("mmmovie.update_starScore", vo);
+		
+		return res;
+	}
 
 
 }
