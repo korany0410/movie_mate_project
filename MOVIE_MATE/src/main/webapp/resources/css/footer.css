@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+
+.footer_main_box {
+	background: black;
+	padding: 0 0 50px 0;
+}
+
+
+
 .footer_box {
 	text-decoration:none;
 	color: white;
@@ -65,19 +73,23 @@
 	float: left;
 	
 }
+
 .icon_box {
 	float:right;
 	right: 0px;
 }
+
 .link_icon{
 	color: black;
 	margin-right: 3px;
 }
+
 .link_icon_i{
 	color: #c8c8c8;
 	font-size:30px;	
 	
 }
+
 .link_icon_i:hover{
 	color:#7900FF;
 

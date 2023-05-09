@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+body {
+	background-color: #fafafa;
+	overflow-y: hidden;
+}
+
+#kakao_main_box {
+	height: 600px !important;
+	width: 450px;
+	margin: 0px auto;
+	border: 1px solid gray;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.kakao_btn {
+	margin: 0;
+}
+
+
+
+.kakao_input-group {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.kakao_logo_img {
+	width: 350px;
+	margin: 15px;
+}
+
+.kakao_input-group-text {
+	padding: 0;
+}
+
+.kakao_btn-outline-danger {background-color:#7900ff;
+	width: 400px;
+	position: relative;
+	right: -30px;
+}
+
+ .kakao_img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin: 0 auto;
+	display: block;
+	
+}
+
+ .kakao_img2 {
+	margin: 0 auto;
+	display: block;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	cursor: pointer;
+}
+
+#kakao_id_box {margin-top: 20px;
+
+}
+
+.kakao_form-control{height: 30px;
+width: 300px;
+position: relative;
+right: -50px;
+margin-bottom: 20px;
+}
+
+#kakao_signUp_btn{cursor: pointer;
+ background-color:#7900ff;
+	width: 300px;
+	height: 30px;
+	border-radius: 10px;
+	color: white;
+	position: relative;
+	right: -55px;
+}  
+
+#kakao_joong {position: relative;
+		left: 50px;}

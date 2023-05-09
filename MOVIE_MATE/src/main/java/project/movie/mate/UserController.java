@@ -72,28 +72,28 @@ public class UserController {
 	}
 
 	@RequestMapping("/double_check.do")
-	@ResponseBody
-	public String double_check(MovieMate_UserVO moviemate_uservo) {
+	   @ResponseBody
+	   public String double_check(MovieMate_UserVO moviemate_uservo) {
 
-		int count = moviemate_userdao.double_check(moviemate_uservo);
+	      int count = moviemate_userdao.double_check(moviemate_uservo);
 
-		System.out.println("double_check.do -> count : " + count);
+	      System.out.println("double_check.do -> count : " + count);
 
-		HttpSession session = request.getSession();
+	      HttpSession session = request.getSession();
 
-		String s_name = (String) session.getAttribute("userName");
+	      String s_name = (String) session.getAttribute("userName");
 
-		if (s_name.equals(moviemate_uservo.getUsername())) {
-			return "possible";
-		}
+	      if (s_name.equals(moviemate_uservo.getUsername())) {
+	         return "possible";
+	      }
 
-		if (count < 1) {
-			return "possible";
-		}
+	      if (count < 1) {
+	         return "possible";
+	      }
 
-		return "imposiible";
-	}
-
+	      return "imposiible";
+	   }
+	
 	@RequestMapping("/movie_mate_login_screen.do")
 	public String movie_mate_login_screen(Model model, String pathname, String code) {
 
@@ -241,4 +241,8 @@ public class UserController {
 		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + data.getIsup();
 	}
 	
+
+	
+
+
 }
