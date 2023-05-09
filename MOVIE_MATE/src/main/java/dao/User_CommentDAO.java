@@ -9,10 +9,13 @@ import vo.User_CommentVO;
 public class User_CommentDAO {
 	SqlSession sqlSession;
 
+	
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
+	//comment_isup ==============================	
+	
 	public int isup_count(MovieMate_CommentVO vo) {
 		int res = sqlSession.selectOne("ucomment.isupCount", vo);
 
@@ -34,7 +37,21 @@ public class User_CommentDAO {
 	}
 
 	public int updateData(User_CommentVO vo) {
+		
 		int res = sqlSession.update("ucomment.updateData", vo);
+		
 		return res;
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

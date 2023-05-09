@@ -144,35 +144,24 @@
 		
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;	
-			
 			var dom = document.getElementById(result.split("/")[0]);
+			var yesOrNo = result.split("/")[2];
+			var icon = document.getElementById('like_icon'+result.split("/")[0]);
+			console.log("result : "+result);
+			console.log("dom : "+ dom);
+			console.log("y/n : " + yesOrNo);
+			if (yesOrNo == 'no') {
+				icon.className = "bx bx-like";
+				
+			}else{
+				icon.className = "bx bxs-like";
+				
+			}
 			
 			dom.innerText = result.split("/")[1];
-			console.log(result);
-			/*
-			var yesOrNo = result.split("/")[0];
-			var up_count = result.split("/")[1];
-			var box = document.getElementById('up_li');
-			var count = document.getElementById('count');
-			var icon = document.getElementById('like_icon');
-
-			if (yesOrNo == 'no') {
-				box.style.color = "black";
-				count.innerText = up_count;
-				icon.className = "bx bx-like";
-			} else {
-				box.style.color = "#7900FF";
-				count.innerText = up_count;
-				icon.className = "bx bxs-like";
-			}
-			*/
+		
 		}
 	}
-    
-/* 	function moreInfo(idx) {
-		location.href = "movie_mate_comment_moreInfo_screen.do?comment_idx"+idx;
-	} */
-	
 </script>
 </head>
 <body>
@@ -194,8 +183,8 @@
 					<div class="title_info">
 						<div class="title">${movie_info.title}</div>
 						<div class="release_date">
-							<span> ${fn:substring(movie_info.release_date,0,4)} • </span>
-							<span> ${movie_info.genre} • ${movie_info.nation} </span>
+							<span> ${fn:substring(movie_info.release_date,0,4)} • </span> <span>
+								${movie_info.genre} • ${movie_info.nation} </span>
 						</div>
 						<div class="input_box">
 							<div class="evaluation">
@@ -204,8 +193,7 @@
 									<div class="starpoint_box">
 										<c:forEach var="i" begin="1" end="10">
 											<label for="starpoint_${i}" class="label_star"
-												title="${i / 2.0}">
-												<span class="blind">${i / 2.0}</span>
+												title="${i / 2.0}"> <span class="blind">${i / 2.0}</span>
 											</label>
 											<c:choose>
 												<c:when test="${i eq movie_user.star_score * 2 }">
@@ -237,11 +225,10 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" />
-									<input type="hidden" name="movie_idx" id="movie_idx"
-										value="${movie_info.movie_idx}" />
-									<input class="want_btn" type="button" value="보고싶어요"
-										onclick="want_view(this.form);" />
+									<input type="hidden" name="user_idx" value="${userIdx}" /> <input
+										type="hidden" name="movie_idx" id="movie_idx"
+										value="${movie_info.movie_idx}" /> <input class="want_btn"
+										type="button" value="보고싶어요" onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
@@ -289,7 +276,7 @@
 							onclick="update_comment(this.form);" />
 					</form>
 				</div>
-				<div class="info_box">
+				<div class="Choiceinfo_box">
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
@@ -379,84 +366,107 @@
 								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
-					<div id="comment_list" class="carousel slide">
-						<div class="carousel-inner com_box">
-							<div class="carousel-item active">
-								<div class="row">
-									<c:forEach var="i" begin="0" end="1">
-										<div class="commentInfo_box col-6">
-											<form>
-												<div class="comment_info">
-													<div class="comment_name"
-														onclick="go_userInfo('${comment_list[i].username}')">
-														${comment_list[i].username}</div>
-													<div class="go_cocomment"
-														onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
-														<div class="comment_content">${comment_list[i].content }</div>
+					<c:choose>
+						<c:when test="${not empty comment_list}">
+							<div id="comment_list" class="carousel slide">
+								<div class="carousel-inner com_box">
+									<div class="carousel-item active">
+										<div class="row">
+											<c:forEach var="i" begin="0" end="1">
+												<c:if test="${not empty comment_list[i]}">
+													<div class="commentInfo_box col-6">
+														<form>
+															<div class="comment_info">
+																<div class="comment_name"
+																	onclick="go_userInfo('${comment_list[i].username}')">
+																	${comment_list[i].username}</div>
+																<div class="go_cocomment"
+																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
+																	<div class="comment_content">${comment_list[i].content }</div>
+																</div>
+																<div class="cocomment_upComment_box">
+
+																	<div class="cocomment_up" id="up${comment_list[i].comment_idx}"
+																		onclick="isup_clicked('${comment_list[i].comment_idx}');">
+																		<c:choose>
+																			<c:when test="${comment_list[i].isup eq 'yes'}">
+																				<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
+																			</c:when>
+																			<c:otherwise>
+																				<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																			</c:otherwise>
+																		</c:choose>
+																		<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
+																	
+																	</div>
+																	<div class="cocomment_comment"
+																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
+																		<i class='bx bx-message-rounded'></i>
+																		${comment_list[i].count - 1}
+																	</div>
+																</div>
+															</div>
+														</form>
 													</div>
-													<div class="cocomment_upComment_box">
-														<div class="cocomment_up" id="up">
-															<i id="like_icon" class='bx bx-like'
-																onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
-															<span id="${comment_list[i].comment_idx}">
-																${comment_list[i].up} </span>
+												</c:if>
+											</c:forEach>
+										</div>
+									</div>
+									<c:forEach var="index" begin="1" end="${maxComment_page}">
+										<div class="carousel-item">
+											<div class="row">
+												<c:forEach var="i" begin="${index * 2 }"
+													end="${index * 2 + 1}">
+													<c:if test="${not empty comment_list[i]}">
+														<div class="commentInfo_box col-6">
+															<form>
+																<div class="comment_info">
+																	<div class="comment_name"
+																		onclick="go_userInfo('${comment_list[i].username}')">
+																		${comment_list[i].username}</div>
+																	<div class="go_cocomment"
+																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+																		<div class="comment_content">${comment_list[i].content }</div>
+																	</div>
+																	<div class="cocomment_upComment_box">
+																		<div class="cocomment_up_box" id="up${comment_list[i].comment_idx}">
+																			<c:choose>
+																				<c:when test="${comment_list[i].isup eq 'yes'}">
+																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
+																				</c:when>
+																				<c:otherwise>
+																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																				</c:otherwise>
+																			</c:choose>
+																			<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
+																		</div>
+																		<div class="cocomment_comment"
+																			onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+																			<i class='bx bx-message-rounded'></i>
+																			${comment_list[i].count - 1}
+																		</div>
+																	</div>
+																</div>
+															</form>
 														</div>
-														<div class="cocomment_comment"
-															onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
-															<i class='bx bx-message-rounded'></i>
-															${comment_list[i].count - 1}
-														</div>
-													</div>
-												</div>
-											</form>
+													</c:if>
+												</c:forEach>
+											</div>
 										</div>
 									</c:forEach>
 								</div>
+								<input type="button" class="carousel-control-prev comment_btn"
+									data-bs-target="#comment_list" data-bs-slide="prev"
+									value="&lt;" /> <input type="button"
+									class="carousel-control-next comment_btn"
+									data-bs-target="#comment_list" data-bs-slide="next"
+									value="&gt;" />
 							</div>
-							<c:forEach var="index" begin="1" end="${maxComment_page}">
-								<div class="carousel-item">
-									<div class="row">
-										<c:forEach var="i" begin="${index * 2 }"
-											end="${index * 2 + 1}">
-											<c:if test="${not empty comment_list[i]}">
-												<div class="commentInfo_box col-6"
-													onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
-													<form>
-														<div class="comment_info">
-															<div class="comment_name"
-																onclick="go_userInfo('${comment_list[i].username}')">
-																${comment_list[i].username}</div>
-															<div class="go_cocomment"
-																onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
-																<div class="comment_content">${comment_list[i].content }</div>
-															</div>
-															<div class="cocomment_upComment">
-																<div class="cocomment_up_box" id="up">
-																	<i id="like_icon" class='bx bx-like'
-																		onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
-																	<span id="${comment_list[i].comment_idx}">
-																		${comment_list[i].up} </span>
-																</div>
-																<div class="cocomment_comment"
-																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
-																	<i class='bx bx-message-rounded'></i>
-																	${comment_list[i].count - 1}
-																</div>
-															</div>
-														</div>
-													</form>
-												</div>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-						<input type="button" class="carousel-control-prev comment_btn"
-							data-bs-target="#comment_list" data-bs-slide="prev" value="&lt;" />
-						<input type="button" class="carousel-control-next comment_btn"
-							data-bs-target="#comment_list" data-bs-slide="next" value="&gt;" />
-					</div>
+						</c:when>
+						<c:otherwise>
+							관심좀 주세요.
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="similar_box">
 					<div class="head_title">비슷한 작품</div>
@@ -491,5 +501,10 @@
 			<div class="dummy col-1 col-lg-2"></div>
 		</div>
 	</div>
+	<footer>
+		<%@ include file="/resources/jsp/footer.jsp"%>
+	</footer>
+	
+	
 </body>
 </html>

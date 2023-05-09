@@ -5,9 +5,21 @@ package vo;
  *
  */
 public class CommentList_ViewVO {
-	private int movie_idx,user_idx, comment_idx, up, m_ref, count;
+	private int movie_idx, user_idx, comment_idx, up, m_ref, count;
 	private double star_score;
-	private String username, user_profile_img, movie_profile_img, content, regdate, want_view, title, release_date;
+	private String username, user_profile_img, movie_profile_img, content, regdate, want_view, title, release_date,
+			isup;
+
+	public String getIsup() {
+		if(this.isup == null) {
+			return "no";
+		}
+		return isup;
+	}
+
+	public void setIsup(String isup) {
+		this.isup = isup;
+	}
 
 	public int getUser_idx() {
 		return user_idx;
@@ -56,8 +68,6 @@ public class CommentList_ViewVO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
 
 	public String getContent() {
 		return content;
@@ -131,5 +141,4 @@ public class CommentList_ViewVO {
 		this.movie_idx = movie_idx;
 	}
 
-	
 }

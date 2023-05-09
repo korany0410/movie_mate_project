@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .main_box {
-	
+	min-height: 60vh !important;
 }
 
 .comment_box {
@@ -19,8 +19,11 @@
 
 .comment_user_box {
 	float: left;
+	display: flex;
 }
-
+.cocomment_profile_img{
+	margin-right: 5px;
+}
 .user_box_name {
 	cursor: pointer;
 	padding-bottom: 15px;
@@ -44,9 +47,30 @@
 
 .cocomment {
 	cursor: pointer;
-	padding-top: 15px;
 }
 
 .bxs-star {
 	font-size: 16px;
+}
+.cocomment_upComment_box{
+	display: flex;
+	margin-top: 10px;
+	font-size: 18px;
+}
+.cocomment_up{
+	cursor: pointer;
+	padding: 2px 6px 2px 6px;
+	border-radius: 5px;
+}
+.cocomment_up:hover{
+	background-color: #c8c8c8;
+}
+.cocomment_comment{
+	cursor:pointer;
+	margin-left: 15px;
+	padding: 2px 6px 2px 6px;
+	border-radius: 5px;
+}
+.cocomment_comment:hover{
+	background-color: #c8c8c8;
 }

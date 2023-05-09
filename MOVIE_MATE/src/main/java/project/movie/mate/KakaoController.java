@@ -2,6 +2,9 @@ package project.movie.mate;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +27,7 @@ public class KakaoController {
 	// 2번 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
 	// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
 	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Throwable {
 
 		// 1번
 		System.out.println("code:" + code);
@@ -39,8 +42,14 @@ public class KakaoController {
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
 		
+		String name = (String) userInfo.get("nickname");
+		String email = (String) userInfo.get("email");
+		String image = (String) userInfo.get("profile_image");
 		
-		return "movie_mate_login_screen.do";	
+		session.setAttribute("image", image);
+		session.setAttribute("name", name);
+		session.setAttribute("email", email);
+		return "/WEB-INF/views/userInfo/movie_mate_kakao_signup.jsp";
 		// return에 페이지를 해도 되고, 여기서는 코드가 넘어오는지만 확인할거기 때문에 따로 return 값을 두지는 않았음
 
 	}
