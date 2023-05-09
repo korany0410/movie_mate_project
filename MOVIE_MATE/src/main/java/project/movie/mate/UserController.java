@@ -229,10 +229,12 @@ public class UserController {
 		} else {
 			if (data.getIsup().equals("yes")) {
 				data.setIsup("no");
+				uc_vo.setIsup("no");
 				user_commentdao.updateData(data);
 				moviemate_commentdao.decreaseUp(data);
 			} else {
 				data.setIsup("yes");
+				uc_vo.setIsup("yes");
 				user_commentdao.updateData(data);
 				moviemate_commentdao.increaseUp(data);
 			}
