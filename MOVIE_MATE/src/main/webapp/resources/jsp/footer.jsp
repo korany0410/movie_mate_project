@@ -108,7 +108,7 @@
 
 					<br>
 					<div class="info_box_bottom">
-						<div>주식회사 무비메이트 | 대표 킹갓제너럴현준 | 서울특별시 서초구 강남대로 343 신덕빌딩 3층</div>
+						<div>주식회사 무비메이트 | 대표 박성준 | 서울특별시 서초구 강남대로 343 신덕빌딩 3층</div>
 						<div>사업자 등록 번호 211-88-66013</div>
 						<div class="last">movie mate © 2022 by MOVIE_MATE, Inc. All
 							rights reserved.</div>
