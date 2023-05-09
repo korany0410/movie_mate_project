@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: bymys
-=======
-Built-By: MINZI
->>>>>>> 910b211495184de782ee37bd00e4768beafeb2d3
 Build-Jdk: 11.0.18
 Created-By: Maven Integration for Eclipse
 
