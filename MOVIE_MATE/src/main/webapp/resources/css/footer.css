@@ -1,21 +1,29 @@
 @charset "UTF-8";
 
-.main_box {
+
+.footer_main_box {
 	background: black;
 	padding: 0 0 50px 0;
 }
 
+
+
 .footer_box {
 	text-decoration:none;
 	color: white;
+	width: 100wv;
+	margin: 0 auto;
+	background: black;
+	padding: 0 0 50px 0;	
+}
+
+.margin_box{
 	width: 1450px;
 	margin: 0 auto;
-	
+	background: black;
 }
 .bxs-star{
 	color:white;
-	
-
 }
 .footer_link {
 	text-decoration: none;
@@ -65,19 +73,23 @@
 	float: left;
 	
 }
+
 .icon_box {
 	float:right;
 	right: 0px;
 }
+
 .link_icon{
 	color: black;
 	margin-right: 3px;
 }
+
 .link_icon_i{
 	color: #c8c8c8;
 	font-size:30px;	
 	
 }
+
 .link_icon_i:hover{
 	color:#7900FF;
 

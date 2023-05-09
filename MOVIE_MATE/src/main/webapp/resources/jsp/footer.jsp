@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -6,7 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/mate/resources/css/footer.css">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -57,40 +59,30 @@
 
 <body>
 
-
-	<div class="main_box">
-		<div class="footer_box">
+	<div class="footer_box">
+		<div class="margin_box">
 			<h3 class="footer_h3" style='font-size: 25px'>
-				지금까지
-				<i class='bx bxs-star bx-flashing'>
-					<span id="count"></span>
-				</i>
-				개의 평가가 쌓였어요.
+				지금까지 <i class='bx bxs-star bx-flashing'> <span id="count"></span>
+				</i> 개의 평가가 쌓였어요.
 			</h3>
 			<div class="info_icon_box">
 				<div class="info_box">
 					<div class="info_box_top">
 						<a href="#" class="footer_link"
 							onclick="window.open('https://watcha.com/legals/agreement', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">
-							서비스 이용약관 | </a>
-						<a href="#" class="footer_link"
+							서비스 이용약관 | </a> <a href="#" class="footer_link"
 							onclick="window.open('https://watcha.com/legals/privacy', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">
-							개인정보 처리방침 |</a>
-						<a href="#" class="footer_link"
+							개인정보 처리방침 |</a> <a href="#" class="footer_link"
 							onclick="window.open('https://watcha.team/', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">
 							회사 안내 </a>
 					</div>
 
 					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							언어선택</button>
+						<button class="btn btn-secondary dropdown-toggle" type="button"
+							data-bs-toggle="dropdown" aria-expanded="false">언어선택</button>
 						<ul class="dropdown-menu">
-							<li>
-								<a class="dropdown-item" href="#">한국어</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#">English</a>
-							</li>
+							<li><a class="dropdown-item" href="#">한국어</a></li>
+							<li><a class="dropdown-item" href="#">English</a></li>
 						</ul>
 
 					</div>
@@ -98,14 +90,10 @@
 					<br>
 
 					<div>
-						고객센터 |
-						<a href="#" class="footer_link"
+						고객센터 | <a href="#" class="footer_link"
 							onclick="window.open('https://help.pedia.watcha.co.kr/hc/ko', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">cs@moviemate.co.kr,
-						</a>
-						02-515-9985 <br>
-						<span>광고 문의 | ad_sales@moviemate.com</span>
-						<br> 제휴 및 대외 협력 |
-						<a href="#" class="footer_link"
+						</a> 02-515-9985 <br> <span>광고 문의 | ad_sales@moviemate.com</span>
+						<br> 제휴 및 대외 협력 | <a href="#" class="footer_link"
 							onclick="window.open('https://watcha.team/contact', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">
 							https://moviemate.team/contact</a>
 					</div>
@@ -114,26 +102,23 @@
 					<div class="info_box_bottom">
 						<div>주식회사 무비메이트 | 대표 킹갓제너럴현준 | 서울특별시 서초구 강남대로 343 신덕빌딩 3층</div>
 						<div>사업자 등록 번호 211-88-66013</div>
-						<div class="last">movie mate © 2022 by MOVIE_MATE, Inc. All rights reserved.</div>
+						<div class="last">movie mate © 2022 by MOVIE_MATE, Inc. All
+							rights reserved.</div>
 					</div>
 				</div>
 				<div class="icon_box">
-					<a class="link_icon" href="https://www.facebook.com/watchaKR/" target="_blank">
-						<i class='bx bxl-facebook-circle link_icon_i'></i>
-					</a>
-					<a class="link_icon" href="https://twitter.com/watcha_kr" target="_blank">
-						<i class='bx bxl-twitter link_icon_i'></i>
-					</a>
-					<a class="link_icon" href="https://github.com/korany0410?tab=repositories" target="_blank">
-						<i class='bx bxl-github link_icon_i'></i>
+					<a class="link_icon" href="https://www.facebook.com/watchaKR/"
+						target="_blank"> <i class='bx bxl-facebook-circle link_icon_i'></i>
+					</a> <a class="link_icon" href="https://twitter.com/watcha_kr"
+						target="_blank"> <i class='bx bxl-twitter link_icon_i'></i>
+					</a> <a class="link_icon"
+						href="https://github.com/korany0410?tab=repositories"
+						target="_blank"> <i class='bx bxl-github link_icon_i'></i>
 					</a>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
 
 
 </body>
