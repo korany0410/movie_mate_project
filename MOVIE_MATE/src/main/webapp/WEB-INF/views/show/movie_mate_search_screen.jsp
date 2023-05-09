@@ -276,6 +276,9 @@ $(document).ready(function() {
 		</div>
 	</c:if>
 	<footer style="height: 100px;"> </footer>
+   <footer>
+      <%@ include file="/resources/jsp/footer.jsp"%>
+   </footer>
 
 </body>
 </html>
