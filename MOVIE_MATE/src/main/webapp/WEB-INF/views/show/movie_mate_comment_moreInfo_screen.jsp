@@ -121,6 +121,35 @@ function isLogin() {
 		}
 		return;
 	}
+	
+	
+	//수정하기
+	function modify(idx) {
+         var comment = document.getElementById('comment'+idx);
+         var textarea = document.getElementById('comment_textarea'+idx);
+         comment.style.display = "none";
+         textarea.style.display = "block";
+   }
+	
+	//수정 취소
+	function cancel_modify(idx) {
+		var comment = document.getElementById('comment'+idx);
+        var textarea = document.getElementById('comment_textarea'+idx);
+		comment.style.display = "block";
+		textarea.style.display = "none";
+	}
+	//수정 완료
+	function save_modify(idx) {
+		
+		idx.action = "comment_moreInfo_save_modify.do";
+		idx.submit();
+		
+		
+		var comment = document.getElementById('comment'+idx);
+        var textarea = document.getElementById('comment_textarea'+idx);
+    	comment.style.display = "block";
+		textarea.style.display = "none";
+	}
 </script>
 </head>
 
@@ -255,8 +284,12 @@ function isLogin() {
 						</div>
 					</div>
 					<div style="display: flex;">
-						<div class="cocomment_content" style="width: 1050px;">
+						<div id="comment${vo.comment_idx}" class="cocomment_content" style="width: 1050px;">
 							<pre class="cocomment_con">${vo.content}</pre>
+						</div>
+						<div id="comment_textarea${vo.comment_idx}" class="cocomment_content" style="width: 1050px; display: none;">
+							<textarea rows="" cols="" style="width: 100%;"></textarea>
+							<input type="button" value="취소하기" onclick="cancel_modify('${vo.comment_idx}');"/> <input type="button" value="변경하기" onclick="save_modify('${vo.comment_idx}');" />
 						</div>
 						<div class="dropdown">
 							<button style="background-color: white !important; border: none !important;" class="btn btn-secondary"
@@ -265,10 +298,10 @@ function isLogin() {
 							</button>
 							<ul class="dropdown-menu">
 								<li>
-									<a class="dropdown-item dropdown_modify" href="" onclick="modify();">수정하기</a>
+									<a class="dropdown-item dropdown_modify" href="javascript:void(0);" onclick="modify('${vo.comment_idx}');">수정하기</a>
 								</li>
 								<li>
-									<a class="dropdown-item dropdown_delete" href="" onclick="delete();">삭제하기</a>
+									<a class="dropdown-item dropdown_delete" href="javascript:void(0);" onclick="delete('${vo.comment_idx}');">삭제하기</a>
 								</li>
 							</ul>
 						</div>

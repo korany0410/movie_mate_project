@@ -40,6 +40,7 @@ import dao.Movie_CastDAO;
 import dao.Movie_TagDAO;
 import dao.Movie_UserDAO;
 import dao.User_CastDAO;
+import dao.User_CommentDAO;
 import db.DB;
 import vo.BestGenre_ViewVO;
 import vo.BestMovie_ViewVO;
@@ -846,5 +847,13 @@ public class MovieController {
 				+ vo.getC_ref();
 
 	}
+	
+	//movie_mate_comment_moreInfo_screen 글 수정
+		@RequestMapping("/comment_moreInfo_save_modify.do")
+		public String save_modify(User_CommentVO uc_vo) {
+			int res = MovieMate_CommentDAO.save_modify(uc_vo);
+			
+			return "/WEB-INF/views/userInfo/movie_mate_comment_moreInfo_screen.jsp";_
+		}
 
 }

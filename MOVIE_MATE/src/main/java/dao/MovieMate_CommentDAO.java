@@ -136,5 +136,11 @@ public class MovieMate_CommentDAO {
 		return cl_vo;
 
 	}
+	
+	// movie_mate_comment_moreInfo_screen 글 수정
+	public int save_modify(CommentList_ViewVO cl_vo) {
+		int res = sqlSession.update("ucomment.moreInfoUpdate", cl_vo);
+		return res;
+	}
 
 }

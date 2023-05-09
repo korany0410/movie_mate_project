@@ -259,5 +259,7 @@ public class UserController {
 		int up = moviemate_commentdao.reload(uc_vo);
 		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + uc_vo.getIsup();
 	}
+	
+	
 
 }
