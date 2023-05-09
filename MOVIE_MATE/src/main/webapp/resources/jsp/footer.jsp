@@ -50,7 +50,7 @@
 
 	    console.log(count);
 
-	    var dom = document.getElementById('count');
+	    var dom = document.getElementById('footer_count');
 	    dom.innerText = count;
 	}
     }
@@ -64,7 +64,7 @@
 			<h3 class="footer_h3" style='font-size: 25px'>
 				<span> 지금까지 </span>
 				<i class='bx bxs-star bx-flashing'>
-					<span id="count" style="font-size: 25px;"></span>
+					<span id="footer_count" style="font-size: 25px;"></span>
 				</i>
 				<span> 개의 평가가 쌓였어요. </span>
 			</h3>

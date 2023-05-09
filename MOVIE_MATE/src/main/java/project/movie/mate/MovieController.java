@@ -45,6 +45,7 @@ import vo.BestGenre_ViewVO;
 import vo.BestMovie_ViewVO;
 import vo.CastList_ViewVO;
 import vo.CommentList_ViewVO;
+import vo.Filtering;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
@@ -316,6 +317,11 @@ public class MovieController {
 		System.out.println("유저IDX : " + session.getAttribute("userIdx"));
 		System.out.println("유저이미지 : " + session.getAttribute("userImg"));
 
+		// 이주의 배우
+		String actor = "이병헌";
+		// 이주의 감독
+		String director = "스티븐 스필버그";
+
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
 		model.addAttribute("masterpiece_list", masterpiece_list);
@@ -329,11 +335,11 @@ public class MovieController {
 		model.addAttribute("top10_list", top10_list);
 
 		// 이주의 배우
-		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
 		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
-		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
+		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list(director);
 		model.addAttribute("director_list", director_list);
 
 		// 평균별점
@@ -357,14 +363,14 @@ public class MovieController {
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
 
-		total_chart.put("director", director_list);
-		total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
-
 		total_chart.put("masterpiece", masterpiece_list);
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
 
+		total_chart.put("director", director_list);
+		total_chart_name.put("director", "MovieMate 화제의 감독 [" + director + "]");
+
 		total_chart.put("recommend", recommend_list);
-		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
+		total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");
@@ -491,9 +497,30 @@ public class MovieController {
 	}
 
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
-	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
+	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo, String clean_bot) {
 		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
 		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
+
+		if (clean_bot != null && clean_bot.equals("operation")) {
+			System.out.println("클린 봇 작동...");
+			Filtering filter_class = new Filtering();
+			String[] filter_arr = filter_class.getFilter();
+			HashMap<Integer, Integer> contain = new HashMap<Integer, Integer>();
+			for (String word : filter_arr) {
+				for (int i = 0; i < comment_view_list.size(); i++) {
+					if (comment_view_list.get(i).getContent().contains(word)) {
+						contain.put(i, i);
+					}
+				}
+			}
+			List<CommentList_ViewVO> list = new ArrayList<CommentList_ViewVO>();
+			for (int i = 0; i < comment_view_list.size(); i++) {
+				if (contain.get(i) == null) {
+					list.add(comment_view_list.get(i));
+				}
+			}
+			comment_view_list = list;
+		}
 
 		System.out.println(comment_view_list.size());
 
@@ -513,6 +540,7 @@ public class MovieController {
 			comment_view_origin = moviemate_commentdao.update_isup(comment_view_origin, uc);
 		}
 
+		model.addAttribute("clean_bot", clean_bot);
 		model.addAttribute("origin", comment_view_origin);
 		model.addAttribute("list", comment_view_list);
 
@@ -733,12 +761,15 @@ public class MovieController {
 		int runtime = moviemate_moviedao.runtime(uservo);
 
 		for (BestMovie_ViewVO vo : movieList) {
-			for (String nation : vo.getNation().split(",")) {
-				double[] origin = bestMovieList.getOrDefault(nation, new double[2]);
-				double[] insert = new double[] { vo.getAvg(), vo.getCount() };
-				insert[0] = Math.round((insert[0] + origin[0]) / 2);
-				insert[1]++;
-				bestMovieList.put(nation, insert);
+			System.out.println(vo.getNation());
+			if (!vo.getNation().equals("국가 미표시")) {
+				for (String nation : vo.getNation().split(",")) {
+					double[] origin = bestMovieList.getOrDefault(nation, new double[2]);
+					double[] insert = new double[] { vo.getAvg(), vo.getCount() };
+					insert[0] = Math.round((insert[0] + origin[0]) / 2);
+					insert[1]++;
+					bestMovieList.put(nation, insert);
+				}
 			}
 		}
 

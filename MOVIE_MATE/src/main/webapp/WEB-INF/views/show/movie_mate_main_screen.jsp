@@ -68,17 +68,22 @@
 				<c:forEach var="index" begin="1" end="2">
 					<div class="carousel-item">
 						<c:forEach var="i" begin="${index * 5}" end="${index * 5 + 4}">
-							<div class="movieInfo_box"
-								onclick="choice_screen(${map.value[i].movie_idx});">
-								<div class="img_box">
-									<img class="profile_img" alt="${map.value[i].title}"
-										src="${map.value[i].profile_img }">
-								</div>
-								<div class="fw-bold info">${map.value[i].title}</div>
-								<div class="info">${fn:substring(map.value[i].release_date,0,4)}
-									• ${map.value[i].nation}</div>
-								<div class="info">평균★${map.value[i].star_score}</div>
-							</div>
+							<c:if test="${not empty map.value[i]}">
+								<form>
+									<div class="movieInfo_box"
+										onclick="choice_screen(${map.value[i].movie_idx});">
+										<div class="img_box">
+											<div class="numbering">${i+1}</div>
+											<img class="profile_img" alt="${map.value[i].title}"
+												src="${map.value[i].profile_img }">
+										</div>
+										<div class="fw-bold info">${map.value[i].title}</div>
+										<div class="info">${fn:substring(map.value[i].release_date,0,4)}
+											• ${map.value[i].nation}</div>
+										<div class="info">평균★${map.value[i].star_score}</div>
+									</div>
+								</form>
+							</c:if>
 						</c:forEach>
 					</div>
 				</c:forEach>
