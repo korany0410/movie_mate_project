@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -7,30 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/mate/resources/images/logo_icon_1.png" />
-<link rel="apple-touch-icon"
-	href="/mate/resources/images/logo_icon_1.png" />
+<link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_1.png" />
 <title>무비메이트</title>
 <link rel="stylesheet" href="/mate/resources/css/choiceScreen.css?ver=1" />
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-	rel='stylesheet'>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
-	crossorigin="anonymous"></script>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript">
     function isLogin() {
@@ -144,28 +132,22 @@
 		
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;	
-			
 			var dom = document.getElementById(result.split("/")[0]);
+			var yesOrNo = result.split("/")[2];
+			var icon = document.getElementById('like_icon');
+			console.log("result : "+result);
+			console.log("dom : "+ dom);
+			console.log("y/n : " + yesOrNo);
+			if (yesOrNo == 'no') {
+				icon.className = "bx bx-like";
+				
+			}else{
+				icon.className = "bx bxs-like";
+				
+			}
 			
 			dom.innerText = result.split("/")[1];
-			console.log(result);
-			/*
-			var yesOrNo = result.split("/")[0];
-			var up_count = result.split("/")[1];
-			var box = document.getElementById('up_li');
-			var count = document.getElementById('count');
-			var icon = document.getElementById('like_icon');
-
-			if (yesOrNo == 'no') {
-				box.style.color = "black";
-				count.innerText = up_count;
-				icon.className = "bx bx-like";
-			} else {
-				box.style.color = "#7900FF";
-				count.innerText = up_count;
-				icon.className = "bx bxs-like";
-			}
-			*/
+		
 		}
 	}
     
@@ -203,19 +185,15 @@
 								<div class="starpoint_wrap">
 									<div class="starpoint_box">
 										<c:forEach var="i" begin="1" end="10">
-											<label for="starpoint_${i}" class="label_star"
-												title="${i / 2.0}">
-												<span class="blind">${i / 2.0}</span>
+											<label for="starpoint_${i}" class="label_star" title="${i / 2.0}"> <span class="blind">${i / 2.0}</span>
 											</label>
 											<c:choose>
 												<c:when test="${i eq movie_user.star_score * 2 }">
-													<input type="radio" name="starpoint" id="starpoint_${i}"
-														class="star_radio" value="${i / 2.0}"
+													<input type="radio" name="starpoint" id="starpoint_${i}" class="star_radio" value="${i / 2.0}"
 														onclick="setStarScore(${i});" checked="checked">
 												</c:when>
 												<c:otherwise>
-													<input type="radio" name="starpoint" id="starpoint_${i}"
-														class="star_radio" value="${i / 2.0}"
+													<input type="radio" name="starpoint" id="starpoint_${i}" class="star_radio" value="${i / 2.0}"
 														onclick="setStarScore(${i});">
 												</c:otherwise>
 											</c:choose>
@@ -237,17 +215,14 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" />
-									<input type="hidden" name="movie_idx" id="movie_idx"
-										value="${movie_info.movie_idx}" />
-									<input class="want_btn" type="button" value="보고싶어요"
+									<input type="hidden" name="user_idx" value="${userIdx}" /> <input type="hidden" name="movie_idx"
+										id="movie_idx" value="${movie_info.movie_idx}" /> <input class="want_btn" type="button" value="보고싶어요"
 										onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
 								<img id="pancel" src="/mate/resources/images/pancel.png" alt="" />
-								<input class="want_btn" type="button" value="글쓰기"
-									onclick="write_comment();" />
+								<input class="want_btn" type="button" value="글쓰기" onclick="write_comment();" />
 							</div>
 						</div>
 					</div>
@@ -265,8 +240,7 @@
 									<img class="p_img" src="/mate/resources/images/user.png" alt="" />
 								</c:when>
 								<c:otherwise>
-									<img class="p_img" src="/mate/resources/upload/${userImg}"
-										alt="" />
+									<img class="p_img" src="/mate/resources/upload/${userImg}" alt="" />
 								</c:otherwise>
 							</c:choose>
 							<c:if test=""></c:if>
@@ -277,16 +251,13 @@
 				<div id="myComment_input_box">
 					<label for="exampleFormControlTextarea1" class="input_title">${movie_info.title}</label>
 					<form>
-						<textarea class="form-control input_box"
-							id="exampleFormControlTextarea1" name="com_content" rows="3"></textarea>
-						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" />
-						<input type="hidden" name="com_username" value="${userName}" />
+						<textarea class="form-control input_box" id="exampleFormControlTextarea1" name="com_content" rows="3"></textarea>
+						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" /> <input type="hidden" name="com_username"
+							value="${userName}" />
 						<c:if test="${not empty my_comment }">
-							<input type="hidden" name="comment_idx"
-								value="${my_comment.comment_idx}" />
+							<input type="hidden" name="comment_idx" value="${my_comment.comment_idx}" />
 						</c:if>
-						<input type="button" class="update_btn" value="저장"
-							onclick="update_comment(this.form);" />
+						<input type="button" class="update_btn" value="저장" onclick="update_comment(this.form);" />
 					</form>
 				</div>
 				<div class="info_box">
@@ -339,8 +310,7 @@
 							<c:forEach var="index" begin="1" end="${maxCast_page}">
 								<div class="carousel-item actor">
 									<div class="row">
-										<c:forEach var="i" begin="${index * 6 }"
-											end="${index * 6 + 5}">
+										<c:forEach var="i" begin="${index * 6 }" end="${index * 6 + 5}">
 											<c:if test="${not empty cast_list[i]}">
 												<div class="movieInfo_box col-6">
 													<form>
@@ -364,10 +334,9 @@
 								</div>
 							</c:forEach>
 						</div>
-						<input type="button" class="carousel-control-prev cast_btn"
-							data-bs-target="#cast_list" data-bs-slide="prev" value="&lt;" />
-						<input type="button" class="carousel-control-next cast_btn"
-							data-bs-target="#cast_list" data-bs-slide="next" value="&gt;" />
+						<input type="button" class="carousel-control-prev cast_btn" data-bs-target="#cast_list" data-bs-slide="prev"
+							value="&lt;" /> <input type="button" class="carousel-control-next cast_btn" data-bs-target="#cast_list"
+							data-bs-slide="next" value="&gt;" />
 					</div>
 				</div>
 				<div class="starScore_box"></div>
@@ -379,91 +348,91 @@
 								onclick="location.href='movie_mate_comment.do?movie_idx=${movie_info.movie_idx}'" />
 						</div>
 					</div>
-					<div id="comment_list" class="carousel slide">
-						<div class="carousel-inner com_box">
-							<div class="carousel-item active">
-								<div class="row">
-									<c:forEach var="i" begin="0" end="1">
-										<div class="commentInfo_box col-6">
-											<form>
-												<div class="comment_info">
-													<div class="comment_name"
-														onclick="go_userInfo('${comment_list[i].username}')">
-														${comment_list[i].username}</div>
-													<div class="go_cocomment"
-														onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
-														<div class="comment_content">${comment_list[i].content }</div>
+					<c:choose>
+						<c:when test="${not empty comment_list}">
+							<div id="comment_list" class="carousel slide">
+								<div class="carousel-inner com_box">
+									<div class="carousel-item active">
+										<div class="row">
+											<c:forEach var="i" begin="0" end="1">
+												<c:if test="${not empty comment_list[i]}">
+													<div class="commentInfo_box col-6">
+														<form>
+															<div class="comment_info">
+																<div class="comment_name" onclick="go_userInfo('${comment_list[i].username}')">
+																	${comment_list[i].username}</div>
+																<div class="go_cocomment"
+																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
+																	<div class="comment_content">${comment_list[i].content }</div>
+																</div>
+																<div class="cocomment_upComment_box">
+																	<div class="cocomment_up" id="up" onclick="isup_clicked('${comment_list[i].comment_idx}');">
+																		<i id="like_icon" class='bx bx-like' ></i>
+																		<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
+																	</div>
+																	<div class="cocomment_comment"
+																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
+																		<i class='bx bx-message-rounded'></i>
+																		${comment_list[i].count - 1}
+																	</div>
+																</div>
+															</div>
+														</form>
 													</div>
-													<div class="cocomment_upComment_box">
-														<div class="cocomment_up" id="up">
-															<i id="like_icon" class='bx bx-like'
-																onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
-															<span id="${comment_list[i].comment_idx}">
-																${comment_list[i].up} </span>
+												</c:if>
+											</c:forEach>
+										</div>
+									</div>
+									<c:forEach var="index" begin="1" end="${maxComment_page}">
+										<div class="carousel-item">
+											<div class="row">
+												<c:forEach var="i" begin="${index * 2 }" end="${index * 2 + 1}">
+													<c:if test="${not empty comment_list[i]}">
+														<div class="commentInfo_box col-6"
+															onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+															<form>
+																<div class="comment_info">
+																	<div class="comment_name" onclick="go_userInfo('${comment_list[i].username}')">
+																		${comment_list[i].username}</div>
+																	<div class="go_cocomment"
+																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+																		<div class="comment_content">${comment_list[i].content }</div>
+																	</div>
+																	<div class="cocomment_upComment">
+																		<div class="cocomment_up_box" id="up">
+																			<i id="like_icon" class='bx bx-like' onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
+																			<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
+																		</div>
+																		<div class="cocomment_comment"
+																			onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+																			<i class='bx bx-message-rounded'></i>
+																			${comment_list[i].count - 1}
+																		</div>
+																	</div>
+																</div>
+															</form>
 														</div>
-														<div class="cocomment_comment"
-															onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
-															<i class='bx bx-message-rounded'></i>
-															${comment_list[i].count - 1}
-														</div>
-													</div>
-												</div>
-											</form>
+													</c:if>
+												</c:forEach>
+											</div>
 										</div>
 									</c:forEach>
 								</div>
+								<input type="button" class="carousel-control-prev comment_btn" data-bs-target="#comment_list"
+									data-bs-slide="prev" value="&lt;" /> <input type="button" class="carousel-control-next comment_btn"
+									data-bs-target="#comment_list" data-bs-slide="next" value="&gt;" />
 							</div>
-							<c:forEach var="index" begin="1" end="${maxComment_page}">
-								<div class="carousel-item">
-									<div class="row">
-										<c:forEach var="i" begin="${index * 2 }"
-											end="${index * 2 + 1}">
-											<c:if test="${not empty comment_list[i]}">
-												<div class="commentInfo_box col-6"
-													onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
-													<form>
-														<div class="comment_info">
-															<div class="comment_name"
-																onclick="go_userInfo('${comment_list[i].username}')">
-																${comment_list[i].username}</div>
-															<div class="go_cocomment"
-																onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
-																<div class="comment_content">${comment_list[i].content }</div>
-															</div>
-															<div class="cocomment_upComment">
-																<div class="cocomment_up_box" id="up">
-																	<i id="like_icon" class='bx bx-like'
-																		onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
-																	<span id="${comment_list[i].comment_idx}">
-																		${comment_list[i].up} </span>
-																</div>
-																<div class="cocomment_comment"
-																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
-																	<i class='bx bx-message-rounded'></i>
-																	${comment_list[i].count - 1}
-																</div>
-															</div>
-														</div>
-													</form>
-												</div>
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-						<input type="button" class="carousel-control-prev comment_btn"
-							data-bs-target="#comment_list" data-bs-slide="prev" value="&lt;" />
-						<input type="button" class="carousel-control-next comment_btn"
-							data-bs-target="#comment_list" data-bs-slide="next" value="&gt;" />
-					</div>
+						</c:when>
+						<c:otherwise>
+							관심좀 주세요.
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="similar_box">
 					<div class="head_title">비슷한 작품</div>
 					<div class="row">
 						<c:forEach var="map" items="${movie_list}" varStatus="status">
-							<div class="similar_movie col-4 col-md-3"
-								onclick="choice_screen(${map.value.movie_idx});">
+							<div class="similar_movie col-4 col-md-3" onclick="choice_screen(${map.value.movie_idx});">
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
 								</div>

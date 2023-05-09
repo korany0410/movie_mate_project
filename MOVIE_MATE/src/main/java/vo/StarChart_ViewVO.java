@@ -20,4 +20,5 @@ public class StarChart_ViewVO {
 		this.count = count;
 	}
 
+	
 }
