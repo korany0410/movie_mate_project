@@ -17,7 +17,7 @@ body {
 	margin: 0;
 }
 
-.logo_img:hover{
+.logo_img:hover {
 	cursor: pointer;
 }
 
@@ -35,6 +35,33 @@ body {
 	padding: 0;
 }
 
-.btn-outline-danger {background-color:#7900ff;
+.btn-outline-danger {
+	background-color: #7900ff;
 	width: 400px;
+}
+
+.check {
+	width: 30px !important;
+	font-size: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bx-check-circle {
+	color: #3ac979;	
+}
+
+.bx-x-circle {
+	color: #df1010;
+}
+
+.su{
+	border: none !important;
+	color: white !important;
+}
+
+.su:hover {
+	background-color: #7900ff;
 }
