@@ -60,9 +60,9 @@ public class MovieMate_MovieDAO {
 	}
 
 	// 화제의 감독 작품
-	public List<MovieMate_MovieVO> director_list() {
+	public List<MovieMate_MovieVO> director_list(String keyword) {
 		MovieMate_CastVO vo = new MovieMate_CastVO();
-		vo.setName("스티븐 스필버그");
+		vo.setName(keyword);
 		int cast_idx = sqlSession.selectOne("mmcast.selectOne", vo);
 		Movie_CastVO vo_3 = new Movie_CastVO();
 		vo_3.setCast_idx(cast_idx);

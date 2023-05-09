@@ -316,6 +316,11 @@ public class MovieController {
 		System.out.println("유저IDX : " + session.getAttribute("userIdx"));
 		System.out.println("유저이미지 : " + session.getAttribute("userImg"));
 
+		// 이주의 배우
+		String actor = "이병헌";
+		// 이주의 감독
+		String director = "스티븐 스필버그";
+
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
 		model.addAttribute("masterpiece_list", masterpiece_list);
@@ -329,11 +334,11 @@ public class MovieController {
 		model.addAttribute("top10_list", top10_list);
 
 		// 이주의 배우
-		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
 		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
-		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
+		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list(director);
 		model.addAttribute("director_list", director_list);
 
 		// 평균별점
@@ -357,14 +362,14 @@ public class MovieController {
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
 
-		total_chart.put("director", director_list);
-		total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
-
 		total_chart.put("masterpiece", masterpiece_list);
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
 
+		total_chart.put("director", director_list);
+		total_chart_name.put("director", "MovieMate 화제의 감독 [" + director + "]");
+
 		total_chart.put("recommend", recommend_list);
-		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
+		total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");
@@ -496,6 +501,22 @@ public class MovieController {
 		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
 
 		System.out.println(comment_view_list.size());
+
+		HttpSession session = request.getSession();
+		System.out.println("choice" + comment_view_list.size());
+		if (!session.getAttribute("isLogin").equals("no")) {
+			int user_idx = (int) session.getAttribute("userIdx");
+			for (CommentList_ViewVO vo2 : comment_view_list) {
+				User_CommentVO uc = new User_CommentVO();
+				uc.setComment_idx(vo2.getComment_idx());
+				uc.setUser_idx(user_idx);
+				vo2 = moviemate_commentdao.update_isup(vo2, uc);
+			}
+			User_CommentVO uc = new User_CommentVO();
+			uc.setComment_idx(comment_view_origin.getComment_idx());
+			uc.setUser_idx(user_idx);
+			comment_view_origin = moviemate_commentdao.update_isup(comment_view_origin, uc);
+		}
 
 		model.addAttribute("origin", comment_view_origin);
 		model.addAttribute("list", comment_view_list);
@@ -652,6 +673,18 @@ public class MovieController {
 	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
 
 		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(vo);
+
+		HttpSession session = request.getSession();
+		System.out.println("choice" + comment_list.size());
+		if (!session.getAttribute("isLogin").equals("no")) {
+			int user_idx = (int) session.getAttribute("userIdx");
+			for (CommentList_ViewVO vo2 : comment_list) {
+				User_CommentVO uc = new User_CommentVO();
+				uc.setComment_idx(vo2.getComment_idx());
+				uc.setUser_idx(user_idx);
+				vo2 = moviemate_commentdao.update_isup(vo2, uc);
+			}
+		}
 
 		model.addAttribute("comment_list", comment_list);
 		model.addAttribute("movie_idx", vo.getMovie_idx());

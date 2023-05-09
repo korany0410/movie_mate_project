@@ -50,6 +50,7 @@
 			<div class="star_title title2">별점 분포</div>
 			<div id="inbody_chart">
 				<script>
+		var $arrColors = ['#FFFFFF','#EBDAFF','#D8B6FF','#C591FF','#B26DFF','#9F48FF','#8C24FF','#7900FF','#6700DA','#5600B6','#450091'];
 	    new Morris.Bar({
 		element : 'inbody_chart',
 		data : [ {
@@ -93,6 +94,9 @@
 		lineWidth : [ '3px' ],
 		resize : [ 'true' ],
 		smooth : [ 'true' ],
+		barColors: function (row, series, type) {
+		        return $arrColors[row.x];
+		    }
 	    });
 	</script>
 			</div>
@@ -160,15 +164,18 @@
 						<div class="carousel-item active">
 							<div class="directorInfo_box">
 								<c:forEach var="i" begin="0" end="2">
-									<form>
-										<div class="info">
-											<div class="name">${bestDirectorList[i].name}</div>
-											<div class="stat">
-												<fmt:formatNumber value="${bestActorList[i].avg}" pattern="" />
-												점• ${bestDirectorList[i].count}편
+									<c:if test="${not empty bestDirectorList[i]}">
+										<form>
+											<div class="info">
+												<div class="name">${bestDirectorList[i].name}</div>
+												<div class="stat">
+													<fmt:formatNumber value="${bestActorList[i].avg}"
+														pattern="" />
+													점• ${bestDirectorList[i].count}편
+												</div>
 											</div>
-										</div>
-									</form>
+										</form>
+									</c:if>
 								</c:forEach>
 							</div>
 						</div>
@@ -202,17 +209,20 @@
 					<c:choose>
 						<c:when test="${fn:length(bestMovieK) <= 3}">
 							<c:forEach var="i" begin="0" end="2">
-								<div class="col-${12/fn:length(bestMovieK)}">
-									<div style="font-size: 20px; font-weight: bold;">${bestMovieK[i]}</div>
-									<div style="font-size: 15px; color: gray;">
-										<fmt:formatNumber value="${bestMovieV.get(bestMovieK[i])[0]}"
-											pattern="" />
-										점 •
-										<fmt:formatNumber value="${bestMovieV.get(bestMovieK[i])[1]}"
-											pattern="" />
-										편
+								<c:if test="${not empty bestMovieK[i]}">
+									<div class="col-${12/fn:length(bestMovieK)}"
+										style="text-align: center;">
+										<div style="font-size: 20px; font-weight: bold;">${bestMovieK[i]}</div>
+										<div style="font-size: 15px; color: gray;">
+											<fmt:formatNumber value="${bestMovieV.get(bestMovieK[i])[0]}"
+												pattern="" />
+											점 •
+											<fmt:formatNumber value="${bestMovieV.get(bestMovieK[i])[1]}"
+												pattern="" />
+											편
+										</div>
 									</div>
-								</div>
+								</c:if>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
@@ -247,6 +257,7 @@
 					</c:choose>
 				</div>
 			</div>
+			<hr style="width: 90%; margin-left: 5%;">
 			<div class="genre">
 				<div class="nation title2">영화 선호장르</div>
 				<div class="row">
@@ -298,8 +309,7 @@
 					</c:choose>
 				</div>
 			</div>
-		</div>
-		<div class="time box">
+			<hr style="width: 90%; margin-left: 5%;">
 			<div class="time title2">영화 감상 시간</div>
 			<div
 				style="text-align: center; font-size: 22px; color: #7900ff; font-weight: bold; margin-bottom: 20px;">${runtime}시간</div>
