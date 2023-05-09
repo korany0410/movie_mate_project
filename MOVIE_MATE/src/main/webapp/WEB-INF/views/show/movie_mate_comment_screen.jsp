@@ -153,10 +153,6 @@
 							${vo.count - 1}
 						</div>
 					</div>
-
-
-
-
 				</form>
 			</div>
 		</c:forEach>
