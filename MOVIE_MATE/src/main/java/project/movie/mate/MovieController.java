@@ -497,6 +497,22 @@ public class MovieController {
 
 		System.out.println(comment_view_list.size());
 
+		HttpSession session = request.getSession();
+		System.out.println("choice" + comment_view_list.size());
+		if (!session.getAttribute("isLogin").equals("no")) {
+			int user_idx = (int) session.getAttribute("userIdx");
+			for (CommentList_ViewVO vo2 : comment_view_list) {
+				User_CommentVO uc = new User_CommentVO();
+				uc.setComment_idx(vo2.getComment_idx());
+				uc.setUser_idx(user_idx);
+				vo2 = moviemate_commentdao.update_isup(vo2, uc);
+			}
+			User_CommentVO uc = new User_CommentVO();
+			uc.setComment_idx(comment_view_origin.getComment_idx());
+			uc.setUser_idx(user_idx);
+			comment_view_origin = moviemate_commentdao.update_isup(comment_view_origin, uc);
+		}
+
 		model.addAttribute("origin", comment_view_origin);
 		model.addAttribute("list", comment_view_list);
 
@@ -652,6 +668,18 @@ public class MovieController {
 	public String movie_mate_comment(Model model, MovieMate_MovieVO vo) {
 
 		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(vo);
+
+		HttpSession session = request.getSession();
+		System.out.println("choice" + comment_list.size());
+		if (!session.getAttribute("isLogin").equals("no")) {
+			int user_idx = (int) session.getAttribute("userIdx");
+			for (CommentList_ViewVO vo2 : comment_list) {
+				User_CommentVO uc = new User_CommentVO();
+				uc.setComment_idx(vo2.getComment_idx());
+				uc.setUser_idx(user_idx);
+				vo2 = moviemate_commentdao.update_isup(vo2, uc);
+			}
+		}
 
 		model.addAttribute("comment_list", comment_list);
 		model.addAttribute("movie_idx", vo.getMovie_idx());
