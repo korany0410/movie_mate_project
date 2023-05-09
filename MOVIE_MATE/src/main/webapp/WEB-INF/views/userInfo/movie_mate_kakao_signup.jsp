@@ -108,51 +108,7 @@
 	}
 </script>
 
-<style>
- .img {
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	margin: 0 auto;
-	display: block;
-	
-}
 
- .img2 {
-	margin: 0 auto;
-	display: block;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	cursor: pointer;
-}
-
-#id_box {margin-top: 20px;
-
-}
-
-.form-control{height: 30px;
-width: 300px;
-position: relative;
-right: -50px;
-margin-bottom: 20px;
-}
-
-#signUp_btn{cursor: pointer;
- background-color:#7900ff;
-	width: 300px;
-	height: 30px;
-	border-radius: 10px;
-	color: white;
-	position: relative;
-	right: -75px;
-}  
-
-#joong {position: relative;
-		left: 50px;}
-
-
-
-</style>
 </head>
 <body>
 	<%-- <form>
@@ -168,33 +124,33 @@ margin-bottom: 20px;
 			onclick="signUp(this.form);" />
 	</form> --%>
 	
-	<form class="form">
-		<div id="main_box">
+	<form>
+		<div id="kakao_main_box">
 			<div class="logo_box input-group mb-2">
-			<img class="img2" src="/mate/resources/images/logo_main.png" alt="" height="35" onclick="location.href='movie_mate_main_screen.do'">
-            <img class="img" src="${image}" />
+			<img class="kakao_img2" src="/mate/resources/images/logo_main.png" alt="" height="35" onclick="location.href='movie_mate_main_screen.do'">
+            <img class="kakao_img" src="${image}" />
 				
 			</div>
-			<div class="input_box input-group mb-2" id="id_box">
+			<div class="input_box input-group mb-2" id="kakao_id_box">
 				<input type="text" name="username" 
-					class="form-control" id="username" aria-describedby="basic-addon2"
+					class="kakao_form-control" id="username" aria-describedby="basic-addon2"
 					onkeyup="validation('username');" value="${name}" /> <span
-					class="input-group-text" id="basic-addon2"> <input
-					type="button" class="btn" value="중복" id="joong"
+					class="kakao_input-group-text" id="basic-addon2"> <input
+					type="button" class="kakao_btn" value="중복" id="kakao_joong"
 					onclick="double_check(this.form);" />
 				</span>
 			</div>
 			<div class="input_box input-group mb-2" id="email_box">
 				<input type="text" name="email" 
-					class="form-control" id="email" onkeyup="validation('email');" value="${email}" />
+					class="kakao_form-control" id="email" onkeyup="validation('email');" value="${email}" />
 			</div>
 			<div class="input_box input-group mb-2" id="pwd_box">
 				<input type="password" name="pwd" placeholder="비밀번호"
-					class="form-control" id="pwd" onkeyup="validation('pwd');"/>
+					class="kakao_form-control" id="pwd" onkeyup="validation('pwd');"/>
 			</div>
 		     
-		     <input type="button" value="회원가입" class="btn btn-outline-danger"
-					id="signUp_btn" onclick="signUp(this.form);" />
+		     <input type="button" value="회원가입" class="btn kakao_btn-outline-danger"
+					id="kakao_signUp_btn" onclick="signUp(this.form);" />
 			
 		</div>
 	</form>

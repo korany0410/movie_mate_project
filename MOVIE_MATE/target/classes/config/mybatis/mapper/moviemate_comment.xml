@@ -49,9 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		com_content = #{com_content}
 		WHERE comment_idx = #{comment_idx}
 	</update>
-	
+
 	<select id="commentCount" resultType="int">
-		select COUNT (*) from moviemate_comment
+		select COUNT (*) from
+		moviemate_comment
 	</select>
 
 	<select id="commentOrigin" resultType="vo.CommentList_ViewVO"
@@ -116,7 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		mu.movie_idx AND(1=2 OR mu.star_score >
 		0 OR mu.want_view ='yes') AND
 		mc.m_ref = #{movie_idx} AND mc.c_ref = #{comment_idx}
-		ORDER BY regdate DESC
+		ORDER BY regdate
+		DESC
 	</select>
 
 	<insert id="cocommentInsert"
@@ -125,6 +127,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(seq_comment_idx.nextVal, #{com_username}, #{com_content}, 0,
 		#{m_ref}, 0, 0, 0, #{c_ref}, sysdate)
 	</insert>
+
+	<update id="increaseUp" parameterType="vo.User_CommentVO">
+		UPDATE moviemate_comment
+		SET up = up + 1 WHERE comment_idx = #{comment_idx}
+	</update>
+
+	<update id="decreaseUp" parameterType="vo.User_CommentVO">
+		UPDATE moviemate_comment
+		SET up = up - 1 WHERE comment_idx = #{comment_idx}
+	</update>
+
+	<select id="reload" parameterType="vo.User_CommentVO"
+		resultType="int">
+		SELECT up FROM moviemate_comment WHERE comment_idx =
+		#{comment_idx}
+	</select>
+
+
 </mapper>
 
 

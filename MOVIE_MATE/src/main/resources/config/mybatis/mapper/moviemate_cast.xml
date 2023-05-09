@@ -30,6 +30,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'%' ||
 		#{keyword} || '%'
 	</select>
+
+	<select id="actorList" resultType="vo.CastList_ViewVO"
+		parameterType="vo.MovieMate_UserVO">
+		SELECT mmc.name, COUNT(mmc.name) count, mmc.cast_idx,
+		AVG(mu.star_score) * 20 avg FROM movie_user mu, moviemate_movie
+		mmm, moviemate_cast mmc, movie_cast mc WHERE mu.movie_idx =
+		mmm.movie_idx AND mc.cast_idx = mmc.cast_idx AND mc.movie_idx =
+		mmm.movie_idx AND mu.user_idx = #{user_idx} AND type = 'actor'
+		GROUP BY mmc.name, mmc.cast_idx HAVING ROUND(avg(mu.star_score),1) > 0 ORDER BY avg DESC
+	</select>
+	
+	<select id="directorList" resultType="vo.CastList_ViewVO"
+		parameterType="vo.MovieMate_UserVO">
+		SELECT mmc.name, COUNT(mmc.name) count, mmc.cast_idx,
+		AVG(mu.star_score) * 20 avg FROM movie_user mu, moviemate_movie
+		mmm, moviemate_cast mmc, movie_cast mc WHERE mu.movie_idx =
+		mmm.movie_idx AND mc.cast_idx = mmc.cast_idx AND mc.movie_idx =
+		mmm.movie_idx AND mu.user_idx = #{user_idx} AND type = 'director'
+		GROUP BY mmc.name, mmc.cast_idx HAVING ROUND(avg(mu.star_score),1) > 0 ORDER BY avg DESC
+	</select>
+	
+	
 </mapper>
 
 
