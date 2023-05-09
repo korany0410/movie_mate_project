@@ -316,6 +316,11 @@ public class MovieController {
 		System.out.println("유저IDX : " + session.getAttribute("userIdx"));
 		System.out.println("유저이미지 : " + session.getAttribute("userImg"));
 
+		// 이주의 배우
+		String actor = "이병헌";
+		// 이주의 감독
+		String director = "스티븐 스필버그";
+
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
 		model.addAttribute("masterpiece_list", masterpiece_list);
@@ -329,11 +334,11 @@ public class MovieController {
 		model.addAttribute("top10_list", top10_list);
 
 		// 이주의 배우
-		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list("이병헌");
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
 		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
-		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list();
+		List<MovieMate_MovieVO> director_list = moviemate_moviedao.director_list(director);
 		model.addAttribute("director_list", director_list);
 
 		// 평균별점
@@ -357,14 +362,14 @@ public class MovieController {
 		total_chart.put("top10", top10_list);
 		total_chart_name.put("top10", "왓챠 top10 영화");
 
-		total_chart.put("director", director_list);
-		total_chart_name.put("director", "MovieMate 화제의 감독 스티븐스필버그");
-
 		total_chart.put("masterpiece", masterpiece_list);
 		total_chart_name.put("masterpiece", "무비메이트 명작 영화");
 
+		total_chart.put("director", director_list);
+		total_chart_name.put("director", "MovieMate 화제의 감독 [" + director + "]");
+
 		total_chart.put("recommend", recommend_list);
-		total_chart_name.put("recommend", "MovieMate 이 주의 배우 이병헌");
+		total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");

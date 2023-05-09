@@ -71,6 +71,7 @@
 							<div class="movieInfo_box"
 								onclick="choice_screen(${map.value[i].movie_idx});">
 								<div class="img_box">
+									<div class="numbering">${i+1}</div>
 									<img class="profile_img" alt="${map.value[i].title}"
 										src="${map.value[i].profile_img }">
 								</div>
