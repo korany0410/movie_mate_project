@@ -127,9 +127,11 @@ public class KakaoLoginService implements IKakaoLoginService {
 
 				String nickname = properties.get("nickname").toString();
 				String email = kakao_account.get("email").toString();
+				String image = properties.get("profile_image").toString();
 
 				userInfo.put("nickname", nickname);
 				userInfo.put("email", email);
+				userInfo.put("profile_image", image);
 
 			} catch (Exception e) {
 				e.printStackTrace();

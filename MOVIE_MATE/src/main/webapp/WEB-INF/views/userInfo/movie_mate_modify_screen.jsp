@@ -36,6 +36,7 @@
 <script type="text/javascript">
     var id_check = true;
     var pwd_check = false;
+
     function profile_change(input) {
 	var file = input.files[0];
 	var img = document.getElementById('upload_img');
@@ -185,6 +186,7 @@
 				</div>
 			</div>
 		</div>
+		<div style="height: 30px;"></div>
 		<input type="hidden" name="user_idx" value="${userIdx}" />
 		<input type="hidden" name="profile_img" value="${userImg}">
 	</form>

@@ -41,6 +41,14 @@ public class MovieMate_UserDAO {
 
 		return count;
 	}
+	
+	// (email 중복확인)
+	public int email_check(MovieMate_UserVO moviemate_uservo) {
+
+		int count = sqlSession.selectOne("mmuser.email_check", moviemate_uservo);
+
+		return count;
+	}
 
 	// (로그인 확인)
 	public MovieMate_UserVO login(MovieMate_UserVO moviemate_uservo) {

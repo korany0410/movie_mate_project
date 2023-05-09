@@ -389,6 +389,16 @@ public class MovieController {
 		List<MovieMate_CastVO> cast_list = moviemate_castdao.movie_castList(moviemate_movievo);
 		List<CommentList_ViewVO> comment_list = moviemate_commentdao.selectList(moviemate_movievo);
 
+		System.out.println("choice" + comment_list.size());
+		if (!session.getAttribute("isLogin").equals("no")) {
+			int user_idx = (int) session.getAttribute("userIdx");
+			for (CommentList_ViewVO vo : comment_list) {
+				User_CommentVO uc = new User_CommentVO();
+				uc.setComment_idx(vo.getComment_idx());
+				uc.setUser_idx(user_idx);
+				vo = moviemate_commentdao.update_isup(vo, uc);
+			}
+		}
 		// List<MovieMate_MovieVO> movie_list =
 		// moviemate_moviedao.select_similarList(moviemate_movievo);
 
@@ -600,6 +610,10 @@ public class MovieController {
 
 		System.out.println("starScore" + vo.getStar_score());
 		movie_userdao.update_starScore(vo);
+		double avg = movie_userdao.avg(vo);
+		avg = Math.round(avg * 10) / 10.0;
+		vo.setStar_score(avg);
+		moviemate_moviedao.update_starScore(vo);
 
 		return Double.toString(vo.getStar_score());
 	}

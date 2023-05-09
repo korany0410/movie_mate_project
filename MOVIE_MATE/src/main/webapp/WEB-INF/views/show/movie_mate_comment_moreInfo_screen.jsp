@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <link rel="icon" href="/mate/resources/images/logo_icon_1.png" />
 <link rel="apple-touch-icon" href="/mate/resources/images/logo_icon_1.png" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+   integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+   integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+   integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <title>무비메이트</title>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="/mate/resources/css/reset.css" />
@@ -47,14 +55,16 @@ function isLogin() {
 	function resFnCommentUp() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;	
+			console.log(result)
 			var dom = document.getElementById(result.split("/")[0]);
 			var count = result.split("/")[1];
+			var yesOrNo = result.split("/")[2];
 			//좋아요 버튼 클릭시 배경 색 변경, 아이콘 색 변경
 			var up = document.getElementById("up");
 			var likeIcon = document.getElementById("like_icon");
 			
 			console.log(count + "a");
-			if( count == 0){
+			if(yesOrNo == 'no'){
 				up.style.backgroundColor = "white";
 				up.style.color = "rgba(0, 0, 0, 0.6)";
 				up.style.fontWeight = "normal";
@@ -87,6 +97,9 @@ function isLogin() {
 	//댓글버튼 클릭시 숨기기 보이기 기능
 	function cocomment_input() {
 	
+		if (isLogin() == "login_no") {
+			return;
+		}
 		var dom = document.getElementById("cocomment_input");
 		var backgroundBox = document.getElementById("cocomment_input_btn");
 		var cocommentComment = document.getElementById("cocomment_comment");
@@ -253,6 +266,9 @@ function isLogin() {
 
 	</div>
 	<div class=bottom_marin style='margin-bottom: 200px'></div>
+   <footer>
+      <%@ include file="/resources/jsp/footer.jsp"%>
+   </footer>
 
 </body>
 </html>

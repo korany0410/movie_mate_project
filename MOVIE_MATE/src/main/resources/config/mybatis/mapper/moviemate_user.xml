@@ -14,6 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM moviemate_user WHERE username =
 		#{username}
 	</select>
+	
+	<select id="email_check" resultType="int"
+		parameterType="vo.MovieMate_UserVO">
+		SELECT COUNT(*) FROM moviemate_user WHERE email =
+		#{email}
+	</select>
 
 	<select id="userInfo" resultType="vo.MovieMate_UserVO"
 		parameterType="vo.MovieMate_UserVO">

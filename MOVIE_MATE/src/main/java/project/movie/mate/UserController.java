@@ -83,9 +83,26 @@ public class UserController {
 
 		String s_name = (String) session.getAttribute("userName");
 
-		if (s_name.equals(moviemate_uservo.getUsername())) {
+		if (s_name != null && s_name.equals(moviemate_uservo.getUsername())) {
 			return "possible";
 		}
+
+		if (count < 1) {
+			return "possible";
+		}
+
+		return "imposiible";
+	}
+
+	@RequestMapping("/email_check.do")
+	@ResponseBody
+	public String email_check(MovieMate_UserVO moviemate_uservo) {
+
+		int count = moviemate_userdao.email_check(moviemate_uservo);
+
+		System.out.println("double_check.do -> count : " + count);
+
+		HttpSession session = request.getSession();
 
 		if (count < 1) {
 			return "possible";
@@ -225,20 +242,22 @@ public class UserController {
 		if (data == null) {
 			user_commentdao.insertData(uc_vo);
 			moviemate_commentdao.increaseUp(uc_vo);
+			uc_vo.setIsup("yes");
 		} else {
 			if (data.getIsup().equals("yes")) {
 				data.setIsup("no");
+				uc_vo.setIsup("no");
 				user_commentdao.updateData(data);
 				moviemate_commentdao.decreaseUp(data);
 			} else {
 				data.setIsup("yes");
+				uc_vo.setIsup("yes");
 				user_commentdao.updateData(data);
 				moviemate_commentdao.increaseUp(data);
 			}
 		}
-
 		int up = moviemate_commentdao.reload(uc_vo);
-		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + data.getIsup();
+		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + uc_vo.getIsup();
 	}
-	
+
 }
