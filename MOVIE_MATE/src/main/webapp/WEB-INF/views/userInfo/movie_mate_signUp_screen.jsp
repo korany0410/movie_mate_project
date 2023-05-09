@@ -58,7 +58,6 @@
 		var param = "username=" + username + "&email=" + email + "&pwd=" + pwd;
 		sendRequest(url, param, resSign, "GET");
 	}
-
 	function resSign() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;
@@ -73,15 +72,26 @@
 			}
 		}
 	}
+    function double_check(f) {
+	var username = f.username.value;
+	var email = f.email.value;
+	var url = "double_check.do";
+	var param = "username=" + username + "&email=" + email;
+	sendRequest(url, param, resDouble, "GET");
+    }
+    function resDouble() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    var result = xhr.responseText;
+	    console.log(result);
+	    if (result == 'possible') {
+		alert("가능한 이름입니다.");
+		user_check2 = true;
+	    } else {
+		alert("동일한 이름이 존재합니다. 다시 입력해주세요.");
+		return;
+	    }
 
-	function double_check(f) {
-		var username = f.username.value;
-		var url = "double_check.do";
-		var param = "username=" + username;
-		console.log(username);
-		sendRequest(url, param, resDouble, "GET");
 	}
-
 	function resDouble() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;
@@ -95,7 +105,6 @@
 			}
 		}
 	}
-
 	function validation(v) {
 		var check;
 		var value = document.getElementById(v).value;
@@ -125,10 +134,10 @@
 			<div class="input_box input-group mb-2" id="id_box">
 				<input type="text" name="username" placeholder="이름"
 					class="form-control" id="username" aria-describedby="basic-addon2"
-					onkeyup="validation('username');" /> <span
-					class="input-group-text" id="basic-addon2"> <input
-					type="button" class="btn" value="중복"
-					onclick="double_check(this.form);" />
+					onkeyup="validation('username');" />
+				<span class="input-group-text" id="basic-addon2">
+					<input type="button" class="btn" value="중복"
+						onclick="double_check(this.form);" />
 				</span>
 			</div>
 			<div class="input_box input-group mb-2" id="email_box">

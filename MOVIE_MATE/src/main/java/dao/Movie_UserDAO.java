@@ -76,4 +76,11 @@ public class Movie_UserDAO {
 		int count = sqlSession.selectOne("muser.movieCount");
 		return count;
 	}
+
+	public double avg(Movie_UserVO vo) {
+
+		double avg = sqlSession.selectOne("muser.avg", vo);
+
+		return avg;
+	}
 }

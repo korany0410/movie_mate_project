@@ -225,22 +225,24 @@ public class UserController {
 		if (data == null) {
 			user_commentdao.insertData(uc_vo);
 			moviemate_commentdao.increaseUp(uc_vo);
+			uc_vo.setIsup("yes");
 		} else {
 			if (data.getIsup().equals("yes")) {
 				data.setIsup("no");
+				uc_vo.setIsup("no");
 				user_commentdao.updateData(data);
 				moviemate_commentdao.decreaseUp(data);
 			} else {
 				data.setIsup("yes");
+				uc_vo.setIsup("yes");
 				user_commentdao.updateData(data);
 				moviemate_commentdao.increaseUp(data);
 			}
 		}
-
 		int up = moviemate_commentdao.reload(uc_vo);
-		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + data.getIsup();
+		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + uc_vo.getIsup();
 	}
-	
+
 
 	
 

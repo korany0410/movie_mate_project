@@ -71,7 +71,8 @@
 			var up_count = result.split("/")[1];
 			var box = document.getElementById('up');
 			var count = document.getElementById('count');
-			var icon = document.getElementById('like_icon');
+			var up = document.getElementById('up'+result.split("/")[0]);
+			var icon = document.getElementById('like_icon'+result.split("/")[0]);
 			
 			dom.innerText = result.split("/")[1];
 			console.log("result : " + result);
@@ -142,8 +143,8 @@
 					</div>
 					<div class="comment_content" onclick="moreInfo('${vo.comment_idx}');">${vo.content}</div>
 					<div class="cocomment_upComment_box">
-						<div class="cocomment_up" id="up" onclick="isup_clicked('${vo.comment_idx}');">
-							<i id="like_icon" class='bx bx-like like_btn'>
+						<div class="cocomment_up" id="up${vo.comment_idx}" onclick="isup_clicked('${vo.comment_idx}');">
+							<i id="like_icon${vo.comment_idx}" class='bx bx-like like_btn'>
 								<span class='like_btn' id="${vo.comment_idx}"> ${vo.up} </span>
 							</i>
 						</div>

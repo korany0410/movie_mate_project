@@ -131,6 +131,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT ROUND(sum(running_time) / 60) FROM moviemate_movie mmm, movie_user mu
 		WHERE mmm.movie_idx = mu.movie_idx AND mu.user_idx = #{user_idx}
 	</select>
+	
+	<update id="update_starScore" parameterType="vo.Movie_UserVO">
+		UPDATE moviemate_movie SET star_score = #{star_score} WHERE movie_idx = #{movie_idx}
+	</update>
+	
 
 </mapper>
 

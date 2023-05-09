@@ -36,24 +36,24 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript">
-	window.onload = function() {
+    window.onload = function() {
 
-		var url = "movie_count.do";
-		var param = null;
+	var url = "movie_count.do";
+	var param = null;
 
-		sendRequest(url, param, resFn, "GET");
+	sendRequest(url, param, resFn, "GET");
+    }
+
+    function resFn() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    var count = xhr.responseText;
+
+	    console.log(count);
+
+	    var dom = document.getElementById('count');
+	    dom.innerText = count;
 	}
-
-	function resFn() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var count = xhr.responseText;
-
-			console.log(count);
-
-			var dom = document.getElementById('count');
-			dom.innerText = count;
-		}
-	}
+    }
 </script>
 </head>
 
@@ -62,8 +62,11 @@
 	<div class="footer_box">
 		<div class="margin_box">
 			<h3 class="footer_h3" style='font-size: 25px'>
-				지금까지 <i class='bx bxs-star bx-flashing'> <span id="count"></span>
-				</i> 개의 평가가 쌓였어요.
+				<span> 지금까지 </span>
+				<i class='bx bxs-star bx-flashing'>
+					<span id="count" style="font-size: 25px;"></span>
+				</i>
+				<span> 개의 평가가 쌓였어요. </span>
 			</h3>
 			<div class="info_icon_box">
 				<div class="info_box">
@@ -81,8 +84,12 @@
 						<button class="btn btn-secondary dropdown-toggle" type="button"
 							data-bs-toggle="dropdown" aria-expanded="false">언어선택</button>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">한국어</a></li>
-							<li><a class="dropdown-item" href="#">English</a></li>
+							<li>
+								<a class="dropdown-item" href="#">한국어</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">English</a>
+							</li>
 						</ul>
 
 					</div>
@@ -92,7 +99,8 @@
 					<div>
 						고객센터 | <a href="#" class="footer_link"
 							onclick="window.open('https://help.pedia.watcha.co.kr/hc/ko', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">cs@moviemate.co.kr,
-						</a> 02-515-9985 <br> <span>광고 문의 | ad_sales@moviemate.com</span>
+						</a> 02-515-9985 <br>
+						<span>광고 문의 | ad_sales@moviemate.com</span>
 						<br> 제휴 및 대외 협력 | <a href="#" class="footer_link"
 							onclick="window.open('https://watcha.team/contact', 'window_name', 'width=900, height=900, location=no, status=no, scrollbars=yes'); return false;">
 							https://moviemate.team/contact</a>

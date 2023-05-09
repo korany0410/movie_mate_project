@@ -78,6 +78,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where (want_view = 'yes' and star_score = 0)
             or (want_view = 'no' and star_score > 0)
 	</select>
+	
+	<select id="avg" resultType="double" parameterType="vo.Movie_UserVO">
+		SELECT AVG(star_score) FROM movie_user WHERE 
+		movie_idx = #{movie_idx} AND star_score > 0
+	</select>
 
 </mapper>
 
