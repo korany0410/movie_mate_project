@@ -134,7 +134,7 @@
 			var result = xhr.responseText;	
 			var dom = document.getElementById(result.split("/")[0]);
 			var yesOrNo = result.split("/")[2];
-			var icon = document.getElementById('like_icon');
+			var icon = document.getElementById('like_icon'+result.split("/")[0]);
 			console.log("result : "+result);
 			console.log("dom : "+ dom);
 			console.log("y/n : " + yesOrNo);
@@ -366,8 +366,16 @@
 																	<div class="comment_content">${comment_list[i].content }</div>
 																</div>
 																<div class="cocomment_upComment_box">
-																	<div class="cocomment_up" id="up" onclick="isup_clicked('${comment_list[i].comment_idx}');">
-																		<i id="like_icon" class='bx bx-like' ></i>
+																	<div class="cocomment_up" id="up${comment_list[i].comment_idx}"
+																		onclick="isup_clicked('${comment_list[i].comment_idx}');">
+																		<c:choose>
+																			<c:when test="${comment_list[i].isup eq 'yes'}">
+																				<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
+																			</c:when>
+																			<c:otherwise>
+																				<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																			</c:otherwise>
+																		</c:choose>
 																		<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
 																	</div>
 																	<div class="cocomment_comment"
@@ -388,8 +396,7 @@
 											<div class="row">
 												<c:forEach var="i" begin="${index * 2 }" end="${index * 2 + 1}">
 													<c:if test="${not empty comment_list[i]}">
-														<div class="commentInfo_box col-6"
-															onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
+														<div class="commentInfo_box col-6">
 															<form>
 																<div class="comment_info">
 																	<div class="comment_name" onclick="go_userInfo('${comment_list[i].username}')">
@@ -398,9 +405,16 @@
 																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
 																		<div class="comment_content">${comment_list[i].content }</div>
 																	</div>
-																	<div class="cocomment_upComment">
-																		<div class="cocomment_up_box" id="up">
-																			<i id="like_icon" class='bx bx-like' onclick="isup_clicked('${comment_list[i].comment_idx}');"></i>
+																	<div class="cocomment_upComment_box">
+																		<div class="cocomment_up_box" id="up${comment_list[i].comment_idx}">
+																			<c:choose>
+																				<c:when test="${comment_list[i].isup eq 'yes'}">
+																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
+																				</c:when>
+																				<c:otherwise>
+																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																				</c:otherwise>
+																			</c:choose>
 																			<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
 																		</div>
 																		<div class="cocomment_comment"

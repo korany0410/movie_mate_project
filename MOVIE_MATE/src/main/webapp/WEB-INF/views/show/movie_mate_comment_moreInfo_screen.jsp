@@ -47,14 +47,16 @@ function isLogin() {
 	function resFnCommentUp() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = xhr.responseText;	
+			console.log(result)
 			var dom = document.getElementById(result.split("/")[0]);
 			var count = result.split("/")[1];
+			var yesOrNo = result.split("/")[2];
 			//좋아요 버튼 클릭시 배경 색 변경, 아이콘 색 변경
 			var up = document.getElementById("up");
 			var likeIcon = document.getElementById("like_icon");
 			
 			console.log(count + "a");
-			if( count == 0){
+			if(yesOrNo == 'no'){
 				up.style.backgroundColor = "white";
 				up.style.color = "rgba(0, 0, 0, 0.6)";
 				up.style.fontWeight = "normal";
@@ -87,6 +89,9 @@ function isLogin() {
 	//댓글버튼 클릭시 숨기기 보이기 기능
 	function cocomment_input() {
 	
+		if (isLogin() == "login_no") {
+			return;
+		}
 		var dom = document.getElementById("cocomment_input");
 		var backgroundBox = document.getElementById("cocomment_input_btn");
 		var cocommentComment = document.getElementById("cocomment_comment");

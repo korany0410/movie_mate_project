@@ -125,4 +125,16 @@ public class MovieMate_CommentDAO {
 		return res;
 	}
 
+	public CommentList_ViewVO update_isup(CommentList_ViewVO cl_vo, User_CommentVO uc_vo) {
+
+		User_CommentVO res = sqlSession.selectOne("ucomment.userCommentData", uc_vo);
+		System.out.println(res);
+		System.out.println(cl_vo);
+		if (res != null) {
+			cl_vo.setIsup(res.getIsup());
+		}
+		return cl_vo;
+
+	}
+
 }
