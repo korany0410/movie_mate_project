@@ -7,6 +7,9 @@ public class MovieMate_MovieVO {
 	private String movie_info, genre, company, background_img, nation;
 
 	public String getNation() {
+		if(this.nation == null) {
+			return "국가표시 없음";
+		}
 		return nation;
 	}
 

@@ -738,12 +738,15 @@ public class MovieController {
 		int runtime = moviemate_moviedao.runtime(uservo);
 
 		for (BestMovie_ViewVO vo : movieList) {
-			for (String nation : vo.getNation().split(",")) {
-				double[] origin = bestMovieList.getOrDefault(nation, new double[2]);
-				double[] insert = new double[] { vo.getAvg(), vo.getCount() };
-				insert[0] = Math.round((insert[0] + origin[0]) / 2);
-				insert[1]++;
-				bestMovieList.put(nation, insert);
+			System.out.println(vo.getNation());
+			if (!vo.getNation().equals("국가 미표시")) {
+				for (String nation : vo.getNation().split(",")) {
+					double[] origin = bestMovieList.getOrDefault(nation, new double[2]);
+					double[] insert = new double[] { vo.getAvg(), vo.getCount() };
+					insert[0] = Math.round((insert[0] + origin[0]) / 2);
+					insert[1]++;
+					bestMovieList.put(nation, insert);
+				}
 			}
 		}
 

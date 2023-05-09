@@ -26,6 +26,10 @@
 <link rel="stylesheet" href="/mate/resources/css/comment_moreInfo_screen.css" />
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 
 
@@ -249,45 +253,25 @@ function isLogin() {
 								<div class="cocomment_regdate">${vo.regdate}</div>
 							</div>
 						</div>
-						<div class="cocomment_setting dropdown">
-							<i class='bx bx-dots-vertical-rounded cocomment_setting_bx btn btn-secondary dropdown-toggle'
-								data-bs-toggle="dropdown" aria-expanded="false" style='color: rgba(0, 0, 0, 0.5)'></i>
-
-
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="#">Action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Another action</a>
-								</li>
-
-							</ul>
-
-						</div>
-
-
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Dropdown button</button>
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="#">Action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Another action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</li>
-							</ul>
-						</div>
-
-
-
 					</div>
-					<div class="cocomment_content">
-						<pre class="cocomment_con">${vo.content}</pre>
+					<div style="display: flex;">
+						<div class="cocomment_content" style="width: 1050px;">
+							<pre class="cocomment_con">${vo.content}</pre>
+						</div>
+						<div class="dropdown">
+							<button style="background-color: white !important; border: none !important;" class="btn btn-secondary"
+								type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class='bx bx-dots-vertical-rounded' style='color: rgba(0, 0, 0, 0.5); font-size: 20px;'></i>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item dropdown_modify" href="" onclick="modify();">수정하기</a>
+								</li>
+								<li>
+									<a class="dropdown-item dropdown_delete" href="" onclick="delete();">삭제하기</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 
 					<div class="cocomment_up" id="up${vo.comment_idx}">
@@ -301,8 +285,6 @@ function isLogin() {
 						</c:choose>
 						<span class='like_btn' id="${vo.comment_idx}"> ${vo.up} </span>
 					</div>
-
-
 				</div>
 			</c:forEach>
 		</div>

@@ -70,19 +70,21 @@
 	margin: 10px 0 50px 0;
 	padding-top: 55px;
 	width: 1100px;
-	border-top:1px solid rgba(0, 0, 0, 0.08);
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .count-box {
 	display: flex;
 }
-.count_ment{
+
+.count_ment {
 	font-size: 14px;
 	color: rgba(0, 0, 0, 0.5);
 	font-weight: bold;
 	margin-right: 1px;
 	margin-bottom: 10px;
 }
+
 .count {
 	font-size: 14px;
 	color: rgba(0, 0, 0, 0.5);
@@ -206,7 +208,8 @@
 }
 
 .cocomment_setting {
-	float: left;
+	width: 50px;
+	float: none !important;
 	margin-left: 945px;
 	font-size: 23px;
 	cursor: pointer;
@@ -231,4 +234,10 @@
 	font-size: 14px;
 	margin: 0 0 10px 37px;
 	cursor: pointer;
+}
+
+.show {
+	inset: 0px auto auto -115px !important;
+	box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.07);
+	
 }
