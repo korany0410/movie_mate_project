@@ -45,6 +45,7 @@ import vo.BestGenre_ViewVO;
 import vo.BestMovie_ViewVO;
 import vo.CastList_ViewVO;
 import vo.CommentList_ViewVO;
+import vo.Filtering;
 import vo.MovieMate_CastVO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_MovieVO;
@@ -496,9 +497,30 @@ public class MovieController {
 	}
 
 	@RequestMapping("/movie_mate_comment_moreInfo_screen.do")
-	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo) {
+	public String movie_mate_comment_moreInfo_screen(Model model, Movie_CommentVO mc_vo, String clean_bot) {
 		CommentList_ViewVO comment_view_origin = moviemate_commentdao.selectCommentOrigin(mc_vo);
 		List<CommentList_ViewVO> comment_view_list = moviemate_commentdao.selectCommentList(mc_vo);
+
+		if (clean_bot != null && clean_bot.equals("operation")) {
+			System.out.println("클린 봇 작동...");
+			Filtering filter_class = new Filtering();
+			String[] filter_arr = filter_class.getFilter();
+			HashMap<Integer, Integer> contain = new HashMap<Integer, Integer>();
+			for (String word : filter_arr) {
+				for (int i = 0; i < comment_view_list.size(); i++) {
+					if (comment_view_list.get(i).getContent().contains(word)) {
+						contain.put(i, i);
+					}
+				}
+			}
+			List<CommentList_ViewVO> list = new ArrayList<CommentList_ViewVO>();
+			for (int i = 0; i < comment_view_list.size(); i++) {
+				if (contain.get(i) == null) {
+					list.add(comment_view_list.get(i));
+				}
+			}
+			comment_view_list = list;
+		}
 
 		System.out.println(comment_view_list.size());
 
@@ -518,6 +540,7 @@ public class MovieController {
 			comment_view_origin = moviemate_commentdao.update_isup(comment_view_origin, uc);
 		}
 
+		model.addAttribute("clean_bot", clean_bot);
 		model.addAttribute("origin", comment_view_origin);
 		model.addAttribute("list", comment_view_list);
 
