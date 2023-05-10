@@ -49,6 +49,7 @@
 
 	<beans:bean class="project.movie.mate.KakaoController">
 		<beans:constructor-arg ref="kakao"></beans:constructor-arg>
+		<beans:constructor-arg ref="moviemateUser_dao"></beans:constructor-arg>
 	</beans:bean>
 
 

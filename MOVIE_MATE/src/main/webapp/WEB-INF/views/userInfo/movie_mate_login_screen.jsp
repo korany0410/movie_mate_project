@@ -69,6 +69,23 @@
 	    }
 	}
     }
+
+    function kakao() {
+	var pathname = "${pathname}";
+	pathname = pathname.replaceAll("&", "@");
+	var url = "path_save.do";
+	var param = "pathname=" + pathname;
+
+	sendRequest(url, param, resPathFn, "GET");
+    }
+
+    function resPathFn() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    var result = xhr.responseText;
+	    console.log(result);
+	    location.href = "https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code";
+	}
+    }
 </script>
 </head>
 </head>
@@ -97,8 +114,7 @@
 			<div class="openApi_box input-group mb-2">
 				<input type="button" name="button"
 					style="background-color: #F7E600; color: black; border-color: #F7E600;"
-					value="카카오 간편로그인" class="btn btn-outline-danger"
-					onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code'">
+					value="카카오 간편로그인" class="btn btn-outline-danger" onclick="kakao();">
 			</div>
 			
 			<a type="button " class="btn btn-success btn-block" href="${url}">네이버 로그인</a>

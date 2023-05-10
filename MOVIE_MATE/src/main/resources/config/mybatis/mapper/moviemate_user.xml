@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM moviemate_user WHERE username =
 		#{username}
 	</select>
-	
+
 	<select id="email_check" resultType="int"
 		parameterType="vo.MovieMate_UserVO">
 		SELECT COUNT(*) FROM moviemate_user WHERE email =
@@ -59,13 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM moviemate_user WHERE user_idx =
 		#{user_idx}
 	</select>
-	
-	<!-- <select id="Login.do" resultType="vo.MovieMate_UserVO"
-	    parameterType="vo.MovieMate_UserVO">
-	    SELECT * FROM moviemate_user WHERE email =
-		#{email} AND
-		pwd = #{pwd}
-	</select> -->
+
+	<select id="kakaoLogin" resultType="vo.MovieMate_UserVO"
+		parameterType="vo.MovieMate_UserVO">
+		SELECT * FROM moviemate_user WHERE email = #{email}
+	</select>
 </mapper>
 
 
