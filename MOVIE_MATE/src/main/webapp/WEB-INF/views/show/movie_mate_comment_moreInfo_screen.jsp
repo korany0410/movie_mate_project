@@ -34,7 +34,8 @@
 
 
 <script type="text/javascript">
-function isLogin() {
+/*
+	function isLogin() {
 	var isLogin = "${isLogin}";
 	if(isLogin == 'no'){
 	    if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
@@ -44,7 +45,7 @@ function isLogin() {
 	}
 	return "login_yes";
     }
-    
+    */
 
 	function update_cocomment(f) {
 		f.action = "moviemate_cocomment_insert.do";
@@ -80,16 +81,9 @@ function isLogin() {
 			console.log(count + "a");
 			if(yesOrNo == 'no'){
 				up.style.backgroundColor = "white";
-				up.style.color = "rgba(0, 0, 0, 0.6)";
-				up.style.fontWeight = "normal";
-				icon.className = "bx bx-like";
-				
-			}else{
-				
-				up.style.color = "black";
-				up.style.fontWeight = "bold";
-				icon.className = "bx bxs-like";
-				
+				icon.className = "bx bx-like";				
+			}else{			
+				icon.className = "bx bxs-like";			
 			}	
 				dom.innerText = result.split("/")[1];	
 		}	
@@ -98,7 +92,6 @@ function isLogin() {
 	
 	//댓글버튼 클릭시 숨기기 보이기 기능
 	function cocomment_input() {
-	
 		if (isLogin() == "login_no") {
 			return;
 		}
@@ -126,6 +119,7 @@ function isLogin() {
 	//수정하기
 	function modify(idx) {
          var comment = document.getElementById('comment'+idx);
+         console.log(comment);
          var textarea = document.getElementById('comment_textarea'+idx);
          comment.style.display = "none";
          textarea.style.display = "block";
@@ -140,30 +134,46 @@ function isLogin() {
 	}
 	//수정 완료
 	function save_modify(idx) {
-		
-		idx.action = "comment_moreInfo_save_modify.do";
-		idx.submit();
-		
-		
+
 		var comment = document.getElementById('comment'+idx);
         var textarea = document.getElementById('comment_textarea'+idx);
     	comment.style.display = "block";
 		textarea.style.display = "none";
+
+		 location.href = "comment_moreInfo_save_modify.do?comment_idx=${vo.comment_idx};
+
+	}
+	
+	//댓글 삭제
+	function delete(idx) {
+		
+		
+		
+	}
+	
+	function clean_bot() {
+	    if(confirm("클린봇을 작동시키겠습니까?")){
+			var bot = document.getElementById('bot');
+			var doing = document.getElementById('doing');
+			
+			bot.className = 'bx bx-bot bx-tada';
+			doing.innerText = "이 작동중입니다...";
+			
+			setTimeout(function() {
+			    console.log('Works!');
+			    location.href="movie_mate_comment_moreInfo_screen.do?clean_bot=operation&movie_idx=${origin.movie_idx}&comment_idx=${origin.comment_idx}";
+			  }, 3500);
+	    }
+
 	}
 </script>
-</head>
-
 </head>
 <body>
 	<header>
 		<%@ include file="/resources/jsp/header.jsp"%>
 	</header>
 	<div class="wall" style="height: 100px"></div>
-
 	<div class="center_box">
-
-
-
 		<div class="user_info" style="display: flex;">
 			<div class="profile_img">
 				<c:choose>
@@ -176,7 +186,6 @@ function isLogin() {
 				</c:choose>
 			</div>
 			${origin.username}
-
 		</div>
 		<div class="movie_box">
 			<div>
@@ -205,7 +214,7 @@ function isLogin() {
 		</div>
 		<div class="content">${origin.content}</div>
 		<div class="count-box">
-			<div class="cocomment_up" id="up${origin.comment_idx}" onclick="isup_clicked('${origin.comment_idx}');">
+			<div class="my_cocomment_up count" id="up${origin.comment_idx}" onclick="isup_clicked('${origin.comment_idx}');">
 				좋아요
 				<span id="${origin.comment_idx}">${origin.up} </span>
 			</div>
@@ -257,10 +266,21 @@ function isLogin() {
 			<div style="height: 30px;"></div>
 		</form>
 
-		<div class="cleanBot_box">
-			<i id="bot" class='bx bxs-bot' style='color: #7900ff'>클린봇</i>
-			<span>이 악성댓글을 감지합니다.</span>
-		</div>
+		<c:choose>
+			<c:when test="${empty clean_bot}">
+				<div class="cleanBot_box" onclick="clean_bot();">
+					<i id="bot" class='bx bxs-bot' style='color: #7900ff'>클린봇</i>
+					<span id="doing"> 이 악성댓글을 감지합니다. </span>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="cleanedBot_box" onclick="clean_bot();">
+					<i id="bot" class='bx bxs-bot bx-spin bx-rotate-90' style='color: #7900ff'></i>
+					<span style="color: #7900FF;">클린봇</span>
+					<span id="doing">이 악성댓글을 처리했어요!. </span>
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 		<div class="cocomment_list_box">
 			<c:forEach var="vo" items="${list}">
@@ -284,12 +304,15 @@ function isLogin() {
 						</div>
 					</div>
 					<div style="display: flex;">
+
 						<div id="comment${vo.comment_idx}" class="cocomment_content" style="width: 1050px;">
 							<pre class="cocomment_con">${vo.content}</pre>
 						</div>
 						<div id="comment_textarea${vo.comment_idx}" class="cocomment_content" style="width: 1050px; display: none;">
 							<textarea rows="" cols="" style="width: 100%;"></textarea>
-							<input type="button" value="취소하기" onclick="cancel_modify('${vo.comment_idx}');"/> <input type="button" value="변경하기" onclick="save_modify('${vo.comment_idx}');" />
+							<input type="button" value="취소하기" onclick="cancel_modify('${vo.comment_idx}');" /> <input type="button"
+								value="변경하기" onclick="save_modify('${vo.comment_idx}');" />
+
 						</div>
 						<div class="dropdown">
 							<button style="background-color: white !important; border: none !important;" class="btn btn-secondary"
@@ -306,7 +329,6 @@ function isLogin() {
 							</ul>
 						</div>
 					</div>
-
 					<div class="cocomment_up" id="up${vo.comment_idx}">
 						<c:choose>
 							<c:when test="${vo.isup eq 'yes' }">
@@ -321,12 +343,6 @@ function isLogin() {
 				</div>
 			</c:forEach>
 		</div>
-
-
-
-
-
-
 	</div>
 	<div class=bottom_marin style='margin-bottom: 200px'></div>
 	<footer>

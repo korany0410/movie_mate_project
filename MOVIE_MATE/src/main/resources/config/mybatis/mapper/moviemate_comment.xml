@@ -144,7 +144,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{comment_idx}
 	</select>
 
-
+		<update id="moreInfoUpdate" parameterType="vo.MovieMate_CommentVO">
+		UPDATE moviemate_comment SET
+		com_content = #{com_content}
+		WHERE comment_idx = #{comment_idx}
+	</update>
+	
 </mapper>
 
 

@@ -173,6 +173,18 @@
 	padding: 10px 0 10px 0;
 	color: rgba(0, 0, 0, 0.6);
 	background-color: rgba(0, 0, 0, 0.02);
+	box-sizing: border-box;
+}
+
+.cleanedBot_box {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	margin: 20px 0 20px 0;
+	text-align: center;
+	padding: 10px 0 10px 0;
+	color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, 0.02);
+	box-sizing: border-box;
 }
 
 .cocomment_user_box {
@@ -239,5 +251,13 @@
 .show {
 	inset: 0px auto auto -115px !important;
 	box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.07);
-	
+}
+
+.cleanBot_box:hover {
+	cursor: pointer;
+	border: 1px solid #7900ff;
+}
+
+.cleanBot_box:hover #bot{
+	font-weight: bold;
 }

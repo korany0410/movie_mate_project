@@ -138,8 +138,10 @@ public class MovieMate_CommentDAO {
 	}
 	
 	// movie_mate_comment_moreInfo_screen 글 수정
-	public int save_modify(CommentList_ViewVO cl_vo) {
-		int res = sqlSession.update("ucomment.moreInfoUpdate", cl_vo);
+	public int save_modify(MovieMate_CommentVO commentvo) {
+
+		int res = sqlSession.update("mmcomment.moreInfoUpdate", commentvo);
+
 		return res;
 	}
 
