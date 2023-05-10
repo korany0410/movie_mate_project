@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +29,7 @@ import dao.User_CommentDAO;
 import vo.MovieMate_CommentVO;
 import vo.MovieMate_UserVO;
 import vo.Movie_UserVO;
+import vo.PathNameVO;
 import vo.StarChart_ViewVO;
 
 import vo.User_CommentVO;
@@ -112,18 +114,18 @@ public class UserController {
 	}
 
 	@RequestMapping("/movie_mate_login_screen.do")
-	public String movie_mate_login_screen(Model model, String pathname, String code) {
-
+	public String movie_mate_login_screen(Model model, PathNameVO pathname, String code) {
+		System.out.println("로그인 경로 : " + pathname.getPathname());
 		if (code != null) {
 			System.out.println(code);
 		}
-		model.addAttribute("pathname", pathname);
+		model.addAttribute("pathname", pathname.getPathname());
 		return "/WEB-INF/views/userInfo/movie_mate_login_screen.jsp";
 	}
 
 	@RequestMapping("/login.do")
 	@ResponseBody
-	public String login(MovieMate_UserVO moviemate_uservo, String pathname) {
+	public String login(MovieMate_UserVO moviemate_uservo, PathNameVO pathname) {
 
 		MovieMate_UserVO user_info = moviemate_userdao.login(moviemate_uservo);
 		if (user_info == null) {
@@ -139,7 +141,8 @@ public class UserController {
 			System.out.println("이메일 : " + user_info.getEmail());
 			System.out.println("이름 : " + user_info.getUsername());
 			System.out.println("비밀번호 : " + user_info.getPwd());
-			return pathname;
+			System.out.println("리다이렉트 : " + pathname.getPathname());
+			return pathname.getPathname().replaceAll("@", "&");
 		}
 	}
 
@@ -152,7 +155,7 @@ public class UserController {
 		session.setAttribute("userIdx", null);
 		session.setAttribute("userImg", null);
 
-		return "movie_mate_main_screen.do";
+		return "redirect:movie_mate_main_screen.do";
 	}
 
 	@RequestMapping("/movie_mate_mypage_screen.do")

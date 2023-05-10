@@ -32,20 +32,14 @@
 	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
+<script type="text/javascript" src="/mate/resources/js/login.js"></script>
 <script type="text/javascript">
-    function isLogin() {
-	var isLogin = "${isLogin}";
-	if(isLogin == 'no'){
-	    if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
-			location.href="movie_mate_login_screen.do";
-	    }
-		return "login_no";
-	}
-	return "login_yes";
-    }
-    
+
+	var isLogin_value = "${isLogin}";
+   
     function setStarScore(i) {
 	if(isLogin() == "login_no"){
+	    console.log("a");
 	    return;
 	}
 	var score = document.getElementById('starpoint_' + i);
@@ -183,8 +177,8 @@
 					<div class="title_info">
 						<div class="title">${movie_info.title}</div>
 						<div class="release_date">
-							<span> ${fn:substring(movie_info.release_date,0,4)} • </span> <span>
-								${movie_info.genre} • ${movie_info.nation} </span>
+							<span> ${fn:substring(movie_info.release_date,0,4)} • </span>
+							<span> ${movie_info.genre} • ${movie_info.nation} </span>
 						</div>
 						<div class="input_box">
 							<div class="evaluation">
@@ -193,7 +187,8 @@
 									<div class="starpoint_box">
 										<c:forEach var="i" begin="1" end="10">
 											<label for="starpoint_${i}" class="label_star"
-												title="${i / 2.0}"> <span class="blind">${i / 2.0}</span>
+												title="${i / 2.0}">
+												<span class="blind">${i / 2.0}</span>
 											</label>
 											<c:choose>
 												<c:when test="${i eq movie_user.star_score * 2 }">
@@ -225,10 +220,11 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" /> <input
-										type="hidden" name="movie_idx" id="movie_idx"
-										value="${movie_info.movie_idx}" /> <input class="want_btn"
-										type="button" value="보고싶어요" onclick="want_view(this.form);" />
+									<input type="hidden" name="user_idx" value="${userIdx}" />
+									<input type="hidden" name="movie_idx" id="movie_idx"
+										value="${movie_info.movie_idx}" />
+									<input class="want_btn" type="button" value="보고싶어요"
+										onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
@@ -386,18 +382,22 @@
 																</div>
 																<div class="cocomment_upComment_box">
 
-																	<div class="cocomment_up" id="up${comment_list[i].comment_idx}"
+																	<div class="cocomment_up"
+																		id="up${comment_list[i].comment_idx}"
 																		onclick="isup_clicked('${comment_list[i].comment_idx}');">
 																		<c:choose>
 																			<c:when test="${comment_list[i].isup eq 'yes'}">
-																				<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
+																				<i id="like_icon${comment_list[i].comment_idx}"
+																					class='bx bxs-like'></i>
 																			</c:when>
 																			<c:otherwise>
-																				<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																				<i id="like_icon${comment_list[i].comment_idx}"
+																					class='bx bx-like'></i>
 																			</c:otherwise>
 																		</c:choose>
-																		<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
-																	
+																		<span id="${comment_list[i].comment_idx}">
+																			${comment_list[i].up} </span>
+
 																	</div>
 																	<div class="cocomment_comment"
 																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
@@ -429,16 +429,20 @@
 																		<div class="comment_content">${comment_list[i].content }</div>
 																	</div>
 																	<div class="cocomment_upComment_box">
-																		<div class="cocomment_up_box" id="up${comment_list[i].comment_idx}">
+																		<div class="cocomment_up_box"
+																			id="up${comment_list[i].comment_idx}">
 																			<c:choose>
 																				<c:when test="${comment_list[i].isup eq 'yes'}">
-																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
+																					<i id="like_icon${comment_list[i].comment_idx}"
+																						class='bx bxs-like'></i>
 																				</c:when>
 																				<c:otherwise>
-																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																					<i id="like_icon${comment_list[i].comment_idx}"
+																						class='bx bx-like'></i>
 																				</c:otherwise>
 																			</c:choose>
-																			<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
+																			<span id="${comment_list[i].comment_idx}">
+																				${comment_list[i].up} </span>
 																		</div>
 																		<div class="cocomment_comment"
 																			onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
@@ -457,8 +461,8 @@
 								</div>
 								<input type="button" class="carousel-control-prev comment_btn"
 									data-bs-target="#comment_list" data-bs-slide="prev"
-									value="&lt;" /> <input type="button"
-									class="carousel-control-next comment_btn"
+									value="&lt;" />
+								<input type="button" class="carousel-control-next comment_btn"
 									data-bs-target="#comment_list" data-bs-slide="next"
 									value="&gt;" />
 							</div>
@@ -504,7 +508,5 @@
 	<footer>
 		<%@ include file="/resources/jsp/footer.jsp"%>
 	</footer>
-	
-	
 </body>
 </html>
