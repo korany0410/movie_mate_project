@@ -87,6 +87,8 @@
 					value="카카오 간편로그인" class="btn btn-outline-danger"
 					onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code'">
 			</div>
+			
+	
 			<div class="link_box input-group mb-2" id="link_box">
 				계정이 없으신가요? <a href="movie_mate_signUp_screen.do">회원가입</a>
 			</div>
