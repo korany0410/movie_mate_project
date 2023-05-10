@@ -2,7 +2,7 @@
 
 function createRequest(){
 		
-	//JavaScript를 이용하여 서버로 정보를 보내는 HTTP request를 만들기 위해서는 이런 기능을 제공하는 클래스 인스턴스가 필요하다. 
+//JavaScript를 이용하여 서버로 정보를 보내는 HTTP request를 만들기 위해서는 이런 기능을 제공하는 클래스 인스턴스가 필요하다. 
 
 //이런 클래스는 InternetExplorer에서는 XMLHTTP라고 불리는 ActivX object를 말한다. 
 
@@ -47,15 +47,14 @@ function sendRequest(url, param, callBack, method){
 	xhr.send(httpMethod == 'POST'?httpParam:null);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+function isLogin() {
+	console.log(isLogin_value);
+	if(isLogin_value == 'no'){
+	    if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
+		var pathname = (location.pathname + location.search).substring(6);
+			location.href="movie_mate_login_screen.do" + pathname;
+	    }
+		return "login_no";
+	}
+	return "login_yes";
+}

@@ -34,6 +34,7 @@
 	var email = f.email.value;
 	var pwd = f.pwd.value;
 	var pathname = "${pathname}";
+<<<<<<< HEAD
 	if (pathname == "" || pathname == "logout.do") {
 	    pathname = "movie_mate_main_screen.do";
 
@@ -42,11 +43,24 @@
 	    sendRequest(url, param, resFn, "POST");
 
 	}
+=======
+	console.log(pathname);
+	if (pathname == "" || pathname == "logout.do") {
+	    pathname = "movie_mate_main_screen.do";
+	}
+	url = "login.do";
+	param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
+	sendRequest(url, param, resFn, "POST");
+>>>>>>> 50500059e95d2ac49d77f9e28c9854cf2192dfdb
     }
 
     function resFn() {
 	if (xhr.readyState == 4 && xhr.status == 200) {
 	    var result = xhr.responseText;
+<<<<<<< HEAD
+=======
+	    console.log("result = " + result);
+>>>>>>> 50500059e95d2ac49d77f9e28c9854cf2192dfdb
 	    if (result != 'fail') {
 		alert("로그인 성공했습니다.");
 		location.href = result;
@@ -87,8 +101,11 @@
 					value="카카오 간편로그인" class="btn btn-outline-danger"
 					onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code'">
 			</div>
+<<<<<<< HEAD
 			
 	
+=======
+>>>>>>> 50500059e95d2ac49d77f9e28c9854cf2192dfdb
 			<div class="link_box input-group mb-2" id="link_box">
 				계정이 없으신가요? <a href="movie_mate_signUp_screen.do">회원가입</a>
 			</div>
