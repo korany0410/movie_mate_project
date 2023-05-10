@@ -6,6 +6,9 @@ public class BestMovie_ViewVO {
 	private int count;
 
 	public String getNation() {
+		if(this.nation == null) {
+			return "국가 미표시";
+		}
 		return nation;
 	}
 
