@@ -117,7 +117,7 @@
 		enctype="multipart/form-data">
 		<div class="main_box">
 			<div class="first_box">
-				<img class="background" src="/mate/resources/images/photo.png"
+				<img class="background" src="/mate/resources/images/modify_background.png"
 					alt="" />
 			</div>
 			<div class="myProfile_box">

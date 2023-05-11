@@ -87,7 +87,13 @@
 			}
 		}	
 	}
-	
+	//원댓글 삭제
+	function del_origin_comment_screen(f) {
+		if(confirm("정말 삭제하시겠습니까?")){
+			f.action = "del_origin_comment_screen.do";
+			f.submit();
+		}
+	}
 
 </script>
 </head>
@@ -103,8 +109,8 @@
 		<c:forEach var="vo" items="${comment_list}">
 			<div class="comment_box">
 				<form action="movie_mate_comment_moreInfo_screen.do" id="moreInfo${vo.comment_idx}">
-					<input type="hidden" name="movie_idx" value="${movie_idx}"> <input type="hidden" name="comment_idx"
-						value="${vo.comment_idx}">
+					<input type="hidden" name="movie_idx" value="${movie_idx}">
+					<input type="hidden" name="comment_idx" value="${vo.comment_idx}">
 					<div class="comment_info">
 						<c:if test="${vo.user_profile_img eq 'no_data.jpg'}">
 						</c:if>
@@ -138,7 +144,20 @@
 							</div>
 						</div>
 					</div>
-					<div class="comment_content" onclick="moreInfo('${vo.comment_idx}');">${vo.content}</div>
+
+
+					<c:choose>
+						<c:when test="${vo.del_info eq 0 }">
+							<div class="comment_content" onclick="moreInfo('${vo.comment_idx}');">${vo.content}</div>
+						</c:when>
+						<c:otherwise>
+							<div class="comment_content" onclick="moreInfo('${vo.comment_idx}');">해당 댓글은 삭제되었습니다.</div>
+						</c:otherwise>
+					</c:choose>
+
+
+
+
 					<div class="cocomment_upComment_box">
 						<div class="cocomment_up" id="up${vo.comment_idx}" onclick="isup_clicked('${vo.comment_idx}');">
 							<c:choose>
@@ -155,6 +174,27 @@
 							<i class='bx bx-message-rounded'></i>
 							${vo.count - 1}
 						</div>
+						<c:choose>
+							<c:when test="${userIdx eq vo.user_idx}">
+								<c:choose>
+									<c:when test="${vo.del_info eq 0 }">
+										<form id="origin_del${vo.comment_idx}">
+											<div>${vo.del_info}</div>
+											<input type="hidden" name="comment_idx" value="${vo.comment_idx}">
+											<input type="hidden" name="m_ref" value="${movie_idx}">
+											<input type="hidden" name="c_ref" value="${vo.comment_idx}">
+											<input type="button" value="삭제하기" onclick="del_origin_comment_screen(this.form);">
+										</form>
+									</c:when>
+									<c:otherwise>
+										<input type="button" value="삭제하기" onclick="del_origin_comment_screen(this.form);" disabled="disabled">
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+						<c:otherwise>
+							<input type="button" value="삭제하기" onclick="del_origin_comment_screen(this.form);" disabled="disabled">
+						</c:otherwise>
+						</c:choose>
 					</div>
 				</form>
 			</div>

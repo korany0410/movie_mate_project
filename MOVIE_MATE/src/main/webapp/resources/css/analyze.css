@@ -24,8 +24,8 @@ body{
 
 .profile_box {
 	height: 250px;
-	background: black;
 	margin-bottom: 30px;
+	overflow: hidden;
 }
 
 .title2 {

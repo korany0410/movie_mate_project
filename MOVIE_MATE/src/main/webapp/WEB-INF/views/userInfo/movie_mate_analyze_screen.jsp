@@ -45,7 +45,7 @@
 </head>
 <body>
 	<div class="main_box">
-		<div class="profile_box box"></div>
+		<div class="profile_box box"><img class="profile_box" src="/mate/resources/images/analyze_profile.png" alt="" /> </div>
 		<div class="star_score box">
 			<div class="star_title title2">별점 분포</div>
 			<div id="inbody_chart">

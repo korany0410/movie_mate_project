@@ -5,13 +5,21 @@ package vo;
  *
  */
 public class CommentList_ViewVO {
-	private int movie_idx, user_idx, comment_idx, up, m_ref, count;
+	private int movie_idx, user_idx, comment_idx, up, m_ref, count, del_info;
 	private double star_score;
 	private String username, user_profile_img, movie_profile_img, content, regdate, want_view, title, release_date,
 			isup;
 
+	public int getDel_info() {
+		return del_info;
+	}
+
+	public void setDel_info(int del_info) {
+		this.del_info = del_info;
+	}
+
 	public String getIsup() {
-		if(this.isup == null) {
+		if (this.isup == null) {
 			return "no";
 		}
 		return isup;
