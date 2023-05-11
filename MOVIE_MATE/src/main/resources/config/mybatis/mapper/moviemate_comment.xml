@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="update" parameterType="vo.MovieMate_CommentVO">
 		UPDATE moviemate_comment SET
-		com_content = #{com_content}
+		com_content = #{com_content}, del_info = 0
 		WHERE comment_idx = #{comment_idx}
 	</update>
 
