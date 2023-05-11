@@ -43,6 +43,7 @@
 
     function login() {
 	var pathname = (location.pathname + location.search).substring(6);
+	pathname = pathname.replaceAll("&","@");
 	location.href = "movie_mate_login_screen.do?pathname=" + pathname;
     }
 </script>
