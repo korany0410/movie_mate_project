@@ -17,3 +17,8 @@ li {
 	margin: 0px;
 	padding: 0px;
 }
+.dark-mode{
+	background-color: black;
+	color: white;
+	font-color : white;
+} 
