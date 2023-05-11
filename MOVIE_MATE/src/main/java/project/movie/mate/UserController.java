@@ -230,9 +230,23 @@ public class UserController {
 		return "movie_mate_mypage_screen.do";
 	}
 
+	@RequestMapping("/path_save.do")
+	@ResponseBody
+	public String save_path(PathNameVO pathname) {
+
+		System.out.println(pathname.getPathname());
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute("pathname", pathname.getPathname());
+
+		return "result";
+	}
+
 	@RequestMapping("/movie_mate_login_kakao.do")
 	public String kakao(@RequestParam String code) {
 		System.out.println(code);
+
 		return "kakaoLogin?code=" + code;
 	}
 
