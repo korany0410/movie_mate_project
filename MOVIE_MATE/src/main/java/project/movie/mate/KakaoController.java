@@ -9,11 +9,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< HEAD
-=======
+
 
 import dao.MovieMate_UserDAO;
->>>>>>> 3ec0f7eb34fb78512943ff952c271c4c5ceb8b83
+
 import service.KakaoLoginService;
 import vo.MovieMate_UserVO;
 import vo.PathNameVO;

@@ -16,7 +16,7 @@
 	window.onload = function() {
 		check_username = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,18}$/;
 		check_email = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-		var username = "${name}";
+		var username = "${username}";
 		var email = "${email}";
 		console.log(username);
 		console.log(email);
@@ -130,13 +130,13 @@
 				<img class="kakao_img2" src="/mate/resources/images/logo_main.png"
 					alt="" height="35"
 					onclick="location.href='movie_mate_main_screen.do'"> <img
-					class="kakao_img" src="${image}" />
+					class="kakao_img" src="${profile_image}" />
 
 			</div>
 			<div class="input_box input-group mb-2" id="kakao_id_box">
 				<input type="text" name="username" class="kakao_form-control"
 					id="username" aria-describedby="basic-addon2"
-					onkeyup="validation('username');" value="${name}" /> <span
+					onkeyup="validation('username');" value="${username}" /> <span
 					class="kakao_input-group-text" id="basic-addon2"> <input
 					type="button" class="kakao_btn" value="중복" id="kakao_joong"
 					onclick="double_check(this.form);" />

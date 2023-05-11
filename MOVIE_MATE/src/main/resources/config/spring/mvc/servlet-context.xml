@@ -51,6 +51,12 @@
 		<beans:constructor-arg ref="kakao"></beans:constructor-arg>
 		<beans:constructor-arg ref="moviemateUser_dao"></beans:constructor-arg>
 	</beans:bean>
+	
+	<beans:bean class="project.movie.mate.NaverController">
+		<beans:constructor-arg ref="naver"></beans:constructor-arg>
+	</beans:bean>
+	
+	
 
 
 
