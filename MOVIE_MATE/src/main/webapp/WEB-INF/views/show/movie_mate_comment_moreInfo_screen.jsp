@@ -53,20 +53,11 @@
 	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 	crossorigin="anonymous"></script>
 
-
+<script type="text/javascript" src="/mate/resources/js/login.js"></script>
 
 <script type="text/javascript">
-function isLogin() {
-	var isLogin = "${isLogin}";
-	if(isLogin == 'no'){
-	    if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
-			location.href="movie_mate_login_screen.do";
-	    }
-		return "login_no";
-	}
-	return "login_yes";
-    }
-    
+
+	var isLogin_value = "${isLogin}"; 
 
 	function update_cocomment(f) {
 		f.action = "moviemate_cocomment_insert.do";
@@ -99,7 +90,6 @@ function isLogin() {
 			var upper = document.getElementById('upper'+result.split("/")[0]);
 			var icon = document.getElementById('like_icon'+result.split("/")[0]);
 			
-			console.log(count + "a");
 			if(yesOrNo == 'no'){
 				up.style.backgroundColor = "white";
 				icon.className = "bx bx-like";				

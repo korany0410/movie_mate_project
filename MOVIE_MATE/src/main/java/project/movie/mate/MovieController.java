@@ -318,7 +318,7 @@ public class MovieController {
 		System.out.println("유저이미지 : " + session.getAttribute("userImg"));
 
 		// 이주의 배우
-		String actor = "이병헌";
+		String actor = "조니 뎁";
 		// 이주의 감독
 		String director = "스티븐 스필버그";
 
@@ -371,7 +371,7 @@ public class MovieController {
 
 		total_chart.put("recommend", recommend_list);
 
-		total_chart_name.put("recommend", "MovieMate 이 주의 마동석");
+		total_chart_name.put("recommend", "MovieMate 이 주의 조니 뎁");
     	total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
 
 
@@ -411,11 +411,12 @@ public class MovieController {
 		// List<MovieMate_MovieVO> movie_list =
 		// moviemate_moviedao.select_similarList(moviemate_movievo);
 
+		MovieMate_CommentVO my_comment = null;
 		HashMap<Integer, MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
-		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
 
 		if (session.getAttribute("isLogin").equals("yes")) {
+			my_comment = new MovieMate_CommentVO();
 			int user_idx = (int) session.getAttribute("userIdx");
 			int movie_idx = moviemate_movievo.getMovie_idx();
 			String user_name = (String) session.getAttribute("userName");
