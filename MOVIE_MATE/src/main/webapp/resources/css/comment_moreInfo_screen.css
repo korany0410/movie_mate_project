@@ -92,7 +92,14 @@
 	margin-right: 25px;
 	margin-bottom: 10px;
 }
-
+.comment_delete_button{
+	border: hidden;
+	font-size: 14px;
+	padding: 3px 8px 2px 8px;
+	border-radius: 10px;
+	
+	
+}
 .button_box {
 	cursor: pointer;
 	height: 50px;

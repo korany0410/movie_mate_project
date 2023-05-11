@@ -136,13 +136,13 @@ public class MovieMate_CommentDAO {
 		return cl_vo;
 
 	}
-	
-	// movie_mate_comment_moreInfo_screen 글 수정
-	public int save_modify(MovieMate_CommentVO commentvo) {
 
-		int res = sqlSession.update("mmcomment.moreInfoUpdate", commentvo);
+	public int delete_comment(MovieMate_CommentVO commentvo) {
+
+		System.out.println(commentvo.getComment_idx());
+		int res = sqlSession.update("mmcomment.delete_comment", commentvo);
 
 		return res;
 	}
-
+	
 }

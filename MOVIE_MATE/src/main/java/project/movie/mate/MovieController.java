@@ -400,6 +400,7 @@ public class MovieController {
 		if (!session.getAttribute("isLogin").equals("no")) {
 			int user_idx = (int) session.getAttribute("userIdx");
 			for (CommentList_ViewVO vo : comment_list) {
+				vo.getDel_info();
 				User_CommentVO uc = new User_CommentVO();
 				uc.setComment_idx(vo.getComment_idx());
 				uc.setUser_idx(user_idx);
@@ -409,11 +410,12 @@ public class MovieController {
 		// List<MovieMate_MovieVO> movie_list =
 		// moviemate_moviedao.select_similarList(moviemate_movievo);
 
+		MovieMate_CommentVO my_comment = null;
 		HashMap<Integer, MovieMate_MovieVO> movie_list = moviemate_moviedao.select_similarList(moviemate_movievo);
-		MovieMate_CommentVO my_comment = new MovieMate_CommentVO();
 		Movie_UserVO vo = new Movie_UserVO();
 
 		if (session.getAttribute("isLogin").equals("yes")) {
+			my_comment = new MovieMate_CommentVO();
 			int user_idx = (int) session.getAttribute("userIdx");
 			int movie_idx = moviemate_movievo.getMovie_idx();
 			String user_name = (String) session.getAttribute("userName");
@@ -874,14 +876,42 @@ public class MovieController {
 	// movie_mate_comment_moreInfo_screen 글 수정
 	@RequestMapping("/comment_moreInfo_save_modify.do")
 	public String save_modify(MovieMate_CommentVO commentvo) {
-		int vo = moviemate_commentdao.save_modify(commentvo);
 
 		moviemate_commentdao.update_comment(commentvo);
 
-		int comment_idx = commentvo.getC_ref();
-
-		return "movie_mate_comment_moreInfo_screen.do?comment_idx=" + comment_idx;
+		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
+				+ commentvo.getM_ref();
 	}
 
+	@RequestMapping("/del_comment.do")
+	public String del_comment(MovieMate_CommentVO commentvo) {
+
+		moviemate_commentdao.delete_comment(commentvo);
+
+		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
+				+ commentvo.getM_ref();
+
+	}
+	
+	@RequestMapping("/del_origin_comment.do")
+	public String del_origin_comment(MovieMate_CommentVO commentvo) {
+		moviemate_commentdao.delete_comment(commentvo);
+		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
+		+ commentvo.getM_ref();
+	}
+	
+	@RequestMapping("/del_origin_comment_screen.do")
+	public String del_origin_comment_screen(MovieMate_CommentVO commentvo) {
+		moviemate_commentdao.delete_comment(commentvo);
+		return "redirect:movie_mate_comment.do?&movie_idx=" + commentvo.getM_ref();
+	}
+	
+	@RequestMapping("/del_origin_comment_choice.do")
+	public String del_origin_comment_choice(MovieMate_CommentVO commentvo) {
+		moviemate_commentdao.delete_comment(commentvo);
+		return "redirect:movie_mate_choice_screen.do?&movie_idx=" + commentvo.getM_ref();
+	}
+	
+	
 	
 }
