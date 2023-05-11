@@ -29,8 +29,6 @@ body {
 .movieTitle_box {
 	width: 100vw;
 	height: 310px;
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
 }
 
 .title_box {

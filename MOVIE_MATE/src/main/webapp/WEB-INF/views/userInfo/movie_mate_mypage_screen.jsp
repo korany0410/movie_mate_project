@@ -35,7 +35,7 @@
 	<div class="main_box">
 		<div class="first_box">
 			<i class='bx bxs-cog setting' onclick="modify();"></i>
-			<img class="background" src="/mate/resources/images/photo.png" alt="" />
+			<img class="background" src="/mate/resources/images/mypage_background.png" onclick="location.href='movie_mate_main_screen.do'"/>
 		</div>
 		<div class="myProfile_box">
 			<div class="profile_img">

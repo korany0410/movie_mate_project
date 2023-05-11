@@ -41,7 +41,7 @@ public class MovieMate_UserDAO {
 
 		return count;
 	}
-	
+
 	// (email 중복확인)
 	public int email_check(MovieMate_UserVO moviemate_uservo) {
 
@@ -91,30 +91,16 @@ public class MovieMate_UserDAO {
 	public int update_userInfo(MovieMate_UserVO uservo) {
 
 		int res = sqlSession.update("mmuser.update_userInfo", uservo);
-		
+
 		return res;
 	}
-	
 
- }
-	
-	
-	
+	public MovieMate_UserVO kakaoLogin(MovieMate_UserVO vo) {
 
+		System.out.println("kakaoLogin :" + vo.getEmail());
+		MovieMate_UserVO res = sqlSession.selectOne("mmuser.kakaoLogin", vo);
+		return res;
 
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

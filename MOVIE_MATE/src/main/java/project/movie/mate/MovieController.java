@@ -40,6 +40,7 @@ import dao.Movie_CastDAO;
 import dao.Movie_TagDAO;
 import dao.Movie_UserDAO;
 import dao.User_CastDAO;
+import dao.User_CommentDAO;
 import db.DB;
 import vo.BestGenre_ViewVO;
 import vo.BestMovie_ViewVO;
@@ -402,6 +403,7 @@ public class MovieController {
 		if (!session.getAttribute("isLogin").equals("no")) {
 			int user_idx = (int) session.getAttribute("userIdx");
 			for (CommentList_ViewVO vo : comment_list) {
+				vo.getDel_info();
 				User_CommentVO uc = new User_CommentVO();
 				uc.setComment_idx(vo.getComment_idx());
 				uc.setUser_idx(user_idx);
@@ -874,4 +876,45 @@ public class MovieController {
 
 	}
 
+	// movie_mate_comment_moreInfo_screen 글 수정
+	@RequestMapping("/comment_moreInfo_save_modify.do")
+	public String save_modify(MovieMate_CommentVO commentvo) {
+
+		moviemate_commentdao.update_comment(commentvo);
+
+		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
+				+ commentvo.getM_ref();
+	}
+
+	@RequestMapping("/del_comment.do")
+	public String del_comment(MovieMate_CommentVO commentvo) {
+
+		moviemate_commentdao.delete_comment(commentvo);
+
+		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
+				+ commentvo.getM_ref();
+
+	}
+	
+	@RequestMapping("/del_origin_comment.do")
+	public String del_origin_comment(MovieMate_CommentVO commentvo) {
+		moviemate_commentdao.delete_comment(commentvo);
+		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
+		+ commentvo.getM_ref();
+	}
+	
+	@RequestMapping("/del_origin_comment_screen.do")
+	public String del_origin_comment_screen(MovieMate_CommentVO commentvo) {
+		moviemate_commentdao.delete_comment(commentvo);
+		return "redirect:movie_mate_comment.do?&movie_idx=" + commentvo.getM_ref();
+	}
+	
+	@RequestMapping("/del_origin_comment_choice.do")
+	public String del_origin_comment_choice(MovieMate_CommentVO commentvo) {
+		moviemate_commentdao.delete_comment(commentvo);
+		return "redirect:movie_mate_choice_screen.do?&movie_idx=" + commentvo.getM_ref();
+	}
+	
+	
+	
 }

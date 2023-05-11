@@ -117,7 +117,7 @@
 		enctype="multipart/form-data">
 		<div class="main_box">
 			<div class="first_box">
-				<img class="background" src="/mate/resources/images/photo.png"
+				<img class="background" src="/mate/resources/images/modify_background.png"
 					alt="" />
 			</div>
 			<div class="myProfile_box">
@@ -178,7 +178,7 @@
 			</div>
 			<div class="second_box last df">
 				<div class="cancel" style="float: left; font-size: 32px;">
-					<i class='bx bx-left-arrow-alt' style='color: #7900ff;'></i>
+					<i class='bx bx-left-arrow-alt' style='color: #7900ff;' onclick="javascript:history.go(-1);"></i>
 				</div>
 				<div class="go" style="float: right; font-size: 32px;"
 					onclick="modify();">
