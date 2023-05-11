@@ -18,7 +18,7 @@ li {
 	padding: 0px;
 }
 .dark-mode{
-	background-color: black;
+	background-color: black !important;
 	color: white;
 	font-color : white;
 } 

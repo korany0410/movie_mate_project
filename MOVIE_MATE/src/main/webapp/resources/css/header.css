@@ -51,11 +51,14 @@ body {
 	-bs-gutter-x: 9rem !important;
 }
 
-.dark_mode_button {
+.dark_mode{
 	border-style : none;
 	border: none;
 	outline: none;
 	font-size: 25px;
 	background-color: transparent;
 	margin-left: 20px;
+}
+.dark_mode_button{
+	color: rgba(0, 0, 0, 0.7);
 }

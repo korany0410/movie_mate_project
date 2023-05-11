@@ -35,18 +35,20 @@
 		var pathname = (location.pathname + location.search).substring(6);
 		location.href = "movie_mate_login_screen.do?pathname=" + pathname;
 	}
+
 	function darkMode() {
-		
 		var body = document.body;
 		body.classList.toggle("dark-mode");
-		var dark_mode_button = document.getElementById("dark_mode_button");
-			if(dark_mode_button.className == "bx bx-moon"){
-				dark_mode_button.className = "bx bx-sun";
-				alert("다크 모드 작동!");
-			}else{
-				dark_mode_button.className = "bx bx-moon";
-				alert("라이트 모드 작동!");
-			}
+		var button = document.getElementById("dark_mode_button");
+		if (button.className == "bx bx-moon") {
+			button.className = "bx bx-sun";
+			button.style.color = "rgba(0, 0, 0, 0.7)";
+			alert("다크 모드 작동!");
+		} else {
+			button.className = "bx bx-moon";
+			button.style.color = "white";
+			alert("라이트 모드 작동!");
+		}
 	}
 </script>
 </head>
@@ -102,9 +104,9 @@
 				</c:choose>
 			</div>
 			<div class="dark_mode_box">
-				<div >
-					<button onclick="darkMode();" id="dark_mode" class="dark_mode_button">
-						<i id="dark_mode_button" class='bx bx-moon' style='color: rgba(0, 0, 0, 0.7)'></i>
+				<div>
+					<button onclick="darkMode();" id="dark_mode" class="dark_mode">
+						<i id="dark_mode_button" class='bx bx-moon dark_mode_button'></i>
 					</button>
 				</div>
 
