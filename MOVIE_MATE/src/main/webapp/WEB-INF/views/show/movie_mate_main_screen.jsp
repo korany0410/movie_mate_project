@@ -89,9 +89,9 @@
 				</c:forEach>
 			</div>
 			<input type="button" class="carousel-control-prev"
-				data-bs-target="#${ map.key }" data-bs-slide="prev" value="&lt;" />
+				data-bs-target="#${ map.key }" data-bs-slide="prev" value="〈" />
 			<input type="button" class="carousel-control-next"
-				data-bs-target="#${ map.key }" data-bs-slide="next" value="&gt;" />
+				data-bs-target="#${ map.key }" data-bs-slide="next" value="〉" />
 		</div>
 	</c:forEach>
 	<footer>

@@ -571,11 +571,9 @@
 									</c:forEach>
 								</div>
 								<input type="button" class="carousel-control-prev comment_btn"
-									data-bs-target="#comment_list" data-bs-slide="prev"
-									value="〈" />
+									data-bs-target="#comment_list" data-bs-slide="prev" value="〈" />
 								<input type="button" class="carousel-control-next comment_btn"
-									data-bs-target="#comment_list" data-bs-slide="next"
-									value="〉" />
+									data-bs-target="#comment_list" data-bs-slide="next" value="〉" />
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -592,8 +590,10 @@
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
 								</div>
-								<div class="fw-bold info star_title">${map.value.title}</div>
-								<div class="info star_comment">평균★${map.value.star_score}</div>
+								<div class="hide_info" style="">
+									<div class="fw-bold info star_title">${map.value.title}</div>
+									<div class="info star_comment">평균★${map.value.star_score}</div>
+								</div>
 							</div>
 						</c:forEach>
 					</div>

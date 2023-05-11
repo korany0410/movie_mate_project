@@ -319,7 +319,7 @@ public class MovieController {
 		System.out.println("유저이미지 : " + session.getAttribute("userImg"));
 
 		// 이주의 배우
-		String actor = "이병헌";
+		String actor = "조니 뎁";
 		// 이주의 감독
 		String director = "스티븐 스필버그";
 
@@ -336,7 +336,7 @@ public class MovieController {
 		model.addAttribute("top10_list", top10_list);
 
 		// 이주의 배우
-		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
+        List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
 		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
@@ -371,7 +371,10 @@ public class MovieController {
 		total_chart_name.put("director", "MovieMate 화제의 감독 [" + director + "]");
 
 		total_chart.put("recommend", recommend_list);
-		total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
+
+		total_chart_name.put("recommend", "MovieMate 이 주의 조니 뎁");
+    	total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
+
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");

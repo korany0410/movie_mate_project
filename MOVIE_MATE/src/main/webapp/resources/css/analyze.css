@@ -26,6 +26,7 @@ body{
 	height: 250px;
 	margin-bottom: 30px;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 .title2 {
