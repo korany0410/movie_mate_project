@@ -287,10 +287,12 @@ body {
 	top: 50% !important;
 	color: #000 !important;
 	font-weight: bold;
-	font-size: 25px;
-	line-height: 15px;
+	font-size: 20px;
+	line-height: 10px;
+	text-align: center;
 	border: 1px solid gray !important;
 	border-radius: 50px !important;
+	background-color: white !important;
 	opacity: 1 !important;
 }
 
@@ -299,16 +301,12 @@ body {
 }
 
 .carousel-control-prev {
-	left: -3% !important;
+	
 }
 
 .cast_name {
 	font-weight: bold;
-	color: rgba(0,0,0,7);
-}
-.cast_name:hover{
-	color:black;
-	font-size: 17px;
+	color: rgba(0, 0, 0, 7);
 }
 
 .cast_type {
@@ -322,6 +320,7 @@ body {
 
 .commentInfo_box {
 	padding: 0 !important;
+	
 }
 
 .com_box {
@@ -376,7 +375,7 @@ body {
 
 .comment_content {
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 13px;
 	padding: 5px;
 	min-height: 150px;
 	overflow: hidden;
@@ -403,9 +402,17 @@ body {
 .comment_box {
 	margin: 10px 10px 15px 10px;
 	cursor: pointer;
+	transition: all 0.1s linear;
 }
-.comment_box:hover{
+
+.comment_box:hover {
 	font-weight: 900;
+	transform: translate(5px, 0);
+}
+
+.commnet_box2 {
+	margin: 10px 10px 15px 10px;
+	cursor: pointer;
 }
 
 #want {
@@ -579,8 +586,12 @@ body {
 
 .commentInfo_box {
 	cursor: pointer;
+	transition: all 0.1s linear;
 }
 
+.commentInfo_box:hover {
+	transform: translate(0, -5px);
+}
 .comment_info {
 	cursor: pointer;
 }
@@ -589,16 +600,14 @@ body {
 	display: flex;
 	padding: 3px;
 	color: rgba(0, 0, 0, 0.6);
-
 }
-cocomment_up{
-	
+
+cocomment_up {
 	
 }
 
 .cocomment_comment {
 	margin-left: 6px;
-	
 }
 
 .cocomment_up:hover {
@@ -616,4 +625,31 @@ cocomment_up{
 .commentInfo_box {
 	width: 44% !important;
 	margin: 0 10px;
+}
+
+.comment_starWant {
+	font-size: 12px;
+	width: 100px;
+	border-radius: 18px;
+	padding: 1px 10px;
+	background-color: white;
+	float: right;
+	background-color: white;
+}
+
+.comment_username {
+	float: left;
+	width: calc(100% - 100px);
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	display: -webkit-box;
+	text-overflow: ellipsis;
+}
+
+.commentDel_btn {
+	margin-left: calc(100% - 120px); width : 40px;
+	font-size: 15px;
+	width: 40px;
 }

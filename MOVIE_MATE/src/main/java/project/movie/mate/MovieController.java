@@ -659,6 +659,7 @@ public class MovieController {
 		movie_userdao.update_starScore(vo);
 		double avg = movie_userdao.avg(vo);
 		avg = Math.round(avg * 10) / 10.0;
+		System.out.println("평점 평군 : " + avg);
 		vo.setStar_score(avg);
 		moviemate_moviedao.update_starScore(vo);
 
