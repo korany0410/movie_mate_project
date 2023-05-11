@@ -29,8 +29,6 @@ body {
 .movieTitle_box {
 	width: 100vw;
 	height: 310px;
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
 }
 
 .title_box {
@@ -306,10 +304,11 @@ body {
 
 .cast_name {
 	font-weight: bold;
-	color: rgba(0,0,0,7);
+	color: rgba(0, 0, 0, 7);
 }
-.cast_name:hover{
-	color:black;
+
+.cast_name:hover {
+	color: black;
 	font-size: 17px;
 }
 
@@ -333,6 +332,46 @@ body {
 
 .row {
 	width: 100%;
+}
+
+.similar_movie_box {
+	
+}
+
+.similar_movie:hover {
+	cursor: pointer;
+}
+
+.similar_movie:hover .movie_img {
+	transform: scale(1.1);
+}
+
+.similar_movie:hover .movieInfo_box {
+	transform: translate(0, -70px);
+	height: 70px;
+	background: black;
+	color: white;
+	padding-top: 20px;
+	padding-left: 5px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.movieImg_box {
+	border-radius: 10px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.movie_img {
+	transition: all 0.1s ease;
+}
+
+.movieInfo_box {
+	transition: all 0.1s ease;
+	z-index: 2;
+	position: relative;
+	height: 70px;
 }
 
 .comment_info {
@@ -406,7 +445,8 @@ body {
 	margin: 10px 10px 15px 10px;
 	cursor: pointer;
 }
-.comment_box:hover{
+
+.comment_box:hover {
 	font-weight: 900;
 }
 
@@ -483,10 +523,6 @@ body {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 1;
 	display: -webkit-box;
-}
-
-.similar_movie:hover {
-	cursor: pointer;
 }
 
 .movieImg_box {
@@ -591,16 +627,14 @@ body {
 	display: flex;
 	padding: 3px;
 	color: rgba(0, 0, 0, 0.6);
-
 }
-cocomment_up{
-	
+
+cocomment_up {
 	
 }
 
 .cocomment_comment {
 	margin-left: 6px;
-	
 }
 
 .cocomment_up:hover {

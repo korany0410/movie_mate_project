@@ -73,12 +73,30 @@ h1 {
 .carousel-control-next {
 	right: 0% !important;
 }
+.movieInfo_box:hover{
+	
+}
+.movieInfo_box:hover .profile_img{
+	transform: scale(1.1);
+}
+.movieInfo_box:hover .movie_info_text_box{
+	transform: translate(0, -120px);
+	height: 120px;
+	background: black;
+	color: white;
+	padding-top: 35px;
+	padding-left: 10px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
 
 .img_box {
 	position: relative;
 	width: 100%;
 	height: 0px;
 	padding-bottom: 145.37%;
+	border-radius: 10px;
+	overflow: hidden;
 }
 
 .profile_img {
@@ -90,10 +108,16 @@ h1 {
 	width: 100%;
 	height: 100%;
 	border: 1px solid rgb(234, 233, 232);
-	border-radius: 5px;
+	border-radius: 10px;
 	background: rgb(248, 248, 248);
+	transition: all 0.1s ease;
 }
-
+.movie_info_text_box{
+	transition: all 0.1s ease;
+	z-index: 2;
+	position: relative;
+	height: 120px;
+}
 .movieInfo_box_2 {
 	display: flex;
 	height: 100%;
@@ -105,8 +129,16 @@ h1 {
 	position: relative;
 	width: 25%;
 	padding-bottom: 33.3%;
+	overflow: hidden;
+	border-radius: 10px;	
+	
 }
-
+.img_box_2:hover .profile_img_2{
+	transform: scale(1.1);
+}
+.info_box_2:hover .profile_img_2{
+	transform: scale(1.1);
+}
 .profile_img_2 {
 	overflow: hidden;
 	position: absolute;
@@ -116,8 +148,9 @@ h1 {
 	width: 100%;
 	height: 100%;
 	border: 1px solid rgb(234, 233, 232);
-	border-radius: 5px;
+	border-radius: 10px;
 	background: rgb(248, 248, 248);
+	transition: all 0.1s ease;
 }
 
 .head_title {

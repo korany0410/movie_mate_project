@@ -137,4 +137,12 @@ public class MovieMate_CommentDAO {
 
 	}
 
+	public int delete_comment(MovieMate_CommentVO commentvo) {
+
+		System.out.println(commentvo.getComment_idx());
+		int res = sqlSession.update("mmcomment.delete_comment", commentvo);
+
+		return res;
+	}
+	
 }
