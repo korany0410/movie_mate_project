@@ -42,6 +42,10 @@
 		f.submit();
 	}
 
+	function choice_screen(idx) {
+		location.href = "movie_mate_choice_screen.do?movie_idx=" + idx;
+	}
+	
 	function isup_clicked(idx) {
 		if (isLogin() == "login_no") {
 			return;
@@ -165,6 +169,10 @@
 		}
 	}
 	
+	//
+	function user_info(username) {
+		location.href = "movie_mate_mypage_screen.do?username=" + username;
+	}
 </script>
 </head>
 
@@ -175,7 +183,7 @@
 	</header>
 	<div class="wall" style="height: 100px"></div>
 	<div class="center_box">
-		<div class="user_info" style="display: flex;">
+		<div class="user_info" style="display: flex; cursor: pointer;" onclick="user_info('${origin.username}')">
 			<div class="profile_img">
 				<c:choose>
 					<c:when test="${origin.user_profile_img eq 'no_data.jpg'}">
@@ -189,12 +197,12 @@
 			${origin.username}
 		</div>
 		<div class="movie_box">
-			<div>
+			<div class ="movie_profile" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">
 				<img class="movie_profile_img" src="${origin.movie_profile_img}" alt="" />
 			</div>
 			<div class="movie_info_box">
-				<div class="title">${origin.title}</div>
-				<div class="release_date">${fn:substring(origin.release_date,0,4)}</div>
+				<div class="title" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${origin.title}</div>
+				<div class="release_date" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${fn:substring(origin.release_date,0,4)}</div>
 				<c:choose>
 					<c:when test="${origin.star_score gt 0 }">
 						<div class="comment" style='width: 75px'>
@@ -235,19 +243,21 @@
 						<c:choose>
 							<c:when test="${origin.del_info eq 0 }">
 								<form action="" id="origin_del${origin.comment_idx}">
-									<input type="hidden" name="comment_idx" value="${origin.comment_idx}">
-									<input type="hidden" name="m_ref" value="${origin.movie_idx}">
-									<input type="hidden" name="c_ref" value="${origin.comment_idx}">
-									<input type="button" class="comment_delete_button" value="삭제하기" onclick="del_origin_comment(this.form);">
+									<input type="hidden" name="comment_idx" value="${origin.comment_idx}"> <input type="hidden"
+										name="m_ref" value="${origin.movie_idx}"> <input type="hidden" name="c_ref"
+										value="${origin.comment_idx}"> <input type="button" class="comment_delete_button" value="삭제하기"
+										onclick="del_origin_comment(this.form);">
 								</form>
 							</c:when>
 							<c:otherwise>
-								<input type="button" class="comment_delete_button" value="삭제하기" onclick="del_origin_comment(this.form);" disabled="disabled">
+								<input type="button" class="comment_delete_button" value="삭제하기" onclick="del_origin_comment(this.form);"
+									disabled="disabled">
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<input type="button" class="comment_delete_button" value="삭제하기" onclick="del_origin_comment(this.form);" disabled="disabled">
+						<input type="button" class="comment_delete_button" value="삭제하기" onclick="del_origin_comment(this.form);"
+							disabled="disabled">
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -291,10 +301,10 @@
 			<input type="hidden" name="com_username" value="${userName}" />
 			<textarea class="comemnt_textarea" name="com_content" placeholder="${origin.title}에 대한 생각을 자유롭게 표현해주세요." rows="4"
 				cols="50"></textarea>
-			<input type="hidden" name="c_ref" value="${origin.comment_idx}" />
-			<input type="hidden" name="m_ref" value="${origin.movie_idx}" />
-			<input type="button" class="update_btn update_btn_save" value="저장" onclick="update_cocomment(this.form);" />
-			<input type="button" class="update_btn update_btn_cancel" value="취소" onclick="     " />
+			<input type="hidden" name="c_ref" value="${origin.comment_idx}" /> <input type="hidden" name="m_ref"
+				value="${origin.movie_idx}" /> <input type="button" class="update_btn update_btn_save" value="저장"
+				onclick="update_cocomment(this.form);" /> <input type="button" class="update_btn update_btn_cancel" value="취소"
+				onclick="     " />
 			<div style="height: 30px;"></div>
 		</form>
 
@@ -342,12 +352,11 @@
 							</div>
 							<div id="comment_textarea${vo.comment_idx}" class="cocomment_content" style="width: 1050px; display: none;">
 								<form>
-									<input type="hidden" name="comment_idx" value="${vo.comment_idx}">
-									<input type="hidden" name="m_ref" value="${vo.movie_idx}">
-									<input type="hidden" name="c_ref" value="${origin.comment_idx}">
+									<input type="hidden" name="comment_idx" value="${vo.comment_idx}"> <input type="hidden" name="m_ref"
+										value="${vo.movie_idx}"> <input type="hidden" name="c_ref" value="${origin.comment_idx}">
 									<textarea rows="" cols="" style="width: 100%;" name="com_content"></textarea>
-									<input type="button" value="취소" onclick="cancel_modify('${vo.comment_idx}');" />
-									<input type="button" value="변경" onclick="save_modify(this.form);" />
+									<input type="button" value="취소" onclick="cancel_modify('${vo.comment_idx}');" /> <input type="button"
+										value="변경" onclick="save_modify(this.form);" />
 								</form>
 							</div>
 							<div class="dropdown" id="modify_delete_dropdown">
@@ -371,9 +380,8 @@
 									</li>
 									<li>
 										<form action="del_comment.do" id="del_${vo.comment_idx}">
-											<input type="hidden" name="comment_idx" value="${vo.comment_idx}">
-											<input type="hidden" name="m_ref" value="${vo.movie_idx}">
-											<input type="hidden" name="c_ref" value="${origin.comment_idx}">
+											<input type="hidden" name="comment_idx" value="${vo.comment_idx}"> <input type="hidden" name="m_ref"
+												value="${vo.movie_idx}"> <input type="hidden" name="c_ref" value="${origin.comment_idx}">
 											<a class="dropdown-item dropdown_delete" href="javascript:void(0);"
 												onclick="del_comment('${vo.comment_idx}');">삭제하기</a>
 										</form>

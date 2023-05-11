@@ -82,3 +82,8 @@
 .cocomment_comment:hover {
 	background-color: #c8c8c8;
 }
+
+.commentDel_btn {
+	margin-left: calc(100% - 150px);
+	width: 40px;
+}
