@@ -212,9 +212,9 @@
 									</c:otherwise>
 								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" /> <input type="hidden" name="movie_idx"
-										id="movie_idx" value="${movie_info.movie_idx}" /> <input class="want_btn" type="button" value="보고싶어요"
-										onclick="want_view(this.form);" />
+									<input type="hidden" name="user_idx" value="${userIdx}" />
+									<input type="hidden" name="movie_idx" id="movie_idx" value="${movie_info.movie_idx}" />
+									<input class="want_btn" type="button" value="보고싶어요" onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
@@ -231,7 +231,7 @@
 			<div class="left_box col-6 col-lg-5">
 				<c:if test="${not empty my_comment}">
 					<div id="myComment_box">
-						<div class="img_box" >
+						<div class="img_box">
 							<c:choose>
 								<c:when test="${userImg eq 'no_data.jpg'}">
 									<img class="p_img" src="/mate/resources/images/user.png" alt="" />
@@ -257,12 +257,12 @@
 					<label for="exampleFormControlTextarea1" class="input_title">${movie_info.title}</label>
 					<form>
 						<textarea class="form-control input_box" id="exampleFormControlTextarea1" name="com_content" rows="3"></textarea>
-						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" /> <input type="hidden" name="com_username"
-							value="${userName}" />
+						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" />
+						<input type="hidden" name="com_username" value="${userName}" />
 						<c:if test="${not empty my_comment }">
 							<input type="hidden" name="comment_idx" value="${my_comment.comment_idx}" />
 						</c:if>
-		
+
 						<input type="button" class="update_btn" value="저장" onclick="update_comment(this.form);" />
 					</form>
 				</div>
@@ -341,8 +341,9 @@
 							</c:forEach>
 						</div>
 						<input type="button" class="carousel-control-prev cast_btn" data-bs-target="#cast_list" data-bs-slide="prev"
-							value="&lt;" /> <input type="button" class="carousel-control-next cast_btn" data-bs-target="#cast_list"
-							data-bs-slide="next" value="&gt;" />
+							value="&lt;" />
+						<input type="button" class="carousel-control-next cast_btn" data-bs-target="#cast_list" data-bs-slide="next"
+							value="&gt;" />
 					</div>
 				</div>
 				<div class="starScore_box"></div>
@@ -493,8 +494,9 @@
 									</c:forEach>
 								</div>
 								<input type="button" class="carousel-control-prev comment_btn" data-bs-target="#comment_list"
-									data-bs-slide="prev" value="&lt;" /> <input type="button" class="carousel-control-next comment_btn"
-									data-bs-target="#comment_list" data-bs-slide="next" value="&gt;" />
+									data-bs-slide="prev" value="&lt;" />
+								<input type="button" class="carousel-control-next comment_btn" data-bs-target="#comment_list"
+									data-bs-slide="next" value="&gt;" />
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -504,14 +506,16 @@
 				</div>
 				<div class="similar_box">
 					<div class="head_title">비슷한 작품</div>
-					<div class="row">
+					<div class="row similar_movie_box">
 						<c:forEach var="map" items="${movie_list}" varStatus="status">
 							<div class="similar_movie col-4 col-md-3" onclick="choice_screen(${map.value.movie_idx});">
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
 								</div>
-								<div class="fw-bold info star_title">${map.value.title}</div>
-								<div class="info star_comment">평균★${map.value.star_score}</div>
+								<div class="movieInfo_box">
+									<div class="fw-bold info star_title">${map.value.title}</div>
+									<div class="info star_comment">평균★${map.value.star_score}</div>
+								</div>
 							</div>
 						</c:forEach>
 					</div>
