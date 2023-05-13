@@ -63,7 +63,6 @@ public class KakaoController {
 		MovieMate_UserVO vo = new MovieMate_UserVO();
 		vo.setEmail(email.trim());
 
-
 		MovieMate_UserVO user_info = moviemate_userdao.kakaoLogin(vo);
 		if (user_info != null) {
 			session.setAttribute("isLogin", "yes");

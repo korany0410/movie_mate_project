@@ -129,10 +129,10 @@
 					value="카카오 간편로그인" class="btn btn-outline-danger" onclick="kakao();">
 			</div>
 
-			<div>
+			<div class="openApi_box input-group mb-2">
 				<input type="button" name="button"
 					style="background-color: #2DB400; color: black; border-color: #F7E600;"
-					value="네이버로 로그인하기" class="btn btn-outline-danger"
+					value="네이버 간편로그인" class="btn btn-outline-danger"
 					onclick="naverLogin();">
 			</div>
 
