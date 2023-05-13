@@ -118,8 +118,10 @@ public class MovieMate_MovieDAO {
 	}
 
 	// 이 주의 추천 장르
-	public List<MovieMate_MovieVO> genre_list() {
-		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.genre_list");
+	public List<MovieMate_MovieVO> genre_list(String genre) {
+		MovieMate_MovieVO vo = new MovieMate_MovieVO();
+		vo.setGenre(genre);
+		List<MovieMate_MovieVO> list = sqlSession.selectList("mmmovie.genre_list", vo);
 		return list;
 	}
 

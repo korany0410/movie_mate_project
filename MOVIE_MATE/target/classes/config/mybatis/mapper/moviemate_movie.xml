@@ -77,9 +77,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="genre_list" resultType="vo.MovieMate_MovieVO"
 		parameterType="vo.MovieMate_MovieVO">
-		select *
-		from moviemate_movie
-		where genre = '액션'
+		SELECT * FROM (SELECT RANK() OVER(ORDER BY star_score
+		DESC, release_date desc) no, m.*
+		FROM (SELECT * FROM moviemate_movie WHERE profile_img !=
+		'no_data.jpg' AND genre LIKE '%' ||
+		#{genre} || '%') m )
+		WHERE (no BETWEEN 1 AND 15)
 	</select>
 
 	<select id="famous_list" resultType="vo.MovieMate_MovieVO"

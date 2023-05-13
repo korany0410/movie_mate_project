@@ -322,6 +322,8 @@ public class MovieController {
 		String actor = "조니 뎁";
 		// 이주의 감독
 		String director = "스티븐 스필버그";
+		// 추천 장르
+		String genre = "액션";
 
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
@@ -336,7 +338,7 @@ public class MovieController {
 		model.addAttribute("top10_list", top10_list);
 
 		// 이주의 배우
-        List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
+		List<MovieMate_MovieVO> recommend_list = moviemate_moviedao.recommend_list(actor);
 		model.addAttribute("recommend_list", recommend_list);
 
 		// 화제감독의추천작
@@ -348,7 +350,7 @@ public class MovieController {
 		model.addAttribute("avg_star_list", avg_star_list);
 
 		// 이 주의 추천 장르
-		List<MovieMate_MovieVO> genre_list = moviemate_moviedao.genre_list();
+		List<MovieMate_MovieVO> genre_list = moviemate_moviedao.genre_list(genre);
 		model.addAttribute("genre_list", genre_list);
 
 		// 이 주의 인플루언서
@@ -371,16 +373,13 @@ public class MovieController {
 		total_chart_name.put("director", "MovieMate 화제의 감독 [" + director + "]");
 
 		total_chart.put("recommend", recommend_list);
-
-		total_chart_name.put("recommend", "MovieMate 이 주의 조니 뎁");
-    	total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
-
+		total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");
 
 		total_chart.put("genre", genre_list);
-		total_chart_name.put("genre", "이 주의 추천 장르 '액션'");
+		total_chart_name.put("genre", "이 주의 추천 장르 [" + genre + "]");
 
 		total_chart.put("famous", famous_list);
 		total_chart_name.put("famous", "이 주의 인플루언서 추천 영화 ");
@@ -896,26 +895,33 @@ public class MovieController {
 				+ commentvo.getM_ref();
 
 	}
-	
+
 	@RequestMapping("/del_origin_comment.do")
 	public String del_origin_comment(MovieMate_CommentVO commentvo) {
 		moviemate_commentdao.delete_comment(commentvo);
 		return "redirect:movie_mate_comment_moreInfo_screen.do?comment_idx=" + commentvo.getC_ref() + "&movie_idx="
-		+ commentvo.getM_ref();
+				+ commentvo.getM_ref();
 	}
-	
+
 	@RequestMapping("/del_origin_comment_screen.do")
 	public String del_origin_comment_screen(MovieMate_CommentVO commentvo) {
 		moviemate_commentdao.delete_comment(commentvo);
 		return "redirect:movie_mate_comment.do?&movie_idx=" + commentvo.getM_ref();
 	}
-	
+
 	@RequestMapping("/del_origin_comment_choice.do")
 	public String del_origin_comment_choice(MovieMate_CommentVO commentvo) {
 		moviemate_commentdao.delete_comment(commentvo);
 		return "redirect:movie_mate_choice_screen.do?&movie_idx=" + commentvo.getM_ref();
 	}
-	
-	
-	
+
+	@RequestMapping("/darkMode.do")
+	@ResponseBody
+	public String darkMode(String mode) {
+		HttpSession session = request.getSession();
+
+		session.setAttribute("mode", mode);
+
+		return mode;
+	}
 }

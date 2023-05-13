@@ -46,26 +46,41 @@
 	    location.href = "logout.do";
 	}
     }
-
     function darkMode() {
 	var body = document.body;
+	var div = document.div;
+	console.log(body);
+	console.log(div);
+	var span = document.span;
 	body.classList.toggle("dark-mode");
-	var dark_mode_button = document.getElementById("dark_mode_button");
-	if (dark_mode_button.className == "bx bx-moon") {
-	    dark_mode_button.className = "bx bx-sun";
-	    alert("다크 모드 작동!");
+	div.classList.toggle("dark-mode");
+	span.classList.toggle("dark-mode");
+	var button = document.getElementById("dark_mode_button");
+	var navbar = document.getElementById("navbar");
+	var logo_main = document.getElementById("logo_main");
+	if (button.className == "bx bx-moon") {
+	    button.className = "bx bx-sun";
+	    button.style.color = "rgba(0, 0, 0, 0.7)";
+	    navbar.style.background = "white";
+	    logo_main.src = "/mate/resources/images/logo_main.png";
 	} else {
-	    dark_mode_button.className = "bx bx-moon";
-	    alert("라이트 모드 작동!");
+	    button.className = "bx bx-moon";
+	    button.style.color = "white";
+	    navbar.style.background = "#282c34";
+	    logo_main.src = "/mate/resources/images/logo_main_white.png";
 	}
+	var url = "darkMode.do";
+	var param = "mode=" + button.className;
+	sendRequest(url, param, resDarkMode, "GET");
     }
 </script>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+	<nav id="navbar" class="navbar fixed-top navbar-expand-lg">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="movie_mate_main_screen.do"> <img
-					src="/mate/resources/images/logo_main.png" alt="" height="35">
+					id="logo_main" src="/mate/resources/images/logo_main.png"
+					style="width: 220px;" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
@@ -117,16 +132,12 @@
 			</div>
 			<div class="dark_mode_box">
 				<div>
-					<button onclick="darkMode();" id="dark_mode"
-						class="dark_mode_button">
-						<i id="dark_mode_button" class='bx bx-moon'
-							style='color: rgba(0, 0, 0, 0.7)'></i>
+					<button onclick="darkMode();" id="dark_mode" class="dark_mode">
+						<i id="dark_mode_button" class='bx bx-moon dark_mode_button'></i>
 					</button>
 				</div>
-
 			</div>
 		</div>
 	</nav>
-
 </body>
 </html>
