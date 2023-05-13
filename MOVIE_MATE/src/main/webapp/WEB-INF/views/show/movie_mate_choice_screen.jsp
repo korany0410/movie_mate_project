@@ -260,9 +260,18 @@
 										alt="" />
 								</c:otherwise>
 							</c:choose>
-							<c:if test=""></c:if>
 						</div>
-						<div class="comment_box">${my_comment.com_content}</div>
+						<div class="go_cocomment"
+							onclick="go_cocomment('${my_comment.comment_idx}','${movie_info.movie_idx}');">
+							<c:choose>
+								<c:when test="${my_comment.del_info eq 0}">
+									<div class="comment_box">${my_comment.com_content}</div>
+								</c:when>
+								<c:otherwise>
+									<div class="comment_box">해당 댓글은 삭제되었습니다.</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 				</c:if>
 				<div id="myComment_input_box">
@@ -307,7 +316,6 @@
 							<div class="carousel-item actor active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="5">
-
 										<div class="movieInfo_box col-6">
 											<form>
 												<div class="comment_box"
@@ -355,9 +363,9 @@
 								</div>
 							</c:forEach>
 						</div>
-						<input type="button" class="carousel-control-prev cast_btn"
+						<input type="button" class="carousel-control-prev cast_btn prev"
 							data-bs-target="#cast_list" data-bs-slide="prev" value="〈" />
-						<input type="button" class="carousel-control-next cast_btn"
+						<input type="button" class="carousel-control-next cast_btn next"
 							data-bs-target="#cast_list" data-bs-slide="next" value="〉" />
 					</div>
 				</div>
@@ -583,14 +591,14 @@
 				</div>
 				<div class="similar_box">
 					<div class="head_title">비슷한 작품</div>
-					<div class="row">
+					<div class="row similar_movie_box">
 						<c:forEach var="map" items="${movie_list}" varStatus="status">
 							<div class="similar_movie col-4 col-md-3"
 								onclick="choice_screen(${map.value.movie_idx});">
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
 								</div>
-								<div class="hide_info" style="">
+								<div class="movieInfo_box">
 									<div class="fw-bold info star_title">${map.value.title}</div>
 									<div class="info star_comment">평균★${map.value.star_score}</div>
 								</div>

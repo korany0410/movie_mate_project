@@ -10,7 +10,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous"/>
+	crossorigin="anonymous" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
@@ -35,24 +35,37 @@
 	console.log(f.keyword.value);
     }
 
+    function login() {
+	var pathname = (location.pathname + location.search).substring(6);
+	pathname = pathname.replaceAll("&", "@");
+	location.href = "movie_mate_login_screen.do?pathname=" + pathname;
+    }
+
     function logout() {
 	if (confirm("로그아웃 하시겠습니까?")) {
 	    location.href = "logout.do";
 	}
     }
 
-    function login() {
-	var pathname = (location.pathname + location.search).substring(6);
-	pathname = pathname.replaceAll("&","@");
-	location.href = "movie_mate_login_screen.do?pathname=" + pathname;
+    function darkMode() {
+	var body = document.body;
+	body.classList.toggle("dark-mode");
+	var dark_mode_button = document.getElementById("dark_mode_button");
+	if (dark_mode_button.className == "bx bx-moon") {
+	    dark_mode_button.className = "bx bx-sun";
+	    alert("다크 모드 작동!");
+	} else {
+	    dark_mode_button.className = "bx bx-moon";
+	    alert("라이트 모드 작동!");
+	}
     }
 </script>
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="movie_mate_main_screen.do">
-				<img src="/mate/resources/images/logo_main.png" alt="" height="35">
+			<a class="navbar-brand" href="movie_mate_main_screen.do"> <img
+					src="/mate/resources/images/logo_main.png" alt="" height="35">
 			</a>
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
@@ -80,13 +93,13 @@
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
 							<li class="nav-item profile_box">
 								<a class="nav-link"
-									href="movie_mate_mypage_screen.do?username=${userName}">
-									<c:choose>
+									href="movie_mate_mypage_screen.do?username=${userName}"> <c:choose>
 										<c:when test="${userImg eq 'no_data.jpg'}">
 											<img class="profile" src="/mate/resources/images/user.png">
 										</c:when>
 										<c:otherwise>
-											<img class="profile" src="/mate/resources/upload/${userImg}" alt="" />
+											<img class="profile" src="/mate/resources/upload/${userImg}"
+												alt="" />
 										</c:otherwise>
 									</c:choose>
 								</a>
@@ -101,6 +114,16 @@
 						</ul>
 					</c:otherwise>
 				</c:choose>
+			</div>
+			<div class="dark_mode_box">
+				<div>
+					<button onclick="darkMode();" id="dark_mode"
+						class="dark_mode_button">
+						<i id="dark_mode_button" class='bx bx-moon'
+							style='color: rgba(0, 0, 0, 0.7)'></i>
+					</button>
+				</div>
+
 			</div>
 		</div>
 	</nav>

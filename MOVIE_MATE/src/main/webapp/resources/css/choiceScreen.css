@@ -290,18 +290,6 @@ body {
 	font-size: 20px;
 	line-height: 10px;
 	text-align: center;
-	border: 1px solid gray !important;
-	border-radius: 50px !important;
-	background-color: white !important;
-	opacity: 1 !important;
-}
-
-.carousel-control-next {
-	
-}
-
-.carousel-control-prev {
-	
 }
 
 .cast_name {
@@ -329,6 +317,46 @@ body {
 
 .row {
 	width: 100%;
+}
+
+.similar_movie_box {
+	
+}
+
+.similar_movie:hover {
+	cursor: pointer;
+}
+
+.similar_movie:hover .movie_img {
+	transform: scale(1.1);
+}
+
+.similar_movie:hover .movieInfo_box {
+	transform: translate(0, -70px);
+	height: 70px;
+	background: black;
+	color: white;
+	padding-top: 20px;
+	padding-left: 5px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.movieImg_box {
+	border-radius: 10px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.movie_img {
+	transition: all 0.1s ease;
+}
+
+.movieInfo_box {
+	transition: all 0.1s ease;
+	z-index: 2;
+	position: relative;
+	height: 70px;
 }
 
 .comment_info {
@@ -459,12 +487,24 @@ body {
 	border: none;
 }
 
+.prev {
+	z-index: 999 !important;
+}
+
+.next {
+	z-index: 999 !important;
+}
+
 .cast_btn {
 	visibility: hidden !important;
 }
 
 #cast_list:hover .cast_btn {
 	visibility: visible !important;
+}
+
+.cast_btn:hover {
+	cursor: pointer;
 }
 
 .comment_btn {
@@ -499,14 +539,14 @@ body {
 }
 
 .similar_movie:hover .hide_info {
-	transform: translate(0,-45px);
+	transform: translate(0, -45px);
 	background: white;
 	border-radius: 0 0 10px 10px;
 	background: rgb(248, 248, 248);
 	border: 1px solid rgb(234, 233, 232);
 }
 
-.hide_info{
+.hide_info {
 	transition: all 0.1s linear;
 	height: 45px;
 }
@@ -625,7 +665,7 @@ body {
 	color: rgba(0, 0, 0, 0.6);
 }
 
-cocomment_up {
+.cocomment_up {
 	
 }
 

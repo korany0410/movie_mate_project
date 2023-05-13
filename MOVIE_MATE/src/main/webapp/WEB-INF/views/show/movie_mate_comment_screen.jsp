@@ -115,7 +115,7 @@
 						<c:if test="${vo.user_profile_img eq 'no_data.jpg'}">
 						</c:if>
 						<div class="cocomment">
-							<div class="comment_user_box">
+							<div class="comment_user_box" onclick="user_info('${vo.username}')">
 								<div class="cocomment_profile_img">
 									<c:choose>
 										<c:when test="${vo.user_profile_img eq 'no_data.jpg'}">
@@ -126,7 +126,7 @@
 										</c:otherwise>
 									</c:choose>
 								</div>
-								<div class="user_box_name" onclick="user_info('${vo.username}')">${vo.username}</div>
+								<div class="user_box_name">${vo.username}</div>
 							</div>
 							<div class="comment_starWant">
 								<c:choose>
@@ -159,20 +159,21 @@
 
 
 					<div class="cocomment_upComment_box">
-						<div class="cocomment_up" id="up${vo.comment_idx}" onclick="isup_clicked('${vo.comment_idx}');">
+						<div class="cocomment_up" id="up${vo.comment_idx}" onclick="isup_clicked('${vo.comment_idx}');"
+							style="width: 55px;">
 							<c:choose>
 								<c:when test="${vo.isup eq 'yes'}">
-									<i id="like_icon${vo.comment_idx}" class='bx bxs-like'></i>
+									<i id="like_icon${vo.comment_idx}" class='bx bxs-like like_icon'></i>
 								</c:when>
 								<c:otherwise>
-									<i id="like_icon${vo.comment_idx}" class='bx bx-like'></i>
+									<i id="like_icon${vo.comment_idx}" class='bx bx-like like_icon'></i>
 								</c:otherwise>
 							</c:choose>
-							<span id="${vo.comment_idx}"> ${vo.up} </span>
+							<span id="${vo.comment_idx}" class="like_icon"> ${vo.up} </span>
 						</div>
-						<div class="cocomment_comment" onclick="go_cocomment('${vo.comment_idx}','${movie_idx}');">
+						<div class="cocomment_comment" onclick="go_cocomment('${vo.comment_idx}','${movie_idx}');" style="width: 55px;">
 							<i class='bx bx-message-rounded'></i>
-							${vo.count - 1}
+							<span> ${vo.count - 1} </span>
 						</div>
 						<c:choose>
 							<c:when test="${userIdx eq vo.user_idx}">
@@ -183,17 +184,17 @@
 											<input type="hidden" name="comment_idx" value="${vo.comment_idx}">
 											<input type="hidden" name="m_ref" value="${movie_idx}">
 											<input type="hidden" name="c_ref" value="${vo.comment_idx}">
-											<input type="button" value="삭제하기" onclick="del_origin_comment_screen(this.form);">
+											<input class="commentDel_btn" type="button" value="삭제" onclick="del_origin_comment_screen(this.form);">
 										</form>
 									</c:when>
 									<c:otherwise>
-										<input type="button" value="삭제하기" onclick="del_origin_comment_screen(this.form);" disabled="disabled">
+										<input class="commentDel_btn" type="button" value="삭제" onclick="del_origin_comment_screen(this.form);" disabled="disabled">
 									</c:otherwise>
 								</c:choose>
 							</c:when>
-						<c:otherwise>
-							<input type="button" value="삭제하기" onclick="del_origin_comment_screen(this.form);" disabled="disabled">
-						</c:otherwise>
+							<c:otherwise>
+								<input class="commentDel_btn" type="button" value="삭제" onclick="del_origin_comment_screen(this.form);" disabled="disabled">
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</form>
