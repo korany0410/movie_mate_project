@@ -6,12 +6,14 @@ body {
 }
 
 .navbar {
-	background-color: white !important;
+	background-color: white;
 	width: 100% !important;
 	z-index: 999;
-	background-color: white;
 	margin: 0 auto;
-	border-bottom: 1px solid #c8c8c8;
+}
+
+.logo_main {
+	
 }
 
 .container-fluid {
@@ -31,7 +33,7 @@ body {
 
 .form-control {
 	width: 350px;
-	background-color: #f3f6f4 !important;
+	/* background-color: #f3f6f4 !important; */
 }
 
 .profile {
@@ -47,6 +49,19 @@ body {
 }
 
 .container, .container-fluid, .container-lg, .container-md,
-	.container-sm, .container-xl, .container-xxl { 
-	--bs-gutter-x: 9rem !important;
+	.container-sm, .container-xl, .container-xxl { -
+	-bs-gutter-x: 9rem !important;
+}
+
+.dark_mode {
+	border-style: none;
+	border: none;
+	outline: none;
+	font-size: 25px;
+	background-color: transparent;
+	margin-left: 20px;
+}
+
+.dark_mode_button {
+	color: rgba(0, 0, 0, 0.7);
 }
