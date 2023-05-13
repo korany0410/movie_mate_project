@@ -117,18 +117,28 @@ public class KakaoLoginService implements IKakaoLoginService {
 				// JSON String -> Map
 				Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
 				});
+				System.out.println("json properties===============================");
 				System.out.println(jsonMap.get("properties"));
+				System.out.println("kakao_account===============================");
+				System.out.println("kakao_account===============================" + jsonMap.get("kakao_account"));
 
 				Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
 				Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
 
-				// System.out.println(properties.get("nickname"));
-				// System.out.println(kakao_account.get("email"));
+				System.out.println("kakao_account==========MAP =====================");
+				System.out.println(kakao_account);
+				System.out.println("nickname==========nickname =====================");
+				 System.out.println(properties.get("nickname"));
+				 System.out.println("email==========email =====================");
+				 System.out.println(kakao_account.get("email"));
 
 				String nickname = properties.get("nickname").toString();
 				String email = kakao_account.get("email").toString();
 				String image = properties.get("profile_image").toString();
 
+				System.out.println("service의 닉네임" + nickname);
+				System.out.println("service의 email" + email);
+				System.out.println("service의 image" + image);
 				userInfo.put("nickname", nickname);
 				userInfo.put("email", email);
 				userInfo.put("profile_image", image);

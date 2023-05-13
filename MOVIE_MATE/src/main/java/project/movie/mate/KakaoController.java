@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import dao.MovieMate_UserDAO;
 import service.KakaoLoginService;
 import vo.MovieMate_UserVO;
-import vo.PathNameVO;
 
 @Controller
 public class KakaoController {
@@ -31,8 +31,8 @@ public class KakaoController {
 	// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname,
 	// email정보가 담겨있음
 	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session)
-			throws Throwable {
+	public String kakaoLogin(Model model, @RequestParam(value = "code", required = false) String code,
+			HttpSession session) throws Throwable {
 
 		// 1번
 		System.out.println("code:" + code);
@@ -47,19 +47,13 @@ public class KakaoController {
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
 
-		String name = (String) userInfo.get("nickname");
+		String username = (String) userInfo.get("nickname");
 		String email = (String) userInfo.get("email");
-		String image = (String) userInfo.get("profile_image");
+		String profile_image = (String) userInfo.get("profile_image");
 		String pathname = (String) session.getAttribute("pathname");
-
-		session.setAttribute("image", image);
-		session.setAttribute("name", name);
-		session.setAttribute("email", email);
-		session.removeAttribute("pathname");
 
 		MovieMate_UserVO vo = new MovieMate_UserVO();
 		vo.setEmail(email.trim());
-
 
 		MovieMate_UserVO user_info = moviemate_userdao.kakaoLogin(vo);
 		if (user_info != null) {
@@ -69,6 +63,10 @@ public class KakaoController {
 			session.setAttribute("userImg", user_info.getProfile_img());
 			return "redirect:" + pathname.replaceAll("@", "&");
 		}
+
+		model.addAttribute("email", email);
+		model.addAttribute("username", username);
+		model.addAttribute("profile_image", profile_image);
 		return "/WEB-INF/views/userInfo/movie_mate_kakao_signup.jsp";
 	}
 }

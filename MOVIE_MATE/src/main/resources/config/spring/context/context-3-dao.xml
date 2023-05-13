@@ -38,5 +38,7 @@
 		<property name="sqlSession" ref="sqlSessionBean"></property>
 	</bean>
 	<bean id="kakao" class="service.KakaoLoginService"></bean>
+	
+	<bean id="naver" class="service.NaverLoginBO"></bean>
 
 </beans>
