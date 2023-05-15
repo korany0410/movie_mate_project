@@ -95,6 +95,7 @@
 	transition: all 0.1s ease;
 	z-index: 2;
 	position: relative;
+	height: 120px;
 }
 
 .profile_img {

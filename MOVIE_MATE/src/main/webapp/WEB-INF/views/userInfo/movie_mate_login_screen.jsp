@@ -30,49 +30,74 @@
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 
 <script type="text/javascript">
-    function send(f) {
-	var email = f.email.value;
-	var pwd = f.pwd.value;
-	var pathname = "${pathname}";
-	console.log(pathname);
-	if (pathname == "" || pathname == "logout.do") {
-	    pathname = "movie_mate_main_screen.do";
+	function send(f) {
+		var email = f.email.value;
+		var pwd = f.pwd.value;
+		var pathname = "${pathname}";
+
+		if (pathname == "" || pathname == "logout.do") {
+			pathname = "movie_mate_main_screen.do";
+
+			url = "login.do";
+			param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
+			sendRequest(url, param, resFn, "POST");
+
+		}
+
+		console.log(pathname);
+		if (pathname == "" || pathname == "logout.do") {
+			pathname = "movie_mate_main_screen.do";
+		}
+		url = "login.do";
+		param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
+		sendRequest(url, param, resFn, "POST");
+
 	}
-	url = "login.do";
-	param = "email=" + email + "&pwd=" + pwd + "&pathname=" + pathname;
-	sendRequest(url, param, resFn, "POST");
-    }
 
-    function resFn() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
-	    var result = xhr.responseText;
-	    console.log("result = " + result);
-	    if (result != 'fail') {
-		alert("로그인 성공했습니다.");
-		location.href = result;
-	    } else {
-		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-		return;
-	    }
+	function resFn() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = xhr.responseText;
+
+			console.log("result = " + result);
+
+			if (result != 'fail') {
+				alert("로그인 성공했습니다.");
+				location.href = result;
+			} else {
+				alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+				return;
+			}
+		}
 	}
-    }
 
-    function kakao() {
-	var pathname = "${pathname}";
-	pathname = pathname.replaceAll("&", "@");
-	var url = "path_save.do";
-	var param = "pathname=" + pathname;
+	function kakao() {
+		var pathname = "${pathname}";
+		pathname = pathname.replaceAll("&", "@");
+		var url = "path_save.do";
+		var param = "pathname=" + pathname;
 
-	sendRequest(url, param, resPathFn, "GET");
-    }
-
-    function resPathFn() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
-	    var result = xhr.responseText;
-	    console.log(result);
-	    location.href = "https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code";
+		sendRequest(url, param, resPathFn, "GET");
 	}
-    }
+
+	function resPathFn() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = xhr.responseText;
+			console.log(result);
+			location.href = "https://kauth.kakao.com/oauth/authorize?client_id=c5c9bf4e2eae7cd92e2e30cb7d2783d8&redirect_uri=http://localhost:9090/mate/movie_mate_login_kakao.do&response_type=code";
+		}
+	}
+
+	function naverLogin() {
+		var clientId = "1WJZgSQ2gY4nooI1AGEz";
+		var redirectURI = "http://localhost:9090/mate/movie_mate_naver_signup.do";
+		var state = "STATE_STRING";
+		var url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="
+				+ clientId
+				+ "&redirect_uri="
+				+ encodeURIComponent(redirectURI)
+				+ "&state=" + state
+		window.location.href = url;
+	}
 </script>
 </head>
 </head>
@@ -103,10 +128,18 @@
 					style="background-color: #F7E600; color: black; border-color: #F7E600;"
 					value="카카오 간편로그인" class="btn btn-outline-danger" onclick="kakao();">
 			</div>
-			<div class="link_box input-group mb-2" id="link_box">
-				계정이 없으신가요? <a href="movie_mate_signUp_screen.do">회원가입</a>
+
+			<div class="openApi_box input-group mb-2">
+				<input type="button" name="button"
+					style="background-color: #2DB400; color: black; border-color: #F7E600;"
+					value="네이버 간편로그인" class="btn btn-outline-danger"
+					onclick="naverLogin();">
 			</div>
-		</div>
+
+			<div>
+			계정이 없으신가요? <a href="movie_mate_signUp_screen.do">회원가입</a>
+			</div>
+		
 	</form>
 </body>
 </html>

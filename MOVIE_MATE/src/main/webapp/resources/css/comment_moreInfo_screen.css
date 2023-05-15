@@ -22,13 +22,13 @@
 	display: flex;
 }
 
-.title {
+.comment_moreInfo_title {
 	font-size: 24px;
 	font-weight: bold;
 	color: rgba(0, 0, 0, 0.7);
 }
 
-.release_date {
+.comment_moreInfo_release_date {
 	font-size: 15px;
 	color: rgba(0, 0, 0, 0.5);
 	font-weight: bold;

@@ -19,6 +19,7 @@
 	integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
 	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript" src="/mate/resources/js/login.js"></script>
 <script type="text/javascript">
@@ -65,12 +66,23 @@
     function resFnWant() {
 	if(xhr.readyState == 4 && xhr.status == 200){
 	    var result = xhr.responseText;
-	    console.log(result);
-		var img = document.getElementById('want');
-	    if(result == 'yes'){
-			img.src = "/mate/resources/images/check.png";
+	    var yesOrNo = result.split("/")[0];
+	    var mode = result.split("/")[1];
+		var want = document.getElementById('want_class');
+		console.log(mode);
+	    if(yesOrNo == 'yes'){
+			want.className = "bx bx-plus bx-spin pp"
+			setTimeout(function(){
+			want.className = "bx bx-check";		    
+		}, 500); 
+			want.style.color = "#34E245";
 	    } else {
-			img.src = "/mate/resources/images/plus.png";
+			want.className = "bx bx-plus pp";
+			if(mode == "bx bx-sun"){
+			    want.style.color = "gray";
+			} else {
+			    want.style.color = "white";
+			}
 	    }
 	}
     }
@@ -158,7 +170,7 @@
 	<header>
 		<%@ include file="/resources/jsp/header.jsp"%>
 	</header>
-	<div class="wall"></div>
+	<div class="wall" id="dummy"></div>
 	<div class="main_box">
 		<div class="first_box">
 			<div class="thumbnailImg_box row">
@@ -200,34 +212,36 @@
 								</div>
 							</div>
 							<div class="inter" id="wanted">
-								<c:choose>
-									<c:when test="${movieUser_info.want_view eq 'no' }">
-										<img id="want" src="/mate/resources/images/plus.png" alt="" />
-									</c:when>
-									<c:when test="${empty movieUser_info.want_view}">
-										<img id="want" src="/mate/resources/images/plus.png" alt="" />
-									</c:when>
-									<c:otherwise>
-										<img id="want" src="/mate/resources/images/check.png" alt="" />
-									</c:otherwise>
-								</c:choose>
 								<form>
-									<input type="hidden" name="user_idx" value="${userIdx}" />
-									<input type="hidden" name="movie_idx" id="movie_idx" value="${movie_info.movie_idx}" />
-									<input class="want_btn" type="button" value="보고싶어요" onclick="want_view(this.form);" />
+									<c:choose>
+										<c:when test="${movieUser_info.want_view eq 'no' }">
+											<i id="want_class" class='bx bx-plus pp'></i>
+										</c:when>
+										<c:when test="${empty movieUser_info.want_view}">
+											<i id="want_class" class='bx bx-plus pp'></i>
+										</c:when>
+										<c:otherwise>
+											<i id="want_class" class='bx bx-check' style="color: #34E245 !important;"></i>
+										</c:otherwise>
+									</c:choose>
+									<input type="hidden" name="user_idx" value="${userIdx}" /> <input type="hidden" name="movie_idx"
+										id="movie_idx" value="${movie_info.movie_idx}" /> <input class="want_btn" type="button" value="보고싶어요"
+										onclick="want_view(this.form);" />
 								</form>
 							</div>
 							<div class="inter" id="commented">
-								<img id="pancel" src="/mate/resources/images/pancel.png" alt="" />
-								<input class="want_btn" type="button" value="글쓰기" onclick="write_comment();" />
+								<form>
+									<i id="pancel" class='bx bx-pencil'></i>
+									<input class="want_btn" type="button" value="글쓰기" onclick="write_comment();" />
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="second_box row">
-			<div class="dummy col-1 col-lg-2"></div>
+		<div class="second_box row ss2">
+			<div class="col-1 col-lg-2 ss3"></div>
 			<div class="left_box col-6 col-lg-5">
 				<c:if test="${not empty my_comment}">
 					<div id="myComment_box">
@@ -257,12 +271,11 @@
 					<label for="exampleFormControlTextarea1" class="input_title">${movie_info.title}</label>
 					<form>
 						<textarea class="form-control input_box" id="exampleFormControlTextarea1" name="com_content" rows="3"></textarea>
-						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" />
-						<input type="hidden" name="com_username" value="${userName}" />
+						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}" /> <input type="hidden" name="com_username"
+							value="${userName}" />
 						<c:if test="${not empty my_comment }">
 							<input type="hidden" name="comment_idx" value="${my_comment.comment_idx}" />
 						</c:if>
-
 						<input type="button" class="update_btn" value="저장" onclick="update_comment(this.form);" />
 					</form>
 				</div>
@@ -270,11 +283,8 @@
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
-
 							<input class="more_btn" type="button" value="더보기"
 								onclick="location.href='movie_mate_choice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
-
-
 						</div>
 					</div>
 					<div class="content_box">
@@ -287,13 +297,14 @@
 					</div>
 				</div>
 				<div class="cast_box">
-					<div class="head_title">출연/제작</div>
+					<div class="head_box">
+						<div class="head_title">출연/제작</div>
+					</div>
 					<div id="cast_list" class="carousel slide">
 						<div class="carousel-inner cast_inner">
 							<div class="carousel-item actor active">
 								<div class="row">
 									<c:forEach var="i" begin="0" end="5">
-
 										<div class="movieInfo_box col-6">
 											<form>
 												<div class="comment_box"
@@ -340,14 +351,13 @@
 								</div>
 							</c:forEach>
 						</div>
-						<input type="button" class="carousel-control-prev cast_btn" data-bs-target="#cast_list" data-bs-slide="prev"
-							value="&lt;" />
-						<input type="button" class="carousel-control-next cast_btn" data-bs-target="#cast_list" data-bs-slide="next"
-							value="&gt;" />
+						<input type="button" class="carousel-control-prev cast_btn prev" data-bs-target="#cast_list" data-bs-slide="prev"
+							value="〈" /> <input type="button" class="carousel-control-next cast_btn next" data-bs-target="#cast_list"
+							data-bs-slide="next" value="〉" />
 					</div>
 				</div>
 				<div class="starScore_box"></div>
-				<div class="comment_box">
+				<div class="comment_box2">
 					<div class="head_box">
 						<div class="head_title">코멘트</div>
 						<div class="head_btn">
@@ -360,14 +370,29 @@
 							<div id="comment_list" class="carousel slide">
 								<div class="carousel-inner com_box">
 									<div class="carousel-item active">
-										<div class="row">
+										<div class="row" style="margin-left: 0px;">
 											<c:forEach var="i" begin="0" end="1">
 												<c:if test="${not empty comment_list[i]}">
 													<div class="commentInfo_box col-6">
 														<form>
 															<div class="comment_info">
 																<div class="comment_name" onclick="go_userInfo('${comment_list[i].username}')">
-																	${comment_list[i].username}</div>
+																	<div class="comment_username">${comment_list[i].username}</div>
+																	<div class="comment_starWant">
+																		<c:choose>
+																			<c:when test="${vo.star_score gt 0 }">
+																				<div>
+																					<i class='bx bxs-star' style='color: rgba(0, 0, 0, 0.7)'></i>${vo.star_score}</div>
+																			</c:when>
+																			<c:otherwise>
+																				<div>
+																					<i class='bx bxs-bookmark' style='color: rgba(0, 0, 0, 0.7)'></i>
+																					보고싶어요
+																				</div>
+																			</c:otherwise>
+																		</c:choose>
+																	</div>
+																</div>
 																<div class="go_cocomment"
 																	onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
 																	<c:choose>
@@ -380,7 +405,7 @@
 																	</c:choose>
 																</div>
 																<div class="cocomment_upComment_box">
-																	<div class="cocomment_up" id="up${comment_list[i].comment_idx}"
+																	<div class="cocomment_up" style="width: 70px;" id="up${comment_list[i].comment_idx}"
 																		onclick="isup_clicked('${comment_list[i].comment_idx}');">
 																		<c:choose>
 																			<c:when test="${comment_list[i].isup eq 'yes'}">
@@ -391,12 +416,11 @@
 																			</c:otherwise>
 																		</c:choose>
 																		<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
-
 																	</div>
-																	<div class="cocomment_comment"
+																	<div class="cocomment_comment" style="width: 70px;"
 																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
 																		<i class='bx bx-message-rounded'></i>
-																		${comment_list[i].count - 1}
+																		<span> ${comment_list[i].count - 1} </span>
 																	</div>
 																	<c:choose>
 																		<c:when test="${userIdx eq comment_list[i].user_idx}">
@@ -405,16 +429,18 @@
 																					<input type="hidden" name="comment_idx" value="${comment_list[i].comment_idx}">
 																					<input type="hidden" name="m_ref" value="${movie_info.movie_idx}">
 																					<input type="hidden" name="c_ref" value="${comment_list[i].comment_idx}">
-																					<input type="button" value="삭제하기" onclick="del_origin_comment_choice(this.form);">
+																					<input class="commentDel_btn" type="button" value="삭제"
+																						onclick="del_origin_comment_choice(this.form);">
 																				</c:when>
 																				<c:otherwise>
-																					<input type="button" value="삭제하기" onclick="del_origin_comment_choice(this.form);"
-																						disabled="disabled">
+																					<input class="commentDel_btn" type="button" value="삭제"
+																						onclick="del_origin_comment_choice(this.form);" disabled="disabled">
 																				</c:otherwise>
 																			</c:choose>
 																		</c:when>
 																		<c:otherwise>
-																			<input type="button" value="삭제하기" onclick="del_origin_comment_choice(this.form);" disabled="disabled">
+																			<input class="commentDel_btn" type="button" value="삭제"
+																				onclick="del_origin_comment_choice(this.form);" disabled="disabled">
 																		</c:otherwise>
 																	</c:choose>
 																</div>
@@ -427,14 +453,29 @@
 									</div>
 									<c:forEach var="index" begin="1" end="${maxComment_page}">
 										<div class="carousel-item">
-											<div class="row">
+											<div class="row" style="margin-left: 0">
 												<c:forEach var="i" begin="${index * 2 }" end="${index * 2 + 1}">
 													<c:if test="${not empty comment_list[i]}">
 														<div class="commentInfo_box col-6">
 															<form>
 																<div class="comment_info">
 																	<div class="comment_name" onclick="go_userInfo('${comment_list[i].username}')">
-																		${comment_list[i].username}</div>
+																		<div class="comment_username">${comment_list[i].username}</div>
+																		<div class="comment_starWant">
+																			<c:choose>
+																				<c:when test="${vo.star_score gt 0 }">
+																					<div>
+																						<i class='bx bxs-star' style='color: rgba(0, 0, 0, 0.7)'></i>${vo.star_score}</div>
+																				</c:when>
+																				<c:otherwise>
+																					<div>
+																						<i class='bx bxs-bookmark' style='color: rgba(0, 0, 0, 0.7)'></i>
+																						보고싶어요
+																					</div>
+																				</c:otherwise>
+																			</c:choose>
+																		</div>
+																	</div>
 																	<div class="go_cocomment"
 																		onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}');">
 																		<c:choose>
@@ -447,21 +488,21 @@
 																		</c:choose>
 																	</div>
 																	<div class="cocomment_upComment_box">
-																		<div class="cocomment_up_box" id="up${comment_list[i].comment_idx}">
+																		<div class="cocomment_up_box" style="width: 70px;" id="up${comment_list[i].comment_idx}">
 																			<c:choose>
 																				<c:when test="${comment_list[i].isup eq 'yes'}">
 																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bxs-like'></i>
 																				</c:when>
 																				<c:otherwise>
-																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like'></i>
+																					<i id="like_icon${comment_list[i].comment_idx}" class='bx bx-like' style=""></i>
 																				</c:otherwise>
 																			</c:choose>
 																			<span id="${comment_list[i].comment_idx}"> ${comment_list[i].up} </span>
 																		</div>
-																		<div class="cocomment_comment"
+																		<div class="cocomment_comment" style="width: 70px;"
 																			onclick="go_cocomment('${comment_list[i].comment_idx}','${movie_info.movie_idx}')">
 																			<i class='bx bx-message-rounded'></i>
-																			${comment_list[i].count - 1}
+																			<span> ${comment_list[i].count - 1} </span>
 																		</div>
 																		<c:choose>
 																			<c:when test="${userIdx eq comment_list[i].user_idx}">
@@ -470,17 +511,18 @@
 																						<input type="hidden" name="comment_idx" value="${comment_list[i].comment_idx}">
 																						<input type="hidden" name="m_ref" value="${movie_info.movie_idx}">
 																						<input type="hidden" name="c_ref" value="${comment_list[i].comment_idx}">
-																						<input type="button" value="삭제하기" onclick="del_origin_comment_choice(this.form);">
+																						<input class="commentDel_btn" type="button" value="삭제"
+																							onclick="del_origin_comment_choice(this.form);">
 																					</c:when>
 																					<c:otherwise>
-																						<input type="button" value="삭제하기" onclick="del_origin_comment_choice(this.form);"
-																							disabled="disabled">
+																						<input class="commentDel_btn" type="button" value="삭제"
+																							onclick="del_origin_comment_choice(this.form);" disabled="disabled">
 																					</c:otherwise>
 																				</c:choose>
 																			</c:when>
 																			<c:otherwise>
-																				<input type="button" value="삭제하기" onclick="del_origin_comment_choice(this.form);"
-																					disabled="disabled">
+																				<input class="commentDel_btn" type="button" value="삭제"
+																					onclick="del_origin_comment_choice(this.form);" disabled="disabled">
 																			</c:otherwise>
 																		</c:choose>
 																	</div>
@@ -494,9 +536,8 @@
 									</c:forEach>
 								</div>
 								<input type="button" class="carousel-control-prev comment_btn" data-bs-target="#comment_list"
-									data-bs-slide="prev" value="&lt;" />
-								<input type="button" class="carousel-control-next comment_btn" data-bs-target="#comment_list"
-									data-bs-slide="next" value="&gt;" />
+									data-bs-slide="prev" value="〈" /> <input type="button" class="carousel-control-next comment_btn"
+									data-bs-target="#comment_list" data-bs-slide="next" value="〉" />
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -512,7 +553,7 @@
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
 								</div>
-								<div class="movieInfo_box">
+								<div class="movieInfo_miniBox">
 									<div class="fw-bold info star_title">${map.value.title}</div>
 									<div class="info star_comment">평균★${map.value.star_score}</div>
 								</div>

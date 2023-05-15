@@ -312,6 +312,10 @@ public class MovieController {
 			session.setAttribute("userImg", null);
 		}
 
+		if (session.getAttribute("mode") == null) {
+			session.setAttribute("mode", "bx bx-sun");
+		}
+
 		System.out.println("로그인 여부 : " + session.getAttribute("isLogin"));
 		System.out.println("로그인 정보 : ");
 		System.out.println("유저이름 : " + session.getAttribute("userName"));
@@ -322,6 +326,8 @@ public class MovieController {
 		String actor = "조니 뎁";
 		// 이주의 감독
 		String director = "스티븐 스필버그";
+		// 추천 장르
+		String genre = "액션";
 
 		// Movie Mate 명작 영화
 		List<MovieMate_MovieVO> masterpiece_list = moviemate_moviedao.masterpiece_list();
@@ -348,7 +354,7 @@ public class MovieController {
 		model.addAttribute("avg_star_list", avg_star_list);
 
 		// 이 주의 추천 장르
-		List<MovieMate_MovieVO> genre_list = moviemate_moviedao.genre_list();
+		List<MovieMate_MovieVO> genre_list = moviemate_moviedao.genre_list(genre);
 		model.addAttribute("genre_list", genre_list);
 
 		// 이 주의 인플루언서
@@ -371,15 +377,13 @@ public class MovieController {
 		total_chart_name.put("director", "MovieMate 화제의 감독 [" + director + "]");
 
 		total_chart.put("recommend", recommend_list);
-
-		total_chart_name.put("recommend", "MovieMate 이 주의 조니 뎁");
 		total_chart_name.put("recommend", "MovieMate 이 주의 배우 [" + actor + "]");
 
 		total_chart.put("avg_star", avg_star_list);
 		total_chart_name.put("avg_star", "평균별점이 높은 영화순");
 
 		total_chart.put("genre", genre_list);
-		total_chart_name.put("genre", "이 주의 추천 장르 '액션'");
+		total_chart_name.put("genre", "이 주의 추천 장르 [" + genre + "]");
 
 		total_chart.put("famous", famous_list);
 		total_chart_name.put("famous", "이 주의 인플루언서 추천 영화 ");
@@ -608,9 +612,12 @@ public class MovieController {
 		System.out.println(movie_uservo.getUser_idx());
 		System.out.println(movie_uservo.getMovie_idx());
 
-		String status = movie_userdao.change(movie_uservo);
+		HttpSession session = request.getSession();
 
-		return status;
+		String status = movie_userdao.change(movie_uservo);
+		String mode = (String) session.getAttribute("mode");
+
+		return status + "/" + mode;
 	}
 
 	@RequestMapping("/cast_user_isup.do")
@@ -661,6 +668,7 @@ public class MovieController {
 		movie_userdao.update_starScore(vo);
 		double avg = movie_userdao.avg(vo);
 		avg = Math.round(avg * 10) / 10.0;
+		System.out.println("평점 평군 : " + avg);
 		vo.setStar_score(avg);
 		moviemate_moviedao.update_starScore(vo);
 
@@ -862,7 +870,13 @@ public class MovieController {
 		int count_user = movie_userdao.selectCount();
 		int count_comment = moviemate_commentdao.selectCount();
 
-		return Integer.toString(count_comment + count_user);
+		HttpSession session = request.getSession();
+
+		String mode = (String) session.getAttribute("mode");
+
+		System.out.println(mode);
+
+		return Integer.toString(count_comment + count_user) + "/" + mode;
 	}
 
 	@RequestMapping("/moviemate_cocomment_insert.do")
@@ -917,9 +931,18 @@ public class MovieController {
 	@RequestMapping("/darkMode.do")
 	@ResponseBody
 	public String darkMode(String mode) {
+
+		if (mode.equals("bx bx-moon")) {
+			mode = "bx bx-sun";
+		} else {
+			mode = "bx bx-moon";
+		}
+
 		HttpSession session = request.getSession();
 
 		session.setAttribute("mode", mode);
+
+		System.out.println(mode);
 
 		return mode;
 	}

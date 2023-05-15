@@ -21,42 +21,44 @@
 	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript">
-	window.onload = function footer() {
 
-		var url = "movie_count.do";
-		var param = null;
+    window.onload = function footer() {
+	var url = "movie_count.do";
+	var param = null;
 
-		console.log("footer 생성...");
+	console.log("footer 생성...");
+	sendRequest(url, param, resFn, "GET");
+    }
 
-		var button = document.getElementById("dark_mode_button");
-		var navbar = document.getElementById("navbar");
-		var mode = "${mode}";
-		if (mode == "bx bx-sun") {
-			button.style.color = "rgba(0, 0, 0, 0.7)";
-			navbar.style.background = "white";
-			logo_main.src = "/mate/resources/images/logo_main.png";
-		} else {
-			var body = document.body;
-			body.classList.toggle("dark-mode");
-			button.className = "bx bx-moon";
-			button.style.color = "white";
-			navbar.style.background = "#282c34";
-			logo_main.src = "/mate/resources/images/logo_main_white.png";
-		}
+    function resFn() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    var result = xhr.responseText;
+	    var count = result.split("/")[0];
+	    var mode = result.split("/")[1];
+	    var button = document.getElementById("dark_mode_button");
+	    var body = document.body;
+	    var logo_main = document.getElementById("logo_main");
+	    if (mode == "bx bx-sun") {
+		logo_main.src = "/mate/resources/images/logo_main.png";
+		button.className = "bx bx-sun";
+		button.style.color = "black";
+	    body.classList.remove("dark_mode");
+	    body.classList.add("white_mode");
+	    } else {
+		logo_main.src = "/mate/resources/images/logo_main_white.png";
+		button.className = "bx bx-moon";
+		button.style.color = "white";
+	    body.classList.remove("white_mode");
+	    body.classList.add("dark_mode");
+	    }
 
-		sendRequest(url, param, resFn, "GET");
+	    var dom = document.getElementById('footer_count');
+	    dom.innerText = count;
 	}
 
-	function resFn() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var count = xhr.responseText;
 
-			console.log(count);
+    }
 
-			var dom = document.getElementById('footer_count');
-			dom.innerText = count;
-		}
-	} 
 </script>
 </head>
 

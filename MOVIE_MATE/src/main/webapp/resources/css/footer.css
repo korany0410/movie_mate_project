@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .footer_main_box {
-	background: black;
+	background-color: black;
 	padding: 0 0 50px 0;
 }
 
@@ -10,14 +10,14 @@
 	color: white;
 	width: 100wv;
 	margin: 0 auto;
-	background: black;
+	background-color: black;
 	padding: 0 0 50px 0;
 }
 
 .margin_box {
 	width: 1450px;
 	margin: 0 auto;
-	background: black;
+	background-color: black;
 }
 
 .bxs-star {

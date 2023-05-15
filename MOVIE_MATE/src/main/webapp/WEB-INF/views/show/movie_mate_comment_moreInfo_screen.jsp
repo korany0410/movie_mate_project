@@ -197,12 +197,12 @@
 			${origin.username}
 		</div>
 		<div class="movie_box">
-			<div class ="movie_profile" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">
+			<div class="movie_profile" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">
 				<img class="movie_profile_img" src="${origin.movie_profile_img}" alt="" />
 			</div>
 			<div class="movie_info_box">
-				<div class="title" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${origin.title}</div>
-				<div class="release_date" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${fn:substring(origin.release_date,0,4)}</div>
+				<div class="comment_moreInfo_title" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${origin.title}</div>
+				<div class="comment_moreInfo_release_date" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${fn:substring(origin.release_date,0,4)}</div>
 				<c:choose>
 					<c:when test="${origin.star_score gt 0 }">
 						<div class="comment" style='width: 75px'>

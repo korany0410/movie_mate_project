@@ -182,6 +182,7 @@ public class UserController {
 		MovieMate_UserVO user_info = moviemate_userdao.userInfo_idx(user_idx);
 		System.out.println("수정페이지 로그인 정보 : " + user_idx);
 		model.addAttribute("userInfo", user_info);
+
 		return "/WEB-INF/views/userInfo/movie_mate_modify_screen.jsp";
 	}
 
@@ -190,6 +191,7 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 
+		//String currentPaht = Paths.get("").toAbsolutePath().toString();
 		String webPath = "/resources/upload/";
 		String savePath = app.getRealPath(webPath);
 		System.out.println("절대경로 : " + savePath);
@@ -276,7 +278,5 @@ public class UserController {
 		int up = moviemate_commentdao.reload(uc_vo);
 		return Integer.toString(uc_vo.getComment_idx()) + "/" + Integer.toString(up) + "/" + uc_vo.getIsup();
 	}
-	
-	
 
 }
