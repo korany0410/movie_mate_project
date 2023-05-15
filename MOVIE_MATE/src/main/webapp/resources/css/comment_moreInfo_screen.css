@@ -47,7 +47,7 @@
 	width: 80px;
 }
 
-.comment {
+.movie_mate_moreInfo_comment {
 	font-size: 18px;
 	border-radius: 18px;
 	padding: 1px 10px;
@@ -64,7 +64,7 @@
 	margin-top: 63px;
 }
 
-.content {
+.comment_moreInfo_content {
 	font-size: 16px;
 	width: 1100px;
 	margin: 10px 0 50px 0;
@@ -100,7 +100,7 @@
 	
 	
 }
-.button_box {
+.comment_moreInfo_button_box {
 	cursor: pointer;
 	height: 50px;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
@@ -267,4 +267,8 @@
 
 .cleanBot_box:hover #bot{
 	font-weight: bold;
+}
+
+.movie_mate_moreInfo_dropdown{
+	background-color: white !important;
 }

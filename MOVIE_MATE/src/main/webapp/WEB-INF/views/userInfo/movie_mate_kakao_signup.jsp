@@ -36,7 +36,6 @@
     window.onload = function() {
 	check_username = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,18}$/;
 	check_email = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-	user_check2 = check_username.test("${username}");
 	email_check = check_email.test("${email}");
 	console.log("user_check1 = " + user_check1);
 	console.log("user_email = " + email_check);

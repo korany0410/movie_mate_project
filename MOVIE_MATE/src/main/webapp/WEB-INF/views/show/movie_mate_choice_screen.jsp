@@ -28,7 +28,6 @@
    
     function setStarScore(i) {
 	if(isLogin() == "login_no"){
-	    console.log("a");
 	    return;
 	}
 	var score = document.getElementById('starpoint_' + i);

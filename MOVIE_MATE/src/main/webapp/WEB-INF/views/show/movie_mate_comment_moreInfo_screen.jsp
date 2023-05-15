@@ -205,15 +205,15 @@
 				<div class="comment_moreInfo_release_date" onclick="choice_screen('${origin.movie_idx}')" style="cursor: pointer;">${fn:substring(origin.release_date,0,4)}</div>
 				<c:choose>
 					<c:when test="${origin.star_score gt 0 }">
-						<div class="comment" style='width: 75px'>
-							<i class='bx bxs-star' style='color: rgba(0, 0, 0, 0.7)'></i>
-							<span>${origin.star_score}</span>
+						<div class="movie_mate_moreInfo_comment" style='width: 75px'>
+							<i class='bx bxs-star movie_mate_moreInfo_comment_icon' style='color: rgba(0, 0, 0, 0.7)'></i>
+							<span class="movie_mate_moreInfo_comment_icon_span">${origin.star_score}</span>
 						</div>
 
 					</c:when>
 					<c:otherwise>
-						<div class="comment" style='width: 140px'>
-							<i class='bx bxs-bookmark' style='color: rgba(0, 0, 0, 0.7)'></i>
+						<div class="movie_mate_moreInfo_comment" style='width: 140px'>
+							<i class='bx bxs-bookmark movie_mate_moreInfo_comment_icon' style='color: rgba(0, 0, 0, 0.7)'></i>
 							보고싶어요
 						</div>
 					</c:otherwise>
@@ -223,10 +223,10 @@
 		</div>
 		<c:choose>
 			<c:when test="${origin.del_info eq 0 }">
-				<div class="content">${origin.content}</div>
+				<div class="comment_moreInfo_content">${origin.content}</div>
 			</c:when>
 			<c:otherwise>
-				<div class="content">해당 댓글은 삭제되었습니다.</div>
+				<div class="comment_moreInfo_content">해당 댓글은 삭제되었습니다.</div>
 			</c:otherwise>
 		</c:choose>
 
@@ -262,7 +262,7 @@
 				</c:choose>
 			</div>
 		</div>
-		<div class="button_box row">
+		<div class="comment_moreInfo_button_box button_box row">
 			<div class="button_up col-4" id="up${origin.comment_idx}" onclick="isup_clicked('${origin.comment_idx}');">
 				<c:choose>
 					<c:when test="${origin.isup eq 'yes' }">
@@ -362,14 +362,16 @@
 							<div class="dropdown" id="modify_delete_dropdown">
 								<c:choose>
 									<c:when test="${userIdx eq vo.user_idx}">
-										<button id="drop_${vo.user_idx}" style="background-color: white !important; border: none !important;"
-											class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<button id="drop_${vo.user_idx}" style="border: none !important;"
+											class="btn btn-secondary movie_mate_moreInfo_dropdown" type="button" data-bs-toggle="dropdown"
+											aria-expanded="false">
 											<i class='bx bx-dots-vertical-rounded' style='color: rgba(0, 0, 0, 0.5); font-size: 20px;'></i>
 										</button>
 									</c:when>
 									<c:otherwise>
-										<button id="drop_${vo.user_idx}" style="background-color: white !important; border: none !important;"
-											class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled="disabled">
+										<button id="drop_${vo.user_idx}" style="border: none !important;"
+											class="btn btn-secondary movie_mate_moreInfo_dropdown" type="button" data-bs-toggle="dropdown"
+											aria-expanded="false" disabled="disabled">
 											<i class='bx bx-dots-vertical-rounded' style='color: rgba(0, 0, 0, 0.5); font-size: 20px;'></i>
 										</button>
 									</c:otherwise>

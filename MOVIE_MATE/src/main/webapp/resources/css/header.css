@@ -70,7 +70,8 @@ dark mode css
 	color: white;
 }
 
-.dark_mode * {
+.dark_mode * :not(.starpoint_box, .star_radio, .starporint_bg,
+	.label_star) {
 	background-color: #282c34;
 }
 
@@ -214,19 +215,80 @@ dark_mode .movieInfo_box:hover .movie_info_text_box {
 	background-color: white !important;
 }
 
-.dark_mode .starpoint_box {
-	background: url("/mate/resources/images/sp_star_darkmode.png") 0 0
-		no-repeat !important;
-	background-color: white;
+.dark_mode .search_control {
+	background-color: white !important;
+}
+/* movie_mate_moreInfo */
+.dark_mode .comment_moreInfo_title {
+	color: white;
 }
 
-.dark_mode .starpoint_box .starpoint_bg {
-	background: url("/mate/resources/images/sp_star_darkmode.png") 0 0
-		no-repeat !important;
+.dark_mode .comment_moreInfo_button_box {
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
 }
 
 .dark_mode .comment_moreInfo_release_date {
+	color: #808080;
+}
+
+.dark_mode .movie_mate_moreInfo_comment {
+	font-size: 18px;
+	background-color: #808080;
+}
+
+.dark_mode .cleanedBot_box {
+	border: 1px solid #808080 !important;
+}
+
+.dark_mode .cocomment_up  id, span {
+	color: #808080;
+}
+
+.dark_mode .count-box * {
+	color: #808080;
+}
+
+.dark_mode .comment_moreInfo_content {
+	border-top: 1px solid #808080 !important;
+}
+
+.dark_mode #modify_delete_dropdown {
+	background-color: #282c34;
+}
+
+.dark_mode .movie_mate_moreInfo_dropdown {
+	background-color: #282c34 !important;
+}
+
+.dark_mode .bx-dots-vertical-rounded {
+	color: #808080 !important;
+}
+
+.dark_mode .button_box * {
 	color: white;
+}
+
+.dark_mode #doing {
+	color: white;
+}
+
+.dark_mode .movie_mate_moreInfo_comment_icon {
+	background: #808080 !important;
+	color: white !important;
+}
+
+.dark_mode .movie_mate_moreInfo_comment_icon_span {
+	background: #808080 !important;
+	color: white !important;
+}
+
+.dark_mode .carousel-control-prev {
+	color: white !important;
+}
+
+.dark_mode .carousel-control-next {
+	color: white !important;
 }
 
 .white_mode {
