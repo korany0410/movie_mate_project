@@ -312,6 +312,10 @@ public class MovieController {
 			session.setAttribute("userImg", null);
 		}
 
+		if (session.getAttribute("mode") == null) {
+			session.setAttribute("mode", "bx bx-sun");
+		}
+
 		System.out.println("로그인 여부 : " + session.getAttribute("isLogin"));
 		System.out.println("로그인 정보 : ");
 		System.out.println("유저이름 : " + session.getAttribute("userName"));
@@ -608,9 +612,12 @@ public class MovieController {
 		System.out.println(movie_uservo.getUser_idx());
 		System.out.println(movie_uservo.getMovie_idx());
 
-		String status = movie_userdao.change(movie_uservo);
+		HttpSession session = request.getSession();
 
-		return status;
+		String status = movie_userdao.change(movie_uservo);
+		String mode = (String) session.getAttribute("mode");
+
+		return status + "/" + mode;
 	}
 
 	@RequestMapping("/cast_user_isup.do")
@@ -863,7 +870,13 @@ public class MovieController {
 		int count_user = movie_userdao.selectCount();
 		int count_comment = moviemate_commentdao.selectCount();
 
-		return Integer.toString(count_comment + count_user);
+		HttpSession session = request.getSession();
+
+		String mode = (String) session.getAttribute("mode");
+
+		System.out.println(mode);
+
+		return Integer.toString(count_comment + count_user) + "/" + mode;
 	}
 
 	@RequestMapping("/moviemate_cocomment_insert.do")
@@ -918,9 +931,18 @@ public class MovieController {
 	@RequestMapping("/darkMode.do")
 	@ResponseBody
 	public String darkMode(String mode) {
+
+		if (mode.equals("bx bx-moon")) {
+			mode = "bx bx-sun";
+		} else {
+			mode = "bx bx-moon";
+		}
+
 		HttpSession session = request.getSession();
 
 		session.setAttribute("mode", mode);
+
+		System.out.println(mode);
 
 		return mode;
 	}

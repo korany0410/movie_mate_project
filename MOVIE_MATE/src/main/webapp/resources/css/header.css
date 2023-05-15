@@ -17,7 +17,7 @@ body {
 }
 
 .container-fluid {
-	width: 80vw !important;
+	width: 90vw !important;
 }
 
 .btn {
@@ -31,8 +31,8 @@ body {
 	border: 1px solid #7900FF !important;
 }
 
-.form-control {
-	width: 350px;
+.search_control {
+	width: 350px !important;
 	/* background-color: #f3f6f4 !important; */
 }
 
@@ -53,7 +53,7 @@ body {
 	-bs-gutter-x: 9rem !important;
 }
 
-.dark_mode {
+.dark_mode_btn {
 	border-style: none;
 	border: none;
 	outline: none;
@@ -62,6 +62,170 @@ body {
 	margin-left: 20px;
 }
 
-.dark_mode_button {
-	color: rgba(0, 0, 0, 0.7);
+/*
+dark mode css
+*/
+.dark_mode {
+	background-color: #282c34;
+	color: white;
+}
+
+.dark_mode * {
+	background-color: #282c34;
+}
+
+.dark_mode .movieInfo_box:hover .text_info_box {
+	transform: translate(0, -120px);
+	height: 120px;
+	background: black;
+	color: white;
+	padding-top: 35px;
+	padding-left: 10px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.dark_mode .text_info_box {
+	transition: all 0.1s ease;
+	z-index: 2;
+	position: relative;
+	height: 120px;
+}
+
+.dark_mode .text_info_box * {
+	background: transparent;
+}
+
+.dark_mode .similar_movie:hover .movieInfo_miniBox {
+	transform: translate(0, -70px);
+	height: 70px;
+	background: black;
+	color: white;
+	padding-top: 20px;
+	padding-left: 5px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.dark_mode .movieInfo_miniBox {
+	transition: all 0.1s ease;
+	z-index: 2;
+	position: relative;
+	height: 70px;
+}
+
+.dark_mode .movieInfo_miniBox * {
+	background: transparent;
+}
+
+dark_mode .movieInfo_box:hover .movie_info_text_box {
+	transform: translate(0, -120px);
+	height: 120px;
+	background: black;
+	color: white;
+	padding-top: 35px;
+	padding-left: 10px;
+	border-radius: 0 0 10px 10px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.dark_mode .movie_info_text_box {
+	transition: all 0.1s ease;
+	z-index: 2;
+	position: relative;
+	height: 120px;
+}
+
+.dark_mode .movie_info_text_box * {
+	background: transparent;
+}
+
+.dark_mode .header_btn {
+	background: white;
+	border-color: white;
+}
+
+.dark_mode .margin_box {
+	background-color: #282c34;
+}
+
+.dark_mode .footer_box {
+	background-color: #282c34;
+}
+
+.dark_mode .pp {
+	color: white !important;
+}
+
+.dark_mode .want_btn {
+	color: white !important;
+}
+
+.dark_mode #pancel {
+	color: white !important;
+}
+
+.dark_mode .cast_name {
+	color: white;
+}
+
+.dark_mode .comment_info {
+	background-color: #eeeeee !important;
+	border: 1px solid #eeeeee;
+	overflow: hidden;
+}
+
+.dark_mode .comment_info * {
+	background-color: #eeeeee !important;
+	border-color: black;
+	color: black;
+}
+
+.dark_mode .ss2 {
+	background-color: gray;
+}
+
+.dark_mode .ss3 {
+	background-color: gray;
+}
+
+.dark_mode .comment_box {
+	background-color: #eeeeee !important;
+	color: black !important;
+}
+
+.dark_mode .dark_comment * {
+	background-color: #eeeeee !important;
+}
+
+.dark_mode .comment_info {
+	border-bottom: 1px solid #d6d4d4;
+}
+
+.dark_mode .comment_content {
+	border-bottom: 1px solid #d6d4d4;
+}
+
+.dark_mode .comment_starWant {
+	background-color: white !important;
+}
+
+.dark_mode .comment_starWant * {
+	background-color: white !important;
+}
+
+.white_mode {
+	background-color: white;
+}
+
+.white_mode .pp {
+	color: gray !important;
+}
+
+.white_mode .want_btn {
+	color: gray !important;
+}
+
+.white_mode #pancel {
+	color: gray !important;
 }

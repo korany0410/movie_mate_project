@@ -46,32 +46,37 @@
 	    location.href = "logout.do";
 	}
     }
+
+    function signUp() {
+	location.href = "movie_mate_signUp_screen.do";
+    }
     function darkMode() {
-	var body = document.body;
-	var div = document.div;
-	console.log(body);
-	console.log(div);
-	var span = document.span;
-	body.classList.toggle("dark-mode");
-	div.classList.toggle("dark-mode");
-	span.classList.toggle("dark-mode");
-	var button = document.getElementById("dark_mode_button");
-	var navbar = document.getElementById("navbar");
-	var logo_main = document.getElementById("logo_main");
-	if (button.className == "bx bx-moon") {
-	    button.className = "bx bx-sun";
-	    button.style.color = "rgba(0, 0, 0, 0.7)";
-	    navbar.style.background = "white";
-	    logo_main.src = "/mate/resources/images/logo_main.png";
-	} else {
-	    button.className = "bx bx-moon";
-	    button.style.color = "white";
-	    navbar.style.background = "#282c34";
-	    logo_main.src = "/mate/resources/images/logo_main_white.png";
-	}
 	var url = "darkMode.do";
+	var button = document.getElementById("dark_mode_button");
 	var param = "mode=" + button.className;
 	sendRequest(url, param, resDarkMode, "GET");
+    }
+    function resDarkMode() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    var result = xhr.responseText;
+	    var body = document.body;
+	    var button = document.getElementById("dark_mode_button");
+	    var logo_main = document.getElementById("logo_main");
+	    if (result == "bx bx-sun") {
+		logo_main.src = "/mate/resources/images/logo_main.png";
+		button.className = "bx bx-sun";
+		button.style.color = "black";
+		body.classList.remove("dark_mode");
+		body.classList.add("white_mode");
+	    } else {
+		logo_main.src = "/mate/resources/images/logo_main_white.png";
+		button.className = "bx bx-moon";
+		button.style.color = "white";
+		body.classList.remove("white_mode");
+		body.classList.add("dark_mode");
+	    }
+	    console.log(button.className);
+	}
     }
 </script>
 </head>
@@ -85,22 +90,23 @@
 			<div class="collapse navbar-collapse d-flex justify-content-end"
 				id="navbarSupportedContent">
 				<form>
-					<input class="form-control" type="search" name="keyword"
-						placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요." aria-label="Search"
+					<input class="form-control search_control" type="search"
+						name="keyword" placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요."
+						aria-label="Search"
 						onkeydown="if(event.keyCode==13) { event.preventDefault(); search(this.form); }">
 				</form>
 				<c:choose>
 					<c:when test="${isLogin eq 'no' }">
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
 							<li class="nav-item">
-								<a class="nav-link" href="javascript:login();">로그인</a>
+								<button class="btn btn-outline-success header_btn"
+									onclick="login();">로그인</button>
 							</li>
 						</ul>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
 							<li class="nav-item">
-								<a class="nav-link" href="movie_mate_signUp_screen.do">
-									<button class="btn btn-outline-success">회원가입</button>
-								</a>
+								<button class="btn btn-outline-success header_btn"
+									onclick="signUp();">회원가입</button>
 							</li>
 						</ul>
 					</c:when>
@@ -122,18 +128,17 @@
 						</ul>
 						<ul class="navbar-nav mb-2 mb-lg-0 ms-2 flex-shrink-0">
 							<li class="nav-item">
-								<a class="nav-link" href="javascript:logout();">
-									<button class="btn btn-outline-success">로그아웃</button>
-								</a>
+								<button class="btn btn-outline-success header_btn"
+									onclick="logout();">로그아웃</button>
 							</li>
 						</ul>
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div class="dark_mode_box">
+			<div class="darkMode_box">
 				<div>
-					<button onclick="darkMode();" id="dark_mode" class="dark_mode">
-						<i id="dark_mode_button" class='bx bx-moon dark_mode_button'></i>
+					<button onclick="darkMode();" id="dark_mode" class="dark_mode_btn">
+						<i id="dark_mode_button" class='bx bx-moon'></i>
 					</button>
 				</div>
 			</div>

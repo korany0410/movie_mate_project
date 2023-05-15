@@ -31,6 +31,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
 	integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
 	crossorigin="anonymous"></script>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+	rel='stylesheet'>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript" src="/mate/resources/js/login.js"></script>
 <script type="text/javascript">
@@ -77,12 +79,23 @@
     function resFnWant() {
 	if(xhr.readyState == 4 && xhr.status == 200){
 	    var result = xhr.responseText;
-	    console.log(result);
-		var img = document.getElementById('want');
-	    if(result == 'yes'){
-			img.src = "/mate/resources/images/check.png";
+	    var yesOrNo = result.split("/")[0];
+	    var mode = result.split("/")[1];
+		var want = document.getElementById('want_class');
+		console.log(mode);
+	    if(yesOrNo == 'yes'){
+			want.className = "bx bx-plus bx-spin pp"
+			setTimeout(function(){
+			want.className = "bx bx-check";		    
+		}, 500); 
+			want.style.color = "#34E245";
 	    } else {
-			img.src = "/mate/resources/images/plus.png";
+			want.className = "bx bx-plus pp";
+			if(mode == "bx bx-sun"){
+			    want.style.color = "gray";
+			} else {
+			    want.style.color = "white";
+			}
 	    }
 	}
     }
@@ -170,7 +183,7 @@
 	<header>
 		<%@ include file="/resources/jsp/header.jsp"%>
 	</header>
-	<div class="wall"></div>
+	<div class="wall" id="dummy"></div>
 	<div class="main_box">
 		<div class="first_box">
 			<div class="thumbnailImg_box row">
@@ -216,18 +229,19 @@
 								</div>
 							</div>
 							<div class="inter" id="wanted">
-								<c:choose>
-									<c:when test="${movieUser_info.want_view eq 'no' }">
-										<img id="want" src="/mate/resources/images/plus.png" alt="" />
-									</c:when>
-									<c:when test="${empty movieUser_info.want_view}">
-										<img id="want" src="/mate/resources/images/plus.png" alt="" />
-									</c:when>
-									<c:otherwise>
-										<img id="want" src="/mate/resources/images/check.png" alt="" />
-									</c:otherwise>
-								</c:choose>
 								<form>
+									<c:choose>
+										<c:when test="${movieUser_info.want_view eq 'no' }">
+											<i id="want_class" class='bx bx-plus pp'></i>
+										</c:when>
+										<c:when test="${empty movieUser_info.want_view}">
+											<i id="want_class" class='bx bx-plus pp'></i>
+										</c:when>
+										<c:otherwise>
+											<i id="want_class" class='bx bx-check'
+												style="color: #34E245 !important;"></i>
+										</c:otherwise>
+									</c:choose>
 									<input type="hidden" name="user_idx" value="${userIdx}" />
 									<input type="hidden" name="movie_idx" id="movie_idx"
 										value="${movie_info.movie_idx}" />
@@ -236,17 +250,19 @@
 								</form>
 							</div>
 							<div class="inter" id="commented">
-								<img id="pancel" src="/mate/resources/images/pancel.png" alt="" />
-								<input class="want_btn" type="button" value="글쓰기"
-									onclick="write_comment();" />
+								<form>
+									<i id="pancel" class='bx bx-pencil'></i>
+									<input class="want_btn" type="button" value="글쓰기"
+										onclick="write_comment();" />
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="second_box row">
-			<div class="dummy col-1 col-lg-2"></div>
+		<div class="second_box row ss2">
+			<div class="col-1 col-lg-2 ss3"></div>
 			<div class="left_box col-6 col-lg-5">
 				<c:if test="${not empty my_comment}">
 					<div id="myComment_box">
@@ -293,11 +309,8 @@
 					<div class="head_box">
 						<div class="head_title">기본정보</div>
 						<div class="head_btn">
-
 							<input class="more_btn" type="button" value="더보기"
 								onclick="location.href='movie_mate_choice_moreInfo.do?movie_idx=${movie_info.movie_idx}'" />
-
-
 						</div>
 					</div>
 					<div class="content_box">
@@ -310,7 +323,9 @@
 					</div>
 				</div>
 				<div class="cast_box">
-					<div class="head_title">출연/제작</div>
+					<div class="head_box">
+						<div class="head_title">출연/제작</div>
+					</div>
 					<div id="cast_list" class="carousel slide">
 						<div class="carousel-inner cast_inner">
 							<div class="carousel-item actor active">
@@ -529,7 +544,7 @@
 																				</c:when>
 																				<c:otherwise>
 																					<i id="like_icon${comment_list[i].comment_idx}"
-																						class='bx bx-like'></i>
+																						class='bx bx-like' style=""></i>
 																				</c:otherwise>
 																			</c:choose>
 																			<span id="${comment_list[i].comment_idx}">
@@ -598,7 +613,7 @@
 								<div class="movieImg_box">
 									<img class="movie_img" alt="" src="${map.value.profile_img}">
 								</div>
-								<div class="movieInfo_box">
+								<div class="movieInfo_miniBox">
 									<div class="fw-bold info star_title">${map.value.title}</div>
 									<div class="info star_comment">평균★${map.value.star_score}</div>
 								</div>
