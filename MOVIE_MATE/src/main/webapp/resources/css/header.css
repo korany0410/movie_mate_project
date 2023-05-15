@@ -70,7 +70,8 @@ dark mode css
 	color: white;
 }
 
-.dark_mode * {
+.dark_mode * :not(.starpoint_box, .star_radio, .starporint_bg,
+	.label_star) {
 	background-color: #282c34;
 }
 
@@ -211,6 +212,10 @@ dark_mode .movieInfo_box:hover .movie_info_text_box {
 }
 
 .dark_mode .comment_starWant * {
+	background-color: white !important;
+}
+
+.dark_mode .search_control {
 	background-color: white !important;
 }
 
