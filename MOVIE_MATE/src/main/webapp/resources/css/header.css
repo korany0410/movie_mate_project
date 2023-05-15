@@ -291,6 +291,10 @@ dark_mode .movieInfo_box:hover .movie_info_text_box {
 	color: white !important;
 }
 
+.dark_mode .update_btn {
+	color: white;
+}
+
 .white_mode {
 	background-color: white;
 }
