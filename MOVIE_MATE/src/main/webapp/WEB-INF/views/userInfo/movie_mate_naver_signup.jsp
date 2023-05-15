@@ -36,7 +36,6 @@
     window.onload = function() {
 	check_username = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,18}$/;
 	check_email = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-	user_check2 = check_username.test("${username}");
 	email_check = check_email.test("${email}");
 	console.log("user_check1 = " + user_check1);
 	console.log("user_email = " + email_check);
@@ -62,6 +61,9 @@
 	var username = f.username.value;
 	var email = f.email.value;
 	var pwd = f.pwd.value;
+	console.log(username);
+	console.log(email);
+	console.log(pwd);
 	var url = "signUp.do";
 	var param = "username=" + username + "&email=" + email + "&pwd=" + pwd;
 	sendRequest(url, param, resSign, "GET");
@@ -157,7 +159,7 @@
 			</div>
 			<div class="input_box input-group mb-2" id="email_box">
 				<input type="text" placeholder="${email}" disabled="disabled"
-					class="form-control" id="email" onkeyup="validation('email');" />
+					class="form-control" />
 			</div>
 			<input type="hidden" id="email" name="email" value="${email}" />
 			<div class="input_box input-group mb-2" id="pwd_box">

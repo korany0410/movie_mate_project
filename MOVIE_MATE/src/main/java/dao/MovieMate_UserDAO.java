@@ -102,5 +102,13 @@ public class MovieMate_UserDAO {
 		return res;
 
 	}
+	
+	public MovieMate_UserVO naverLogin(MovieMate_UserVO vo) {
+
+		System.out.println("naverLogin :" + vo.getEmail());
+		MovieMate_UserVO res = sqlSession.selectOne("mmuser.kakaoLogin", vo);
+		return res;
+
+	}
 
 }

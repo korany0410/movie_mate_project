@@ -14,16 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import dao.MovieMate_UserDAO;
 import service.NaverLoginBO;
+import vo.MovieMate_UserVO;
 
 @Controller
 public class NaverController {
 	@Autowired
 	NaverLoginBO naverLoginBO;
-	
-	public NaverController(NaverLoginBO naverLoginBO) {
+	MovieMate_UserDAO moviemate_userdao;
+
+	public NaverController(NaverLoginBO naverLoginBO, MovieMate_UserDAO moviemate_userdao) {
 		// TODO Auto-generated constructor stub
 		this.naverLoginBO = naverLoginBO;
+		this.moviemate_userdao = moviemate_userdao;
 	}
 
 	// 로그인 화면
@@ -35,7 +39,7 @@ public class NaverController {
 		if (request.getServerPort() != 80) {
 			serverUrl = serverUrl + ":" + request.getServerPort();
 		}
-		
+
 		String url = naverLoginBO.getAuthorizationUrl(session, serverUrl);
 		String[] link = url.split("&");
 		int size = url.split("&").length - 1;
@@ -59,17 +63,31 @@ public class NaverController {
 		JSONObject jsonObj = (JSONObject) obj;
 
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-		
-		System.out.println("obj" + response_obj);
+
+		System.out.println("obj : " + response_obj);
 		// 프로필 조회
 		String email = (String) response_obj.get("email");
 		String username = (String) response_obj.get("name");
 		String profile_image = (String) response_obj.get("profile_image");
-		
+		String pathname = (String) session.getAttribute("pathname");
+
+		MovieMate_UserVO vo = new MovieMate_UserVO();
+		vo.setEmail(email.trim());
+
+		MovieMate_UserVO user_info = moviemate_userdao.naverLogin(vo);
+		if (user_info != null) {
+			System.out.println(pathname);
+			session.setAttribute("isLogin", "yes");
+			session.setAttribute("userName", user_info.getUsername());
+			session.setAttribute("userIdx", user_info.getUser_idx());
+			session.setAttribute("userImg", user_info.getProfile_img());
+			return "redirect:" + pathname.replaceAll("@", "&");
+		}
+
 		model.addAttribute("email", email);
 		model.addAttribute("username", username);
 		model.addAttribute("profile_image", profile_image);
-		
+
 		// movie_mate_naver_signup.jsp로 리다이렉트
 		return "/WEB-INF/views/userInfo/movie_mate_naver_signup.jsp";
 	}
