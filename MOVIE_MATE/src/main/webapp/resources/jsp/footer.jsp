@@ -21,7 +21,7 @@
 	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/mate/resources/js/httpRequest.js"></script>
 <script type="text/javascript">
-	/* window.onload = function footer() {
+	window.onload = function footer() {
 
 		var url = "movie_count.do";
 		var param = null;
@@ -56,7 +56,7 @@
 			var dom = document.getElementById('footer_count');
 			dom.innerText = count;
 		}
-	} */
+	} 
 </script>
 </head>
 
