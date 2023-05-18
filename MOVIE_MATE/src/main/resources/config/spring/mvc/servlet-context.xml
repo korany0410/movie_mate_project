@@ -57,8 +57,4 @@
 		<beans:constructor-arg ref="moviemateUser_dao"></beans:constructor-arg>
 	</beans:bean>
 
-
-
-
-
 </beans:beans>
