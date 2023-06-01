@@ -76,12 +76,39 @@
 ### Open Api
 **영화진흥원에서 영화데이터를 json으로 가져옴**
 - 목록 : 영화이름, 포스터이미지, 출연진, 개봉날짜, 장르, 국가, 영화설명, 제작, 런타임, 관람등급
+### 1. 헤더 (header.jsp)
+#### 로그인
+1. 일반회원 로그인
+2. 카카오톡 로그인
+3. 네이버 로그인
+#### 회원가입
+1. 일반 회원가이
+2. 카카오톡, 네이버 로그인
+#### 검색 기능
+1. 영화, 배우, 유저 검색
+#### 마이페이지
+#### 다크모드
 
-### 1.메인화면 (movie_mate_main_screen.jsp)
+### 2.메인화면 (movie_mate_main_screen.jsp)
+주제에 맞는 리스트 출력
 
+### 3.영화 선택 화면 (movie_mate_choice_screen.jsp)
 
+### 4. 영화 검색 화면 (movie_mate_search_screen.jsp)
 
+### 5. 영화검색화면 (movie_mate_search_screen.jsp)
 
+### 6. (배우,감독)선택화면 (movie_mate_choiceCast_screen.jsp)
 
+### 7. 댓글리스트화면 (movie_mate_comment_screen.jsp)
 
+### 8. 해당댓글정보화면 (movie_mate_comment_moreInfo_screen.jsp)
+
+### 9. 마이페이지 (movie_mate_mypage_screen.jsp)
+
+### 10. 회원정보수정 (movie_mate_modify_screen.jsp)
+
+### 11. 취향분석 (movie_mate_analyze.jsp)
+
+### 12. 영화링크 (movie_mate_mychoice_moreInfo.jsp)
 
